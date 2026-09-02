@@ -365,3 +365,22 @@ describe('repeated navigation links', () => {
   });
 });
 
+describe('Part II Item 2 long title variant', () => {
+  const lines = htmlToLines(fx('part-ii-item2-repurchases-10q.htm'));
+  const { sections } = splitItems(lines, '10-Q');
+
+  it('detects Item II.2 and ends Item II.1A before the repurchase table', () => {
+    const risk = sections.get('II.1A');
+    expect(risk).toBeDefined();
+    expect(risk?.paragraphs).toHaveLength(1);
+    expect(risk?.paragraphs[0]?.text).toMatch(/^Our significant business risks/);
+
+    const repurchases = sections.get('II.2');
+    expect(repurchases).toBeDefined();
+    expect(repurchases?.paragraphs.length).toBeGreaterThan(1);
+    expect(repurchases?.paragraphs[0]?.text).toMatch(/^Acme's common stock repurchase program/);
+    expect(repurchases?.paragraphs.some((p) => /April.*100,000/.test(p.text))).toBe(true);
+  });
+});
+
+

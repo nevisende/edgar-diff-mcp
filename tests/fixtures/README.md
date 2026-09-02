@@ -59,3 +59,9 @@ when a real body heading exists later in the filing.
 such as "Financial Table of Contents", "Back to contents", and "Index to financial statements".
 Those repeated navigation links are page furniture and must be dropped from section bodies.
 
+`part-ii-item2-repurchases-10q.htm` is a synthetic quarterly filing containing a Part II Item 2
+heading with the long title variant "Unregistered Sales of Equity Securities and Use of Proceeds
+and Issuer Repurchases of Equity Securities" followed by a repurchase table. Item II.1A must end
+before the Item 2 heading, and Item II.2 must be recognized with the repurchase table.
+
+

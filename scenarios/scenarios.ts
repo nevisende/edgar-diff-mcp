@@ -258,9 +258,10 @@ export const scenarios: Scenario[] = [
         assertions: [
           { name: 'qualified Item II.1A diff succeeds', path: 'status', operator: 'equals', expected: 'ok' },
           { name: 'qualified Item is preserved', path: 'item', operator: 'equals', expected: 'II.1A' },
-          { name: '14 paragraphs were added', path: 'stats.added', operator: 'equals', expected: 14 },
-          { name: '10 paragraphs were removed', path: 'stats.removed', operator: 'equals', expected: 10 },
-          { name: 'one paragraph changed', path: 'stats.changed', operator: 'equals', expected: 1 },
+          { name: 'no paragraphs were added', path: 'stats.added', operator: 'equals', expected: 0 },
+          { name: 'no paragraphs were removed', path: 'stats.removed', operator: 'equals', expected: 0 },
+          { name: 'no paragraphs changed', path: 'stats.changed', operator: 'equals', expected: 0 },
+          { name: 'Item II.1A is identical', path: 'stats.similarity', operator: 'equals', expected: 1 },
           { name: 'diff changes carry SEC Archives citations', path: '$', operator: 'includes', expected: 'https://www.sec.gov/Archives/' },
         ],
       },
