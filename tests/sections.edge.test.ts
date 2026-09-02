@@ -125,6 +125,22 @@ describe('fused headings', () => {
   });
 });
 
+describe('short fused headings', () => {
+  const shortFused = splitItems(htmlToLines(fx('short-fused-headings-10k.htm')), '10-K').sections;
+
+  it('splits a sentence-like remainder after a canonical title regardless of line length', () => {
+    const risk = shortFused.get('1A')!;
+    expect(risk.paragraphs[0]?.text).toBe('We face supply disruptions.');
+    expect(risk.warnings).toContain('heading and first paragraph were in one block; split at Risk Factors');
+  });
+
+  it('keeps a short canonical-title continuation as part of the heading', () => {
+    const comments = shortFused.get('1B')!;
+    expect(comments.paragraphs.map((paragraph) => paragraph.text)).toEqual(['None.']);
+    expect(comments.warnings.some((warning) => /heading and first paragraph/.test(warning))).toBe(false);
+  });
+});
+
 describe('combined headings', () => {
   const combined = splitItems(htmlToLines(fx('combined-headings-10k.htm')), '10-K').sections;
 

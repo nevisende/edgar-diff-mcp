@@ -113,16 +113,21 @@ function matchesKnownTitle(raw: string, form: string, keys: string[]): boolean {
   return titleVariantsFor(form, key).some((variant) => comparableTitle(candidate) === comparableTitle(variant));
 }
 
-/** Split only at a known Item title or an unambiguous nearby sentence boundary. */
-function splitFusedHeading(raw: string, form: string, keys: string[]): FusedHeading | undefined {
+function sentenceLikeRemainder(value: string): boolean {
+  return /^[A-Z]/.test(value) && value.trim().split(/\s+/).length >= 3;
+}
+
+/** Split only at a known Item title or, for long lines, an unambiguous nearby sentence boundary. */
+function splitFusedHeading(raw: string, form: string, keys: string[], allowSentenceBoundary: boolean): FusedHeading | undefined {
   for (const variant of keys.length === 1 && keys[0] ? titleVariantsFor(form, keys[0]) : []) {
     const found = raw.slice(0, variant.length);
     if (comparableTitle(found) !== comparableTitle(variant)) continue;
     const rest = raw.slice(variant.length);
     const body = /^[.:–—-]?\s+(.+)$/.exec(rest)?.[1];
-    if (body) return { rawTitle: found, paragraph: body, splitTitle: found };
+    if (body && sentenceLikeRemainder(body)) return { rawTitle: found, paragraph: body, splitTitle: found };
   }
 
+  if (!allowSentenceBoundary) return undefined;
   for (let i = 0; i < Math.min(raw.length, 120); i++) {
     if (!/[.!?]/.test(raw[i] ?? '')) continue;
     const rest = raw.slice(i + 1);
@@ -248,9 +253,9 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
     const keys = items.map((item) => (isTenQ && part ? `${part}.${item}` : item));
     const title = m[3] ?? '';
     const combinedLabel = keys.length > 1 ? `${m[1]} ${m[2]}` : undefined;
-    if (headingLine.length > MAX_HEADING_CHARS) {
-      const fused = splitFusedHeading(title, form, keys);
-      if (!fused) return;
+    const tooLong = headingLine.length > MAX_HEADING_CHARS;
+    const fused = splitFusedHeading(title, form, keys, tooLong);
+    if (fused) {
       const heading: Heading = {
         keys,
         rawTitle: fused.rawTitle,
@@ -262,6 +267,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
       all.push(heading);
       return;
     }
+    if (tooLong) return;
     if (looksLikeSentence(title) && !matchesKnownTitle(title, form, keys)) return;
     const heading: Heading = { keys, rawTitle: title, line: i };
     if (combinedLabel) heading.combinedLabel = combinedLabel;
