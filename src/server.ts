@@ -100,13 +100,22 @@ function paginateList<T>(entries: T[], offset: number, maxEntries: number, maxEn
   truncated: boolean;
   truncatedReason?: string;
 } {
-  const kept = entries.slice(offset, offset + maxEntries);
+  const candidates = entries.slice(offset, offset + maxEntries);
+  const kept: T[] = [];
   const reasons: string[] = [];
-  if (offset + kept.length < entries.length) reasons.push(`${maxEntriesName}=${maxEntries}`);
+  if (offset + candidates.length < entries.length) reasons.push(`${maxEntriesName}=${maxEntries}`);
+  let serializedChars = 2; // opening and closing brackets
   let charTruncated = false;
-  while (JSON.stringify(kept).length > maxChars && kept.length > 0) {
-    kept.pop();
-    charTruncated = true;
+  for (const entry of candidates) {
+    // Serializing a one-entry array preserves JSON's array treatment of values such as undefined.
+    const entryChars = JSON.stringify([entry]).length - 2;
+    const nextChars = serializedChars + (kept.length > 0 ? 1 : 0) + entryChars;
+    if (nextChars > maxChars) {
+      charTruncated = true;
+      break;
+    }
+    kept.push(entry);
+    serializedChars = nextChars;
   }
   if (charTruncated) reasons.push(`maxChars=${maxChars}`);
   const oversizedEntry = charTruncated && kept.length === 0 && offset < entries.length;
