@@ -129,7 +129,7 @@ export class FilingService {
     }
 
     items.sort((a, b) => a.stats.similarity - b.stats.similarity);
-    return { status: 'ok', base, target, items, onlyInBase, onlyInTarget, warnings };
+    return { status: 'ok', base, target, items, onlyInBase, onlyInTarget, warnings: [...new Set(warnings)] };
   }
 
   /** Verbatim paragraphs matching a regex, with citations. Unknown item → not_found, never an empty list. */

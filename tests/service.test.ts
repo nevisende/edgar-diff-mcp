@@ -116,6 +116,17 @@ describe('FilingService', () => {
     expect(d.items.every((entry) => !('changes' in entry))).toBe(true);
   });
 
+  it('returns de-duplicated warnings across both filings', async () => {
+    const base = await service.resolveFiling('1', '0000000001-24-000001');
+    const target = await service.resolveFiling('1', '0000000001-25-000001');
+    const d = await service.diffAll(base, target);
+    expect(d.status).toBe('ok');
+    if (d.status !== 'ok') return;
+
+    expect(d.warnings.filter((warning) => /Item 1B: body is only/.test(warning))).toHaveLength(1);
+    expect(new Set(d.warnings).size).toBe(d.warnings.length);
+  });
+
   it('reports Items found on only one side', async () => {
     const baseHtml = fx('acme-10k-2024.htm');
     const targetHtml = fx('acme-10k-2025.htm').replaceAll('Item 1B.', 'Item 2.').replaceAll('Item&#160;1B.', 'Item&#160;2.');
