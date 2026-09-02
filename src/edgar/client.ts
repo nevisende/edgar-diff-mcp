@@ -37,6 +37,7 @@ export interface ListFilingsOptions {
 
 const TICKERS_URL = 'https://www.sec.gov/files/company_tickers.json';
 const SUBMISSIONS_URL = (cik: string) => `https://data.sec.gov/submissions/CIK${cik}.json`;
+const SUBMISSIONS_PAGE_URL = (name: string) => `https://data.sec.gov/submissions/${name}`;
 
 /** Filings are immutable and safe to cache forever; indexes change daily and are not. */
 export function isImmutableUrl(url: string): boolean {
@@ -44,17 +45,26 @@ export function isImmutableUrl(url: string): boolean {
 }
 
 const TickersSchema = z.record(z.string(), z.object({ cik_str: z.number(), ticker: z.string(), title: z.string() }));
+const FilingArraysSchema = z.object({
+  accessionNumber: z.array(z.string()),
+  form: z.array(z.string()),
+  filingDate: z.array(z.string()),
+  reportDate: z.array(z.string()),
+  primaryDocument: z.array(z.string()),
+});
 const SubmissionsSchema = z.object({
   filings: z.object({
-    recent: z.object({
-      accessionNumber: z.array(z.string()),
-      form: z.array(z.string()),
-      filingDate: z.array(z.string()),
-      reportDate: z.array(z.string()),
-      primaryDocument: z.array(z.string()),
-    }),
+    recent: FilingArraysSchema,
+    files: z.array(z.object({ name: z.string() })).default([]),
   }),
 });
+
+interface SubmissionsState {
+  filings: FilingRef[];
+  files: string[];
+  nextFile: number;
+  loading?: Promise<void>;
+}
 
 export function padCik(cik: string | number): string {
   return String(cik).replace(/\D/g, '').padStart(10, '0');
@@ -72,7 +82,7 @@ export class EdgarClient {
   private lastRequestAt = 0;
   private queue: Promise<void> = Promise.resolve();
   /** In-process memo of the submissions index, per CIK, for the life of this client. */
-  private readonly submissions = new Map<string, Promise<FilingRef[]>>();
+  private readonly submissions = new Map<string, Promise<SubmissionsState>>();
 
   constructor(opts: EdgarClientOptions) {
     if (!opts.userAgent || !/@/.test(opts.userAgent)) {
@@ -129,14 +139,15 @@ export class EdgarClient {
 
   async listFilings(cik: string, opts: ListFilingsOptions = {}): Promise<FilingRef[]> {
     const padded = padCik(cik);
-    let all = this.submissions.get(padded);
-    if (!all) {
-      all = this.loadSubmissions(padded);
-      this.submissions.set(padded, all);
-      all.catch(() => this.submissions.delete(padded));
+    const state = await this.getSubmissions(padded);
+    if (opts.form) {
+      const wanted = opts.limit ?? Number.POSITIVE_INFINITY;
+      while (state.filings.filter((ref) => ref.form === opts.form).length < wanted && state.nextFile < state.files.length) {
+        await this.loadNextSubmissionsPage(padded, state);
+      }
     }
     const out: FilingRef[] = [];
-    for (const ref of await all) {
+    for (const ref of state.filings) {
       if (opts.form && ref.form !== opts.form) continue;
       out.push(ref);
       if (opts.limit && out.length >= opts.limit) break;
@@ -144,9 +155,42 @@ export class EdgarClient {
     return out;
   }
 
-  private async loadSubmissions(padded: string): Promise<FilingRef[]> {
+  private async getSubmissions(padded: string): Promise<SubmissionsState> {
+    let state = this.submissions.get(padded);
+    if (!state) {
+      state = this.loadSubmissions(padded);
+      this.submissions.set(padded, state);
+      state.catch(() => this.submissions.delete(padded));
+    }
+    return state;
+  }
+
+  private async loadSubmissions(padded: string): Promise<SubmissionsState> {
     const sub = await this.getJson(SUBMISSIONS_URL(padded), SubmissionsSchema);
-    const r = sub.filings.recent;
+    return {
+      filings: this.toFilingRefs(padded, sub.filings.recent),
+      files: sub.filings.files.map((file) => file.name),
+      nextFile: 0,
+    };
+  }
+
+  private async loadNextSubmissionsPage(padded: string, state: SubmissionsState): Promise<void> {
+    if (state.loading) return state.loading;
+    const name = state.files[state.nextFile];
+    if (!name) return;
+    const loading = this.getJson(SUBMISSIONS_PAGE_URL(name), FilingArraysSchema).then((page) => {
+      state.filings.push(...this.toFilingRefs(padded, page));
+      state.nextFile++;
+    });
+    state.loading = loading;
+    try {
+      await loading;
+    } finally {
+      delete state.loading;
+    }
+  }
+
+  private toFilingRefs(padded: string, r: z.infer<typeof FilingArraysSchema>): FilingRef[] {
     const out: FilingRef[] = [];
     for (let i = 0; i < r.accessionNumber.length; i++) {
       const accession = r.accessionNumber[i] ?? '';
@@ -166,8 +210,14 @@ export class EdgarClient {
 
   /** Find a filing by accession number for a CIK (searches recent filings). */
   async findFiling(cik: string, accession: string): Promise<FilingRef | undefined> {
-    const all = await this.listFilings(cik);
-    return all.find((f) => f.accession === accession);
+    const padded = padCik(cik);
+    const state = await this.getSubmissions(padded);
+    let found = state.filings.find((filing) => filing.accession === accession);
+    while (!found && state.nextFile < state.files.length) {
+      await this.loadNextSubmissionsPage(padded, state);
+      found = state.filings.find((filing) => filing.accession === accession);
+    }
+    return found;
   }
 
   async fetchDocument(ref: FilingRef): Promise<string> {
