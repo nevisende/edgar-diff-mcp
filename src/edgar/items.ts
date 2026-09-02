@@ -64,13 +64,31 @@ const ITEM_TITLE_VARIANTS_10K: Partial<Record<string, string[]>> = {
   ],
 };
 
+const ITEM_TITLE_VARIANTS_10Q: Partial<Record<string, string[]>> = {
+  'I.1': ['Financial Statements'],
+  'I.2': ["Management's Discussion and Analysis of Financial Condition and Results of Operations"],
+  'I.3': ['Quantitative and Qualitative Disclosures About Market Risk'],
+  'I.4': ['Controls and Procedures'],
+  'II.1': ['Legal Proceedings'],
+  'II.1A': ['Risk Factors'],
+  'II.2': ['Unregistered Sales of Equity Securities and Use of Proceeds'],
+  'II.3': ['Defaults Upon Senior Securities'],
+  'II.4': ['Mine Safety Disclosures'],
+  'II.5': ['Other Information'],
+  'II.6': ['Exhibits'],
+};
+
 /** Known filed variants, longest first so a shorter canonical prefix never truncates a title. */
 export function titleVariantsFor(form: string, key: string): string[] {
   const f = form.toUpperCase();
   const table = f.startsWith('10-Q') ? ITEM_TITLES_10Q : f.startsWith('10-K') ? ITEM_TITLES_10K : undefined;
   const canonical = table?.[key];
-  const variants = f.startsWith('10-K') ? ITEM_TITLE_VARIANTS_10K[key] ?? [] : [];
-  return [...variants, ...(canonical ? [canonical] : [])].sort((a, b) => b.length - a.length);
+  const variants = f.startsWith('10-Q')
+    ? ITEM_TITLE_VARIANTS_10Q[key] ?? []
+    : f.startsWith('10-K')
+      ? ITEM_TITLE_VARIANTS_10K[key] ?? []
+      : [];
+  return [...new Set([...variants, ...(canonical ? [canonical] : [])])].sort((a, b) => b.length - a.length);
 }
 
 /** Canonical titles only for the forms we actually know; anything else keeps its own heading text. */

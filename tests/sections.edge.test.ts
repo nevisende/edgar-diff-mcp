@@ -157,6 +157,23 @@ describe('fused headings', () => {
   });
 });
 
+describe('10-Q fused headings', () => {
+  it('splits full quarterly Item titles from same-block body text', () => {
+    const result = splitItems(htmlToLines(fx('fused-headings-10q.htm')), '10-Q');
+
+    expect([...result.sections.keys()]).toEqual(['I.1', 'I.2', 'II.2', 'II.6']);
+    expect(result.sections.get('I.2')?.paragraphs[0]?.text).toBe(
+      'Revenue increased in this fictional quarter.',
+    );
+    expect(result.sections.get('II.2')?.paragraphs[0]?.text).toBe(
+      'Acme made no fictional unregistered equity sales.',
+    );
+    expect(result.sections.get('II.2')?.warnings).toContain(
+      'heading and first paragraph were in one block; split at Unregistered Sales of Equity Securities and Use of Proceeds',
+    );
+  });
+});
+
 describe('short fused headings', () => {
   const shortFused = splitItems(htmlToLines(fx('short-fused-headings-10k.htm')), '10-K').sections;
 
