@@ -1,0 +1,48 @@
+/** Canonical 10-K / 10-Q item titles, used only for labelling. */
+export const ITEM_TITLES_10K: Record<string, string> = {
+  '1': 'Business',
+  '1A': 'Risk Factors',
+  '1B': 'Unresolved Staff Comments',
+  '1C': 'Cybersecurity',
+  '2': 'Properties',
+  '3': 'Legal Proceedings',
+  '4': 'Mine Safety Disclosures',
+  '5': "Market for Registrant's Common Equity",
+  '6': '[Reserved]',
+  '7': "Management's Discussion and Analysis",
+  '7A': 'Quantitative and Qualitative Disclosures About Market Risk',
+  '8': 'Financial Statements and Supplementary Data',
+  '9': 'Changes in and Disagreements with Accountants',
+  '9A': 'Controls and Procedures',
+  '9B': 'Other Information',
+  '9C': 'Disclosure Regarding Foreign Jurisdictions that Prevent Inspections',
+  '10': 'Directors, Executive Officers and Corporate Governance',
+  '11': 'Executive Compensation',
+  '12': 'Security Ownership',
+  '13': 'Certain Relationships and Related Transactions',
+  '14': 'Principal Accountant Fees and Services',
+  '15': 'Exhibits and Financial Statement Schedules',
+  '16': 'Form 10-K Summary',
+};
+
+export const ITEM_TITLES_10Q: Record<string, string> = {
+  'I.1': 'Financial Statements',
+  'I.2': "Management's Discussion and Analysis",
+  'I.3': 'Quantitative and Qualitative Disclosures About Market Risk',
+  'I.4': 'Controls and Procedures',
+  'II.1': 'Legal Proceedings',
+  'II.1A': 'Risk Factors',
+  'II.2': 'Unregistered Sales of Equity Securities',
+  'II.3': 'Defaults Upon Senior Securities',
+  'II.4': 'Mine Safety Disclosures',
+  'II.5': 'Other Information',
+  'II.6': 'Exhibits',
+};
+
+/** Canonical titles only for the forms we actually know; anything else keeps its own heading text. */
+export function titleFor(form: string, key: string, fallback: string): string {
+  const f = form.toUpperCase();
+  const table = f.startsWith('10-Q') ? ITEM_TITLES_10Q : f.startsWith('10-K') ? ITEM_TITLES_10K : undefined;
+  const raw = fallback.trim().replace(/[.:\-–—]+$/, '').trim();
+  return table?.[key] ?? (raw || 'Untitled');
+}

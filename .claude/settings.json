@@ -1,0 +1,6 @@
+{
+  "permissions": {
+    "allow": ["Bash(npm run check)", "Bash(npm run demo)", "Bash(npx vitest*)", "Bash(npx tsc*)"],
+    "deny": ["Bash(git push*)", "Bash(npm publish*)"]
+  }
+}

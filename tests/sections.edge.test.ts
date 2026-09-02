@@ -1,0 +1,81 @@
+import { readFileSync } from 'node:fs';
+import { describe, expect, it } from 'vitest';
+import { htmlToLines, splitItems, MIN_BODY_CHARS } from '../src/edgar/sections.js';
+import { titleFor } from '../src/edgar/items.js';
+
+const fx = (name: string) => readFileSync(new URL(`./fixtures/${name}`, import.meta.url), 'utf8');
+const lines = htmlToLines(fx('acme-10k-2024.htm'));
+const { sections, warnings } = splitItems(lines, '10-K');
+
+describe('table-of-contents defences', () => {
+  it('does not let the last TOC entry swallow the forward-looking-statements preamble', () => {
+    // If the TOC cluster were not removed, "Item 7." from the TOC would own the preamble
+    // (which is > MIN_BODY_CHARS) and could beat or pollute the real Item 7.
+    const mdna = sections.get('7')!;
+    expect(mdna.paragraphs[0]!.text).toMatch(/^Total revenue for fiscal 2024/);
+    expect(mdna.paragraphs.some((p) => /forward-looking statements/i.test(p.text))).toBe(false);
+    expect(warnings).toEqual([]);
+  });
+
+  it('treats "Item 7 of this report discusses…" as body text, not a heading', () => {
+    const business = sections.get('1')!;
+    expect(business.paragraphs.some((p) => p.text.startsWith('Item 7 of this report'))).toBe(true);
+    expect(sections.get('7')!.warnings.some((w) => /appeared/.test(w))).toBe(false);
+  });
+
+  it('returns a genuinely short Item ("None.") with a warning instead of refusing it as a TOC stub', () => {
+    const s = sections.get('1B')!;
+    expect(s).toBeDefined();
+    expect(s.paragraphs.map((p) => p.text)).toEqual(['None.']);
+    expect(s.charCount).toBeLessThan(MIN_BODY_CHARS);
+    expect(s.warnings.join(' ')).toMatch(/placeholder/);
+  });
+
+  it('keeps table cells separated so "verbatim" stays true for tables', () => {
+    const mdna = sections.get('7')!;
+    const row = mdna.paragraphs.find((p) => /^Hardware/.test(p.text))!;
+    expect(row.text).toBe('Hardware $243.5 million 12%');
+  });
+
+  it('drops zero-width characters that break heading regexes in real EDGAR HTML', () => {
+    const l = htmlToLines('<div>Item&#8203;&#160;1A.&#8203; Risk Factors</div><div>' + 'x'.repeat(500) + '</div>');
+    expect(l[0]).toBe('Item 1A. Risk Factors');
+  });
+
+  it('handles a 10-Q whose TOC precedes the body with Part tracking intact', () => {
+    const body = (s: string) => Array(8).fill(s);
+    const tenQ = [
+      'TABLE OF CONTENTS',
+      'PART I FINANCIAL INFORMATION',
+      'Item 1. Financial Statements 3',
+      'Item 2. Management\'s Discussion 12',
+      'PART II OTHER INFORMATION',
+      'Item 1A. Risk Factors 20',
+      'Item 6. Exhibits 25',
+      'PART I. FINANCIAL INFORMATION',
+      'Item 1. Financial Statements',
+      ...body('Condensed consolidated balance sheet line with enough characters to count as body.'),
+      'Item 2. Management\'s Discussion and Analysis',
+      ...body('See Part II, Item 1A of this report for risks. Discussion paragraph with enough length here.'),
+      'PART II. OTHER INFORMATION',
+      'Item 1A. Risk Factors',
+      ...body('A risk paragraph long enough that the section is clearly not a table-of-contents entry.'),
+      'Item 6. Exhibits',
+      'Exhibit 31.1 Certification.',
+    ];
+    const r = splitItems(tenQ, '10-Q');
+    expect([...r.sections.keys()]).toEqual(['I.1', 'I.2', 'II.1A', 'II.6']);
+    // The cross-reference "See Part II, Item 1A…" inside I.2 must not flip the Part.
+    expect(r.sections.get('I.2')!.paragraphs).toHaveLength(8);
+    expect(r.sections.get('II.6')!.warnings.join(' ')).toMatch(/placeholder/);
+  });
+});
+
+describe('titleFor', () => {
+  it('only applies canonical titles to forms it knows', () => {
+    expect(titleFor('10-K', '3', 'whatever')).toBe('Legal Proceedings');
+    expect(titleFor('10-Q', 'II.1A', '')).toBe('Risk Factors');
+    expect(titleFor('20-F', '3', 'Key Information.')).toBe('Key Information');
+    expect(titleFor('8-K', '2', '')).toBe('Untitled');
+  });
+});

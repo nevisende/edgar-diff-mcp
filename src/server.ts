@@ -1,0 +1,204 @@
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { z } from 'zod';
+import type { EdgarClient } from './edgar/client.js';
+import { MAX_PATTERN_CHARS, cite, type FilingService } from './service.js';
+import type { FilingRef, ParagraphChange, Section } from './types.js';
+
+/**
+ * edgar-diff-mcp — a read-only MCP server over SEC EDGAR.
+ *
+ * Design rules (see docs/DESIGN.md):
+ *  1. Read-only by construction. No tool has a side effect outside the cache.
+ *  2. Verbatim or nothing. We return filing text, never a paraphrase.
+ *  3. Every paragraph carries a citation (CIK, accession, item, paragraph index, URL).
+ *  4. No data = no answer. A missing Item returns `not_found` with what *is* available.
+ *  5. Honest degradation. Parser doubts are surfaced as `warnings`, never hidden.
+ */
+
+const INSTRUCTIONS = `edgar-diff-mcp is read-only and returns SEC filing text verbatim.
+Quote only what a tool returns and keep its citation (accession, item, paragraph, url) next to the quote.
+If a tool returns status "not_found", say so and use availableItems — do not infer the missing section.
+Typical flow: resolve_company → list_filings (form "10-K") → diff_sections(item "1A") or get_section.`;
+
+const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true } as const;
+
+const json = (value: unknown) => ({ content: [{ type: 'text' as const, text: JSON.stringify(value, null, 2) }] });
+const fail = (e: unknown) => ({ isError: true, content: [{ type: 'text' as const, text: e instanceof Error ? e.message : String(e) }] });
+
+const CikSchema = z.string().regex(/^\d{1,10}$/, 'CIK must be 1–10 digits').describe('Central Index Key');
+const AccessionSchema = z
+  .string()
+  .regex(/^\d{10}-\d{2}-\d{6}$/, 'Accession must look like 0000320193-24-000123')
+  .describe('EDGAR accession number, dashed form');
+const ItemSchema = z.string().min(1).describe('Item reference: "1A", "7", "Item 1A", or "II.1A" for a 10-Q Part II item');
+
+/** One citation shape for every tool. */
+const withCitation = (ref: FilingRef, section: Section, paragraph: number, text: string) => ({ citation: cite(ref, section, paragraph), text });
+
+/** Attach full citations to diff entries so they are self-describing when copied out of context. */
+function citeChange(c: ParagraphChange, base: FilingRef, target: FilingRef, section: Section) {
+  return {
+    ...c,
+    ...(c.base ? { base: { ...c.base, citation: cite(base, section, c.base.paragraph) } } : {}),
+    ...(c.target ? { target: { ...c.target, citation: cite(target, section, c.target.paragraph) } } : {}),
+  };
+}
+
+export function buildServer(client: EdgarClient, service: FilingService): McpServer {
+  const server = new McpServer({ name: 'edgar-diff-mcp', version: '0.1.0' }, { instructions: INSTRUCTIONS });
+
+  server.registerTool(
+    'resolve_company',
+    {
+      title: 'Resolve company',
+      description: 'Look up a company by ticker (exact) or name (substring) and return CIK candidates. Returns [] when nothing matches.',
+      inputSchema: { query: z.string().min(1).describe('Ticker such as "AAPL", a company name fragment, or a numeric CIK') },
+      annotations: READ_ONLY,
+    },
+    async ({ query }) => {
+      try {
+        return json(await client.resolveCompany(query));
+      } catch (e) {
+        return fail(e);
+      }
+    },
+  );
+
+  server.registerTool(
+    'list_filings',
+    {
+      title: 'List filings',
+      description: 'List recent filings for a CIK, optionally filtered by form ("10-K", "10-Q"). Each entry includes the accession number needed by other tools.',
+      inputSchema: {
+        cik: CikSchema,
+        form: z.string().optional().describe('Exact form type, e.g. "10-K"'),
+        limit: z.number().int().min(1).max(100).optional().describe('Max results, default 20'),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ cik, form, limit }) => {
+      try {
+        const opts: { form?: string; limit?: number } = { limit: limit ?? 20 };
+        if (form) opts.form = form;
+        return json(await client.listFilings(cik, opts));
+      } catch (e) {
+        return fail(e);
+      }
+    },
+  );
+
+  server.registerTool(
+    'list_items',
+    {
+      title: 'List items in a filing',
+      description: 'Parse a filing and list the Items that were found (e.g. 1A Risk Factors, 7 MD&A) with sizes and any parser warnings. Call this before get_section when unsure what exists.',
+      inputSchema: { cik: CikSchema, accession: AccessionSchema },
+      annotations: READ_ONLY,
+    },
+    async ({ cik, accession }) => {
+      try {
+        const ref = await service.resolveFiling(cik, accession);
+        return json({ filing: ref, ...(await service.listItems(ref)) });
+      } catch (e) {
+        return fail(e);
+      }
+    },
+  );
+
+  server.registerTool(
+    'get_section',
+    {
+      title: 'Get section (verbatim)',
+      description:
+        'Return the verbatim paragraphs of one Item from a filing, each with a citation. If the Item cannot be located the result is status "not_found" together with the Items that are available — never a guess. Short placeholder bodies ("None.") are returned with a warning.',
+      inputSchema: {
+        cik: CikSchema,
+        accession: AccessionSchema,
+        item: ItemSchema,
+        maxParagraphs: z.number().int().min(1).max(2000).optional().describe('Truncate output after N paragraphs (default 400). Truncation is reported.'),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ cik, accession, item, maxParagraphs }) => {
+      try {
+        const ref = await service.resolveFiling(cik, accession);
+        const r = await service.getSection(ref, item);
+        if (r.status !== 'ok') return json(r);
+        const cap = maxParagraphs ?? 400;
+        return json({
+          status: 'ok',
+          filing: ref,
+          item: r.section.item,
+          title: r.section.title,
+          totalParagraphs: r.section.paragraphs.length,
+          truncated: r.section.paragraphs.length > cap,
+          warnings: r.section.warnings,
+          paragraphs: r.section.paragraphs.slice(0, cap).map((p) => withCitation(ref, r.section, p.index, p.text)),
+        });
+      } catch (e) {
+        return fail(e);
+      }
+    },
+  );
+
+  server.registerTool(
+    'diff_sections',
+    {
+      title: 'Diff one Item across two filings',
+      description:
+        'Compare the same Item (e.g. "1A" Risk Factors) between a base filing and a target filing. Returns added, removed and changed paragraphs — verbatim, each with a citation on its side — plus summary stats. Changed paragraphs include a word-level edit script. Unchanged paragraphs are omitted unless includeUnchanged is true.',
+      inputSchema: {
+        cik: CikSchema,
+        baseAccession: AccessionSchema.describe('Older filing'),
+        targetAccession: AccessionSchema.describe('Newer filing'),
+        item: ItemSchema,
+        includeUnchanged: z.boolean().optional(),
+        maxChanges: z.number().int().min(1).max(1000).optional().describe('Truncate change list after N entries (default 200). Truncation is reported.'),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ cik, baseAccession, targetAccession, item, includeUnchanged, maxChanges }) => {
+      try {
+        const base = await service.resolveFiling(cik, baseAccession);
+        const target = await service.resolveFiling(cik, targetAccession);
+        const d = await service.diff(base, target, item, includeUnchanged ?? false);
+        if (d.status !== 'ok') return json(d);
+        const cap = maxChanges ?? 200;
+        const section: Section = { item: d.item, title: d.title, paragraphs: [], charCount: 0, warnings: [] };
+        return json({
+          ...d,
+          truncated: d.changes.length > cap,
+          changes: d.changes.slice(0, cap).map((c) => citeChange(c, base, target, section)),
+        });
+      } catch (e) {
+        return fail(e);
+      }
+    },
+  );
+
+  server.registerTool(
+    'search_filing',
+    {
+      title: 'Search a filing (verbatim matches)',
+      description: `Regex search across a filing (or one Item). Returns the full verbatim paragraph for each match with a citation. Case-insensitive; pattern ≤ ${MAX_PATTERN_CHARS} chars. Unknown item → status "not_found".`,
+      inputSchema: {
+        cik: CikSchema,
+        accession: AccessionSchema,
+        pattern: z.string().min(1).max(MAX_PATTERN_CHARS).describe('JavaScript regular expression, e.g. "tariff|export control"'),
+        item: ItemSchema.optional(),
+        limit: z.number().int().min(1).max(200).optional(),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ cik, accession, pattern, item, limit }) => {
+      try {
+        const ref = await service.resolveFiling(cik, accession);
+        return json(await service.search(ref, pattern, item, limit ?? 20));
+      } catch (e) {
+        return fail(e);
+      }
+    },
+  );
+
+  return server;
+}

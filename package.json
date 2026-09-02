@@ -1,0 +1,61 @@
+{
+  "name": "edgar-diff-mcp",
+  "version": "0.1.0",
+  "description": "Read-only MCP server that lets an agent diff SEC filings section-by-section and answers only with verbatim, cited text.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Furkan Denizhan <furkandenizhan@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nevisende/edgar-diff-mcp"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "sec",
+    "edgar",
+    "10-k",
+    "10-q",
+    "diff",
+    "claude",
+    "agents"
+  ],
+  "bin": {
+    "edgar-diff-mcp": "dist/main.js",
+    "edgar-diff": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/main.ts",
+    "cli": "tsx src/cli.ts",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm run test",
+    "smoke:live": "tsx scripts/smoke-live.ts",
+    "demo": "tsx scripts/demo-fixtures.ts",
+    "prepublishOnly": "npm run check && npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "cheerio": "^1.2.0",
+    "diff": "^9.0.0",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "tsx": "^4.23.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.0"
+  }
+}
