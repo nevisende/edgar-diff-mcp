@@ -107,6 +107,20 @@ describe('EdgarClient request retries', () => {
     await expect(client.getText(url)).rejects.toThrow(new RegExp(`429.*${url}`));
     expect(attempts).toBe(3);
   });
+
+  it('aborts a request after the configured timeout and includes the URL in the error', async () => {
+    const url = 'https://example.test/timeout';
+    const client = new EdgarClient({
+      userAgent: 'timeout tests@example.com',
+      minIntervalMs: 0,
+      timeoutMs: 2,
+      fetchImpl: async (_input, init) => new Promise<Response>((_resolve, reject) => {
+        init?.signal?.addEventListener('abort', () => reject(new Error('request aborted by timeout')), { once: true });
+      }),
+    });
+
+    await expect(client.getText(url)).rejects.toThrow(new RegExp(`${url}.*(?:timeout|abort)`, 'i'));
+  });
 });
 
 describe('EdgarClient numeric CIK resolution', () => {

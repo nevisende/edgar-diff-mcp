@@ -11,6 +11,7 @@ import { buildServer } from '../src/server.js';
  * against a fake EDGAR. This is what an agent actually sees.
  */
 const fx = (name: string) => readFileSync(new URL(`./fixtures/${name}`, import.meta.url), 'utf8');
+const oversizedCybersecurityParagraph = `We require multi-factor authentication for all employees and contractors. ${'Our security program continuously evaluates material risks across systems, suppliers and customer deployments. '.repeat(12)}`;
 const routes: Record<string, string> = {
   'https://www.sec.gov/files/company_tickers.json': JSON.stringify({ '0': { cik_str: 1, ticker: 'ACME', title: 'Acme Robotics, Inc.' } }),
   'https://data.sec.gov/submissions/CIK0000000001.json': JSON.stringify({
@@ -25,8 +26,14 @@ const routes: Record<string, string> = {
       },
     },
   }),
-  'https://www.sec.gov/Archives/edgar/data/1/000000000125000001/acme-10k-2025.htm': fx('acme-10k-2025.htm'),
-  'https://www.sec.gov/Archives/edgar/data/1/000000000124000001/acme-10k-2024.htm': fx('acme-10k-2024.htm'),
+  'https://www.sec.gov/Archives/edgar/data/1/000000000125000001/acme-10k-2025.htm': fx('acme-10k-2025.htm').replace(
+    'We require multi-factor authentication for all employees and contractors, and we conduct phishing simulations at least twice per year.',
+    oversizedCybersecurityParagraph,
+  ),
+  'https://www.sec.gov/Archives/edgar/data/1/000000000124000001/acme-10k-2024.htm': fx('acme-10k-2024.htm').replace(
+    'We require multi-factor authentication for all employees and contractors, and we conduct phishing simulations at least twice per year.',
+    oversizedCybersecurityParagraph,
+  ),
   'https://www.sec.gov/Archives/edgar/data/1/000000000125000020/acme-20f-2025.htm': fx('acme-20f-2025.htm'),
   'https://www.sec.gov/Archives/edgar/data/1/000000000124000020/acme-20f-2024.htm': fx('acme-20f-2024.htm'),
 };
@@ -265,29 +272,43 @@ describe('MCP surface', () => {
       cik: '1',
       accession: '0000000001-25-000001',
       item: '1A',
-      maxChars: 500,
+      maxChars: 1000,
     });
-    expect(JSON.stringify(section.paragraphs).length).toBeLessThanOrEqual(500);
-    expect(section).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=500/) });
+    expect(JSON.stringify(section.paragraphs).length).toBeLessThanOrEqual(1000);
+    expect(section).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=1000/) });
 
     const diff = await call('diff_sections', {
       cik: '1',
       baseAccession: '0000000001-24-000001',
       targetAccession: '0000000001-25-000001',
       item: '1A',
-      maxChars: 500,
+      maxChars: 1000,
     });
-    expect(JSON.stringify(diff.changes).length).toBeLessThanOrEqual(500);
-    expect(diff).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=500/) });
+    expect(JSON.stringify(diff.changes).length).toBeLessThanOrEqual(1000);
+    expect(diff).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=1000/) });
 
     const search = await call('search_filing', {
       cik: '1',
       accession: '0000000001-25-000001',
       pattern: '.',
       item: '1A',
-      maxChars: 500,
+      maxChars: 1000,
     });
-    expect(JSON.stringify(search.matches).length).toBeLessThanOrEqual(500);
-    expect(search).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=500/) });
+    expect(JSON.stringify(search.matches).length).toBeLessThanOrEqual(1000);
+    expect(search).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=1000/) });
+
+    const oversized = await call('get_section', {
+      cik: '1',
+      accession: '0000000001-25-000001',
+      item: '1C',
+      offset: 2,
+      maxChars: 1000,
+    });
+    expect(oversized).toMatchObject({
+      offset: 2,
+      returned: 0,
+      truncated: true,
+      truncatedReason: 'entry at offset 2 alone exceeds maxChars=1000; raise maxChars.',
+    });
   });
 });

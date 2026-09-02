@@ -33,8 +33,10 @@ describe('greedy pairing inside one removed/added run', () => {
     expect(d.stats).toMatchObject({ changed: 0, added: 1, removed: 1 });
   });
 
-  it('treats punctuation-only edits as unchanged (documented normalisation)', () => {
+  it('reports a punctuation-only edit as changed while section similarity stays 1', () => {
     const d = diffSections(sec('We may fail, to protect IP.'), sec('We may fail to protect IP'), ref(4), ref(5));
+    expect(d.stats.changed).toBe(1);
+    expect(d.stats.unchanged).toBe(0);
     expect(d.stats.similarity).toBe(1);
   });
 });

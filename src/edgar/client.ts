@@ -16,6 +16,8 @@ export interface EdgarClientOptions {
   fetchImpl?: typeof fetch;
   /** Minimum spacing between requests in ms. Default 110 (≈9 req/s). */
   minIntervalMs?: number;
+  /** Request timeout in ms. Default 30000. */
+  timeoutMs?: number;
   cache?: KeyValueCache;
 }
 
@@ -38,7 +40,6 @@ export interface ListFilingsOptions {
 const TICKERS_URL = 'https://www.sec.gov/files/company_tickers.json';
 const SUBMISSIONS_URL = (cik: string) => `https://data.sec.gov/submissions/CIK${cik}.json`;
 const SUBMISSIONS_PAGE_URL = (name: string) => `https://data.sec.gov/submissions/${name}`;
-const REQUEST_TIMEOUT_MS = 30_000;
 const MAX_ATTEMPTS = 3;
 const RETRY_BASE_DELAY_MS = 500;
 
@@ -102,6 +103,7 @@ export class EdgarClient {
   private readonly ua: string;
   private readonly fetchImpl: typeof fetch;
   private readonly minInterval: number;
+  private readonly timeoutMs: number;
   private readonly cache: KeyValueCache | undefined;
   private lastRequestAt = 0;
   private queue: Promise<void> = Promise.resolve();
@@ -115,6 +117,7 @@ export class EdgarClient {
     this.ua = opts.userAgent;
     this.fetchImpl = opts.fetchImpl ?? fetch;
     this.minInterval = opts.minIntervalMs ?? 110;
+    this.timeoutMs = opts.timeoutMs ?? 30_000;
     this.cache = opts.cache;
   }
 
@@ -131,7 +134,7 @@ export class EdgarClient {
       try {
         res = await this.fetchImpl(url, {
           headers: { 'User-Agent': this.ua, 'Accept-Encoding': 'gzip, deflate', Accept: '*/*' },
-          signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+          signal: AbortSignal.timeout(this.timeoutMs),
         });
       } catch (error) {
         lastError = new Error(`EDGAR request failed for ${url}: ${errorMessage(error)}`);

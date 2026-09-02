@@ -109,17 +109,22 @@ function paginateList<T>(entries: T[], offset: number, maxEntries: number, maxEn
     charTruncated = true;
   }
   if (charTruncated) reasons.push(`maxChars=${maxChars}`);
+  const oversizedEntry = charTruncated && kept.length === 0 && offset < entries.length;
   return {
     entries: kept,
     offset,
     returned: kept.length,
     total: entries.length,
     truncated: reasons.length > 0,
-    ...(reasons.length > 0 ? { truncatedReason: `Trailing entries were omitted to satisfy ${reasons.join(' and ')}.` } : {}),
+    ...(oversizedEntry
+      ? { truncatedReason: `entry at offset ${offset} alone exceeds maxChars=${maxChars}; raise maxChars.` }
+      : reasons.length > 0
+        ? { truncatedReason: `Trailing entries were omitted to satisfy ${reasons.join(' and ')}.` }
+        : {}),
   };
 }
 
-const MaxCharsSchema = z.number().int().min(2).max(400_000).optional().describe('Maximum characters in the serialized paragraph/change/match list (default 60000). Truncation is reported.');
+const MaxCharsSchema = z.number().int().min(1000).max(400_000).optional().describe('Maximum characters in the serialized paragraph/change/match list (default 60000). Truncation is reported.');
 const OffsetSchema = z.number().int().nonnegative().optional().describe('Zero-based entry index to start from (default 0). For another page, use offset + returned from the prior response.');
 
 export function buildServer(client: EdgarClient, service: FilingService): McpServer {
