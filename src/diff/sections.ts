@@ -116,7 +116,7 @@ export function diffSections(base: Section, target: Section, baseRef: FilingRef,
       similarity: Number((unchanged / denom).toFixed(3)),
     },
     changes,
-    warnings: [...base.warnings, ...target.warnings],
+    warnings: [...new Set([...base.warnings, ...target.warnings])],
   };
 }
 

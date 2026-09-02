@@ -36,3 +36,7 @@ has consecutive short real sections with long canonical headings, which must not
 `placeholder-cluster-10q.htm` is a synthetic quarterly filing with three consecutive real
 Items whose complete bodies are `None.` or `Not applicable.`. They must remain available even
 though their short lengths and proximity resemble a table-of-contents cluster.
+
+`spaced-toc-10k.htm` is a synthetic annual filing whose table-of-contents rows are separated
+by enough lines to escape cluster detection. Its short duplicate candidates must not create
+doubt warnings when the parser selects the substantive Item bodies.

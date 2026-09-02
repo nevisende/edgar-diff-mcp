@@ -73,4 +73,12 @@ describe('diffSections on identical sections', () => {
     expect(d.stats.similarity).toBe(1);
     expect(onlyChanges(d).changes).toEqual([]);
   });
+
+  it('de-duplicates an identical warning carried by both filings', () => {
+    const warning = 'Item 1C carries the same parser doubt on both sides.';
+    const base = { ...parse(2024).get('1C')!, warnings: [warning] };
+    const target = { ...parse(2025).get('1C')!, warnings: [warning] };
+    const d = diffSections(base, target, ref(2024), ref(2025));
+    expect(d.warnings).toEqual([warning]);
+  });
 });

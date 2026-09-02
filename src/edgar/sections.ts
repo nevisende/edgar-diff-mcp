@@ -308,7 +308,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
   }
 
   // Candidate bodies run from each kept heading to the next *kept* heading.
-  const candidates = new Map<string, { section: Section; bodyChars: number; tocTail: boolean }[]>();
+  const candidates = new Map<string, { section: Section; bodyChars: number; tocTail: boolean; pageRef: boolean }[]>();
   kept.forEach(({ c: h }, idx) => {
     const next = kept[idx + 1]?.c;
     const end = next ? next.line : documentEnd;
@@ -325,7 +325,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
         section.warnings.push(`Combined heading "${h.combinedLabel}": this body covers Items ${h.keys.join(', ')}`);
       }
       const list = candidates.get(key) ?? [];
-      list.push({ section, bodyChars: charCount, tocTail: h.tocTail });
+      list.push({ section, bodyChars: charCount, tocTail: h.tocTail, pageRef: hasPageRef(h.rawTitle) });
       candidates.set(key, list);
     }
   });
@@ -343,7 +343,10 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
       const preview = best.section.paragraphs[0]?.text.slice(0, 60) ?? '';
       best.section.warnings.push(`Item ${key}: body is only ${best.bodyChars} chars ("${preview}"); likely a placeholder such as "None." or "Not applicable."`);
     }
-    if (list.length > 1) {
+    const hasRealRival = list.some((candidate) =>
+      candidate !== best && candidate.bodyChars >= MIN_BODY_CHARS && !candidate.pageRef,
+    );
+    if (hasRealRival) {
       best.section.warnings.push(`Item ${key} heading appeared ${list.length} times outside the table of contents; kept the longest body.`);
     }
     sections.set(key, best.section);

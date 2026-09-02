@@ -69,6 +69,16 @@ describe('table-of-contents defences', () => {
     expect(r.sections.get('I.2')!.paragraphs).toHaveLength(8);
     expect(r.sections.get('II.6')!.warnings.join(' ')).toMatch(/placeholder/);
   });
+
+  it('silently discards TOC-sized rivals when spaced rows escape clustering', () => {
+    const spaced = splitItems(htmlToLines(fx('spaced-toc-10k.htm')), '10-K');
+    expect([...spaced.sections.keys()]).toEqual(['1', '1A', '7']);
+    expect(spaced.warnings).toEqual([]);
+    for (const section of spaced.sections.values()) {
+      expect(section.charCount).toBeGreaterThanOrEqual(MIN_BODY_CHARS);
+      expect(section.warnings).toEqual([]);
+    }
+  });
 });
 
 describe('fused headings', () => {
