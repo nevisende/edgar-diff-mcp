@@ -2,8 +2,8 @@
 
 - Harness: claude
 - Model: sonnet
-- Date: 2026-09-02T21:37:06Z
-- Wall-clock seconds: 22
+- Date: 2026-09-02T22:04:05Z
+- Wall-clock seconds: 16
 - Exit code: 0
 
 ## Prompt
@@ -12,22 +12,16 @@ Compare Berkshire Hathaway's Part II Item 1A (Risk Factors) between its two most
 
 ## Answer
 
-Comparing Berkshire Hathaway's Part II Item 1A (Risk Factors) between the two most recent 10-Qs:
+Compared Berkshire Hathaway's Part II Item 1A (Risk Factors) between its two most recent 10-Q filings:
 
-- **Base (older):** 10-Q filed 2026-05-04, for quarter ended 2026-03-31, accession 0001193125-26-202243
-- **Target (newer):** 10-Q filed 2026-08-10, for quarter ended 2026-06-30, accession 0001193125-26-341032
+- **Base:** Q1 2026 10-Q (accession 0001193125-26-202243, filed 2026-05-04)
+- **Target:** Q2 2026 10-Q (accession 0001193125-26-341032, filed 2026-08-10)
 
-**Result: the substantive Risk Factors text did not change.** 27 of 38 base paragraphs are identical (unchanged) in the target. All of the diffs the tool found are limited to the routine share-repurchase table embedded in this Item (issuer purchases of equity securities), which is refreshed each quarter with new dates and figures — not the risk-factor narrative itself.
+**Result: No change.** The `diff_sections` tool reports 1 paragraph in each filing, 0 added, 0 removed, 0 changed, 1 unchanged, similarity 1.0.
 
-The one narrative sentence that changed just updates the reporting quarter reference:
+The single paragraph is identical in both filings:
 
-> Base (paragraph 2): "Berkshire's common stock repurchases during the **first quarter of 2026** are summarized as follows."
-> — citation: accession 0001193125-26-202243, item II.1A, ¶2, https://www.sec.gov/Archives/edgar/data/1067983/000119312526202243/brka-20260331.htm
+> "Our significant business risks are described in Item 1A to Form 10-K for the year ended December 31, 2025, to which reference is made herein. The risks and uncertainties we describe are not the only ones facing us. Additional risks and uncertainties not presently known to us or that we currently deem immaterial may also impair our business or operations. Any adverse effect on our business, financial condition or operating results could result in a decline in the value of our securities and the loss of all or part of your investment."
 
-> Target (paragraph 2): "Berkshire's common stock repurchases during the **second quarter of 2026** are summarized as follows."
-> — citation: accession 0001193125-26-341032, item II.1A, ¶2, https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm
-
-All other adds/removes (14 added, 9 of the 10 removed beyond the one "changed" pair) are table cells — month labels ("January"→"April", "February"→"May", "March"→"June"), share class labels, and repurchase-volume/price figures (e.g. target ¶24 "716,231.37", ¶33 "733,775.06", ¶36/38 "7,139,881") replacing the prior quarter's numbers (base ¶29 "729,701.17", ¶32/34 "431,462", ¶33 "486.92") — each with its own citation as returned by the tool.
-
-**Bottom line:** No new or removed risk factor language appears — only the quarterly repurchase-activity table within Item 1A was updated with new dates/figures for Q2 2026.
+— Citation: CIK 0001067983, accession 0001193125-26-341032, Item II.1A, paragraph 0, https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm (the base filing's paragraph is verbatim identical per the diff tool's "unchanged" classification).
 

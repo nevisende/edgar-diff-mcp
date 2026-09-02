@@ -1,6 +1,6 @@
 {
   "kind": "string-level scenario grading",
-  "generatedAt": "2026-09-02T21:55:11.147Z",
+  "generatedAt": "2026-09-02T22:07:31.978Z",
   "harnesses": [
     "claude",
     "codex",
