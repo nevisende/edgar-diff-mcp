@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { EdgarClient } from '../src/edgar/client.js';
 import { FilingService } from '../src/service.js';
+import type { FilingRef } from '../src/types.js';
 
 const fx = (name: string) => readFileSync(new URL(`./fixtures/${name}`, import.meta.url), 'utf8');
 
@@ -97,6 +98,52 @@ describe('FilingService', () => {
     }
   });
 
+  it('summarises every shared Item with most-changed first and no paragraphs', async () => {
+    const base = await service.resolveFiling('1', '0000000001-24-000001');
+    const target = await service.resolveFiling('1', '0000000001-25-000001');
+    const d = await service.diffAll(base, target);
+    expect(d.status).toBe('ok');
+    if (d.status !== 'ok') return;
+
+    expect(d).toMatchObject({ status: 'ok', base, target, onlyInBase: [], onlyInTarget: [] });
+    expect(d.items.map((entry) => entry.item)).toEqual(['7', '1A', '1', '1B', '1C']);
+    expect(d.items.map((entry) => entry.stats.similarity)).toEqual([...d.items.map((entry) => entry.stats.similarity)].sort((a, b) => a - b));
+    expect(d.items.find((entry) => entry.item === '1A')?.stats).toMatchObject({ added: 1, removed: 1, changed: 1 });
+    expect(Object.keys(d.items[0] ?? {}).sort()).toEqual(['item', 'stats', 'title']);
+    expect(d.items.every((entry) => !('changes' in entry))).toBe(true);
+  });
+
+  it('reports Items found on only one side', async () => {
+    const baseHtml = fx('acme-10k-2024.htm');
+    const targetHtml = fx('acme-10k-2025.htm').replaceAll('Item 1B.', 'Item 2.').replaceAll('Item&#160;1B.', 'Item&#160;2.');
+    const { service: isolated, refs } = serviceForDocuments({ base: baseHtml, target: targetHtml });
+    const d = await isolated.diffAll(refs.base, refs.target);
+    expect(d.status).toBe('ok');
+    if (d.status !== 'ok') return;
+    expect(d.onlyInBase).toEqual([{ item: '1B', title: 'Unresolved Staff Comments' }]);
+    expect(d.onlyInTarget).toEqual([{ item: '2', title: 'Properties' }]);
+    expect(d.items.map((entry) => entry.item)).not.toContain('1B');
+    expect(d.items.map((entry) => entry.item)).not.toContain('2');
+  });
+
+  it('returns not_found for either filing when parsing yields zero Items', async () => {
+    const { service: missingBase, refs: baseRefs } = serviceForDocuments({ base: '<html><body>No filing Items here.</body></html>', target: fx('acme-10k-2025.htm') });
+    await expect(missingBase.diffAll(baseRefs.base, baseRefs.target)).resolves.toMatchObject({
+      status: 'not_found',
+      side: 'base',
+      filing: baseRefs.base,
+      reason: expect.stringMatching(/No .*Item/i),
+    });
+
+    const { service: missingTarget, refs: targetRefs } = serviceForDocuments({ base: fx('acme-10k-2024.htm'), target: '<html><body>No filing Items here.</body></html>' });
+    await expect(missingTarget.diffAll(targetRefs.base, targetRefs.target)).resolves.toMatchObject({
+      status: 'not_found',
+      side: 'target',
+      filing: targetRefs.target,
+      reason: expect.stringMatching(/No .*Item/i),
+    });
+  });
+
   it('reports which side is missing an item', async () => {
     const base = await service.resolveFiling('1', '0000000001-24-000001');
     const target = await service.resolveFiling('1', '0000000001-25-000001');
@@ -155,3 +202,17 @@ describe('FilingService', () => {
     await expect(service.search(ref, '(')).rejects.toThrow(/Invalid pattern/);
   });
 });
+
+function serviceForDocuments(documents: { base: string; target: string }): { service: FilingService; refs: { base: FilingRef; target: FilingRef } } {
+  const refs = {
+    base: { cik: '0000000001', accession: '0000000001-24-000001', form: '10-K', filingDate: '2025-02-15', url: 'https://example.test/base.htm' },
+    target: { cik: '0000000001', accession: '0000000001-25-000001', form: '10-K', filingDate: '2026-02-15', url: 'https://example.test/target.htm' },
+  } satisfies { base: FilingRef; target: FilingRef };
+  const byUrl: Record<string, string> = { [refs.base.url]: documents.base, [refs.target.url]: documents.target };
+  const fake = new EdgarClient({
+    userAgent: 'diff-all tests@example.com',
+    minIntervalMs: 0,
+    fetchImpl: async (input) => new Response(byUrl[String(input)] ?? 'not found', { status: byUrl[String(input)] === undefined ? 404 : 200 }),
+  });
+  return { service: new FilingService(fake), refs };
+}

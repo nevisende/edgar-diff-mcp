@@ -1,4 +1,5 @@
 export * from './types.js';
+export type { DiffAllResult } from './types.js';
 export { buildServer } from './server.js';
 export { EdgarClient, padCik, accessionToPath } from './edgar/client.js';
 export type { EdgarClientOptions, KeyValueCache, CompanyMatch } from './edgar/client.js';

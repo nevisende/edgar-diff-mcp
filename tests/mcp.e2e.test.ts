@@ -40,6 +40,14 @@ const text = (r: Awaited<ReturnType<Client['callTool']>>): string => {
   const c = (r.content as { type: string; text?: string }[])[0];
   return c?.text ?? '';
 };
+const call = async (name: string, arguments_: Record<string, unknown>): Promise<Record<string, any>> => {
+  const result = await mcp.callTool({ name, arguments: arguments_ });
+  const parsed = JSON.parse(text(result)) as Record<string, any>;
+  expect(result.structuredContent).toBeDefined();
+  const structured = result.structuredContent as Record<string, any>;
+  expect(structured).toEqual(parsed);
+  return structured;
+};
 
 beforeAll(async () => {
   const client = new EdgarClient({ userAgent: 'e2e tests@example.com', fetchImpl: fakeFetch, minIntervalMs: 0 });
@@ -50,38 +58,61 @@ beforeAll(async () => {
 });
 
 describe('MCP surface', () => {
-  it('exposes exactly the six read-only tools', async () => {
+  it('exposes exactly the seven read-only tools', async () => {
     const { tools } = await mcp.listTools();
-    expect(tools.map((t) => t.name).sort()).toEqual(['diff_sections', 'get_section', 'list_filings', 'list_items', 'resolve_company', 'search_filing']);
+    expect(tools.map((t) => t.name).sort()).toEqual(['diff_all_items', 'diff_sections', 'get_section', 'list_filings', 'list_items', 'resolve_company', 'search_filing']);
     for (const t of tools) {
       expect(t.annotations?.readOnlyHint).toBe(true);
       expect(t.annotations?.destructiveHint).toBe(false);
+      expect(t.outputSchema).toBeDefined();
+      expect(t.outputSchema?.type).toBe('object');
     }
+    for (const name of ['get_section', 'diff_all_items', 'diff_sections', 'search_filing']) {
+      const tool = tools.find((t) => t.name === name);
+      expect(tool?.outputSchema).toMatchObject({ properties: { status: { enum: ['ok', 'not_found'] } } });
+      expect(tool?.outputSchema?.properties).not.toHaveProperty('result');
+    }
+    const overview = tools.find((t) => t.name === 'diff_all_items');
+    expect(overview?.annotations?.idempotentHint).toBe(true);
+    expect(overview?.description).toMatch(/statistics only.*diff_sections/is);
   });
 
   it('walks the whole flow: resolve → list → diff', async () => {
-    const companies = JSON.parse(text(await mcp.callTool({ name: 'resolve_company', arguments: { query: 'ACME' } })));
+    const { results: companies } = await call('resolve_company', { query: 'ACME' });
     expect(companies[0].cik).toBe('0000000001');
 
-    const filings = JSON.parse(text(await mcp.callTool({ name: 'list_filings', arguments: { cik: '1', form: '10-K' } })));
+    const { results: filings } = await call('list_filings', { cik: '1', form: '10-K' });
     expect(filings).toHaveLength(2);
 
-    const diff = JSON.parse(
-      text(
-        await mcp.callTool({
-          name: 'diff_sections',
-          arguments: { cik: '1', baseAccession: filings[1].accession, targetAccession: filings[0].accession, item: '1A' },
-        }),
-      ),
-    );
+    const diff = await call('diff_sections', {
+      cik: '1',
+      baseAccession: filings[1].accession,
+      targetAccession: filings[0].accession,
+      item: '1A',
+    });
+    expect(diff.status).toBe('ok');
     expect(diff.stats).toMatchObject({ added: 1, removed: 1, changed: 1 });
     expect(diff.truncated).toBe(false);
     const added = diff.changes.find((c: { type: string }) => c.type === 'added');
     expect(added.target.text).toMatch(/tariffs/);
   });
 
+  it('returns the all-Item overview through the MCP protocol', async () => {
+    const overview = await call('diff_all_items', {
+      cik: '1',
+      baseAccession: '0000000001-24-000001',
+      targetAccession: '0000000001-25-000001',
+    });
+    expect(overview.status).toBe('ok');
+    expect(overview.items.map((entry: { item: string }) => entry.item)).toEqual(['7', '1A', '1', '1B', '1C']);
+    expect(overview.items[0].stats.similarity).toBeLessThanOrEqual(overview.items[1].stats.similarity);
+    expect(overview.onlyInBase).toEqual([]);
+    expect(overview.onlyInTarget).toEqual([]);
+    expect(JSON.stringify(overview)).not.toContain('changes');
+  });
+
   it('never guesses: unknown item → not_found with availableItems', async () => {
-    const r = JSON.parse(text(await mcp.callTool({ name: 'get_section', arguments: { cik: '1', accession: '0000000001-25-000001', item: '9A' } })));
+    const r = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '9A' });
     expect(r.status).toBe('not_found');
     expect(r.availableItems).toEqual(['1', '1A', '1B', '1C', '7']);
   });
@@ -90,11 +121,18 @@ describe('MCP surface', () => {
     const before = fetchCalls;
     const r = await mcp.callTool({ name: 'get_section', arguments: { cik: 'abc', accession: 'bad', item: '1A' } });
     expect(r.isError).toBe(true);
+    expect(r.structuredContent).toBeUndefined();
     expect(fetchCalls).toBe(before);
   });
 
   it('every change in a diff carries a full citation on its side', async () => {
-    const diff = JSON.parse(text(await mcp.callTool({ name: 'diff_sections', arguments: { cik: '1', baseAccession: '0000000001-24-000001', targetAccession: '0000000001-25-000001', item: '1A', maxChanges: 2 } })));
+    const diff = await call('diff_sections', {
+      cik: '1',
+      baseAccession: '0000000001-24-000001',
+      targetAccession: '0000000001-25-000001',
+      item: '1A',
+      maxChanges: 2,
+    });
     expect(diff.truncated).toBe(true);
     expect(diff.changes).toHaveLength(2);
     for (const c of diff.changes) {
@@ -109,10 +147,25 @@ describe('MCP surface', () => {
   });
 
   it('returns verbatim paragraphs with per-paragraph citations', async () => {
-    const r = JSON.parse(text(await mcp.callTool({ name: 'get_section', arguments: { cik: '1', accession: '0000000001-25-000001', item: '1C', maxParagraphs: 2 } })));
+    const r = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '1C', maxParagraphs: 2 });
     expect(r.status).toBe('ok');
     expect(r.truncated).toBe(true);
     expect(r.paragraphs[0].citation).toMatchObject({ accession: '0000000001-25-000001', item: '1C', paragraph: 0 });
     expect(r.paragraphs[0].text).toMatch(/^We maintain a cybersecurity risk management program/);
+  });
+
+  it('returns typed item listings and cited search matches', async () => {
+    const items = await call('list_items', { cik: '1', accession: '0000000001-25-000001' });
+    expect(items.items.map((item: { key: string }) => item.key)).toEqual(['1', '1A', '1B', '1C', '7']);
+
+    const search = await call('search_filing', {
+      cik: '1',
+      accession: '0000000001-25-000001',
+      pattern: 'tariffs',
+      item: '1A',
+    });
+    expect(search.status).toBe('ok');
+    expect(search.matches[0].citation).toMatchObject({ item: '1A', paragraph: 4 });
+    expect(search.matches[0].text).toMatch(/tariffs/);
   });
 });

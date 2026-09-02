@@ -1,11 +1,13 @@
 import type { EdgarClient } from './edgar/client.js';
 import { htmlToLines, resolveItemKey, splitItems } from './edgar/sections.js';
 import { diffSections, onlyChanges } from './diff/sections.js';
-import type { Citation, FilingRef, Section, SectionDiff, SectionResult } from './types.js';
+import type { Citation, DiffAllResult, FilingRef, Section, SectionDiff, SectionResult } from './types.js';
 
 export const MAX_PATTERN_CHARS = 200;
 
-export type DiffResult = ({ status: 'ok' } & SectionDiff) | { status: 'not_found'; side: 'base' | 'target'; detail: SectionResult };
+export type DiffResult =
+  | ({ status: 'ok' } & SectionDiff)
+  | { status: 'not_found'; side: 'base' | 'target'; detail: Extract<SectionResult, { status: 'not_found' }> };
 export type SearchResult =
   | { status: 'ok'; filing: FilingRef; matches: { citation: Citation; text: string }[]; warnings: string[] }
   | { status: 'not_found'; filing: FilingRef; item: string; reason: string; availableItems: string[] };
@@ -64,6 +66,44 @@ export class FilingService {
     return { status: 'ok', ...(includeUnchanged ? d : onlyChanges(d)) };
   }
 
+  /** Per-Item statistics across two filings. Paragraph text stays in diff(). */
+  async diffAll(base: FilingRef, target: FilingRef): Promise<DiffAllResult> {
+    const baseParsed = await this.parse(base);
+    if (baseParsed.sections.size === 0) {
+      return { status: 'not_found', side: 'base', reason: noItemsReason(baseParsed.warnings), filing: base };
+    }
+    const targetParsed = await this.parse(target);
+    if (targetParsed.sections.size === 0) {
+      return { status: 'not_found', side: 'target', reason: noItemsReason(targetParsed.warnings), filing: target };
+    }
+
+    const items: Extract<DiffAllResult, { status: 'ok' }>['items'] = [];
+    const onlyInBase: Extract<DiffAllResult, { status: 'ok' }>['onlyInBase'] = [];
+    const onlyInTarget: Extract<DiffAllResult, { status: 'ok' }>['onlyInTarget'] = [];
+    const warnings = [
+      ...baseParsed.warnings,
+      ...[...baseParsed.sections.values()].flatMap((section) => section.warnings),
+      ...targetParsed.warnings,
+      ...[...targetParsed.sections.values()].flatMap((section) => section.warnings),
+    ];
+
+    for (const [item, baseSection] of baseParsed.sections) {
+      const targetSection = targetParsed.sections.get(item);
+      if (!targetSection) {
+        onlyInBase.push({ item, title: baseSection.title });
+        continue;
+      }
+      const diff = diffSections(baseSection, targetSection, base, target);
+      items.push({ item: diff.item, title: diff.title, stats: diff.stats });
+    }
+    for (const [item, targetSection] of targetParsed.sections) {
+      if (!baseParsed.sections.has(item)) onlyInTarget.push({ item, title: targetSection.title });
+    }
+
+    items.sort((a, b) => a.stats.similarity - b.stats.similarity);
+    return { status: 'ok', base, target, items, onlyInBase, onlyInTarget, warnings };
+  }
+
   /** Verbatim paragraphs matching a regex, with citations. Unknown item → not_found, never an empty list. */
   async search(ref: FilingRef, pattern: string, item?: string, limit = 20): Promise<SearchResult> {
     if (pattern.length > MAX_PATTERN_CHARS) throw new Error(`Pattern longer than ${MAX_PATTERN_CHARS} chars; simplify it.`);
@@ -96,4 +136,8 @@ export class FilingService {
 
 export function cite(ref: FilingRef, section: Section, paragraph: number): Citation {
   return { ...ref, item: section.item, itemTitle: section.title, paragraph };
+}
+
+function noItemsReason(warnings: string[]): string {
+  return warnings.join(' ') || 'No Items were found in the filing.';
 }

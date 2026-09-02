@@ -1,4 +1,4 @@
-import type { SectionDiff } from './types.js';
+import type { DiffAllResult, SectionDiff } from './types.js';
 
 export const RED = '\x1b[31m', GREEN = '\x1b[32m', YELLOW = '\x1b[33m', DIM = '\x1b[2m', RESET = '\x1b[0m';
 
@@ -23,3 +23,23 @@ export function printDiff(d: SectionDiff): void {
   console.log(`${DIM}base:   ${d.base.url}\ntarget: ${d.target.url}${RESET}`);
 }
 
+export function printDiffAll(d: Extract<DiffAllResult, { status: 'ok' }>): void {
+  console.log(`${DIM}${d.base.form} ${d.base.filingDate} → ${d.target.form} ${d.target.filingDate}${RESET}`);
+  const headers = ['item', 'title', '¶ base→target', '+/-/~', 'similarity'];
+  const rows = d.items.map(({ item, title, stats }) => [
+    item,
+    title,
+    `${stats.baseParagraphs}→${stats.targetParagraphs}`,
+    `+${stats.added}/-${stats.removed}/~${stats.changed}`,
+    stats.similarity.toFixed(3),
+  ]);
+  const widths = headers.map((header, index) => Math.max(header.length, ...rows.map((row) => row[index]?.length ?? 0)));
+  const line = (cells: string[]): string => cells.map((cell, index) => cell.padEnd(widths[index] ?? 0)).join(' | ');
+  console.log(line(headers));
+  console.log(widths.map((width) => '-'.repeat(width)).join('-|-'));
+  for (const row of rows) console.log(line(row));
+  if (d.onlyInBase.length) console.log(`only in base: ${d.onlyInBase.map((entry) => `Item ${entry.item} — ${entry.title}`).join(', ')}`);
+  if (d.onlyInTarget.length) console.log(`only in target: ${d.onlyInTarget.map((entry) => `Item ${entry.item} — ${entry.title}`).join(', ')}`);
+  for (const warning of d.warnings) console.log(`${YELLOW}warning:${RESET} ${warning}`);
+  console.log(`${DIM}base:   ${d.base.url}\ntarget: ${d.target.url}${RESET}`);
+}
