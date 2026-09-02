@@ -143,7 +143,8 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     'resolve_company',
     {
       title: 'Resolve company',
-      description: 'Look up a company by ticker (exact) or name (substring) and return CIK candidates. Returns an empty results array when nothing matches.',
+      description:
+        'Look up a company by ticker (exact) or name (substring) and return CIK candidates. Returns an empty results array when nothing matches. A ticker can point at a newly created holding company with no 10-K/10-Q yet; if list_filings returns nothing for a form, search again by company name and check the other CIKs.',
       inputSchema: { query: z.string().min(1).describe('Ticker such as "AAPL", a company name fragment, or a numeric CIK') },
       outputSchema: ResolveCompanyOutputSchema,
       annotations: READ_ONLY,
