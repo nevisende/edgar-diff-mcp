@@ -1,5 +1,7 @@
 # edgar-diff-mcp
 
+[![CI](https://github.com/nevisende/edgar-diff-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/nevisende/edgar-diff-mcp/actions/workflows/ci.yml)
+
 **A read-only [MCP](https://modelcontextprotocol.io) server that lets a coding agent diff SEC filings section-by-section — and answers only with verbatim, cited text.**
 
 Ask Claude *"what changed in Apple's risk factors between the last two 10-Ks?"* and get back the exact paragraphs that were added, removed or edited, each one tagged with the accession number, Item, paragraph index and source URL. No summary, no paraphrase, no guess.
@@ -18,6 +20,21 @@ paragraphs 7 → 7 · +1 -1 ~1 · similarity 0.714
 
 + [target ¶4] Changes in trade policy, including the tariffs announced on imported robotic components …
 ```
+
+## Measured on real filings
+
+`npm run eval:live` measures the parser against 30 issuers: the two most recent 10-Ks for each issuer and one 10-Q for eight of them. Each recent 10-K has 18 expected Items.
+
+| Parser | Found | Rate |
+|---|---:|---:|
+| Before parser fixes | 892/1090 | 81.8% |
+| Now | 980/1090 | 89.9% |
+
+GE, Intel and McDonald's stay `not_found` on purpose: their 10-Ks use company-specific section headings in the body and put the formal Item names in a cross-reference index. See [`evals/latest.md`](evals/latest.md) for the full committed result.
+
+The same engine on Apple's real Item 1A:
+
+`10-K 2024-11-01 → 10-K 2025-10-31 · Item 1A · paragraphs 115 → 106 · +9 -18 ~51 · similarity 0.4`
 
 ## Why this exists
 
@@ -42,9 +59,10 @@ These are the same rules a careful research desk applies to a junior analyst. Th
 | `list_items` | Items found *with confidence* in a filing, with sizes. Call this when unsure what exists. |
 | `get_section` | Verbatim paragraphs of one Item, each with a citation. `not_found` + `availableItems` otherwise. |
 | `diff_sections` | Same Item across two filings → `added` / `removed` / `changed` paragraphs, each side cited, word-level edits for `changed`, stats. |
+| `diff_all_items` | Per-Item change statistics across two filings, most-changed first, plus Items found on only one side. No paragraphs. |
 | `search_filing` | Regex over a filing (or one Item) → matching paragraphs, verbatim, cited. |
 
-All six carry MCP annotations `readOnlyHint: true, destructiveHint: false, idempotentHint: true`, and every paragraph on every tool uses the same citation shape:
+All seven carry MCP annotations `readOnlyHint: true, destructiveHint: false, idempotentHint: true`. Every tool declares an MCP `outputSchema` and returns `structuredContent` identical to its text JSON. Every paragraph on every tool uses the same citation shape:
 
 ```json
 { "cik": "0000320193", "accession": "0000320193-24-000123", "form": "10-K", "filingDate": "2024-11-01",
@@ -101,14 +119,16 @@ npm run cli -- resolve AAPL
 npm run cli -- filings 320193 --form 10-K --limit 2
 npm run cli -- items   320193 0000320193-24-000123
 npm run cli -- diff    320193 <olderAccession> <newerAccession> 1A
+npm run cli -- diff-all 320193 <olderAccession> <newerAccession>
 npm run cli -- search  320193 0000320193-24-000123 "tariff|export control" --item 1A
+npm run eval:live
 ```
 
 `npm run smoke:live -- MSFT 7` diffs a real Item 7 (MD&A) from EDGAR and exits non-zero on any `not_found` — a parser gap is a bug, not a soft failure.
 
 ## How the parser decides what is an "Item"
 
-Every 10-K lists all of its Items twice: once in the table of contents and once as real headings. A regex cannot tell them apart. This parser flattens the HTML to lines, finds every short `Item N` heading, and then removes **clusters** of headings that sit within a couple of lines of each other — that is what a table of contents looks like once flattened, whatever markup produced it. Rows with a trailing page reference or a tiny body are dropped; if one Item still has several occurrences, the longest body wins. Sentences that merely *mention* an Item ("Item 7 of this report discusses…") are rejected as headings. 10-Q Items are prefixed with their Part (`II.1A`), because Part I and Part II reuse the same numbers.
+Every 10-K lists all of its Items twice: once in the table of contents and once as real headings. A regex cannot tell them apart. This parser flattens the HTML to lines, finds every short `Item N` heading, and then removes **clusters** of headings that sit within a couple of lines of each other — that is what a table of contents looks like once flattened, whatever markup produced it. Rows with a trailing page reference or a tiny body are dropped; if one Item still has several occurrences, the longest body wins. Sentences that merely *mention* an Item ("Item 7 of this report discusses…") are rejected as headings. A fused heading and first paragraph are split only when the title matches a canonical Item title or ends at a clear sentence boundary. Combined headings such as "Items 10, 11, 12, 13 and 14" register the same body under every named Item, with a warning. Repeated page furniture, including running headers and footers such as "Apple Inc. | 2024 Form 10-K | 5", is dropped when it repeats. 10-Q Items are prefixed with their Part (`II.1A`), because Part I and Part II reuse the same numbers.
 
 See [`docs/DESIGN.md`](docs/DESIGN.md) for the full reasoning — including the residual case this heuristic can still get wrong, and how it fails when it does.
 
@@ -121,13 +141,23 @@ src/
   diff/sections.ts    paragraph LCS + greedy pairing + word-level edits
   diff/similarity.ts  Dice coefficient over word bigrams
   service.ts          orchestration; the only place that assembles answers
+  schemas.ts          Zod output schemas, type-checked against src/types.ts
   server.ts           MCP tools (buildServer) — thin, validated, read-only
   main.ts             stdio entry point
   cli.ts / format.ts  human interface over the same service
+scripts/
+  eval-live.ts        live filing corpus evaluation
+evals/                committed evaluation results
 tests/
   fixtures/           synthetic 10-Ks with a known, documented diff and the parser traps built in
   *.test.ts           parser + edge cases, diff + pairing, service (fake EDGAR), MCP end-to-end (in-memory transport)
+.github/workflows/
+  ci.yml               check, demo and build on Node 20 and 22
 ```
+
+## Related work
+
+[`InPractise/diffing-tool`](https://github.com/InPractise/diffing-tool) (TypeScript, 2024) matches sections between filings by title and content in three similarity passes using Levenshtein distance. This project instead locates Items by heading structure, refuses when unsure, and diffs at paragraph level with citations — a narrower problem solved conservatively.
 
 ## Non-goals (for now)
 
@@ -140,5 +170,7 @@ tests/
 Furkan Denizhan — [github.com/nevisende](https://github.com/nevisende) · [linkedin.com/in/furkan-denizhan](https://linkedin.com/in/furkan-denizhan)
 
 Built in a day with Claude Code, following the same discipline I use for the MCP servers I run in production: read-only by architecture, refuse rather than guess, and let the tests say what the code does.
+
+See docs/HOW_IT_WAS_BUILT.md for the agent workflow behind this repository.
 
 MIT.

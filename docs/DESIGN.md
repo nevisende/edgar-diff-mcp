@@ -54,21 +54,35 @@ So the parser:
 
 1. flattens HTML to lines, one per block element (`p`, `div`, `tr`, `li`, headings), with a
    space between table cells and zero-width characters stripped;
-2. finds every short line matching `Item <N[A-C]>` whose title is not a sentence (does not start
+2. drops short page labels such as running headers and footers only when the same normalised
+   label repeats at least three times, so an ordinary numbered table row remains verbatim;
+3. finds every short line matching `Item <N[A-C]>` whose title is not a sentence (does not start
    lower-case, ≤ 12 words) — this rejects "Item 7 of this report discusses…";
-3. groups headings into runs where consecutive headings are ≤ 2 lines apart *and the earlier
+4. splits a heading fused with its first paragraph only after a canonical Item title or a clear
+   sentence boundary near the start; an uncertain split is rejected rather than guessed;
+5. expands a combined heading such as "Items 10, 11, 12, 13 and 14" under every named Item and
+   adds a warning, so the shared body is explicit rather than assigned to one guessed Item;
+6. drops repeated bare `Item N` running headers only when there are at least three and the same
+   Item also has a titled heading, so isolated real headings remain candidates;
+7. groups headings into runs where consecutive headings are ≤ 2 lines apart *and the earlier
    one is a stub* (tiny body or page reference). A run of ≥ 3 is a table of contents;
-4. drops every stub in the run. A run member with a real body and no page reference — the
+8. drops every stub in the run. A run member with a real body and no page reference — the
    last TOC row swallowing the preamble, or the first real heading — is kept but flagged
    `tocTail`, and a flagged candidate is used only when no unflagged one exists for that Item;
-5. among remaining candidates per Item, keeps the longest body;
-6. returns short real bodies ("None.", "Not applicable.") *with a warning*, rather than
+9. among remaining candidates per Item, keeps the longest body;
+10. returns short real bodies ("None.", "Not applicable.") *with a warning*, rather than
    refusing them, because they are real sections.
 
 10-Q filings reuse Item numbers across Part I and Part II, so `PART I`/`PART II` lines are
 tracked and keys become `I.2`, `II.1A`; `PART` lines themselves are excluded from bodies.
 Callers may still pass `1A`; it resolves when unambiguous and errors when not. Cross-references
 such as "See Part II, Item 1A" do not flip the Part because they are sentence-shaped.
+
+### Duplicate headings
+
+The duplicate-heading warning fires only when a losing candidate has a real body: at least
+400 characters and no trailing page reference. A losing TOC stub or heading-only label does
+not create doubt about the selected section.
 
 ### Known failure modes (deliberately not hidden)
 
@@ -78,16 +92,30 @@ such as "See Part II, Item 1A" do not flip the Part because they are sentence-sh
   "Form 10-K Summary" with 400 words of forward-looking boilerplate is visibly wrong.
 - **Headings inside tables of exhibits** ("Item 15" listing exhibit numbers) can produce a long
   "body" of exhibit rows. Mitigation: none yet; it shows up as an oversized Item 15.
-- **Combined headings** ("Items 1 and 2. Business and Properties", common in energy/REIT
-  filings) never match `^item\s+`. Fails honestly as `not_found`.
-- **A heading and its first paragraph in the same block** longer than 140 characters is not
-  matched. Fails honestly as `not_found`.
+- **Cross-reference-index filings (GE, Intel, McDonald's).** The body uses the company's own
+  headings and a Form 10-K cross-reference index at the end; no formal `Item N` heading exists
+  in the body, so every Item is `not_found`. Mapping the index to headings is possible future
+  work.
+- **An unrecognisable fused title** still fails honestly as `not_found`; the parser will not
+  guess where its heading ends and its first paragraph begins.
 - **Non-10-K/10-Q forms** (20-F, 40-F, 8-K) keep their own heading text as the title; Item
   numbering is whatever the document uses. Diffing still works; labelling is weaker.
 - **Restated paragraphs that move between Items** are reported as removed in one Item and
   never seen in the other, because diffs are per Item.
 - **Table rows whose numbers all change** share no word bigrams and are reported as
   remove+add rather than `changed`. This is the conservative direction; see "The diff".
+
+## Measuring instead of guessing
+
+`scripts/eval-live.ts` runs the parser over 30 issuers, using the two most recent 10-Ks for
+each and one 10-Q for eight issuers. It expects 18 Items in each recent 10-K and eight Items
+in each 10-Q. An Item counts as found only when its expected key appears in `list_items`; the
+harness does not award partial credit for nearby text.
+
+Parser fixes moved the result from 892/1090 (81.8%) to 980/1090 (89.9%). AMZN, GOOGL, CVX,
+PFE, DIS, NFLX, COST, UNH, HD, PLD and CRM gained expected Items. MSFT exposed a different
+error: repeated running headers produced four-paragraph fake candidates and Item 1A similarity
+of 0.000. Removing that page furniture raised the measured similarity to 0.383.
 
 ## The diff
 
@@ -105,10 +133,8 @@ invents them.
 
 - Section-aware chunking that keeps sub-headings ("*Risks Related to Our Industry*") as
   citation context.
-- A `diff_all_items` tool that returns per-Item similarity so an analyst can see *where* a
-  filing moved before reading anything.
+- Cross-reference-index mapping from formal Items to company-specific body headings, with
+  explicit confidence checks.
 - Cross-Item move detection.
-- A small evaluation set of real filings with hand-labelled diffs, so the parser's precision is
-  a number rather than a feeling.
 - Streaming for very large Items (Item 8 financial statements routinely exceed a client's
   response budget; today we truncate and say so).
