@@ -1,6 +1,6 @@
 {
   "kind": "string-level scenario grading",
-  "generatedAt": "2026-09-02T21:50:56.700Z",
+  "generatedAt": "2026-09-02T21:53:26.086Z",
   "harnesses": [
     "claude",
     "codex",
@@ -8,7 +8,7 @@
   ],
   "totals": {
     "claude": {
-      "passed": 6,
+      "passed": 7,
       "total": 7
     },
     "codex": {
@@ -198,7 +198,7 @@
     {
       "scenario": "tsla-where-it-moved",
       "harness": "claude",
-      "pass": false,
+      "pass": true,
       "file": "claude/tsla-where-it-moved.md",
       "checks": [
         {
@@ -211,11 +211,11 @@
         },
         {
           "name": "names Item 9B as most changed",
-          "pass": false
+          "pass": true
         },
         {
           "name": "names Item 15 in the top three",
-          "pass": false
+          "pass": true
         },
         {
           "name": "names Item 7 in the top three",
@@ -227,14 +227,10 @@
         },
         {
           "name": "includes an SEC Archives citation URL",
-          "pass": false
+          "pass": true
         }
       ],
-      "failedChecks": [
-        "names Item 9B as most changed",
-        "names Item 15 in the top three",
-        "includes an SEC Archives citation URL"
-      ]
+      "failedChecks": []
     },
     {
       "scenario": "tsla-where-it-moved",

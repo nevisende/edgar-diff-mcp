@@ -62,7 +62,7 @@ fi
 
 found=0
 failures=0
-while IFS=$'\t' read -r scenario_id scenario_prompt; do
+while IFS=$'\t' read -r -u 3 scenario_id scenario_prompt; do
   if [ -n "$FILTER" ] && [ "$scenario_id" != "$FILTER" ]; then
     continue
   fi
@@ -81,7 +81,7 @@ $scenario_prompt"
   case "$HARNESS" in
     claude)
       (
-        cd "$TMPDIR_RUN" && claude -p --model sonnet --mcp-config "$CLAUDE_CONFIG" --strict-mcp-config --allowedTools "mcp__edgar-diff__*" --output-format text "$full_prompt"
+        cd "$TMPDIR_RUN" && claude -p --model sonnet --mcp-config "$CLAUDE_CONFIG" --strict-mcp-config --allowedTools "mcp__edgar-diff__*" --output-format text "$full_prompt" < /dev/null
       ) > "$ANSWER_TMP" 2> "$COMMAND_LOG"
       exit_code=$?
       ;;
@@ -91,7 +91,7 @@ $scenario_prompt"
       ;;
     agy)
       (
-        cd "$TMPDIR_RUN" && agy -p "$full_prompt" --model gemini-3.8-flash-high --dangerously-skip-permissions --add-dir "$TMPDIR_RUN" --print-timeout 10m
+        cd "$TMPDIR_RUN" && agy -p "$full_prompt" --model gemini-3.8-flash-high --dangerously-skip-permissions --add-dir "$TMPDIR_RUN" --print-timeout 10m < /dev/null
       ) > "$ANSWER_TMP" 2> "$COMMAND_LOG"
       exit_code=$?
       ;;
@@ -128,7 +128,7 @@ $scenario_prompt"
   if [ "$exit_code" -ne 0 ]; then
     failures=$((failures + 1))
   fi
-done < "$SCENARIO_LIST"
+done 3< "$SCENARIO_LIST"
 
 if [ "$found" -eq 0 ]; then
   printf 'Unknown scenario id: %s\n' "$FILTER" >&2
