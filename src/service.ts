@@ -70,6 +70,20 @@ export class FilingService {
     if (b.status !== 'ok') return { status: 'not_found', side: 'base', detail: b };
     const t = await this.getSection(target, item);
     if (t.status !== 'ok') return { status: 'not_found', side: 'target', detail: t };
+    if (b.section.item !== t.section.item) {
+      const targetKeys = [...(await this.parse(target)).sections.keys()];
+      return {
+        status: 'not_found',
+        side: 'target',
+        detail: {
+          status: 'not_found',
+          filing: target,
+          item,
+          reason: `Item "${item}" resolved to ${b.section.item} in the base filing and ${t.section.item} in the target filing; qualify the item as ${b.section.item} or ${t.section.item}.`,
+          availableItems: targetKeys,
+        },
+      };
+    }
     const d = diffSections(b.section, t.section, base, target);
     return { status: 'ok', ...(includeUnchanged ? d : onlyChanges(d)) };
   }

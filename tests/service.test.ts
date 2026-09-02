@@ -152,6 +152,31 @@ describe('FilingService', () => {
     expect(d).toMatchObject({ status: 'not_found', side: 'base' });
   });
 
+  it('refuses an unqualified 10-Q Item when it resolves to different Parts', async () => {
+    const body = 'A synthetic filing paragraph with enough repeated detail to be a real section. '.repeat(8);
+    const baseHtml = `<p>PART I</p><p>Item 1. Financial Statements</p><p>${body}</p>`;
+    const targetHtml = `<p>PART II</p><p>Item 1. Legal Proceedings</p><p>${body}</p>`;
+    const { service: isolated, refs } = serviceForDocuments({ base: baseHtml, target: targetHtml }, '10-Q');
+
+    await expect(isolated.diff(refs.base, refs.target, '1')).resolves.toMatchObject({
+      status: 'not_found',
+      side: 'target',
+      detail: {
+        item: '1',
+        reason: expect.stringMatching(/resolved to I\.1.*II\.1.*qualify.*I\.1.*II\.1/i),
+        availableItems: ['II.1'],
+      },
+    });
+
+    const all = await isolated.diffAll(refs.base, refs.target);
+    expect(all).toMatchObject({
+      status: 'ok',
+      items: [],
+      onlyInBase: [{ item: 'I.1' }],
+      onlyInTarget: [{ item: 'II.1' }],
+    });
+  });
+
   it('searches verbatim paragraphs with citations', async () => {
     const ref = await service.resolveFiling('1', '0000000001-25-000001');
     const r = await service.search(ref, 'tariff', '1A');
@@ -240,10 +265,10 @@ describe('FilingService', () => {
   });
 });
 
-function serviceForDocuments(documents: { base: string; target: string }): { service: FilingService; refs: { base: FilingRef; target: FilingRef } } {
+function serviceForDocuments(documents: { base: string; target: string }, form = '10-K'): { service: FilingService; refs: { base: FilingRef; target: FilingRef } } {
   const refs = {
-    base: { cik: '0000000001', accession: '0000000001-24-000001', form: '10-K', filingDate: '2025-02-15', url: 'https://example.test/base.htm' },
-    target: { cik: '0000000001', accession: '0000000001-25-000001', form: '10-K', filingDate: '2026-02-15', url: 'https://example.test/target.htm' },
+    base: { cik: '0000000001', accession: '0000000001-24-000001', form, filingDate: '2025-02-15', url: 'https://example.test/base.htm' },
+    target: { cik: '0000000001', accession: '0000000001-25-000001', form, filingDate: '2026-02-15', url: 'https://example.test/target.htm' },
   } satisfies { base: FilingRef; target: FilingRef };
   const byUrl: Record<string, string> = { [refs.base.url]: documents.base, [refs.target.url]: documents.target };
   const fake = new EdgarClient({
