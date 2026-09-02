@@ -81,6 +81,18 @@ describe('table-of-contents defences', () => {
   });
 });
 
+describe('combined Part and Item headings', () => {
+  it('parses an Item heading that shares one line with its Part heading', () => {
+    const result = splitItems(htmlToLines(fx('part-item-same-line-10q.htm')), '10-Q');
+    const risk = result.sections.get('II.1A');
+
+    expect([...result.sections.keys()]).toEqual(['I.1', 'II.1A']);
+    expect(risk?.title).toBe('Risk Factors');
+    expect(risk?.paragraphs[0]?.text).toMatch(/^Acme faces hypothetical supply constraints/);
+    expect(result.warnings).toEqual([]);
+  });
+});
+
 describe('fused headings', () => {
   const fused = splitItems(htmlToLines(fx('fused-headings-10k.htm')), '10-K').sections;
 

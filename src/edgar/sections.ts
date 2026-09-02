@@ -232,21 +232,23 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
   }
 
   lines.forEach((line, i) => {
+    let headingLine = line;
     const p = PART_RE.exec(line);
     if (line.length <= MAX_HEADING_CHARS && p && p[1] && !looksLikeSentence(p[2] ?? '')) {
       const raw = p[1].toUpperCase();
       part = ROMAN[raw] ?? raw;
-      return;
+      headingLine = line.replace(/^part\s+(?:i{1,3}|iv|[1-4])\s*[,.:\-–—]\s*/i, '');
+      if (headingLine === line) return;
     }
     if (crossReferenceIndexAt >= 0 && i > crossReferenceIndexAt) return;
-    const m = ITEM_RE.exec(line);
+    const m = ITEM_RE.exec(headingLine);
     if (!m?.[1] || !m[2]) return;
     const items = itemKeys(m[2]);
     if (!items) return;
     const keys = items.map((item) => (isTenQ && part ? `${part}.${item}` : item));
     const title = m[3] ?? '';
     const combinedLabel = keys.length > 1 ? `${m[1]} ${m[2]}` : undefined;
-    if (line.length > MAX_HEADING_CHARS) {
+    if (headingLine.length > MAX_HEADING_CHARS) {
       const fused = splitFusedHeading(title, form, keys);
       if (!fused) return;
       const heading: Heading = {

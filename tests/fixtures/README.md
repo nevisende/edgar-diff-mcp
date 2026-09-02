@@ -43,3 +43,6 @@ doubt warnings when the parser selects the substantive Item bodies.
 
 `repeated-page-footer-10k.htm` repeats a short annual-report footer across three synthetic
 pages. The footer must be removed while an ordinary numeric table row remains verbatim.
+
+`part-item-same-line-10q.htm` is a synthetic quarterly filing whose Part II marker and Item 1A
+heading share one line. The parser must update the Part and still recognize the Item heading.
