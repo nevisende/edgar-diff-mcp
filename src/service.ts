@@ -196,7 +196,11 @@ function hasNestedQuantifier(pattern: string): boolean {
 }
 
 export function cite(ref: FilingRef, section: Section, paragraph: number): Citation {
-  return { ...ref, item: section.item, itemTitle: section.title, paragraph };
+  return citeItem(ref, section.item, section.title, paragraph);
+}
+
+export function citeItem(ref: FilingRef, item: string, itemTitle: string, paragraph: number): Citation {
+  return { ...ref, item, itemTitle, paragraph };
 }
 
 function noItemsReason(warnings: string[]): string {

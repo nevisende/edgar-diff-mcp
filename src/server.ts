@@ -1,7 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import type { EdgarClient } from './edgar/client.js';
-import { MAX_PATTERN_CHARS, cite, type FilingService } from './service.js';
+import { MAX_PATTERN_CHARS, cite, citeItem, type FilingService } from './service.js';
 import {
   DiffAllItemsOutputSchema,
   DiffSectionsOutputSchema,
@@ -61,11 +61,12 @@ function citeChange(
   c: ParagraphChange,
   base: FilingRef,
   target: FilingRef,
-  section: Section,
+  item: string,
+  title: string,
   includeWordDiff: boolean,
 ): Extract<DiffSectionsResult, { status: 'ok' }>['changes'][number] {
-  const citedBase = c.base ? { ...c.base, citation: cite(base, section, c.base.paragraph) } : undefined;
-  const citedTarget = c.target ? { ...c.target, citation: cite(target, section, c.target.paragraph) } : undefined;
+  const citedBase = c.base ? { ...c.base, citation: citeItem(base, item, title, c.base.paragraph) } : undefined;
+  const citedTarget = c.target ? { ...c.target, citation: citeItem(target, item, title, c.target.paragraph) } : undefined;
   switch (c.type) {
     case 'added':
       if (!citedTarget) throw new Error('Internal: added change is missing its target paragraph.');
@@ -273,9 +274,8 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
         const d = await service.diff(base, target, item, includeUnchanged ?? false);
         if (d.status !== 'ok') return json(d satisfies DiffSectionsOutput);
         const cap = maxChanges ?? 200;
-        const section: Section = { item: d.item, title: d.title, paragraphs: [], charCount: 0, warnings: [] };
         const limited = truncateList(
-          d.changes.map((c) => citeChange(c, base, target, section, includeWordDiff ?? false)),
+          d.changes.map((c) => citeChange(c, base, target, d.item, d.title, includeWordDiff ?? false)),
           cap,
           'maxChanges',
           maxChars ?? 60_000,
