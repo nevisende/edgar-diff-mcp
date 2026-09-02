@@ -1,5 +1,5 @@
 {
-  "runDate": "2026-09-02T20:08:26.211Z",
+  "runDate": "2026-09-02T20:21:13.502Z",
   "corpus": [
     "AAPL",
     "MSFT",
@@ -50,6 +50,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -86,9 +87,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -99,6 +98,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -169,6 +169,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -205,9 +206,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -218,6 +217,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -301,11 +301,7 @@
         "II.6"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "II.3",
-        "II.4",
-        "II.5"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "I.1",
         "I.2",
@@ -354,6 +350,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -390,9 +387,7 @@
         "15"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -403,6 +398,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -421,12 +417,12 @@
         "4": 23,
         "5": 1554,
         "6": 95,
-        "7": 50310,
+        "7": 50358,
         "8": 97619,
         "9": 84,
         "10": 1540,
         "11": 283,
-        "12": 204,
+        "12": 279,
         "13": 181,
         "14": 357,
         "15": 12110,
@@ -454,10 +450,12 @@
         "Item 9A heading appeared 4 times outside the table of contents; kept the longest body.",
         "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 283 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 204 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 279 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 13: body is only 181 chars (\"The information set forth in the Proxy Statement under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 357 chars (\"Information concerning fees and services provided by our pri\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 16 heading appeared 3 times outside the table of contents; kept the longest body."
+        "Item 16 heading appeared 3 times outside the table of contents; kept the longest body.",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS"
       ]
     },
     {
@@ -477,6 +475,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -513,9 +512,7 @@
         "15"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -526,6 +523,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -544,12 +542,12 @@
         "4": 23,
         "5": 2255,
         "6": 95,
-        "7": 47068,
+        "7": 47116,
         "8": 94900,
         "9": 84,
         "10": 1540,
         "11": 283,
-        "12": 204,
+        "12": 279,
         "13": 181,
         "14": 357,
         "15": 12220,
@@ -578,10 +576,12 @@
         "Item 9B: body is only 330 chars (\"Insider Trading Arrangements\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 283 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 204 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 279 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 13: body is only 181 chars (\"The information set forth in the Proxy Statement under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 357 chars (\"Information concerning fees and services provided by our pri\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 16 heading appeared 3 times outside the table of contents; kept the longest body."
+        "Item 16 heading appeared 3 times outside the table of contents; kept the longest body.",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS"
       ]
     },
     {
@@ -613,9 +613,7 @@
         "II.1A"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "II.5"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "I.1",
         "I.2",
@@ -631,16 +629,18 @@
         "I.3": 1809,
         "I.4": 701,
         "II.1": 174,
-        "II.2": 1367,
+        "II.2": 1386,
         "II.5": 1501,
         "II.6": 1638,
         "I.1": 60237,
-        "I.2": 57232,
+        "I.2": 57280,
         "II.1A": 70470
       },
       "flags": [],
       "warnings": [
-        "Item II.1: body is only 174 chars (\"Refer to Note 13 – Contingencies of the Notes to Financial S\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        "Item II.1: body is only 174 chars (\"Refer to Note 13 – Contingencies of the Notes to Financial S\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at UNREGISTERED SALES OF EQUITY SECURITIES",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS"
       ]
     },
     {
@@ -660,6 +660,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -696,9 +697,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -708,6 +707,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -785,6 +785,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -821,9 +822,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -833,6 +832,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -915,16 +915,14 @@
         "I.2",
         "I.3",
         "I.4",
+        "II.1",
+        "II.1A",
         "II.2",
         "II.5",
-        "II.6",
-        "II.1",
-        "II.1A"
+        "II.6"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "II.5"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "I.1",
         "I.2",
@@ -941,11 +939,11 @@
         "I.2": 37231,
         "I.3": 1744,
         "I.4": 2235,
+        "II.1": 226,
+        "II.1A": 34574,
         "II.2": 3024,
         "II.5": 1297,
-        "II.6": 3195,
-        "II.1": 226,
-        "II.1A": 34574
+        "II.6": 3195
       },
       "flags": [
         "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
@@ -953,8 +951,8 @@
       ],
       "warnings": [
         "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Item II.6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Item II.1: body is only 226 chars (\"Refer to Note 10 of the Notes to Condensed Consolidated Fina\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        "Item II.1: body is only 226 chars (\"Refer to Note 10 of the Notes to Condensed Consolidated Fina\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
       ]
     },
     {
@@ -974,6 +972,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1009,9 +1008,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -1022,6 +1019,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1041,7 +1039,7 @@
         "5": 343,
         "7": 45829,
         "8": 120129,
-        "9": 5,
+        "9": 43,
         "10": 1089,
         "11": 171,
         "12": 171,
@@ -1066,7 +1064,8 @@
         "Item 3: body is only 130 chars (\"See Item 8 of Part II, “Financial Statements and Supplementa\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 5: body is only 343 chars (\"Market Information\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at Changes in and Disagreements with Accountants",
+        "Item 9: body is only 43 chars (\"On Accounting and Financial Disclosure\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 171 chars (\"Information required by Item 11 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 12: body is only 171 chars (\"Information required by Item 12 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
@@ -1091,6 +1090,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1126,9 +1126,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -1139,6 +1137,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1158,7 +1157,7 @@
         "5": 343,
         "7": 48004,
         "8": 117248,
-        "9": 5,
+        "9": 43,
         "10": 1050,
         "11": 171,
         "12": 171,
@@ -1183,7 +1182,8 @@
         "Item 3: body is only 130 chars (\"See Item 8 of Part II, “Financial Statements and Supplementa\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 5: body is only 343 chars (\"Market Information\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at Changes in and Disagreements with Accountants",
+        "Item 9: body is only 43 chars (\"On Accounting and Financial Disclosure\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 171 chars (\"Information required by Item 11 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 12: body is only 171 chars (\"Information required by Item 12 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
@@ -1222,11 +1222,7 @@
         "II.6"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "II.3",
-        "II.4",
-        "II.5"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "I.1",
         "I.2",
@@ -1279,6 +1275,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1315,9 +1312,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -1328,6 +1323,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1346,12 +1342,12 @@
         "4": 31,
         "5": 4889,
         "6": 16,
-        "7": 51706,
+        "7": 51754,
         "8": 128246,
-        "9": 5,
+        "9": 43,
         "10": 1384,
         "11": 474,
-        "12": 254,
+        "12": 329,
         "13": 314,
         "14": 205,
         "15": 11749,
@@ -1374,9 +1370,12 @@
         "Item 3: body is only 246 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 31 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 16 chars (\"27.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+        "heading and first paragraph were in one block; split at CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS",
+        "Item 9: body is only 43 chars (\"ON ACCOUNTING AND FINANCIAL DISCLOSURE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 31 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 254 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 329 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 13: body is only 314 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 205 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
@@ -1398,6 +1397,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1434,9 +1434,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -1447,6 +1445,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1465,12 +1464,12 @@
         "4": 31,
         "5": 4631,
         "6": 16,
-        "7": 57169,
+        "7": 57217,
         "8": 122611,
-        "9": 5,
+        "9": 43,
         "10": 1341,
         "11": 474,
-        "12": 254,
+        "12": 329,
         "13": 314,
         "14": 205,
         "15": 8700,
@@ -1493,9 +1492,12 @@
         "Item 3: body is only 246 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 31 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 16 chars (\"29.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+        "heading and first paragraph were in one block; split at CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS",
+        "Item 9: body is only 43 chars (\"ON ACCOUNTING AND FINANCIAL DISCLOSURE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 31 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 254 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 329 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 13: body is only 314 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 205 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
@@ -1529,9 +1531,7 @@
         "II.5"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "II.5"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "I.1",
         "I.2",
@@ -1546,24 +1546,24 @@
       "itemChars": {
         "I.1": 107872,
         "II.6": 6719,
-        "I.2": 50758,
+        "I.2": 50806,
         "I.3": 223,
         "I.4": 1893,
         "II.1": 279,
         "II.1A": 16514,
-        "II.2": 356,
+        "II.2": 375,
         "II.5": 1605
       },
       "flags": [
-        "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
       "warnings": [
         "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Item II.6 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
         "Item I.3: body is only 223 chars (\"For quantitative and qualitative disclosures about market ri\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item II.1: body is only 279 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item II.2: body is only 356 chars (\"Unregistered Sales of Equity Securities\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        "heading and first paragraph were in one block; split at UNREGISTERED SALES OF EQUITY SECURITIES",
+        "Item II.2: body is only 375 chars (\"AND USE OF PROCEEDS\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -1583,6 +1583,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1619,9 +1620,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -1632,6 +1631,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1701,6 +1701,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1737,9 +1738,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -1750,6 +1749,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1831,9 +1831,7 @@
         "II.6"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "II.5"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "I.1",
         "I.2",
@@ -1884,6 +1882,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1920,9 +1919,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -1933,6 +1930,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -1951,13 +1949,13 @@
         "4": 23,
         "5": 2518,
         "6": 10,
-        "7": 55139,
+        "7": 55187,
         "8": 169530,
         "9": 84,
         "10": 410,
         "11": 139,
-        "12": 139,
-        "13": 139,
+        "12": 214,
+        "13": 164,
         "14": 139,
         "15": 8321,
         "16": 2141,
@@ -1977,11 +1975,14 @@
         "Item 3: body is only 200 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 139 chars (\"The information required by this Item 11 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 139 chars (\"The information required by this Item 12 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 13: body is only 139 chars (\"The information required by this Item 13 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 214 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS",
+        "Item 13: body is only 164 chars (\"AND DIRECTOR INDEPENDENCE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 139 chars (\"The information required by this Item 14 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ]
@@ -2003,6 +2004,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2039,9 +2041,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -2052,6 +2052,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2070,13 +2071,13 @@
         "4": 23,
         "5": 3176,
         "6": 10,
-        "7": 48343,
+        "7": 48391,
         "8": 147908,
         "9": 84,
         "10": 448,
         "11": 139,
-        "12": 139,
-        "13": 139,
+        "12": 214,
+        "13": 164,
         "14": 139,
         "15": 27558,
         "16": 2141,
@@ -2096,11 +2097,14 @@
         "Item 3: body is only 207 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 139 chars (\"The information required by this Item 11 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 139 chars (\"The information required by this Item 12 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 13: body is only 139 chars (\"The information required by this Item 13 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 214 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS",
+        "Item 13: body is only 164 chars (\"AND DIRECTOR INDEPENDENCE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 139 chars (\"The information required by this Item 14 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ]
@@ -2136,11 +2140,7 @@
         "II.6"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "II.3",
-        "II.4",
-        "II.5"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "I.1",
         "I.2",
@@ -2154,7 +2154,7 @@
       "implausibleItems": [],
       "itemChars": {
         "I.1": 74093,
-        "I.2": 36667,
+        "I.2": 36715,
         "I.3": 1547,
         "I.4": 1833,
         "II.1": 203,
@@ -2170,6 +2170,7 @@
         "Duplicate heading: Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
       "warnings": [
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
         "Item II.1: body is only 203 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item II.1A: body is only 305 chars (\"Our operations and financial results are subject to various \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item II.2: body is only 59 chars (\"Unregistered Sales of Equity Securities and Use of Proceeds\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
@@ -2196,6 +2197,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2231,9 +2233,7 @@
         "15"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -2244,6 +2244,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2313,6 +2314,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2348,9 +2350,7 @@
         "15"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -2361,6 +2361,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2444,11 +2445,7 @@
         "II.6"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "II.3",
-        "II.4",
-        "II.5"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "I.1",
         "I.2",
@@ -2462,7 +2459,7 @@
       "implausibleItems": [],
       "itemChars": {
         "I.1": 87252,
-        "I.2": 5849,
+        "I.2": 74710,
         "I.3": 343,
         "I.4": 1005,
         "II.1": 1022,
@@ -2475,12 +2472,11 @@
       },
       "flags": [
         "Item 1A suspiciously short: 1960 chars",
-        "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.2 heading appeared 19 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
       "warnings": [
         "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Item I.2 heading appeared 19 times outside the table of contents; kept the longest body.",
+        "17 repeated running headers merged",
         "Item I.3: body is only 343 chars (\"Reference is made to Berkshire’s Annual Report on Form 10-K \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item II.2: body is only 103 chars (\"Unregistered Sales of Equity Securities and Use of Proceeds \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item II.3: body is only 31 chars (\"Defaults Upon Senior Securities\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
@@ -2505,6 +2501,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2540,9 +2537,7 @@
         "15"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -2551,6 +2546,7 @@
         "3",
         "5",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2622,6 +2618,139 @@
       ]
     },
     {
+      "ticker": "JPM",
+      "form": "10-K",
+      "filingDate": "2025-02-14",
+      "accession": "0000019617-25-000270",
+      "cik": "0000019617",
+      "url": "https://www.sec.gov/Archives/edgar/data/19617/000001961725000270/jpm-20241231.htm",
+      "expectedItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "foundItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "7A",
+        "8",
+        "9",
+        "9A",
+        "9B",
+        "9C",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "missingItems": [],
+      "falsePositiveItems": [],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7A",
+        "9",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "7",
+          "chars": 300,
+          "reason": "expected at least 4,000 chars"
+        },
+        {
+          "item": "8",
+          "chars": 314,
+          "reason": "expected at least 4,000 chars"
+        },
+        {
+          "item": "15",
+          "chars": 983205,
+          "reason": "expected at most 300,000 chars"
+        }
+      ],
+      "itemChars": {
+        "1": 40243,
+        "2": 1995,
+        "3": 76,
+        "4": 24,
+        "5": 2660,
+        "6": 8,
+        "7": 300,
+        "8": 314,
+        "9": 85,
+        "10": 4684,
+        "11": 23,
+        "12": 1265,
+        "13": 74,
+        "14": 39,
+        "15": 983205,
+        "1A": 134836,
+        "1B": 26,
+        "7A": 196,
+        "9A": 2187,
+        "9B": 2193,
+        "9C": 68,
+        "1C": 145
+      },
+      "flags": [
+        "Item 7/MD&A suspiciously short: 300 chars",
+        "Item 15 suspiciously long: 983205 chars"
+      ],
+      "warnings": [
+        "Item 1B: body is only 26 chars (\"Unresolved Staff Comments.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 76 chars (\"Refer to Note 30 for a description of the Firm’s material le\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 24 chars (\"Mine Safety Disclosures.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 7: body is only 300 chars (\"Management’s discussion and analysis of financial condition \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 7A: body is only 196 chars (\"Refer to the Market Risk Management section of Management’s \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 314 chars (\"The Consolidated Financial Statements, together with the Not\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 85 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 68 chars (\"Disclosure regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 23 chars (\"Executive Compensation.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 74 chars (\"Certain Relationships and Related Transactions, and Director\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 39 chars (\"Principal Accounting Fees and Services.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 1C: body is only 145 chars (\"Refer to the Operational Risk Management section of Manageme\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
+    },
+    {
       "ticker": "CVX",
       "form": "10-K",
       "filingDate": "2026-02-24",
@@ -2638,6 +2767,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2673,9 +2803,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -2684,6 +2812,7 @@
         "3",
         "5",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2762,6 +2891,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2797,9 +2927,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -2808,6 +2936,7 @@
         "3",
         "5",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2886,6 +3015,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2922,9 +3052,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -2935,6 +3063,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -2953,12 +3082,12 @@
         "4": 23,
         "5": 2746,
         "6": 8,
-        "7": 57584,
+        "7": 57632,
         "8": 106835,
         "9": 84,
         "10": 2744,
         "11": 223,
-        "12": 177,
+        "12": 252,
         "13": 201,
         "14": 205,
         "15": 10768,
@@ -2978,10 +3107,12 @@
         "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT'S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 223 chars (\"The information required by this Item 11 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 177 chars (\"The information required by this Item 12 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 252 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 13: body is only 201 chars (\"The information required by this Item 13 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 205 chars (\"The information required by this Item 14 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
@@ -3004,6 +3135,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3040,9 +3172,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3053,6 +3183,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3071,12 +3202,12 @@
         "4": 23,
         "5": 2635,
         "6": 8,
-        "7": 58506,
+        "7": 58554,
         "8": 112771,
         "9": 84,
         "10": 2742,
         "11": 223,
-        "12": 177,
+        "12": 252,
         "13": 201,
         "14": 205,
         "15": 10435,
@@ -3096,10 +3227,12 @@
         "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT'S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 223 chars (\"The information required by this Item 11 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 177 chars (\"The information required by this Item 12 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 252 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 13: body is only 201 chars (\"The information required by this Item 13 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 205 chars (\"The information required by this Item 14 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
@@ -3122,6 +3255,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3158,9 +3292,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3171,6 +3303,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3189,12 +3322,12 @@
         "4": 6651,
         "5": 3373,
         "6": 8,
-        "7": 109085,
+        "7": 109133,
         "8": 229894,
         "9": 84,
         "10": 301,
         "11": 203,
-        "12": 203,
+        "12": 278,
         "13": 203,
         "14": 203,
         "15": 47151,
@@ -3213,12 +3346,14 @@
       "warnings": [
         "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9B: body is only 294 chars (\"During the fiscal quarter ended December 31, 2025, none of o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions That Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 10: body is only 301 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 203 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 203 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 278 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 13: body is only 203 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 203 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
@@ -3241,6 +3376,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3277,9 +3413,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3290,6 +3424,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3308,12 +3443,12 @@
         "4": 5665,
         "5": 3400,
         "6": 8,
-        "7": 113877,
+        "7": 113925,
         "8": 232090,
         "9": 84,
         "10": 326,
         "11": 189,
-        "12": 189,
+        "12": 264,
         "13": 189,
         "14": 189,
         "15": 46535,
@@ -3332,11 +3467,13 @@
       "warnings": [
         "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions That Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 10: body is only 326 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 189 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 189 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 264 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 13: body is only 189 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 189 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
@@ -3359,6 +3496,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3371,6 +3509,10 @@
       ],
       "foundItems": [
         "1",
+        "7",
+        "12",
+        "13",
+        "14",
         "15",
         "16",
         "1A",
@@ -3378,24 +3520,18 @@
         "2",
         "3",
         "5",
-        "7",
         "7A",
         "8",
         "9",
         "9A",
         "9B",
         "10",
-        "11",
-        "12",
-        "13",
-        "14"
+        "11"
       ],
       "missingItems": [
         "1B"
       ],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3405,6 +3541,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3421,12 +3558,12 @@
         "2": 1594,
         "3": 4685,
         "5": 1946,
-        "7": 103761,
+        "7": 103809,
         "8": 257870,
-        "9": 5,
+        "9": 43,
         "10": 1543,
         "11": 365,
-        "12": 230,
+        "12": 305,
         "13": 498,
         "14": 826,
         "15": 18328,
@@ -3445,12 +3582,15 @@
       "warnings": [
         "Item 6: heading found but no body text followed it; not returned.",
         "Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 305 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 7A: body is only 190 chars (\"The information required by this Item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS",
+        "Item 9: body is only 43 chars (\"ON ACCOUNTING AND FINANCIAL DISCLOSURE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9B: body is only 254 chars (\"OTHER INFORMATION\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 11: body is only 365 chars (\"Information about Director and executive compensation is inc\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 230 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        "Item 11: body is only 365 chars (\"Information about Director and executive compensation is inc\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3470,6 +3610,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3482,6 +3623,10 @@
       ],
       "foundItems": [
         "1",
+        "7",
+        "12",
+        "13",
+        "14",
         "15",
         "16",
         "1A",
@@ -3489,24 +3634,18 @@
         "2",
         "3",
         "5",
-        "7",
         "7A",
         "8",
         "9",
         "9A",
         "9B",
         "10",
-        "11",
-        "12",
-        "13",
-        "14"
+        "11"
       ],
       "missingItems": [
         "1B"
       ],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3516,6 +3655,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3532,12 +3672,12 @@
         "2": 1571,
         "3": 5037,
         "5": 1950,
-        "7": 103434,
+        "7": 103482,
         "8": 279976,
-        "9": 5,
+        "9": 43,
         "10": 1543,
         "11": 365,
-        "12": 230,
+        "12": 305,
         "13": 498,
         "14": 826,
         "15": 19134,
@@ -3556,12 +3696,15 @@
       "warnings": [
         "Item 6: heading found but no body text followed it; not returned.",
         "Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 305 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 7A: body is only 190 chars (\"The information required by this Item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS",
+        "Item 9: body is only 43 chars (\"ON ACCOUNTING AND FINANCIAL DISCLOSURE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9B: body is only 254 chars (\"OTHER INFORMATION\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 11: body is only 365 chars (\"Information about Director and executive compensation is inc\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 230 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        "Item 11: body is only 365 chars (\"Information about Director and executive compensation is inc\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3581,6 +3724,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3617,9 +3761,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3630,6 +3772,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3696,6 +3839,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3732,9 +3876,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3745,6 +3887,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3811,6 +3954,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3846,9 +3990,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3858,6 +4000,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3900,13 +4043,11 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
         "Item 6: heading found but no body text followed it; not returned.",
-        "Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 1B: body is only 203 chars (\"The Company has received no written comments regarding its p\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 3: body is only 225 chars (\"As disclosed in Note 14 to the Consolidated Financial Statem\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
@@ -3936,6 +4077,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -3971,9 +4113,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -3983,6 +4123,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4025,13 +4166,11 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
         "Item 6: heading found but no body text followed it; not returned.",
-        "Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 1B: body is only 203 chars (\"The Company has received no written comments regarding its p\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 3: body is only 225 chars (\"As disclosed in Note 14 to the Consolidated Financial Statem\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
@@ -4061,6 +4200,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4096,9 +4236,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -4108,6 +4246,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4185,6 +4324,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4220,9 +4360,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -4232,6 +4370,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4309,6 +4448,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4330,7 +4470,7 @@
         "3",
         "4",
         "5",
-        "7",
+        "6",
         "7A",
         "8",
         "9",
@@ -4343,10 +4483,10 @@
         "13",
         "14"
       ],
-      "missingItems": [],
-      "falsePositiveItems": [
-        "9"
+      "missingItems": [
+        "7"
       ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -4354,9 +4494,9 @@
         "2",
         "3",
         "5",
-        "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4374,7 +4514,7 @@
         "3": 122,
         "4": 15,
         "5": 2611,
-        "7": 26746,
+        "6": 26839,
         "8": 81518,
         "9": 5,
         "10": 967,
@@ -4393,16 +4533,13 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warning: Item 6: heading found but no body text followed it; not returned."
+        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned.",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 3: body is only 122 chars (\"See discussion of Legal Proceedings in Note 10 to the consol\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "heading and first paragraph were in one block; split at Management's Discussion and Analysis of Financial Condition and Results of Operations",
         "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9B: body is only 242 chars (\"During the fiscal quarter ended August 31, 2025, no director\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
@@ -4429,6 +4566,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4450,7 +4588,7 @@
         "3",
         "4",
         "5",
-        "7",
+        "6",
         "7A",
         "8",
         "9",
@@ -4463,10 +4601,10 @@
         "13",
         "14"
       ],
-      "missingItems": [],
-      "falsePositiveItems": [
-        "9"
+      "missingItems": [
+        "7"
       ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -4474,9 +4612,9 @@
         "2",
         "3",
         "5",
-        "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4494,7 +4632,7 @@
         "3": 122,
         "4": 15,
         "5": 2611,
-        "7": 27638,
+        "6": 27682,
         "8": 85288,
         "9": 5,
         "10": 942,
@@ -4513,16 +4651,13 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warning: Item 6: heading found but no body text followed it; not returned."
+        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned.",
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 3: body is only 122 chars (\"See discussion of Legal Proceedings in Note 10 to the consol\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "heading and first paragraph were in one block; split at Management's Discussion and Analysis",
         "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9B: body is only 244 chars (\"During the fiscal quarter ended September 1, 2024, no direct\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
@@ -4548,6 +4683,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4583,9 +4719,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -4596,6 +4730,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4613,12 +4748,12 @@
         "3": 331,
         "4": 15,
         "5": 2897,
-        "7": 48245,
+        "7": 48293,
         "8": 110970,
-        "9": 5,
+        "9": 43,
         "10": 2226,
         "11": 419,
-        "12": 2053,
+        "12": 2128,
         "13": 316,
         "14": 309,
         "15": 18304,
@@ -4640,8 +4775,11 @@
         "Item 2: body is only 322 chars (\"We own and lease real properties to support our business ope\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 3: body is only 331 chars (\"The information required by this Item 3 is incorporated here\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+        "heading and first paragraph were in one block; split at CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS",
+        "Item 9: body is only 43 chars (\"ON ACCOUNTING AND FINANCIAL DISCLOSURE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
         "Item 13: body is only 316 chars (\"The information required by Items 404 and 407(a) of Regulati\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 309 chars (\"The information required by Item 9(e) of Schedule 14A will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
@@ -4663,6 +4801,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4698,9 +4837,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -4711,6 +4848,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4728,12 +4866,12 @@
         "3": 331,
         "4": 15,
         "5": 3133,
-        "7": 44114,
+        "7": 44162,
         "8": 94737,
-        "9": 5,
+        "9": 43,
         "10": 2495,
         "11": 419,
-        "12": 2065,
+        "12": 2140,
         "13": 316,
         "14": 309,
         "15": 25064,
@@ -4755,8 +4893,11 @@
         "Item 2: body is only 322 chars (\"We own and lease real properties to support our business ope\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 3: body is only 331 chars (\"The information required by this Item 3 is incorporated here\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+        "heading and first paragraph were in one block; split at CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS",
+        "Item 9: body is only 43 chars (\"ON ACCOUNTING AND FINANCIAL DISCLOSURE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
         "Item 13: body is only 316 chars (\"The information required by Items 404 and 407(a) of Regulati\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 309 chars (\"The information required by Item 9(e) of Schedule 14A will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
@@ -4778,6 +4919,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4814,9 +4956,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -4827,6 +4967,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4896,6 +5037,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -4932,9 +5074,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -4945,6 +5085,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5014,6 +5155,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5035,6 +5177,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5073,6 +5216,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5094,6 +5238,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5132,6 +5277,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5167,9 +5313,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -5180,6 +5324,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5250,6 +5395,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5285,9 +5431,7 @@
         "14"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -5298,6 +5442,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5368,6 +5513,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5389,6 +5535,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5427,6 +5574,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5448,6 +5596,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5486,6 +5635,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5521,9 +5671,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -5533,6 +5681,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5607,6 +5756,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5642,9 +5792,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -5654,6 +5802,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5729,6 +5878,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5765,9 +5915,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -5778,6 +5926,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5850,6 +5999,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5886,9 +6036,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -5899,6 +6047,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -5971,6 +6120,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6007,9 +6157,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -6020,6 +6168,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6038,13 +6187,13 @@
         "4": 23,
         "5": 2183,
         "6": 10,
-        "7": 37097,
+        "7": 37145,
         "8": 103820,
         "9": 84,
         "10": 1062,
         "11": 700,
-        "12": 225,
-        "13": 201,
+        "12": 300,
+        "13": 226,
         "14": 734,
         "15": 25418,
         "16": 1349,
@@ -6062,10 +6211,13 @@
         "Item 3: body is only 178 chars (\"For a discussion of our legal proceedings, refer to Note 12 \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 68 chars (\"Disclosures Regarding Foreign Jurisdictions that Prevent Ins\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 225 chars (\"The information under the captions “Principal Stockholders,”\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 13: body is only 201 chars (\"The information under the captions “Corporate Governance—Ind\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 300 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS",
+        "Item 13: body is only 226 chars (\"AND DIRECTOR INDEPENDENCE\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -6085,6 +6237,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6121,9 +6274,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -6134,6 +6285,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6152,13 +6304,13 @@
         "4": 23,
         "5": 2632,
         "6": 10,
-        "7": 32360,
+        "7": 32408,
         "8": 101451,
         "9": 84,
         "10": 1085,
         "11": 700,
-        "12": 225,
-        "13": 201,
+        "12": 300,
+        "13": 226,
         "14": 734,
         "15": 24249,
         "16": 1360,
@@ -6176,10 +6328,13 @@
         "Item 3: body is only 162 chars (\"For a discussion of our legal proceedings, refer to Note 18 \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 68 chars (\"Disclosures Regarding Foreign Jurisdictions that Prevent Ins\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 225 chars (\"The information under the captions “Principal Stockholders,”\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 13: body is only 201 chars (\"The information under the captions “Corporate Governance—Ind\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 300 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS",
+        "Item 13: body is only 226 chars (\"AND DIRECTOR INDEPENDENCE\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -6199,6 +6354,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6235,9 +6391,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -6247,6 +6401,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6326,6 +6481,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6362,9 +6518,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -6374,6 +6528,7 @@
         "5",
         "7",
         "7A",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6453,6 +6608,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6490,8 +6646,7 @@
       ],
       "missingItems": [],
       "falsePositiveItems": [
-        "4A",
-        "9"
+        "4A"
       ],
       "plausibleItems": [
         "1",
@@ -6503,6 +6658,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6520,13 +6676,13 @@
         "3": 1290,
         "4": 15,
         "5": 5111,
-        "7": 53856,
+        "7": 53904,
         "8": 127992,
-        "9": 5,
+        "9": 43,
         "10": 1460,
         "11": 453,
-        "12": 273,
-        "13": 222,
+        "12": 348,
+        "13": 247,
         "14": 186,
         "15": 892,
         "16": 7875,
@@ -6548,10 +6704,14 @@
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+        "heading and first paragraph were in one block; split at CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS",
+        "Item 9: body is only 43 chars (\"ON ACCOUNTING AND FINANCIAL DISCLOSURE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 273 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 13: body is only 222 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 348 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS",
+        "Item 13: body is only 247 chars (\"AND DIRECTOR INDEPENDENCE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 186 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
@@ -6572,6 +6732,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6609,8 +6770,7 @@
       ],
       "missingItems": [],
       "falsePositiveItems": [
-        "4A",
-        "9"
+        "4A"
       ],
       "plausibleItems": [
         "1",
@@ -6622,6 +6782,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6639,13 +6800,13 @@
         "3": 1290,
         "4": 15,
         "5": 5126,
-        "7": 50916,
+        "7": 50964,
         "8": 116911,
-        "9": 5,
+        "9": 43,
         "10": 1447,
         "11": 453,
-        "12": 273,
-        "13": 222,
+        "12": 348,
+        "13": 247,
         "14": 186,
         "15": 892,
         "16": 7661,
@@ -6667,10 +6828,14 @@
         "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+        "heading and first paragraph were in one block; split at CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS",
+        "Item 9: body is only 43 chars (\"ON ACCOUNTING AND FINANCIAL DISCLOSURE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 12: body is only 273 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item 13: body is only 222 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+        "Item 12: body is only 348 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS",
+        "Item 13: body is only 247 chars (\"AND DIRECTOR INDEPENDENCE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 186 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
@@ -6691,6 +6856,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6727,9 +6893,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -6740,6 +6904,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6758,12 +6923,12 @@
         "4": 6761,
         "5": 3048,
         "6": 10,
-        "7": 59989,
+        "7": 60037,
         "8": 154510,
         "9": 84,
         "10": 2029,
         "11": 288,
-        "12": 2110,
+        "12": 2185,
         "13": 341,
         "14": 375,
         "15": 17758,
@@ -6781,9 +6946,11 @@
         "Item 1B: body is only 25 chars (\"UNRESOLVED STAFF COMMENTS\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 3: body is only 257 chars (\"Information pertaining to legal proceedings is provided in N\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 10 chars (\"[RESERVED]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT'S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSP\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 288 chars (\"The material to be included in the 2026 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
         "Item 13: body is only 341 chars (\"The material to be included in the 2026 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 375 chars (\"The material to be included in the 2026 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
@@ -6805,6 +6972,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6841,9 +7009,7 @@
         "16"
       ],
       "missingItems": [],
-      "falsePositiveItems": [
-        "9"
-      ],
+      "falsePositiveItems": [],
       "plausibleItems": [
         "1",
         "1A",
@@ -6854,6 +7020,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6872,12 +7039,12 @@
         "4": 8081,
         "5": 3064,
         "6": 10,
-        "7": 60401,
+        "7": 60449,
         "8": 161411,
         "9": 84,
         "10": 2029,
         "11": 288,
-        "12": 2127,
+        "12": 2202,
         "13": 341,
         "14": 375,
         "15": 17910,
@@ -6895,9 +7062,11 @@
         "Item 1B: body is only 25 chars (\"UNRESOLVED STAFF COMMENTS\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 3: body is only 257 chars (\"Information pertaining to legal proceedings is provided in N\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 6: body is only 10 chars (\"[RESERVED]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at MANAGEMENT'S DISCUSSION AND ANALYSIS",
         "Item 9: body is only 84 chars (\"CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 9C: body is only 67 chars (\"DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSP\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 11: body is only 288 chars (\"The material to be included in the 2025 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
         "Item 13: body is only 341 chars (\"The material to be included in the 2025 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item 14: body is only 375 chars (\"The material to be included in the 2025 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
@@ -6919,6 +7088,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6940,6 +7110,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6978,6 +7149,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -6999,6 +7171,7 @@
         "7",
         "7A",
         "8",
+        "9",
         "9A",
         "9B",
         "10",
@@ -7155,6 +7328,23 @@
         "changed": 15,
         "unchanged": 25,
         "similarity": 0.834
+      },
+      "flags": []
+    },
+    {
+      "ticker": "JPM",
+      "baseDateStr": "2025-02-14",
+      "targetDateStr": "2026-02-13",
+      "baseAccession": "0000019617-25-000270",
+      "targetAccession": "0001628280-26-008131",
+      "stats": {
+        "baseParagraphs": 670,
+        "targetParagraphs": 633,
+        "added": 259,
+        "removed": 296,
+        "changed": 214,
+        "unchanged": 160,
+        "similarity": 0.473
       },
       "flags": []
     },
@@ -7503,10 +7693,6 @@
     }
   ],
   "issues": [
-    {
-      "ticker": "JPM",
-      "message": "Expected 2 recent 10-K filings; located 1."
-    },
     {
       "ticker": "XOM",
       "message": "Expected 2 recent 10-K filings; located 0."

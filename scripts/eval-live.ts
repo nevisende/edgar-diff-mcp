@@ -27,7 +27,7 @@ const DEFAULT_CORPUS = [
 const TICKERS_WITH_10Q = DEFAULT_CORPUS.slice(0, 8);
 
 /** Core Items expected in every 10-K. */
-const EXPECTED_10K_BASE = ['1', '1A', '1B', '2', '3', '5', '7', '7A', '8', '9A', '9B', '10', '11', '12', '13', '14', '15'];
+const EXPECTED_10K_BASE = ['1', '1A', '1B', '2', '3', '5', '7', '7A', '8', '9', '9A', '9B', '10', '11', '12', '13', '14', '15'];
 /** Item 1C is only expected for filings dated >= 2023-12-15 (SEC cyber rule). */
 const ITEM_1C_CUTOFF = '2023-12-15';
 /** Valid 10-K Items that are not required in every filing. */
@@ -35,6 +35,8 @@ const OPTIONAL_10K_ITEMS = new Set(['1C', '4', '6', '9C', '16']);
 
 /** Expected Items for 10-Q filings. */
 const EXPECTED_10Q = ['I.1', 'I.2', 'I.3', 'I.4', 'II.1', 'II.1A', 'II.2', 'II.6'];
+/** Valid 10-Q Items that are not required in every filing. */
+const OPTIONAL_10Q_ITEMS = new Set(['II.3', 'II.4', 'II.5']);
 
 // ---------------------------------------------------------------------------
 // Types for results
@@ -199,7 +201,9 @@ for (const ticker of corpus) {
 
       result.missingItems = result.expectedItems.filter((k) => !result.foundItems.includes(k));
       result.falsePositiveItems = result.foundItems.filter((k) =>
-        !result.expectedItems.includes(k) && !(is10K && OPTIONAL_10K_ITEMS.has(k))
+        !result.expectedItems.includes(k)
+        && !(is10K && OPTIONAL_10K_ITEMS.has(k))
+        && !(is10Q && OPTIONAL_10Q_ITEMS.has(k))
       );
       for (const item of result.expectedItems) {
         if (!result.foundItems.includes(item)) continue;
