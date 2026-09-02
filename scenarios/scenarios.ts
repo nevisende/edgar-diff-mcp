@@ -28,9 +28,11 @@ export interface PlanStep {
   assertions: PlanAssertion[];
 }
 
+export type AnswerCheckPredicate = string | RegExp | ((answer: string) => boolean);
+
 export interface AnswerCheck {
   name: string;
-  predicate: string | RegExp;
+  predicate: AnswerCheckPredicate;
   negate?: boolean;
 }
 
@@ -265,9 +267,16 @@ export const scenarios: Scenario[] = [
     ],
     checks: [
       { name: 'uses the qualified Item', predicate: 'II.1A' },
-      { name: 'reports the added count', predicate: /(?:14\s+(?:paragraphs?\s+)?added|added\D{0,12}14|\+14)/i },
-      { name: 'reports the removed count', predicate: /(?:10\s+(?:paragraphs?\s+)?removed|removed\D{0,12}10|-10)/i },
-      { name: 'reports the changed count', predicate: /(?:1\s+(?:paragraph\s+)?changed|changed\D{0,12}1|~1)/i },
+      { name: 'includes the new accession', predicate: '0001193125-26-341032' },
+      { name: 'includes the prior accession', predicate: '0001193125-26-202243' },
+      {
+        name: 'reports the three counts or states that disclosure did not change',
+        predicate: (answer: string) =>
+          /did not change|unchanged|identical|no (substantive )?changes?/i.test(answer) ||
+          (/(?:14\s+(?:paragraphs?\s+)?added|added\D{0,12}14|\+14)/i.test(answer) &&
+            /(?:10\s+(?:paragraphs?\s+)?removed|removed\D{0,12}10|-10)/i.test(answer) &&
+            /(?:1\s+(?:paragraph\s+)?changed|changed\D{0,12}1|~1)/i.test(answer)),
+      },
       archiveUrl,
     ],
   },
@@ -312,8 +321,30 @@ export const scenarios: Scenario[] = [
       },
     ],
     checks: [
-      { name: 'plainly says the section could not be located', predicate: /(?:not[_ -]?found|could not (?:be )?locat|unable to locat)/i },
-      { name: 'does not invent an Item 1A quote-source URL', predicate: 'https://www.sec.gov/Archives/', negate: true },
+      {
+        name: 'plainly says the section could not be located',
+        predicate: /not[ _]found|could not (be )?locat|no (risk[- ]factor|item) .*(was|were) (found|returned)|unable to (find|locate)/i,
+      },
+      {
+        name: 'does not contain a quoted passage attributed to Item 1A',
+        predicate: (answer: string) => {
+          const notFound = /not[ _]found|could not (be )?locat|no (risk[- ]factor|item) .*(was|were) (found|returned)|unable to (find|locate)/i.test(answer);
+          if (!notFound) return false;
+          const hasLongBlockquote = answer.split('\n').some((line) => line.trimStart().startsWith('>') && line.trim().length > 80);
+          if (hasLongBlockquote) return false;
+
+          const paraRegex = /paragraph\s+\d+/gi;
+          let p: RegExpExecArray | null;
+          while ((p = paraRegex.exec(answer)) !== null) {
+            const start = Math.max(0, p.index - 200);
+            const end = Math.min(answer.length, p.index + p[0].length + 200);
+            if (/1A/i.test(answer.slice(start, end))) {
+              return false;
+            }
+          }
+          return true;
+        },
+      },
     ],
   },
   {

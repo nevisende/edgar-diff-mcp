@@ -40,8 +40,10 @@ TMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/edgar-scenarios.XXXXXX")
 SCENARIO_LIST="$TMP_DIR/scenarios.tsv"
 ANSWER_TMP="$TMP_DIR/answer.txt"
 COMMAND_LOG="$TMP_DIR/command.log"
+TMPDIR_RUN=""
 cleanup() {
   rm -f "$SCENARIO_LIST" "$ANSWER_TMP" "$COMMAND_LOG"
+  [ -n "$TMPDIR_RUN" ] && rm -rf "$TMPDIR_RUN"
   rmdir "$TMP_DIR" 2>/dev/null || true
 }
 trap cleanup EXIT HUP INT TERM
@@ -74,20 +76,29 @@ $scenario_prompt"
   started_at=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
   started_seconds=$(date '+%s')
 
+  TMPDIR_RUN=$(mktemp -d "${TMPDIR:-/tmp}/edgar-run.XXXXXX")
+
   case "$HARNESS" in
     claude)
-      claude -p --model sonnet --mcp-config "$CLAUDE_CONFIG" --strict-mcp-config --allowedTools "mcp__edgar-diff__*" --output-format text "$full_prompt" > "$ANSWER_TMP" 2> "$COMMAND_LOG"
+      (
+        cd "$TMPDIR_RUN" && claude -p --model sonnet --mcp-config "$CLAUDE_CONFIG" --strict-mcp-config --allowedTools "mcp__edgar-diff__*" --output-format text "$full_prompt"
+      ) > "$ANSWER_TMP" 2> "$COMMAND_LOG"
       exit_code=$?
       ;;
     codex)
-      codex exec --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check -C "$REPO" --ephemeral -o "$ANSWER_TMP" "$full_prompt" < /dev/null > "$COMMAND_LOG" 2>&1
+      codex exec --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check -C "$TMPDIR_RUN" --ephemeral -o "$ANSWER_TMP" "$full_prompt" < /dev/null > "$COMMAND_LOG" 2>&1
       exit_code=$?
       ;;
     agy)
-      agy -p "$full_prompt" --model gemini-3.8-flash-high --dangerously-skip-permissions --add-dir "$REPO" --print-timeout 10m > "$ANSWER_TMP" 2> "$COMMAND_LOG"
+      (
+        cd "$TMPDIR_RUN" && agy -p "$full_prompt" --model gemini-3.8-flash-high --dangerously-skip-permissions --add-dir "$TMPDIR_RUN" --print-timeout 10m
+      ) > "$ANSWER_TMP" 2> "$COMMAND_LOG"
       exit_code=$?
       ;;
   esac
+
+  rm -rf "$TMPDIR_RUN"
+  TMPDIR_RUN=""
 
   finished_seconds=$(date '+%s')
   wall_seconds=$((finished_seconds - started_seconds))

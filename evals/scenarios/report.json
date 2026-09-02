@@ -1,0 +1,677 @@
+{
+  "kind": "string-level scenario grading",
+  "generatedAt": "2026-09-02T21:50:56.700Z",
+  "harnesses": [
+    "claude",
+    "codex",
+    "agy"
+  ],
+  "totals": {
+    "claude": {
+      "passed": 6,
+      "total": 7
+    },
+    "codex": {
+      "passed": 6,
+      "total": 7
+    },
+    "agy": {
+      "passed": 7,
+      "total": 7
+    }
+  },
+  "results": [
+    {
+      "scenario": "nvda-risk-factors",
+      "harness": "claude",
+      "pass": true,
+      "file": "claude/nvda-risk-factors.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "mentions the distinctive added Groq paragraph",
+          "pass": true
+        },
+        {
+          "name": "identifies the new NVIDIA accession",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "nvda-risk-factors",
+      "harness": "codex",
+      "pass": true,
+      "file": "codex/nvda-risk-factors.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "mentions the distinctive added Groq paragraph",
+          "pass": true
+        },
+        {
+          "name": "identifies the new NVIDIA accession",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "nvda-risk-factors",
+      "harness": "agy",
+      "pass": true,
+      "file": "agy/nvda-risk-factors.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "mentions the distinctive added Groq paragraph",
+          "pass": true
+        },
+        {
+          "name": "identifies the new NVIDIA accession",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "aapl-mdna-tariffs",
+      "harness": "claude",
+      "pass": true,
+      "file": "claude/aapl-mdna-tariffs.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "quotes the distinctive 2025 tariff disclosure",
+          "pass": true
+        },
+        {
+          "name": "states that the tariff paragraphs are new",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "aapl-mdna-tariffs",
+      "harness": "codex",
+      "pass": true,
+      "file": "codex/aapl-mdna-tariffs.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "quotes the distinctive 2025 tariff disclosure",
+          "pass": true
+        },
+        {
+          "name": "states that the tariff paragraphs are new",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "aapl-mdna-tariffs",
+      "harness": "agy",
+      "pass": true,
+      "file": "agy/aapl-mdna-tariffs.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "quotes the distinctive 2025 tariff disclosure",
+          "pass": true
+        },
+        {
+          "name": "states that the tariff paragraphs are new",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "tsla-where-it-moved",
+      "harness": "claude",
+      "pass": false,
+      "file": "claude/tsla-where-it-moved.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "names Item 9B as most changed",
+          "pass": false
+        },
+        {
+          "name": "names Item 15 in the top three",
+          "pass": false
+        },
+        {
+          "name": "names Item 7 in the top three",
+          "pass": true
+        },
+        {
+          "name": "reports the lowest similarity",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": false
+        }
+      ],
+      "failedChecks": [
+        "names Item 9B as most changed",
+        "names Item 15 in the top three",
+        "includes an SEC Archives citation URL"
+      ]
+    },
+    {
+      "scenario": "tsla-where-it-moved",
+      "harness": "codex",
+      "pass": true,
+      "file": "codex/tsla-where-it-moved.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "names Item 9B as most changed",
+          "pass": true
+        },
+        {
+          "name": "names Item 15 in the top three",
+          "pass": true
+        },
+        {
+          "name": "names Item 7 in the top three",
+          "pass": true
+        },
+        {
+          "name": "reports the lowest similarity",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "tsla-where-it-moved",
+      "harness": "agy",
+      "pass": true,
+      "file": "agy/tsla-where-it-moved.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "names Item 9B as most changed",
+          "pass": true
+        },
+        {
+          "name": "names Item 15 in the top three",
+          "pass": true
+        },
+        {
+          "name": "names Item 7 in the top three",
+          "pass": true
+        },
+        {
+          "name": "reports the lowest similarity",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "brk-10q-part-ii",
+      "harness": "claude",
+      "pass": true,
+      "file": "claude/brk-10q-part-ii.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "uses the qualified Item",
+          "pass": true
+        },
+        {
+          "name": "includes the new accession",
+          "pass": true
+        },
+        {
+          "name": "includes the prior accession",
+          "pass": true
+        },
+        {
+          "name": "reports the three counts or states that disclosure did not change",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "brk-10q-part-ii",
+      "harness": "codex",
+      "pass": true,
+      "file": "codex/brk-10q-part-ii.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "uses the qualified Item",
+          "pass": true
+        },
+        {
+          "name": "includes the new accession",
+          "pass": true
+        },
+        {
+          "name": "includes the prior accession",
+          "pass": true
+        },
+        {
+          "name": "reports the three counts or states that disclosure did not change",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "brk-10q-part-ii",
+      "harness": "agy",
+      "pass": true,
+      "file": "agy/brk-10q-part-ii.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "uses the qualified Item",
+          "pass": true
+        },
+        {
+          "name": "includes the new accession",
+          "pass": true
+        },
+        {
+          "name": "includes the prior accession",
+          "pass": true
+        },
+        {
+          "name": "reports the three counts or states that disclosure did not change",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "ge-honest-not-found",
+      "harness": "claude",
+      "pass": true,
+      "file": "claude/ge-honest-not-found.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "plainly says the section could not be located",
+          "pass": true
+        },
+        {
+          "name": "does not contain a quoted passage attributed to Item 1A",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "ge-honest-not-found",
+      "harness": "codex",
+      "pass": true,
+      "file": "codex/ge-honest-not-found.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "plainly says the section could not be located",
+          "pass": true
+        },
+        {
+          "name": "does not contain a quoted passage attributed to Item 1A",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "ge-honest-not-found",
+      "harness": "agy",
+      "pass": true,
+      "file": "agy/ge-honest-not-found.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "plainly says the section could not be located",
+          "pass": true
+        },
+        {
+          "name": "does not contain a quoted passage attributed to Item 1A",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "jpm-legal-proceedings",
+      "harness": "claude",
+      "pass": true,
+      "file": "claude/jpm-legal-proceedings.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "includes the new accession",
+          "pass": true
+        },
+        {
+          "name": "includes the prior accession",
+          "pass": true
+        },
+        {
+          "name": "plainly reports no changes",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "jpm-legal-proceedings",
+      "harness": "codex",
+      "pass": true,
+      "file": "codex/jpm-legal-proceedings.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "includes the new accession",
+          "pass": true
+        },
+        {
+          "name": "includes the prior accession",
+          "pass": true
+        },
+        {
+          "name": "plainly reports no changes",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "jpm-legal-proceedings",
+      "harness": "agy",
+      "pass": true,
+      "file": "agy/jpm-legal-proceedings.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "includes the new accession",
+          "pass": true
+        },
+        {
+          "name": "includes the prior accession",
+          "pass": true
+        },
+        {
+          "name": "plainly reports no changes",
+          "pass": true
+        },
+        {
+          "name": "includes an SEC Archives citation URL",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "xom-holding-company",
+      "harness": "claude",
+      "pass": true,
+      "file": "claude/xom-holding-company.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "discloses the holding-company mismatch or uses operating-company CIK",
+          "pass": true
+        },
+        {
+          "name": "does not attribute a filing diff to holding-company CIK",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    },
+    {
+      "scenario": "xom-holding-company",
+      "harness": "codex",
+      "pass": false,
+      "file": "codex/xom-holding-company.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": false
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "discloses the holding-company mismatch or uses operating-company CIK",
+          "pass": false
+        },
+        {
+          "name": "does not attribute a filing diff to holding-company CIK",
+          "pass": true
+        }
+      ],
+      "failedChecks": [
+        "harness exit code is zero",
+        "discloses the holding-company mismatch or uses operating-company CIK"
+      ]
+    },
+    {
+      "scenario": "xom-holding-company",
+      "harness": "agy",
+      "pass": true,
+      "file": "agy/xom-holding-company.md",
+      "checks": [
+        {
+          "name": "harness exit code is zero",
+          "pass": true
+        },
+        {
+          "name": "answer section exists",
+          "pass": true
+        },
+        {
+          "name": "discloses the holding-company mismatch or uses operating-company CIK",
+          "pass": true
+        },
+        {
+          "name": "does not attribute a filing diff to holding-company CIK",
+          "pass": true
+        }
+      ],
+      "failedChecks": []
+    }
+  ]
+}

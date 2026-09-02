@@ -5,8 +5,3 @@ dist/
 .DS_Store
 publish.sh
 evals/scenarios/claude-mcp.json
-evals/scenarios/claude/
-evals/scenarios/codex/
-evals/scenarios/agy/
-evals/scenarios/report.md
-evals/scenarios/report.json
