@@ -93,6 +93,44 @@ describe('fused headings', () => {
   });
 });
 
+describe('combined headings', () => {
+  const combined = splitItems(htmlToLines(fx('combined-headings-10k.htm')), '10-K').sections;
+
+  it('registers list headings under every named Item with identical bodies', () => {
+    expect([...combined.keys()]).toEqual([
+      '1', '1A', '2', '3', '4', '5', '6', '7', '7A', '8', '9', '10', '11', '12', '13', '14', '15',
+    ]);
+    expect(combined.get('5')!.paragraphs).toEqual(combined.get('6')!.paragraphs);
+    expect(combined.get('5')!.title).toBe('Market Information');
+    expect(combined.get('6')!.warnings).toContain(
+      'Combined heading "Items 5 and 6": this body covers Items 5, 6',
+    );
+  });
+
+  it('accepts an empty combined title and shares it across all five Items', () => {
+    const ten = combined.get('10')!;
+    expect(ten.title).toBe('');
+    for (const key of ['11', '12', '13', '14']) {
+      expect(combined.get(key)!.paragraphs).toEqual(ten.paragraphs);
+      expect(combined.get(key)!.title).toBe('');
+    }
+    expect(ten.warnings).toContain(
+      'Combined heading "Items 10, 11, 12, 13 and 14": this body covers Items 10, 11, 12, 13, 14',
+    );
+  });
+
+  it('expands through and hyphen ranges, including lettered list Items', () => {
+    expect(combined.get('1')!.paragraphs).toEqual(combined.get('1A')!.paragraphs);
+    expect(combined.get('3')!.paragraphs).toEqual(combined.get('4')!.paragraphs);
+    expect(combined.get('8')!.paragraphs).toEqual(combined.get('9')!.paragraphs);
+  });
+
+  it('does not parse an incorporation sentence as a combined heading', () => {
+    expect(combined.get('5')!.paragraphs.some((p) => p.text.startsWith('Items 10 through 14 are incorporated'))).toBe(true);
+    expect(combined.get('10')!.paragraphs[0]!.text).toMatch(/^The disclosures required by these Items/);
+  });
+});
+
 describe('titleFor', () => {
   it('only applies canonical titles to forms it knows', () => {
     expect(titleFor('10-K', '3', 'whatever')).toBe('Legal Proceedings');

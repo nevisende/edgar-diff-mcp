@@ -31,8 +31,11 @@ export function htmlToLines(html: string): string[] {
 }
 
 const PART_RE = /^part\s+(i{1,3}|iv|[1-4])\s*[.:\-–—]?\s*(.*)$/i;
-// "Item 1A." / "ITEM 7 —" / "Item 1A:" ... ; headings are short by construction.
-const ITEM_RE = /^item\s+(\d{1,2}[a-c]?)\s*[.:\-–—]?\s*(.*)$/i;
+const ITEM_TOKEN = '\\d{1,2}[a-c]?';
+const ITEM_RANGE = `${ITEM_TOKEN}\\s*(?:through|[-–—])\\s*${ITEM_TOKEN}`;
+const ITEM_LIST = `${ITEM_TOKEN}(?:\\s*,\\s*${ITEM_TOKEN})*(?:\\s*,?\\s+and\\s+${ITEM_TOKEN})?`;
+// "Item 1A." / "Items 5 and 6." / "Items 10 through 14" ...
+const ITEM_RE = new RegExp(`^(items?)\\s+(${ITEM_RANGE}|${ITEM_LIST})\\s*[.:\\-–—]?\\s*(.*)$`, 'i');
 const MAX_HEADING_CHARS = 140;
 const MAX_TITLE_WORDS = 12;
 /** Bodies shorter than this are returned only with a warning; TOC stubs never are. */
@@ -43,9 +46,10 @@ const TOC_MAX_GAP = 2;
 // hasPageRef / classify below implement the cluster rule.
 
 interface Heading {
-  key: string;
+  keys: string[];
   rawTitle: string;
   line: number;
+  combinedLabel?: string;
   fusedParagraph?: string;
   splitTitle?: string;
 }
@@ -85,8 +89,8 @@ function comparableTitle(value: string): string {
 }
 
 /** Split only at a known Item title or an unambiguous nearby sentence boundary. */
-function splitFusedHeading(raw: string, form: string, key: string): FusedHeading | undefined {
-  for (const variant of titleVariantsFor(form, key)) {
+function splitFusedHeading(raw: string, form: string, keys: string[]): FusedHeading | undefined {
+  for (const variant of keys.length === 1 && keys[0] ? titleVariantsFor(form, keys[0]) : []) {
     const found = raw.slice(0, variant.length);
     if (comparableTitle(found) !== comparableTitle(variant)) continue;
     const rest = raw.slice(variant.length);
@@ -104,6 +108,25 @@ function splitFusedHeading(raw: string, form: string, key: string): FusedHeading
     return { rawTitle: headingTitle, paragraph: body, splitTitle: headingTitle };
   }
   return undefined;
+}
+
+function expandItemRange(spec: string): string[] | undefined {
+  const match = new RegExp(`^(${ITEM_TOKEN})\\s*(?:through|[-–—])\\s*(${ITEM_TOKEN})$`, 'i').exec(spec);
+  if (!match?.[1] || !match[2]) return undefined;
+  const start = /^(\d{1,2})([a-c]?)$/i.exec(match[1]);
+  const end = /^(\d{1,2})([a-c]?)$/i.exec(match[2]);
+  if (!start?.[1] || !end?.[1] || start[2] || end[2]) return undefined;
+  const first = Number(start[1]);
+  const last = Number(end[1]);
+  if (last < first || last - first > 20) return undefined;
+  return Array.from({ length: last - first + 1 }, (_, i) => String(first + i));
+}
+
+function itemKeys(spec: string): string[] | undefined {
+  const range = expandItemRange(spec);
+  if (range) return range;
+  const keys = spec.match(new RegExp(ITEM_TOKEN, 'gi'))?.map((key) => key.toUpperCase()) ?? [];
+  return keys.length > 0 && new Set(keys).size === keys.length ? keys : undefined;
 }
 
 /** TOC rows almost always end in a page reference: "Item 1A. Risk Factors 9". */
@@ -176,18 +199,30 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
       return;
     }
     const m = ITEM_RE.exec(line);
-    if (!m || !m[1]) return;
-    const item = m[1].toUpperCase();
-    const key = isTenQ && part ? `${part}.${item}` : item;
-    const title = m[2] ?? '';
+    if (!m?.[1] || !m[2]) return;
+    const items = itemKeys(m[2]);
+    if (!items) return;
+    const keys = items.map((item) => (isTenQ && part ? `${part}.${item}` : item));
+    const title = m[3] ?? '';
+    const combinedLabel = keys.length > 1 ? `${m[1]} ${m[2]}` : undefined;
     if (line.length > MAX_HEADING_CHARS) {
-      const fused = splitFusedHeading(title, form, key);
+      const fused = splitFusedHeading(title, form, keys);
       if (!fused) return;
-      all.push({ key, rawTitle: fused.rawTitle, line: i, fusedParagraph: fused.paragraph, splitTitle: fused.splitTitle });
+      const heading: Heading = {
+        keys,
+        rawTitle: fused.rawTitle,
+        line: i,
+        fusedParagraph: fused.paragraph,
+        splitTitle: fused.splitTitle,
+      };
+      if (combinedLabel) heading.combinedLabel = combinedLabel;
+      all.push(heading);
       return;
     }
     if (looksLikeSentence(title)) return;
-    all.push({ key, rawTitle: title, line: i });
+    const heading: Heading = { keys, rawTitle: title, line: i };
+    if (combinedLabel) heading.combinedLabel = combinedLabel;
+    all.push(heading);
   });
 
   if (all.length === 0) {
@@ -223,13 +258,19 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
     ].filter((l) => !isNoise(l));
     const paragraphs: Paragraph[] = body.map((text, index) => ({ index, text }));
     const charCount = body.reduce((n, l) => n + l.length, 0);
-    const section: Section = { item: h.key, title: titleFor(form, h.key, h.rawTitle), paragraphs, charCount, warnings: [] };
-    if (h.splitTitle) {
-      section.warnings.push(`heading and first paragraph were in one block; split at ${h.splitTitle}`);
+    for (const key of h.keys) {
+      const title = h.combinedLabel ? h.rawTitle.trim() : titleFor(form, key, h.rawTitle);
+      const section: Section = { item: key, title, paragraphs, charCount, warnings: [] };
+      if (h.splitTitle) {
+        section.warnings.push(`heading and first paragraph were in one block; split at ${h.splitTitle}`);
+      }
+      if (h.combinedLabel) {
+        section.warnings.push(`Combined heading "${h.combinedLabel}": this body covers Items ${h.keys.join(', ')}`);
+      }
+      const list = candidates.get(key) ?? [];
+      list.push({ section, bodyChars: charCount, tocTail: h.tocTail });
+      candidates.set(key, list);
     }
-    const list = candidates.get(h.key) ?? [];
-    list.push({ section, bodyChars: charCount, tocTail: h.tocTail });
-    candidates.set(h.key, list);
   });
 
   const sections = new Map<string, Section>();
