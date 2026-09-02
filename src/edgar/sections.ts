@@ -374,7 +374,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
     const paragraphs: Paragraph[] = body.map((text, index) => ({ index, text }));
     const charCount = body.reduce((n, l) => n + l.length, 0);
     for (const key of h.keys) {
-      const title = h.combinedLabel ? h.rawTitle.trim() : titleFor(form, key, h.rawTitle);
+      const title = titleFor(form, key, h.rawTitle);
       const section: Section = { item: key, title, paragraphs, charCount, warnings: [] };
       if (h.splitTitle) {
         section.warnings.push(`heading and first paragraph were in one block; split at ${h.splitTitle}`);

@@ -133,19 +133,23 @@ describe('combined headings', () => {
       '1', '1A', '2', '3', '4', '5', '6', '7', '7A', '8', '9', '10', '11', '12', '13', '14', '15',
     ]);
     expect(combined.get('5')!.paragraphs).toEqual(combined.get('6')!.paragraphs);
-    expect(combined.get('5')!.title).toBe('Market Information');
+    expect(combined.get('5')!.title).toBe("Market for Registrant's Common Equity");
+    expect(combined.get('6')!.title).toBe('[Reserved]');
     expect(combined.get('6')!.warnings).toContain(
       'Combined heading "Items 5 and 6": this body covers Items 5, 6',
     );
   });
 
-  it('accepts an empty combined title and shares it across all five Items', () => {
+  it('uses each Item canonical title when the combined title is empty', () => {
     const ten = combined.get('10')!;
-    expect(ten.title).toBe('');
+    expect(ten.title).toBe('Directors, Executive Officers and Corporate Governance');
     for (const key of ['11', '12', '13', '14']) {
       expect(combined.get(key)!.paragraphs).toEqual(ten.paragraphs);
-      expect(combined.get(key)!.title).toBe('');
     }
+    expect(combined.get('11')!.title).toBe('Executive Compensation');
+    expect(combined.get('12')!.title).toBe('Security Ownership');
+    expect(combined.get('13')!.title).toBe('Certain Relationships and Related Transactions');
+    expect(combined.get('14')!.title).toBe('Principal Accountant Fees and Services');
     expect(ten.warnings).toContain(
       'Combined heading "Items 10, 11, 12, 13 and 14": this body covers Items 10, 11, 12, 13, 14',
     );
