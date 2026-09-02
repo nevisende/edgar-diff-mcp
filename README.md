@@ -23,12 +23,14 @@ paragraphs 7 → 7 · +1 -1 ~1 · similarity 0.827
 
 ## Measured on real filings
 
-`npm run eval:live` measures the parser against 30 issuers: the two most recent 10-Ks for each issuer and one 10-Q for eight of them. Each recent 10-K has 18 expected Items.
+`npm run eval:live` measures the parser against 30 issuers, requesting the two most recent 10-Ks for each issuer and one 10-Q for eight of them. Each recent 10-K has 18 expected Items.
 
-| Parser | Found | Rate |
+| Parser | Expected Items located | Expected Items plausible |
 |---|---:|---:|
-| Before parser fixes | 892/1090 | 81.8% |
-| Now | 980/1090 | 89.9% |
+| Before parser fixes | 892/1090 (81.8%) | Not measured |
+| Now | 980/1090 (89.9% recall) | 963/1090 (88.3%) |
+
+The plausible rate is lower because location checks only that the expected key exists, while plausibility also rejects undersized core sections and oversized Item 15 results. The latest run reports two coverage issues: EDGAR returned only one recent 10-K for JPM and none for XOM.
 
 GE, Intel and McDonald's stay `not_found` on purpose: their 10-Ks use company-specific section headings in the body and put the formal Item names in a cross-reference index. See [`evals/latest.md`](evals/latest.md) for the full committed result.
 
