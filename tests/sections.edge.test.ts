@@ -91,6 +91,28 @@ describe('table-of-contents defences', () => {
   });
 });
 
+describe('short capitalised Item sentences', () => {
+  it('rejects sentence-shaped prose while retaining ordinary Item headings', () => {
+    const result = splitItems(htmlToLines(fx('capitalized-item-sentence-10k.htm')), '10-K');
+
+    expect([...result.sections.keys()]).toEqual(['1', '1A']);
+    expect(result.sections.get('1')?.paragraphs.map((paragraph) => paragraph.text)).toContain(
+      'Item 7 Disclosures are detailed below.',
+    );
+    expect(result.sections.get('1')?.title).toBe('Business');
+    expect(result.sections.get('1A')?.title).toBe('Risk Factors');
+  });
+
+  it('retains a page-number table-of-contents row as a heading candidate', () => {
+    const result = splitItems([
+      'Item 1A. Risk Factors 9',
+      'Synthetic risk text follows this standalone table-of-contents-style heading candidate.',
+    ], '10-K');
+
+    expect([...result.sections.keys()]).toEqual(['1A']);
+  });
+});
+
 describe('combined Part and Item headings', () => {
   it('parses an Item heading that shares one line with its Part heading', () => {
     const result = splitItems(htmlToLines(fx('part-item-same-line-10q.htm')), '10-Q');

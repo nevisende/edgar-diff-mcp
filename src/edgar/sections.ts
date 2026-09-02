@@ -94,7 +94,13 @@ function looksLikeSentence(title: string): boolean {
   const t = title.trim();
   if (!t) return false;
   if (/^[a-z]/.test(t)) return true; // "of our revenue…"
-  if (t.split(/\s+/).length > MAX_TITLE_WORDS) return true;
+  const words = t.split(/\s+/);
+  if (words.length > MAX_TITLE_WORDS) return true;
+  if (
+    words.length >= 4
+    && /[.!?]$/.test(t)
+    && /\b(?:is|are|was|were|has|have|had|will|would|includes|discusses|describes|contains|sets|provides)\b/.test(t)
+  ) return true;
   return false;
 }
 
