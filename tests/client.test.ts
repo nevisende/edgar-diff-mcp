@@ -15,6 +15,29 @@ function filings(accessions: string[], forms: string[]) {
 }
 
 describe('EdgarClient paginated submissions', () => {
+  it('matches a lowercase form without fetching an older submissions page', async () => {
+    const calls: string[] = [];
+    const client = new EdgarClient({
+      userAgent: 'pagination tests@example.com',
+      minIntervalMs: 0,
+      fetchImpl: async (input) => {
+        const url = String(input);
+        calls.push(url);
+        return new Response(JSON.stringify({
+          filings: {
+            recent: filings(['0000000001-25-000001'], ['10-K']),
+            files: [{ name: 'CIK0000000001-submissions-001.json' }],
+          },
+        }), { status: 200 });
+      },
+    });
+
+    await expect(client.listFilings('1', { form: '10-k', limit: 1 })).resolves.toMatchObject([
+      { accession: '0000000001-25-000001', form: '10-K' },
+    ]);
+    expect(calls).toEqual([MAIN_URL]);
+  });
+
   it('loads and memoises older submission pages for filtered lists and accession lookup', async () => {
     const calls: string[] = [];
     const routes: Record<string, unknown> = {

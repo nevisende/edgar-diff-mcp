@@ -204,15 +204,16 @@ export class EdgarClient {
   async listFilings(cik: string, opts: ListFilingsOptions = {}): Promise<FilingRef[]> {
     const padded = padCik(cik);
     const state = await this.getSubmissions(padded);
-    if (opts.form) {
+    const form = opts.form?.toUpperCase();
+    if (form) {
       const wanted = opts.limit ?? Number.POSITIVE_INFINITY;
-      while (state.filings.filter((ref) => ref.form === opts.form).length < wanted && state.nextFile < state.files.length) {
+      while (state.filings.filter((ref) => ref.form === form).length < wanted && state.nextFile < state.files.length) {
         await this.loadNextSubmissionsPage(padded, state);
       }
     }
     const out: FilingRef[] = [];
     for (const ref of state.filings) {
-      if (opts.form && ref.form !== opts.form) continue;
+      if (form && ref.form !== form) continue;
       out.push(ref);
       if (opts.limit && out.length >= opts.limit) break;
     }
