@@ -1,0 +1,44 @@
+<!doctype html>
+<html><body>
+  <div>PART I</div>
+  <div>Item 1. Financial Statements</div>
+  <p>Acme's fictional condensed financial statements contain synthetic balances, invented results, and enough explanatory text to establish a substantive first section before the running-header regression begins. No issuer information appears in this fixture, and every amount and business description is imaginary.</p>
+  <p>Additional test-only financial statement language keeps this Item distinct from a short contents row while exercising ordinary Part I section boundaries in a quarterly filing.</p>
+
+  <div>Item 2. Management's Discussion and Analysis of Financial Condition and Results of Operations</div>
+  <p>On the first synthetic page, Acme discusses invented revenue trends, hypothetical customer demand, and fictional operating costs. This paragraph is deliberately substantial so the next identical titled heading is separated from it by real body text rather than by page-number noise.</p>
+  <p>Management also describes imaginary component availability and test-only production schedules. These statements exist solely to verify that verbatim body paragraphs survive when repeated page headers are removed.</p>
+  <p>A final paragraph on this page adds enough substantive prose to make the fragment exceed the parser's real-body threshold before the next page begins.</p>
+
+  <div>Item 2. Management's Discussion and Analysis of Financial Condition and Results of Operations</div>
+  <p>On the second synthetic page, Acme reports fictional changes in gross margin and invented spending patterns. The repeated heading above is page furniture, while this paragraph is section content that must join the first page's discussion.</p>
+  <p>Hypothetical logistics costs and imaginary foreign-exchange effects provide additional test language. Removing the heading must not remove or rewrite any of this surrounding body text.</p>
+  <p>This second page likewise contains enough prose to ensure the repeated heading is separated from its neighbors by a substantive section fragment.</p>
+
+  <div>Item 2. Management's Discussion and Analysis of Financial Condition and Results of Operations</div>
+  <p>On the third synthetic page, discussion turns to invented liquidity, fabricated capital resources, and hypothetical cash requirements. The exact heading text remains unchanged so this occurrence qualifies for conservative merging.</p>
+  <p>Acme's imaginary plans have no connection to a real company. The paragraph exists to make the body continuous after the parser drops this repeated titled page header.</p>
+  <p>More synthetic analysis separates this header from the next occurrence with real body text and protects isolated headings from being merged accidentally.</p>
+
+  <div>Item 2. Management's Discussion and Analysis of Financial Condition and Results of Operations</div>
+  <p>On the fourth synthetic page, Acme concludes with fictional outlook information and invented operational assumptions. This text must become the final portion of one merged Part I Item 2 section.</p>
+  <p>The parser should preserve this paragraph verbatim, renumber it within the merged section, and report how many repeated running headers it removed.</p>
+  <p>A last substantive paragraph ensures the final candidate is not mistaken for a placeholder before the next real Item heading ends the section.</p>
+
+  <div>Item 3. Quantitative and Qualitative Disclosures About Market Risk</div>
+  <p>Acme's market-risk discussion is fictional and sufficiently detailed to act as a real boundary after Item 2. It mentions hypothetical rates, invented currency exposures, and synthetic sensitivity calculations solely for parser testing, with enough additional prose to exceed the substantive-body threshold.</p>
+  <p>No repeated header appears in this section, so it should remain an ordinary Part I Item 3.</p>
+
+  <div>Item 4. Controls and Procedures</div>
+  <p>The first fictional controls section has a substantive body that must remain a separate candidate. Its title will recur, but another differently titled Item 4 intervenes, so the parser must not merge these headings across that differing text. Additional synthetic control descriptions make this candidate longer than four hundred characters without relying on any real filing language. The test intentionally repeats this explanation to establish an unambiguous body boundary.</p>
+  <div>Item 4. Evaluation of Disclosure Controls and Procedures</div>
+  <p>The differently titled Item 4 candidate is also substantive. It proves that matching only the Item key is unsafe: a parser must require identical heading text and must not bridge across this boundary. More invented evaluation language lengthens this candidate beyond the real-body threshold, preserving the conservative duplicate-heading warning instead of claiming a merge.</p>
+  <div>Item 4. Controls and Procedures</div>
+  <p>The third Item 4 candidate returns to the first title and contains another substantive, wholly fictional control narrative. Despite the exact title recurring three times overall, the intervening different title makes the sequence ineligible for running-header merging. Extra test prose keeps the body substantial and distinct.</p>
+  <div>Item 4. Controls and Procedures</div>
+  <p>The fourth Item 4 candidate uses the recurring title again and supplies a final substantive fictional body. The parser may select the longest candidate, but it must not concatenate bodies across the differently titled heading or emit a repeated-running-header warning for this Item. Additional words keep this final fragment above the threshold.</p>
+
+  <div>PART II</div>
+  <div>Item 6. Exhibits</div>
+  <p>Exhibit 31.1, fictional certification for the synthetic filing.</p>
+</body></html>

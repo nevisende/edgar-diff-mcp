@@ -79,6 +79,28 @@ describe('table-of-contents defences', () => {
       expect(section.warnings).toEqual([]);
     }
   });
+
+  it('does not count a substantive TOC tail as a duplicate-heading rival', () => {
+    const result = splitItems(htmlToLines(fx('toc-tail-duplicate-10k.htm')), '10-K');
+    const summary = result.sections.get('16');
+
+    expect([...result.sections.keys()]).toEqual(['16']);
+    expect(summary?.paragraphs[0]?.text).toMatch(/^Acme elects to provide/);
+    expect(summary?.warnings).toEqual([]);
+    expect(result.warnings).toEqual([]);
+  });
+});
+
+describe('combined Part and Item headings', () => {
+  it('parses an Item heading that shares one line with its Part heading', () => {
+    const result = splitItems(htmlToLines(fx('part-item-same-line-10q.htm')), '10-Q');
+    const risk = result.sections.get('II.1A');
+
+    expect([...result.sections.keys()]).toEqual(['I.1', 'II.1A']);
+    expect(risk?.title).toBe('Risk Factors');
+    expect(risk?.paragraphs[0]?.text).toMatch(/^Acme faces hypothetical supply constraints/);
+    expect(result.warnings).toEqual([]);
+  });
 });
 
 describe('fused headings', () => {
@@ -111,19 +133,23 @@ describe('combined headings', () => {
       '1', '1A', '2', '3', '4', '5', '6', '7', '7A', '8', '9', '10', '11', '12', '13', '14', '15',
     ]);
     expect(combined.get('5')!.paragraphs).toEqual(combined.get('6')!.paragraphs);
-    expect(combined.get('5')!.title).toBe('Market Information');
+    expect(combined.get('5')!.title).toBe("Market for Registrant's Common Equity");
+    expect(combined.get('6')!.title).toBe('[Reserved]');
     expect(combined.get('6')!.warnings).toContain(
       'Combined heading "Items 5 and 6": this body covers Items 5, 6',
     );
   });
 
-  it('accepts an empty combined title and shares it across all five Items', () => {
+  it('uses each Item canonical title when the combined title is empty', () => {
     const ten = combined.get('10')!;
-    expect(ten.title).toBe('');
+    expect(ten.title).toBe('Directors, Executive Officers and Corporate Governance');
     for (const key of ['11', '12', '13', '14']) {
       expect(combined.get(key)!.paragraphs).toEqual(ten.paragraphs);
-      expect(combined.get(key)!.title).toBe('');
     }
+    expect(combined.get('11')!.title).toBe('Executive Compensation');
+    expect(combined.get('12')!.title).toBe('Security Ownership');
+    expect(combined.get('13')!.title).toBe('Certain Relationships and Related Transactions');
+    expect(combined.get('14')!.title).toBe('Principal Accountant Fees and Services');
     expect(ten.warnings).toContain(
       'Combined heading "Items 10, 11, 12, 13 and 14": this body covers Items 10, 11, 12, 13, 14',
     );
@@ -162,6 +188,24 @@ describe('running Item headers', () => {
     }
     expect(running.has('2')).toBe(false);
     expect(running.has('3')).toBe(false);
+  });
+
+  it('merges identical titled running headers separated by substantive body text', () => {
+    const result = splitItems(htmlToLines(fx('titled-running-item-headers-10q.htm')), '10-Q');
+    const mdna = result.sections.get('I.2');
+
+    expect(mdna?.paragraphs).toHaveLength(12);
+    expect(mdna?.paragraphs[0]?.text).toMatch(/^On the first synthetic page/);
+    expect(mdna?.paragraphs.at(-1)?.text).toMatch(/^A last substantive paragraph/);
+    expect(mdna?.paragraphs.some((p) => /^Item 2\./.test(p.text))).toBe(false);
+    expect(mdna?.warnings).toEqual(['3 repeated running headers merged']);
+  });
+
+  it('does not merge recurring headings across a different title for the same key', () => {
+    const controls = splitItems(htmlToLines(fx('titled-running-item-headers-10q.htm')), '10-Q').sections.get('I.4');
+
+    expect(controls?.paragraphs).toHaveLength(1);
+    expect(controls?.warnings.some((warning) => /repeated running headers merged/.test(warning))).toBe(false);
   });
 });
 
