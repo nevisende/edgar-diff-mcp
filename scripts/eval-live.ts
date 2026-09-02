@@ -4,7 +4,7 @@
  *
  *   EDGAR_USER_AGENT="edgar-diff-mcp/0.1 you@example.com" npm run eval:live > evals/latest.md
  *
- * Reads from and writes to `.edgar-cache` so re-runs are free after the first.
+ * Reads from and writes to `EDGAR_CACHE_DIR` (or `.edgar-cache`) so re-runs are free after the first.
  * Exit code is always 0 — this is a report, not a gate.
  */
 import { writeFile, mkdir } from 'node:fs/promises';
@@ -51,6 +51,8 @@ interface FilingResult {
   foundItems: string[];
   missingItems: string[];
   falsePositiveItems: string[];
+  plausibleItems: string[];
+  implausibleItems: { item: string; chars: number; reason: string }[];
   itemChars: Record<string, number>;
   flags: string[];
   warnings: string[];
@@ -73,6 +75,22 @@ interface EvalResults {
   corpus: string[];
   filings: FilingResult[];
   diffs: DiffResult[];
+  issues: { ticker: string; message: string }[];
+}
+
+function implausibleReason(form: string, item: string, chars: number): string | undefined {
+  if (form === '10-K') {
+    if (['1', '1A', '7', '8'].includes(item) && chars < 4000) {
+      return 'expected at least 4,000 chars';
+    }
+    if (item === '15' && chars > 300000) {
+      return 'expected at most 300,000 chars';
+    }
+  }
+  if (form.startsWith('10-Q') && ['I.1', 'I.2'].includes(item) && chars < 4000) {
+    return 'expected at least 4,000 chars';
+  }
+  return undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -86,11 +104,13 @@ if (!/@/.test(ua)) {
 }
 
 const corpus = process.argv.length > 2 ? process.argv.slice(2) : DEFAULT_CORPUS;
-const client = new EdgarClient({ userAgent: ua, cache: new FileCache('.edgar-cache') });
+const cacheDir = process.env['EDGAR_CACHE_DIR'] ?? '.edgar-cache';
+const client = new EdgarClient({ userAgent: ua, cache: new FileCache(cacheDir) });
 const service = new FilingService(client);
 
 const filingResults: FilingResult[] = [];
 const diffResults: DiffResult[] = [];
+const issues: { ticker: string; message: string }[] = [];
 
 for (const ticker of corpus) {
   let cik = '';
@@ -98,13 +118,17 @@ for (const ticker of corpus) {
   try {
     const [company] = await client.resolveCompany(ticker);
     if (!company) {
-      console.error(`[SKIP] ${ticker}: no company found`);
+      const message = 'Company could not be resolved, so no 10-K filings were evaluated.';
+      issues.push({ ticker, message });
+      console.error(`[ERROR] ${ticker}: ${message}`);
       continue;
     }
     cik = company.cik;
     companyName = company.name;
   } catch (e) {
-    console.error(`[ERROR] ${ticker}: resolveCompany failed: ${e instanceof Error ? e.message : String(e)}`);
+    const message = `resolveCompany failed: ${e instanceof Error ? e.message : String(e)}`;
+    issues.push({ ticker, message });
+    console.error(`[ERROR] ${ticker}: ${message}`);
     continue;
   }
 
@@ -114,6 +138,11 @@ for (const ticker of corpus) {
     tenKFilings = await client.listFilings(cik, { form: '10-K', limit: 2 });
   } catch (e) {
     console.error(`[ERROR] ${ticker}: listFilings 10-K failed: ${e instanceof Error ? e.message : String(e)}`);
+  }
+  if (tenKFilings.length < 2) {
+    const message = `Expected 2 recent 10-K filings; located ${tenKFilings.length}.`;
+    issues.push({ ticker, message });
+    console.error(`[ERROR] ${ticker}: ${message}`);
   }
 
   // Fetch 10-Q filing (most recent) for first 8 tickers
@@ -140,6 +169,8 @@ for (const ticker of corpus) {
       foundItems: [],
       missingItems: [],
       falsePositiveItems: [],
+      plausibleItems: [],
+      implausibleItems: [],
       itemChars: {},
       flags: [],
       warnings: [],
@@ -170,6 +201,13 @@ for (const ticker of corpus) {
       result.falsePositiveItems = result.foundItems.filter((k) =>
         !result.expectedItems.includes(k) && !(is10K && OPTIONAL_10K_ITEMS.has(k))
       );
+      for (const item of result.expectedItems) {
+        if (!result.foundItems.includes(item)) continue;
+        const chars = result.itemChars[item] ?? 0;
+        const reason = implausibleReason(filing.form, item, chars);
+        if (reason) result.implausibleItems.push({ item, chars, reason });
+        else result.plausibleItems.push(item);
+      }
 
       // Suspicion checks
       const item1aChars = result.itemChars['1A'] ?? result.itemChars['II.1A'] ?? 0;
@@ -262,6 +300,7 @@ const results: EvalResults = {
   corpus,
   filings: filingResults,
   diffs: diffResults,
+  issues,
 };
 
 await mkdir('evals', { recursive: true });
@@ -270,8 +309,10 @@ await writeFile('evals/results.json', JSON.stringify(results, null, 2));
 // Compute headline numbers
 const totalExpected = filingResults.reduce((n, f) => n + f.expectedItems.length, 0);
 const totalFound = filingResults.reduce((n, f) => n + f.foundItems.filter((k) => f.expectedItems.includes(k)).length, 0);
+const totalPlausible = filingResults.reduce((n, f) => n + f.plausibleItems.length, 0);
 const totalFalsePositives = filingResults.reduce((n, f) => n + f.falsePositiveItems.length, 0);
 const recall = totalExpected > 0 ? ((totalFound / totalExpected) * 100).toFixed(1) : '0.0';
+const plausibleRate = totalExpected > 0 ? ((totalPlausible / totalExpected) * 100).toFixed(1) : '0.0';
 
 // Markdown report to stdout
 const lines: string[] = [];
@@ -286,9 +327,23 @@ lines.push(`| Metric | Value |`);
 lines.push(`|--------|-------|`);
 lines.push(`| Filings evaluated | ${filingResults.filter((f) => !f.error).length} |`);
 lines.push(`| Expected Item slots | ${totalExpected} |`);
-lines.push(`| Found | ${totalFound} |`);
-lines.push(`| **Recall (expected Items located)** | **${recall}%** |`);
+lines.push(`| **Recall (expected Items located)** | **${totalFound}/${totalExpected} (${recall}%)** |`);
+lines.push(`| **Plausible expected Items** | **${totalPlausible}/${totalExpected} (${plausibleRate}%)** |`);
 lines.push(`| False positives | ${totalFalsePositives} |`);
+lines.push(`| Issues | ${issues.length} |`);
+lines.push('');
+
+lines.push('## Evaluation Issues');
+lines.push('');
+if (issues.length === 0) {
+  lines.push('No evaluation issues.');
+} else {
+  lines.push('| Status | Ticker | Issue |');
+  lines.push('|--------|--------|-------|');
+  for (const issue of issues) {
+    lines.push(`| [ERROR] | ${issue.ticker} | ${issue.message} |`);
+  }
+}
 lines.push('');
 
 // Per-filing table
@@ -318,6 +373,22 @@ for (const f of filingResults) {
   const falsePositives = f.falsePositiveItems.length > 0 ? f.falsePositiveItems.join(', ') : '—';
   const flags = f.flags.length > 0 ? compactFlags(f.flags) : (f.error ? `ERROR: ${f.error.slice(0, 80)}` : '—');
   lines.push(`| ${f.ticker} | ${f.form} | ${f.filingDate} | ${f.accession} | ${missing} | ${falsePositives} | ${flags} |`);
+}
+lines.push('');
+
+lines.push('## Located but Implausible Items');
+lines.push('');
+const implausibleItems = filingResults.flatMap((f) =>
+  f.implausibleItems.map((item) => ({ ...item, ticker: f.ticker, form: f.form, filingDate: f.filingDate }))
+);
+if (implausibleItems.length === 0) {
+  lines.push('No located expected Items failed the plausibility checks.');
+} else {
+  lines.push('| Ticker | Form | Filing Date | Item | Chars | Reason |');
+  lines.push('|--------|------|-------------|------|------:|--------|');
+  for (const item of implausibleItems) {
+    lines.push(`| ${item.ticker} | ${item.form} | ${item.filingDate} | ${item.item} | ${item.chars} | ${item.reason} |`);
+  }
 }
 lines.push('');
 

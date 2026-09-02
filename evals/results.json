@@ -1,5 +1,5 @@
 {
-  "runDate": "2026-09-02T19:51:50.879Z",
+  "runDate": "2026-09-02T20:08:26.211Z",
   "corpus": [
     "AAPL",
     "MSFT",
@@ -86,6 +86,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 15799,
         "2": 464,
@@ -181,6 +205,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 15494,
         "2": 464,
@@ -253,6 +301,22 @@
         "II.6"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "II.3",
+        "II.4",
+        "II.5"
+      ],
+      "plausibleItems": [
+        "I.1",
+        "I.2",
+        "I.3",
+        "I.4",
+        "II.1",
+        "II.1A",
+        "II.2",
+        "II.6"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "I.1": 25381,
         "I.2": 21083,
@@ -326,6 +390,30 @@
         "15"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 40768,
         "2": 1158,
@@ -425,6 +513,30 @@
         "15"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 48189,
         "2": 1294,
@@ -501,6 +613,20 @@
         "II.1A"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "II.5"
+      ],
+      "plausibleItems": [
+        "I.1",
+        "I.2",
+        "I.3",
+        "I.4",
+        "II.1",
+        "II.1A",
+        "II.2",
+        "II.6"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "I.3": 1809,
         "I.4": 701,
@@ -570,6 +696,35 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 154,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 47937,
         "2": 886,
@@ -666,6 +821,35 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 154,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 54453,
         "2": 886,
@@ -738,6 +922,20 @@
         "II.1A"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "II.5"
+      ],
+      "plausibleItems": [
+        "I.1",
+        "I.2",
+        "I.3",
+        "I.4",
+        "II.1",
+        "II.1A",
+        "II.2",
+        "II.6"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "I.1": 57287,
         "I.2": 37231,
@@ -811,6 +1009,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 13398,
         "2": 1219,
@@ -904,6 +1126,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 13089,
         "2": 1220,
@@ -976,6 +1222,22 @@
         "II.6"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "II.3",
+        "II.4",
+        "II.5"
+      ],
+      "plausibleItems": [
+        "I.1",
+        "I.2",
+        "I.3",
+        "I.4",
+        "II.1",
+        "II.1A",
+        "II.2",
+        "II.6"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "I.1": 74624,
         "I.2": 40805,
@@ -1053,6 +1315,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 23589,
         "2": 277,
@@ -1148,6 +1434,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 30417,
         "2": 277,
@@ -1219,6 +1529,20 @@
         "II.5"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "II.5"
+      ],
+      "plausibleItems": [
+        "I.1",
+        "I.2",
+        "I.3",
+        "I.4",
+        "II.1",
+        "II.1A",
+        "II.2",
+        "II.6"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "I.1": 107872,
         "II.6": 6719,
@@ -1295,6 +1619,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 24382,
         "2": 856,
@@ -1389,6 +1737,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 40102,
         "2": 918,
@@ -1459,6 +1831,20 @@
         "II.6"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "II.5"
+      ],
+      "plausibleItems": [
+        "I.1",
+        "I.2",
+        "I.3",
+        "I.4",
+        "II.1",
+        "II.1A",
+        "II.2",
+        "II.6"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "I.1": 81992,
         "I.2": 50399,
@@ -1534,6 +1920,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 45098,
         "2": 1162,
@@ -1629,6 +2039,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 49208,
         "2": 1162,
@@ -1702,6 +2136,22 @@
         "II.6"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "II.3",
+        "II.4",
+        "II.5"
+      ],
+      "plausibleItems": [
+        "I.1",
+        "I.2",
+        "I.3",
+        "I.4",
+        "II.1",
+        "II.1A",
+        "II.2",
+        "II.6"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "I.1": 74093,
         "I.2": 36667,
@@ -1781,6 +2231,30 @@
         "15"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 126071,
         "2": 8166,
@@ -1874,6 +2348,30 @@
         "15"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 125069,
         "2": 8165,
@@ -1946,6 +2444,22 @@
         "II.6"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "II.3",
+        "II.4",
+        "II.5"
+      ],
+      "plausibleItems": [
+        "I.1",
+        "I.2",
+        "I.3",
+        "I.4",
+        "II.1",
+        "II.1A",
+        "II.2",
+        "II.6"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "I.1": 87252,
         "I.2": 5849,
@@ -2026,6 +2540,43 @@
         "15"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "7",
+          "chars": 300,
+          "reason": "expected at least 4,000 chars"
+        },
+        {
+          "item": "8",
+          "chars": 314,
+          "reason": "expected at least 4,000 chars"
+        },
+        {
+          "item": "15",
+          "chars": 974088,
+          "reason": "expected at most 300,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 38935,
         "2": 2027,
@@ -2122,6 +2673,39 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "7",
+          "chars": 147,
+          "reason": "expected at least 4,000 chars"
+        },
+        {
+          "item": "8",
+          "chars": 105,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 77023,
         "2": 463,
@@ -2213,6 +2797,39 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "7",
+          "chars": 147,
+          "reason": "expected at least 4,000 chars"
+        },
+        {
+          "item": "8",
+          "chars": 105,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 74191,
         "2": 463,
@@ -2305,6 +2922,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 37323,
         "2": 3000,
@@ -2399,6 +3040,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 39882,
         "2": 2444,
@@ -2493,6 +3158,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 55035,
         "2": 2471,
@@ -2588,6 +3277,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 54639,
         "2": 2509,
@@ -2680,6 +3393,29 @@
       "missingItems": [
         "1B"
       ],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 91043,
         "2": 1594,
@@ -2768,6 +3504,29 @@
       "missingItems": [
         "1B"
       ],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 87663,
         "2": 1571,
@@ -2858,6 +3617,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 18180,
         "2": 2038,
@@ -2949,6 +3732,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 17655,
         "2": 1894,
@@ -3039,6 +3846,35 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 67,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 65954,
         "2": 2282,
@@ -3135,6 +3971,35 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 67,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 68931,
         "2": 2282,
@@ -3231,6 +4096,35 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 216,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 9072,
         "2": 490,
@@ -3326,6 +4220,35 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 216,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 10569,
         "2": 490,
@@ -3421,6 +4344,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 20551,
         "2": 812,
@@ -3517,6 +4464,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 20272,
         "2": 814,
@@ -3612,6 +4583,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 46522,
         "2": 322,
@@ -3703,6 +4698,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 46607,
         "2": 322,
@@ -3795,6 +4814,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 38953,
         "2": 5866,
@@ -3889,6 +4932,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 38819,
         "2": 5657,
@@ -3978,6 +5045,9 @@
         "15",
         "1C"
       ],
+      "falsePositiveItems": [],
+      "plausibleItems": [],
+      "implausibleItems": [],
       "itemChars": {},
       "flags": [
         "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -4034,6 +5104,9 @@
         "15",
         "1C"
       ],
+      "falsePositiveItems": [],
+      "plausibleItems": [],
+      "implausibleItems": [],
       "itemChars": {},
       "flags": [
         "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -4094,6 +5167,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 42362,
         "2": 2463,
@@ -4188,6 +5285,30 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 39500,
         "2": 2412,
@@ -4278,6 +5399,9 @@
         "15",
         "1C"
       ],
+      "falsePositiveItems": [],
+      "plausibleItems": [],
+      "implausibleItems": [],
       "itemChars": {},
       "flags": [
         "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -4334,6 +5458,9 @@
         "15",
         "1C"
       ],
+      "falsePositiveItems": [],
+      "plausibleItems": [],
+      "implausibleItems": [],
       "itemChars": {},
       "flags": [
         "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -4394,6 +5521,35 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 931,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 40226,
         "2": 8953,
@@ -4486,6 +5642,35 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 931,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 38759,
         "2": 8699,
@@ -4580,6 +5765,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 138929,
         "2": 67,
@@ -4677,6 +5886,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 135940,
         "2": 67,
@@ -4774,6 +6007,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 59304,
         "2": 1172,
@@ -4864,6 +6121,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 56702,
         "2": 1166,
@@ -4954,6 +6235,35 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 105,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 55744,
         "2": 982,
@@ -5052,6 +6362,35 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [
+        {
+          "item": "8",
+          "chars": 105,
+          "reason": "expected at least 4,000 chars"
+        }
+      ],
       "itemChars": {
         "1": 57757,
         "2": 1047,
@@ -5150,6 +6489,31 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "4A",
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 43406,
         "2": 979,
@@ -5244,6 +6608,31 @@
         "14"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "4A",
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 39912,
         "2": 952,
@@ -5338,6 +6727,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 70689,
         "2": 1770,
@@ -5428,6 +6841,30 @@
         "16"
       ],
       "missingItems": [],
+      "falsePositiveItems": [
+        "9"
+      ],
+      "plausibleItems": [
+        "1",
+        "1A",
+        "1B",
+        "2",
+        "3",
+        "5",
+        "7",
+        "7A",
+        "8",
+        "9A",
+        "9B",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "1C"
+      ],
+      "implausibleItems": [],
       "itemChars": {
         "1": 69962,
         "2": 1715,
@@ -5513,6 +6950,9 @@
         "15",
         "1C"
       ],
+      "falsePositiveItems": [],
+      "plausibleItems": [],
+      "implausibleItems": [],
       "itemChars": {},
       "flags": [
         "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -5569,6 +7009,9 @@
         "15",
         "1C"
       ],
+      "falsePositiveItems": [],
+      "plausibleItems": [],
+      "implausibleItems": [],
       "itemChars": {},
       "flags": [
         "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -5607,8 +7050,8 @@
         "targetParagraphs": 115,
         "added": 25,
         "removed": 8,
-        "changed": 46,
-        "unchanged": 44,
+        "changed": 47,
+        "unchanged": 43,
         "similarity": 0.727
       },
       "flags": []
@@ -5658,8 +7101,8 @@
         "targetParagraphs": 187,
         "added": 69,
         "removed": 68,
-        "changed": 52,
-        "unchanged": 66,
+        "changed": 54,
+        "unchanged": 64,
         "similarity": 0.585
       },
       "flags": []
@@ -5692,8 +7135,8 @@
         "targetParagraphs": 131,
         "added": 14,
         "removed": 12,
-        "changed": 47,
-        "unchanged": 70,
+        "changed": 48,
+        "unchanged": 69,
         "similarity": 0.847
       },
       "flags": []
@@ -5709,8 +7152,8 @@
         "targetParagraphs": 46,
         "added": 6,
         "removed": 4,
-        "changed": 14,
-        "unchanged": 26,
+        "changed": 15,
+        "unchanged": 25,
         "similarity": 0.834
       },
       "flags": []
@@ -5743,8 +7186,8 @@
         "targetParagraphs": 115,
         "added": 12,
         "removed": 18,
-        "changed": 49,
-        "unchanged": 54,
+        "changed": 50,
+        "unchanged": 53,
         "similarity": 0.769
       },
       "flags": []
@@ -5760,8 +7203,8 @@
         "targetParagraphs": 113,
         "added": 7,
         "removed": 9,
-        "changed": 38,
-        "unchanged": 68,
+        "changed": 39,
+        "unchanged": 67,
         "similarity": 0.884
       },
       "flags": []
@@ -5794,8 +7237,8 @@
         "targetParagraphs": 100,
         "added": 12,
         "removed": 15,
-        "changed": 40,
-        "unchanged": 48,
+        "changed": 41,
+        "unchanged": 47,
         "similarity": 0.779
       },
       "flags": []
@@ -5811,8 +7254,8 @@
         "targetParagraphs": 94,
         "added": 13,
         "removed": 11,
-        "changed": 49,
-        "unchanged": 32,
+        "changed": 50,
+        "unchanged": 31,
         "similarity": 0.746
       },
       "flags": []
@@ -5845,8 +7288,8 @@
         "targetParagraphs": 85,
         "added": 7,
         "removed": 5,
-        "changed": 18,
-        "unchanged": 60,
+        "changed": 19,
+        "unchanged": 59,
         "similarity": 0.89
       },
       "flags": []
@@ -5862,8 +7305,8 @@
         "targetParagraphs": 97,
         "added": 13,
         "removed": 6,
-        "changed": 45,
-        "unchanged": 39,
+        "changed": 48,
+        "unchanged": 36,
         "similarity": 0.82
       },
       "flags": []
@@ -5949,8 +7392,8 @@
         "targetParagraphs": 133,
         "added": 8,
         "removed": 4,
-        "changed": 18,
-        "unchanged": 107,
+        "changed": 19,
+        "unchanged": 106,
         "similarity": 0.92
       },
       "flags": []
@@ -5966,8 +7409,8 @@
         "targetParagraphs": 174,
         "added": 66,
         "removed": 73,
-        "changed": 55,
-        "unchanged": 53,
+        "changed": 62,
+        "unchanged": 46,
         "similarity": 0.544
       },
       "flags": []
@@ -5983,8 +7426,8 @@
         "targetParagraphs": 193,
         "added": 18,
         "removed": 18,
-        "changed": 49,
-        "unchanged": 126,
+        "changed": 87,
+        "unchanged": 88,
         "similarity": 0.862
       },
       "flags": []
@@ -6034,8 +7477,8 @@
         "targetParagraphs": 134,
         "added": 13,
         "removed": 3,
-        "changed": 18,
-        "unchanged": 103,
+        "changed": 19,
+        "unchanged": 102,
         "similarity": 0.878
       },
       "flags": []
@@ -6057,6 +7500,16 @@
       },
       "flags": [],
       "error": "Diff not_found on base: {\"reason\":\"Item \\\"1A\\\" was not found in this filing.\",\"available\":[]}"
+    }
+  ],
+  "issues": [
+    {
+      "ticker": "JPM",
+      "message": "Expected 2 recent 10-K filings; located 1."
+    },
+    {
+      "ticker": "XOM",
+      "message": "Expected 2 recent 10-K filings; located 0."
     }
   ]
 }
