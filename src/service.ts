@@ -29,10 +29,18 @@ export class FilingService {
 
   private async parse(ref: FilingRef): Promise<{ sections: Map<string, Section>; warnings: string[] }> {
     const hit = this.parsed.get(ref.url);
-    if (hit) return hit;
+    if (hit) {
+      this.parsed.delete(ref.url);
+      this.parsed.set(ref.url, hit);
+      return hit;
+    }
     const html = await this.client.fetchDocument(ref);
     const result = splitItems(htmlToLines(html), ref.form);
     this.parsed.set(ref.url, result);
+    if (this.parsed.size > 16) {
+      const oldest = this.parsed.keys().next().value;
+      if (oldest !== undefined) this.parsed.delete(oldest);
+    }
     return result;
   }
 
@@ -107,6 +115,7 @@ export class FilingService {
   /** Verbatim paragraphs matching a regex, with citations. Unknown item → not_found, never an empty list. */
   async search(ref: FilingRef, pattern: string, item?: string, limit = 20): Promise<SearchResult> {
     if (pattern.length > MAX_PATTERN_CHARS) throw new Error(`Pattern longer than ${MAX_PATTERN_CHARS} chars; simplify it.`);
+    if (hasNestedQuantifier(pattern)) throw new Error('Unsafe pattern: nested quantifiers such as "(a+)+" are not allowed.');
     let re: RegExp;
     try {
       re = new RegExp(pattern, 'i');
@@ -134,8 +143,64 @@ export class FilingService {
   }
 }
 
+function hasNestedQuantifier(pattern: string): boolean {
+  const groups: { containsQuantifier: boolean }[] = [];
+  let closedGroupContainsQuantifier = false;
+  for (let i = 0; i < pattern.length; i++) {
+    const ch = pattern[i];
+    if (ch === '\\') {
+      i++;
+      closedGroupContainsQuantifier = false;
+      continue;
+    }
+    if (ch === '[') {
+      for (i++; i < pattern.length; i++) {
+        if (pattern[i] === '\\') i++;
+        else if (pattern[i] === ']') break;
+      }
+      closedGroupContainsQuantifier = false;
+      continue;
+    }
+    if (ch === '(') {
+      groups.push({ containsQuantifier: false });
+      if (pattern[i + 1] === '?') i++;
+      closedGroupContainsQuantifier = false;
+      continue;
+    }
+    if (ch === ')') {
+      const closed = groups.pop();
+      closedGroupContainsQuantifier = closed?.containsQuantifier ?? false;
+      if (closedGroupContainsQuantifier) {
+        const parent = groups.at(-1);
+        if (parent) parent.containsQuantifier = true;
+      }
+      continue;
+    }
+
+    let isQuantifier = ch === '*' || ch === '+' || ch === '?';
+    if (ch === '{') {
+      const quantifier = /^\{\d+(?:,\d*)?\}/.exec(pattern.slice(i));
+      if (quantifier) {
+        isQuantifier = true;
+        i += quantifier[0].length - 1;
+      }
+    }
+    if (isQuantifier) {
+      if (closedGroupContainsQuantifier) return true;
+      const current = groups.at(-1);
+      if (current) current.containsQuantifier = true;
+    }
+    closedGroupContainsQuantifier = false;
+  }
+  return false;
+}
+
 export function cite(ref: FilingRef, section: Section, paragraph: number): Citation {
-  return { ...ref, item: section.item, itemTitle: section.title, paragraph };
+  return citeItem(ref, section.item, section.title, paragraph);
+}
+
+export function citeItem(ref: FilingRef, item: string, itemTitle: string, paragraph: number): Citation {
+  return { ...ref, item, itemTitle, paragraph };
 }
 
 function noItemsReason(warnings: string[]): string {

@@ -202,6 +202,42 @@ describe('FilingService', () => {
     const ref = await service.resolveFiling('1', '0000000001-25-000001');
     await expect(service.search(ref, '(')).rejects.toThrow(/Invalid pattern/);
   });
+
+  it('rejects regex patterns with nested quantifiers', async () => {
+    const ref = await service.resolveFiling('1', '0000000001-25-000001');
+    await expect(service.search(ref, '(a+)+')).rejects.toThrow(/nested quantifiers/i);
+    await expect(service.search(ref, String.raw`(a\+)+`)).resolves.toMatchObject({ status: 'ok' });
+  });
+
+  it('keeps only the 16 most recently parsed filings', async () => {
+    const fetches = new Map<string, number>();
+    const html = fx('acme-10k-2025.htm');
+    const client = new EdgarClient({
+      userAgent: 'LRU tests@example.com',
+      minIntervalMs: 0,
+      fetchImpl: async (input) => {
+        const url = String(input);
+        fetches.set(url, (fetches.get(url) ?? 0) + 1);
+        return new Response(html, { status: 200 });
+      },
+    });
+    const isolated = new FilingService(client);
+    const refs = Array.from({ length: 17 }, (_, index): FilingRef => ({
+      cik: '0000000001',
+      accession: `0000000001-25-${String(index).padStart(6, '0')}`,
+      form: '10-K',
+      filingDate: '2026-02-15',
+      url: `https://example.test/filing-${index}.htm`,
+    }));
+
+    for (const ref of refs) await isolated.listItems(ref);
+    await isolated.listItems(refs[0]!);
+    await isolated.listItems(refs[16]!);
+
+    expect(fetches.get(refs[0]!.url)).toBe(2);
+    expect(fetches.get(refs[16]!.url)).toBe(1);
+    expect([...fetches.values()].reduce((sum, count) => sum + count, 0)).toBe(18);
+  });
 });
 
 function serviceForDocuments(documents: { base: string; target: string }): { service: FilingService; refs: { base: FilingRef; target: FilingRef } } {

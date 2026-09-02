@@ -46,6 +46,7 @@ const call = async (name: string, arguments_: Record<string, unknown>): Promise<
   expect(result.structuredContent).toBeDefined();
   const structured = result.structuredContent as Record<string, any>;
   expect(structured).toEqual(parsed);
+  expect(text(result)).toBe(JSON.stringify(structured));
   return structured;
 };
 
@@ -93,6 +94,7 @@ describe('MCP surface', () => {
     expect(diff.status).toBe('ok');
     expect(diff.stats).toMatchObject({ added: 1, removed: 1, changed: 1, similarity: 0.827 });
     expect(diff.truncated).toBe(false);
+    expect(diff.changes.find((c: { type: string }) => c.type === 'changed')).not.toHaveProperty('wordDiff');
     const added = diff.changes.find((c: { type: string }) => c.type === 'added');
     expect(added.target.text).toMatch(/tariffs/);
   });
@@ -134,6 +136,7 @@ describe('MCP surface', () => {
       maxChanges: 2,
     });
     expect(diff.truncated).toBe(true);
+    expect(diff.truncatedReason).toMatch(/maxChanges=2/);
     expect(diff.changes).toHaveLength(2);
     for (const c of diff.changes) {
       for (const side of ['base', 'target'] as const) {
@@ -144,12 +147,14 @@ describe('MCP surface', () => {
 
   it('announces its rules to the client via instructions', async () => {
     expect(mcp.getInstructions()).toMatch(/verbatim/i);
+    expect(mcp.getInstructions()).toMatch(/maxParagraphs.*maxChanges.*maxChars/i);
   });
 
   it('returns verbatim paragraphs with per-paragraph citations', async () => {
     const r = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '1C', maxParagraphs: 2 });
     expect(r.status).toBe('ok');
     expect(r.truncated).toBe(true);
+    expect(r.truncatedReason).toMatch(/maxParagraphs=2/);
     expect(r.paragraphs[0].citation).toMatchObject({ accession: '0000000001-25-000001', item: '1C', paragraph: 0 });
     expect(r.paragraphs[0].text).toMatch(/^We maintain a cybersecurity risk management program/);
   });
@@ -167,5 +172,48 @@ describe('MCP surface', () => {
     expect(search.status).toBe('ok');
     expect(search.matches[0].citation).toMatchObject({ item: '1A', paragraph: 4 });
     expect(search.matches[0].text).toMatch(/tariffs/);
+    expect(search.truncated).toBe(false);
+  });
+
+  it('makes word-level diffs opt-in', async () => {
+    const diff = await call('diff_sections', {
+      cik: '1',
+      baseAccession: '0000000001-24-000001',
+      targetAccession: '0000000001-25-000001',
+      item: '1A',
+      includeWordDiff: true,
+    });
+    expect(diff.changes.find((c: { type: string }) => c.type === 'changed').wordDiff).toBeDefined();
+  });
+
+  it('drops trailing entries to stay within maxChars and reports truncation', async () => {
+    const section = await call('get_section', {
+      cik: '1',
+      accession: '0000000001-25-000001',
+      item: '1A',
+      maxChars: 500,
+    });
+    expect(JSON.stringify(section.paragraphs).length).toBeLessThanOrEqual(500);
+    expect(section).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=500/) });
+
+    const diff = await call('diff_sections', {
+      cik: '1',
+      baseAccession: '0000000001-24-000001',
+      targetAccession: '0000000001-25-000001',
+      item: '1A',
+      maxChars: 500,
+    });
+    expect(JSON.stringify(diff.changes).length).toBeLessThanOrEqual(500);
+    expect(diff).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=500/) });
+
+    const search = await call('search_filing', {
+      cik: '1',
+      accession: '0000000001-25-000001',
+      pattern: '.',
+      item: '1A',
+      maxChars: 500,
+    });
+    expect(JSON.stringify(search.matches).length).toBeLessThanOrEqual(500);
+    expect(search).toMatchObject({ truncated: true, truncatedReason: expect.stringMatching(/maxChars=500/) });
   });
 });

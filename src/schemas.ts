@@ -19,7 +19,7 @@ export const FilingRefSchema = z.object({
   accession: z.string(),
   form: z.string(),
   filingDate: z.string(),
-  reportDate: z.string().optional(),
+  reportDate: z.string().optional().describe('Present only when EDGAR provides a period-of-report date.'),
   url: z.string(),
 });
 
@@ -94,6 +94,7 @@ export type GetSectionOutput =
       title: string;
       totalParagraphs: number;
       truncated: boolean;
+      truncatedReason?: string;
       warnings: string[];
       paragraphs: z.infer<typeof CitedParagraphSchema>[];
     }
@@ -103,19 +104,20 @@ export const GetSectionOutputSchema = z.object({
   status: z.enum(['ok', 'not_found']),
   filing: FilingRefSchema,
   item: z.string(),
-  title: z.string().optional(),
-  totalParagraphs: z.number().int().nonnegative().optional(),
-  truncated: z.boolean().optional(),
-  warnings: z.array(z.string()).optional(),
-  paragraphs: z.array(CitedParagraphSchema).optional(),
-  reason: z.string().optional(),
-  availableItems: z.array(z.string()).optional(),
+  title: z.string().optional().describe('Present only when status is "ok".'),
+  totalParagraphs: z.number().int().nonnegative().optional().describe('Present only when status is "ok".'),
+  truncated: z.boolean().optional().describe('Present only when status is "ok".'),
+  truncatedReason: z.string().optional().describe('Present only when status is "ok" and truncated is true.'),
+  warnings: z.array(z.string()).optional().describe('Present only when status is "ok".'),
+  paragraphs: z.array(CitedParagraphSchema).optional().describe('Present only when status is "ok".'),
+  reason: z.string().optional().describe('Present only when status is "not_found".'),
+  availableItems: z.array(z.string()).optional().describe('Present only when status is "not_found".'),
 });
 
 const WordEditSchema = z.object({
   value: z.string(),
-  added: z.boolean().optional(),
-  removed: z.boolean().optional(),
+  added: z.boolean().optional().describe('Present only when this word edit adds text.'),
+  removed: z.boolean().optional().describe('Present only when this word edit removes text.'),
 });
 
 const DiffStatsSchema = z.object({
@@ -142,7 +144,7 @@ const CitedParagraphChangeSchema = z.discriminatedUnion('type', [
     base: CitedChangeSideSchema,
     target: CitedChangeSideSchema,
     similarity: z.number().min(0).max(1),
-    wordDiff: z.array(WordEditSchema),
+    wordDiff: z.array(WordEditSchema).optional().describe('Present only for type "changed" when includeWordDiff is true.'),
   }),
   z.object({ type: z.literal('unchanged'), base: CitedChangeSideSchema, target: CitedChangeSideSchema }),
 ]);
@@ -158,22 +160,24 @@ export type DiffSectionsResult =
       changes: z.infer<typeof CitedParagraphChangeSchema>[];
       warnings: string[];
       truncated: boolean;
+      truncatedReason?: string;
     }
   | Extract<DiffResult, { status: 'not_found' }>;
 export type DiffSectionsOutput = DiffSectionsResult;
 
 export const DiffSectionsOutputSchema = z.object({
   status: z.enum(['ok', 'not_found']),
-  item: z.string().optional(),
-  title: z.string().optional(),
-  base: FilingRefSchema.optional(),
-  target: FilingRefSchema.optional(),
-  stats: DiffStatsSchema.optional(),
-  changes: z.array(CitedParagraphChangeSchema).optional(),
-  warnings: z.array(z.string()).optional(),
-  truncated: z.boolean().optional(),
-  side: z.enum(['base', 'target']).optional(),
-  detail: SectionNotFoundSchema.optional(),
+  item: z.string().optional().describe('Present only when status is "ok".'),
+  title: z.string().optional().describe('Present only when status is "ok".'),
+  base: FilingRefSchema.optional().describe('Present only when status is "ok".'),
+  target: FilingRefSchema.optional().describe('Present only when status is "ok".'),
+  stats: DiffStatsSchema.optional().describe('Present only when status is "ok".'),
+  changes: z.array(CitedParagraphChangeSchema).optional().describe('Present only when status is "ok".'),
+  warnings: z.array(z.string()).optional().describe('Present only when status is "ok".'),
+  truncated: z.boolean().optional().describe('Present only when status is "ok".'),
+  truncatedReason: z.string().optional().describe('Present only when status is "ok" and truncated is true.'),
+  side: z.enum(['base', 'target']).optional().describe('Present only when status is "not_found".'),
+  detail: SectionNotFoundSchema.optional().describe('Present only when status is "not_found".'),
 });
 
 const ItemDiffOverviewSchema = z.object({ item: z.string(), title: z.string(), stats: DiffStatsSchema });
@@ -182,26 +186,30 @@ const FilingItemOverviewSchema = z.object({ item: z.string(), title: z.string() 
 export type DiffAllItemsOutput = DiffAllResult;
 export const DiffAllItemsOutputSchema = z.object({
   status: z.enum(['ok', 'not_found']),
-  base: FilingRefSchema.optional(),
-  target: FilingRefSchema.optional(),
-  items: z.array(ItemDiffOverviewSchema).optional(),
-  onlyInBase: z.array(FilingItemOverviewSchema).optional(),
-  onlyInTarget: z.array(FilingItemOverviewSchema).optional(),
-  warnings: z.array(z.string()).optional(),
-  side: z.enum(['base', 'target']).optional(),
-  reason: z.string().optional(),
-  filing: FilingRefSchema.optional(),
+  base: FilingRefSchema.optional().describe('Present only when status is "ok".'),
+  target: FilingRefSchema.optional().describe('Present only when status is "ok".'),
+  items: z.array(ItemDiffOverviewSchema).optional().describe('Present only when status is "ok".'),
+  onlyInBase: z.array(FilingItemOverviewSchema).optional().describe('Present only when status is "ok".'),
+  onlyInTarget: z.array(FilingItemOverviewSchema).optional().describe('Present only when status is "ok".'),
+  warnings: z.array(z.string()).optional().describe('Present only when status is "ok".'),
+  side: z.enum(['base', 'target']).optional().describe('Present only when status is "not_found".'),
+  reason: z.string().optional().describe('Present only when status is "not_found".'),
+  filing: FilingRefSchema.optional().describe('Present only when status is "not_found".'),
 });
 
-export type SearchFilingOutput = SearchResult;
+export type SearchFilingOutput =
+  | (Extract<SearchResult, { status: 'ok' }> & { truncated: boolean; truncatedReason?: string })
+  | Extract<SearchResult, { status: 'not_found' }>;
 export const SearchFilingOutputSchema = z.object({
   status: z.enum(['ok', 'not_found']),
   filing: FilingRefSchema,
-  matches: z.array(CitedParagraphSchema).optional(),
-  warnings: z.array(z.string()).optional(),
-  item: z.string().optional(),
-  reason: z.string().optional(),
-  availableItems: z.array(z.string()).optional(),
+  matches: z.array(CitedParagraphSchema).optional().describe('Present only when status is "ok".'),
+  warnings: z.array(z.string()).optional().describe('Present only when status is "ok".'),
+  truncated: z.boolean().optional().describe('Present only when status is "ok".'),
+  truncatedReason: z.string().optional().describe('Present only when status is "ok" and truncated is true.'),
+  item: z.string().optional().describe('Present only when status is "not_found".'),
+  reason: z.string().optional().describe('Present only when status is "not_found".'),
+  availableItems: z.array(z.string()).optional().describe('Present only when status is "not_found".'),
 });
 
 type Assert<T extends true> = T;

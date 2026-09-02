@@ -59,12 +59,12 @@ These are the same rules a careful research desk applies to a junior analyst. Th
 | `resolve_company` | Ticker (exact) or name (substring) → CIK candidates. `[]` if nothing matches. |
 | `list_filings` | Recent filings for a CIK, filterable by form (`10-K`, `10-Q`). |
 | `list_items` | Items found *with confidence* in a filing, with sizes. Call this when unsure what exists. |
-| `get_section` | Verbatim paragraphs of one Item, each with a citation. `not_found` + `availableItems` otherwise. |
-| `diff_sections` | Same Item across two filings → `added` / `removed` / `changed` paragraphs, each side cited, word-level edits for `changed`, stats. |
+| `get_section` | Verbatim, cited paragraphs for one Item. `maxParagraphs` and `maxChars` bound large results; `not_found` + `availableItems` otherwise. |
+| `diff_sections` | Same Item across two filings → cited changes and stats. Word-level edits are opt-in with `includeWordDiff`; `maxChanges` and `maxChars` bound large results. |
 | `diff_all_items` | Per-Item change statistics across two filings, most-changed first, plus Items found on only one side. No paragraphs. |
 | `search_filing` | Regex over a filing (or one Item) → matching paragraphs, verbatim, cited. |
 
-All seven carry MCP annotations `readOnlyHint: true, destructiveHint: false, idempotentHint: true`. Every tool declares an MCP `outputSchema` and returns `structuredContent` identical to its text JSON. Every paragraph on every tool uses the same citation shape:
+All seven carry four MCP annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, and `openWorldHint: true`. Every tool declares an MCP `outputSchema` and returns `structuredContent` identical to its text JSON. Every paragraph on every tool uses the same citation shape:
 
 ```json
 { "cik": "0000320193", "accession": "0000320193-24-000123", "form": "10-K", "filingDate": "2024-11-01",

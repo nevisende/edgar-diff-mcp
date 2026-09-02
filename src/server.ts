@@ -1,7 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import type { EdgarClient } from './edgar/client.js';
-import { MAX_PATTERN_CHARS, cite, type FilingService } from './service.js';
+import { MAX_PATTERN_CHARS, cite, citeItem, type FilingService } from './service.js';
 import {
   DiffAllItemsOutputSchema,
   DiffSectionsOutputSchema,
@@ -35,12 +35,13 @@ import type { FilingRef, ParagraphChange, Section } from './types.js';
 const INSTRUCTIONS = `edgar-diff-mcp is read-only and returns SEC filing text verbatim.
 Quote only what a tool returns and keep its citation (accession, item, paragraph, url) next to the quote.
 If a tool returns status "not_found", say so and use availableItems — do not infer the missing section.
+Large Items are truncated honestly. Retry with higher maxParagraphs/maxChanges and maxChars (up to 400000) to retrieve a larger page.
 Typical flow: resolve_company → list_filings (form "10-K") → diff_all_items → diff_sections(item "1A") or get_section.`;
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true } as const;
 
 const json = <T extends Record<string, unknown>>(value: T) => ({
-  content: [{ type: 'text' as const, text: JSON.stringify(value, null, 2) }],
+  content: [{ type: 'text' as const, text: JSON.stringify(value) }],
   structuredContent: value,
 });
 const fail = (e: unknown) => ({ isError: true, content: [{ type: 'text' as const, text: e instanceof Error ? e.message : String(e) }] });
@@ -60,10 +61,12 @@ function citeChange(
   c: ParagraphChange,
   base: FilingRef,
   target: FilingRef,
-  section: Section,
+  item: string,
+  title: string,
+  includeWordDiff: boolean,
 ): Extract<DiffSectionsResult, { status: 'ok' }>['changes'][number] {
-  const citedBase = c.base ? { ...c.base, citation: cite(base, section, c.base.paragraph) } : undefined;
-  const citedTarget = c.target ? { ...c.target, citation: cite(target, section, c.target.paragraph) } : undefined;
+  const citedBase = c.base ? { ...c.base, citation: citeItem(base, item, title, c.base.paragraph) } : undefined;
+  const citedTarget = c.target ? { ...c.target, citation: citeItem(target, item, title, c.target.paragraph) } : undefined;
   switch (c.type) {
     case 'added':
       if (!citedTarget) throw new Error('Internal: added change is missing its target paragraph.');
@@ -75,12 +78,37 @@ function citeChange(
       if (!citedBase || !citedTarget || c.similarity === undefined || !c.wordDiff) {
         throw new Error('Internal: changed paragraph is missing diff details.');
       }
-      return { type: 'changed', base: citedBase, target: citedTarget, similarity: c.similarity, wordDiff: c.wordDiff };
+      return {
+        type: 'changed',
+        base: citedBase,
+        target: citedTarget,
+        similarity: c.similarity,
+        ...(includeWordDiff ? { wordDiff: c.wordDiff } : {}),
+      };
     case 'unchanged':
       if (!citedBase || !citedTarget) throw new Error('Internal: unchanged paragraph is missing one side.');
       return { type: 'unchanged', base: citedBase, target: citedTarget };
   }
 }
+
+function truncateList<T>(entries: T[], maxEntries: number, maxEntriesName: string, maxChars: number): { entries: T[]; truncated: boolean; truncatedReason?: string } {
+  const kept = entries.slice(0, maxEntries);
+  const reasons: string[] = [];
+  if (kept.length < entries.length) reasons.push(`${maxEntriesName}=${maxEntries}`);
+  let charTruncated = false;
+  while (JSON.stringify(kept).length > maxChars && kept.length > 0) {
+    kept.pop();
+    charTruncated = true;
+  }
+  if (charTruncated) reasons.push(`maxChars=${maxChars}`);
+  return {
+    entries: kept,
+    truncated: reasons.length > 0,
+    ...(reasons.length > 0 ? { truncatedReason: `Trailing entries were omitted to satisfy ${reasons.join(' and ')}.` } : {}),
+  };
+}
+
+const MaxCharsSchema = z.number().int().min(2).max(400_000).optional().describe('Maximum characters in the serialized paragraph/change/match list (default 60000). Truncation is reported.');
 
 export function buildServer(client: EdgarClient, service: FilingService): McpServer {
   const server = new McpServer({ name: 'edgar-diff-mcp', version: '0.1.0' }, { instructions: INSTRUCTIONS });
@@ -154,31 +182,39 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     {
       title: 'Get section (verbatim)',
       description:
-        'Return the verbatim paragraphs of one Item from a filing, each with a citation. If the Item cannot be located the result is status "not_found" together with the Items that are available — never a guess. Short placeholder bodies ("None.") are returned with a warning.',
+        'Return the verbatim paragraphs of one Item from a filing, each with a citation. If the Item cannot be located the result is status "not_found" together with the Items that are available — never a guess. Short placeholder bodies ("None.") are returned with a warning. Large results are truncated according to maxParagraphs and maxChars.',
       inputSchema: {
         cik: CikSchema,
         accession: AccessionSchema,
         item: ItemSchema,
         maxParagraphs: z.number().int().min(1).max(2000).optional().describe('Truncate output after N paragraphs (default 400). Truncation is reported.'),
+        maxChars: MaxCharsSchema,
       },
       outputSchema: GetSectionOutputSchema,
       annotations: READ_ONLY,
     },
-    async ({ cik, accession, item, maxParagraphs }) => {
+    async ({ cik, accession, item, maxParagraphs, maxChars }) => {
       try {
         const ref = await service.resolveFiling(cik, accession);
         const r = await service.getSection(ref, item);
         if (r.status !== 'ok') return json(r satisfies GetSectionOutput);
         const cap = maxParagraphs ?? 400;
+        const limited = truncateList(
+          r.section.paragraphs.map((p) => withCitation(ref, r.section, p.index, p.text)),
+          cap,
+          'maxParagraphs',
+          maxChars ?? 60_000,
+        );
         return json({
           status: 'ok',
           filing: ref,
           item: r.section.item,
           title: r.section.title,
           totalParagraphs: r.section.paragraphs.length,
-          truncated: r.section.paragraphs.length > cap,
+          truncated: limited.truncated,
+          ...(limited.truncatedReason ? { truncatedReason: limited.truncatedReason } : {}),
           warnings: r.section.warnings,
-          paragraphs: r.section.paragraphs.slice(0, cap).map((p) => withCitation(ref, r.section, p.index, p.text)),
+          paragraphs: limited.entries,
         } satisfies GetSectionOutput);
       } catch (e) {
         return fail(e);
@@ -217,30 +253,38 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     {
       title: 'Diff one Item across two filings',
       description:
-        'Compare the same Item (e.g. "1A" Risk Factors) between a base filing and a target filing. Returns added, removed and changed paragraphs — verbatim, each with a citation on its side — plus summary stats. Changed paragraphs include a word-level edit script. Unchanged paragraphs are omitted unless includeUnchanged is true.',
+        'Compare the same Item (e.g. "1A" Risk Factors) between a base filing and a target filing. Returns added, removed and changed paragraphs — verbatim, each with a citation on its side — plus summary stats. Word-level edit scripts are omitted by default; set includeWordDiff to true to include them. Unchanged paragraphs are omitted unless includeUnchanged is true. Large results are truncated according to maxChanges and maxChars.',
       inputSchema: {
         cik: CikSchema,
         baseAccession: AccessionSchema.describe('Older filing'),
         targetAccession: AccessionSchema.describe('Newer filing'),
         item: ItemSchema,
         includeUnchanged: z.boolean().optional(),
+        includeWordDiff: z.boolean().optional().describe('Include word-level edit scripts for changed paragraphs (default false).'),
         maxChanges: z.number().int().min(1).max(1000).optional().describe('Truncate change list after N entries (default 200). Truncation is reported.'),
+        maxChars: MaxCharsSchema,
       },
       outputSchema: DiffSectionsOutputSchema,
       annotations: READ_ONLY,
     },
-    async ({ cik, baseAccession, targetAccession, item, includeUnchanged, maxChanges }) => {
+    async ({ cik, baseAccession, targetAccession, item, includeUnchanged, includeWordDiff, maxChanges, maxChars }) => {
       try {
         const base = await service.resolveFiling(cik, baseAccession);
         const target = await service.resolveFiling(cik, targetAccession);
         const d = await service.diff(base, target, item, includeUnchanged ?? false);
         if (d.status !== 'ok') return json(d satisfies DiffSectionsOutput);
         const cap = maxChanges ?? 200;
-        const section: Section = { item: d.item, title: d.title, paragraphs: [], charCount: 0, warnings: [] };
+        const limited = truncateList(
+          d.changes.map((c) => citeChange(c, base, target, d.item, d.title, includeWordDiff ?? false)),
+          cap,
+          'maxChanges',
+          maxChars ?? 60_000,
+        );
         return json({
           ...d,
-          truncated: d.changes.length > cap,
-          changes: d.changes.slice(0, cap).map((c) => citeChange(c, base, target, section)),
+          truncated: limited.truncated,
+          ...(limited.truncatedReason ? { truncatedReason: limited.truncatedReason } : {}),
+          changes: limited.entries,
         } satisfies DiffSectionsOutput);
       } catch (e) {
         return fail(e);
@@ -252,21 +296,30 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     'search_filing',
     {
       title: 'Search a filing (verbatim matches)',
-      description: `Regex search across a filing (or one Item). Returns the full verbatim paragraph for each match with a citation. Case-insensitive; pattern ≤ ${MAX_PATTERN_CHARS} chars. Unknown item → status "not_found".`,
+      description: `Regex search across a filing (or one Item). Returns the full verbatim paragraph for each match with a citation. Case-insensitive; pattern ≤ ${MAX_PATTERN_CHARS} chars. Unknown item → status "not_found". Large results are truncated according to maxChars.`,
       inputSchema: {
         cik: CikSchema,
         accession: AccessionSchema,
         pattern: z.string().min(1).max(MAX_PATTERN_CHARS).describe('JavaScript regular expression, e.g. "tariff|export control"'),
         item: ItemSchema.optional(),
         limit: z.number().int().min(1).max(200).optional(),
+        maxChars: MaxCharsSchema,
       },
       outputSchema: SearchFilingOutputSchema,
       annotations: READ_ONLY,
     },
-    async ({ cik, accession, pattern, item, limit }) => {
+    async ({ cik, accession, pattern, item, limit, maxChars }) => {
       try {
         const ref = await service.resolveFiling(cik, accession);
-        const output: SearchFilingOutput = await service.search(ref, pattern, item, limit ?? 20);
+        const result = await service.search(ref, pattern, item, limit ?? 20);
+        if (result.status !== 'ok') return json(result satisfies SearchFilingOutput);
+        const limited = truncateList(result.matches, result.matches.length, 'limit', maxChars ?? 60_000);
+        const output: SearchFilingOutput = {
+          ...result,
+          matches: limited.entries,
+          truncated: limited.truncated,
+          ...(limited.truncatedReason ? { truncatedReason: limited.truncatedReason } : {}),
+        };
         return json(output);
       } catch (e) {
         return fail(e);
