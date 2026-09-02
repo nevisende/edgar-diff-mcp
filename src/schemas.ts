@@ -94,6 +94,7 @@ export type GetSectionOutput =
       title: string;
       totalParagraphs: number;
       truncated: boolean;
+      truncatedReason?: string;
       warnings: string[];
       paragraphs: z.infer<typeof CitedParagraphSchema>[];
     }
@@ -106,6 +107,7 @@ export const GetSectionOutputSchema = z.object({
   title: z.string().optional(),
   totalParagraphs: z.number().int().nonnegative().optional(),
   truncated: z.boolean().optional(),
+  truncatedReason: z.string().optional(),
   warnings: z.array(z.string()).optional(),
   paragraphs: z.array(CitedParagraphSchema).optional(),
   reason: z.string().optional(),
@@ -142,7 +144,7 @@ const CitedParagraphChangeSchema = z.discriminatedUnion('type', [
     base: CitedChangeSideSchema,
     target: CitedChangeSideSchema,
     similarity: z.number().min(0).max(1),
-    wordDiff: z.array(WordEditSchema),
+    wordDiff: z.array(WordEditSchema).optional(),
   }),
   z.object({ type: z.literal('unchanged'), base: CitedChangeSideSchema, target: CitedChangeSideSchema }),
 ]);
@@ -158,6 +160,7 @@ export type DiffSectionsResult =
       changes: z.infer<typeof CitedParagraphChangeSchema>[];
       warnings: string[];
       truncated: boolean;
+      truncatedReason?: string;
     }
   | Extract<DiffResult, { status: 'not_found' }>;
 export type DiffSectionsOutput = DiffSectionsResult;
@@ -172,6 +175,7 @@ export const DiffSectionsOutputSchema = z.object({
   changes: z.array(CitedParagraphChangeSchema).optional(),
   warnings: z.array(z.string()).optional(),
   truncated: z.boolean().optional(),
+  truncatedReason: z.string().optional(),
   side: z.enum(['base', 'target']).optional(),
   detail: SectionNotFoundSchema.optional(),
 });
@@ -193,12 +197,16 @@ export const DiffAllItemsOutputSchema = z.object({
   filing: FilingRefSchema.optional(),
 });
 
-export type SearchFilingOutput = SearchResult;
+export type SearchFilingOutput =
+  | (Extract<SearchResult, { status: 'ok' }> & { truncated: boolean; truncatedReason?: string })
+  | Extract<SearchResult, { status: 'not_found' }>;
 export const SearchFilingOutputSchema = z.object({
   status: z.enum(['ok', 'not_found']),
   filing: FilingRefSchema,
   matches: z.array(CitedParagraphSchema).optional(),
   warnings: z.array(z.string()).optional(),
+  truncated: z.boolean().optional(),
+  truncatedReason: z.string().optional(),
   item: z.string().optional(),
   reason: z.string().optional(),
   availableItems: z.array(z.string()).optional(),
