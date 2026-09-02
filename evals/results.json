@@ -1,5 +1,5 @@
 {
-  "runDate": "2026-09-02T19:39:13.300Z",
+  "runDate": "2026-09-02T19:51:50.879Z",
   "corpus": [
     "AAPL",
     "MSFT",
@@ -5592,7 +5592,7 @@
         "removed": 18,
         "changed": 51,
         "unchanged": 46,
-        "similarity": 0.4
+        "similarity": 0.762
       },
       "flags": []
     },
@@ -5609,7 +5609,7 @@
         "removed": 8,
         "changed": 46,
         "unchanged": 44,
-        "similarity": 0.383
+        "similarity": 0.727
       },
       "flags": []
     },
@@ -5626,7 +5626,7 @@
         "removed": 23,
         "changed": 52,
         "unchanged": 147,
-        "similarity": 0.626
+        "similarity": 0.81
       },
       "flags": []
     },
@@ -5643,7 +5643,7 @@
         "removed": 5,
         "changed": 26,
         "unchanged": 118,
-        "similarity": 0.792
+        "similarity": 0.939
       },
       "flags": []
     },
@@ -5660,7 +5660,7 @@
         "removed": 68,
         "changed": 52,
         "unchanged": 66,
-        "similarity": 0.353
+        "similarity": 0.585
       },
       "flags": []
     },
@@ -5677,7 +5677,7 @@
         "removed": 13,
         "changed": 84,
         "unchanged": 257,
-        "similarity": 0.726
+        "similarity": 0.932
       },
       "flags": []
     },
@@ -5694,7 +5694,7 @@
         "removed": 12,
         "changed": 47,
         "unchanged": 70,
-        "similarity": 0.534
+        "similarity": 0.847
       },
       "flags": []
     },
@@ -5711,7 +5711,7 @@
         "removed": 4,
         "changed": 14,
         "unchanged": 26,
-        "similarity": 0.565
+        "similarity": 0.834
       },
       "flags": []
     },
@@ -5728,7 +5728,7 @@
         "removed": 8,
         "changed": 16,
         "unchanged": 16,
-        "similarity": 0.4
+        "similarity": 0.73
       },
       "flags": []
     },
@@ -5745,7 +5745,7 @@
         "removed": 18,
         "changed": 49,
         "unchanged": 54,
-        "similarity": 0.446
+        "similarity": 0.769
       },
       "flags": []
     },
@@ -5762,7 +5762,7 @@
         "removed": 9,
         "changed": 38,
         "unchanged": 68,
-        "similarity": 0.591
+        "similarity": 0.884
       },
       "flags": []
     },
@@ -5779,7 +5779,7 @@
         "removed": 5,
         "changed": 45,
         "unchanged": 56,
-        "similarity": 0.5
+        "similarity": 0.839
       },
       "flags": []
     },
@@ -5796,7 +5796,7 @@
         "removed": 15,
         "changed": 40,
         "unchanged": 48,
-        "similarity": 0.466
+        "similarity": 0.779
       },
       "flags": []
     },
@@ -5813,7 +5813,7 @@
         "removed": 11,
         "changed": 49,
         "unchanged": 32,
-        "similarity": 0.34
+        "similarity": 0.746
       },
       "flags": []
     },
@@ -5830,7 +5830,7 @@
         "removed": 8,
         "changed": 33,
         "unchanged": 106,
-        "similarity": 0.707
+        "similarity": 0.898
       },
       "flags": []
     },
@@ -5847,7 +5847,7 @@
         "removed": 5,
         "changed": 18,
         "unchanged": 60,
-        "similarity": 0.706
+        "similarity": 0.89
       },
       "flags": []
     },
@@ -5864,7 +5864,7 @@
         "removed": 6,
         "changed": 45,
         "unchanged": 39,
-        "similarity": 0.402
+        "similarity": 0.82
       },
       "flags": []
     },
@@ -5881,7 +5881,7 @@
         "removed": 3,
         "changed": 4,
         "unchanged": 106,
-        "similarity": 0.938
+        "similarity": 0.966
       },
       "flags": []
     },
@@ -5916,7 +5916,7 @@
         "removed": 16,
         "changed": 48,
         "unchanged": 22,
-        "similarity": 0.256
+        "similarity": 0.722
       },
       "flags": []
     },
@@ -5951,7 +5951,7 @@
         "removed": 4,
         "changed": 18,
         "unchanged": 107,
-        "similarity": 0.805
+        "similarity": 0.92
       },
       "flags": []
     },
@@ -5968,7 +5968,7 @@
         "removed": 73,
         "changed": 55,
         "unchanged": 53,
-        "similarity": 0.293
+        "similarity": 0.544
       },
       "flags": []
     },
@@ -5985,7 +5985,7 @@
         "removed": 18,
         "changed": 49,
         "unchanged": 126,
-        "similarity": 0.653
+        "similarity": 0.862
       },
       "flags": []
     },
@@ -6002,7 +6002,7 @@
         "removed": 17,
         "changed": 54,
         "unchanged": 73,
-        "similarity": 0.361
+        "similarity": 0.582
       },
       "flags": []
     },
@@ -6019,7 +6019,7 @@
         "removed": 88,
         "changed": 90,
         "unchanged": 116,
-        "similarity": 0.395
+        "similarity": 0.629
       },
       "flags": []
     },
@@ -6036,7 +6036,7 @@
         "removed": 3,
         "changed": 18,
         "unchanged": 103,
-        "similarity": 0.769
+        "similarity": 0.878
       },
       "flags": []
     },

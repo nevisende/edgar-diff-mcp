@@ -21,6 +21,7 @@ export function diffSections(base: Section, target: Section, baseRef: FilingRef,
   const parts = diffArrays(baseNorm, targetNorm);
 
   const changes: ParagraphChange[] = [];
+  let changedSimilarity = 0;
   let bi = 0;
   let ti = 0;
   let pendingRemoved: number[] = [];
@@ -55,6 +56,7 @@ export function diffSections(base: Section, target: Section, baseRef: FilingRef,
       const bText = base.paragraphs[r]?.text ?? '';
       if (m) {
         const tText = target.paragraphs[m.a]?.text ?? '';
+        changedSimilarity += m.s;
         emitted.push({
           type: 'changed',
           base: { paragraph: r, text: bText },
@@ -113,7 +115,7 @@ export function diffSections(base: Section, target: Section, baseRef: FilingRef,
       removed: count('removed'),
       changed: count('changed'),
       unchanged,
-      similarity: Number((unchanged / denom).toFixed(3)),
+      similarity: Number(((unchanged + changedSimilarity) / denom).toFixed(3)),
     },
     changes,
     warnings: [...new Set([...base.warnings, ...target.warnings])],

@@ -6,6 +6,15 @@ const ref = (n: number): FilingRef => ({ cik: '1', accession: `0000000001-2${n}-
 const sec = (...texts: string[]): Section => ({ item: '1A', title: 'Risk Factors', paragraphs: texts.map((text, index) => ({ index, text })), charCount: 0, warnings: [] });
 
 describe('greedy pairing inside one removed/added run', () => {
+  it('weights a single changed paragraph by Dice while keeping identical at 1 and disjoint at 0', () => {
+    const base = 'During fiscal year 2024 we continued to invest in our products services employees operations supply chain and long term strategic growth initiatives.';
+    const target = 'During fiscal year 2025 we continued to invest in our products services employees operations supply chain and long term strategic growth initiatives.';
+
+    expect(diffSections(sec(base), sec(target), ref(4), ref(5)).stats.similarity).toBeCloseTo(0.905, 3);
+    expect(diffSections(sec(base), sec(base), ref(4), ref(5)).stats.similarity).toBe(1);
+    expect(diffSections(sec('alpha beta gamma'), sec('delta epsilon zeta'), ref(4), ref(5)).stats.similarity).toBe(0);
+  });
+
   it('pairs a 2×2 run by best similarity, not by position', () => {
     const base = sec('same', 'Our supply chain depends on two contract manufacturers in Asia.', 'We face intense competition from established automation vendors.', 'same2');
     const target = sec('same', 'We face intense competition from established automation vendors and start-ups.', 'Our supply chain depends on three contract manufacturers in Asia and Mexico.', 'same2');

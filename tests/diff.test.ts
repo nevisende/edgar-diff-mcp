@@ -34,6 +34,7 @@ describe('diffSections on Risk Factors', () => {
     expect(d.stats.added).toBe(1);
     expect(d.stats.changed).toBe(1);
     expect(d.stats.unchanged).toBe(d.stats.baseParagraphs - 2);
+    expect(d.stats.similarity).toBe(0.827);
   });
 
   it('returns verbatim text with paragraph indices on both sides', () => {

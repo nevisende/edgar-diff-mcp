@@ -77,7 +77,7 @@ export interface DiffStats {
   removed: number;
   changed: number;
   unchanged: number;
-  /** unchanged / max(base, target). 1 means identical after normalisation (case, punctuation, whitespace). */
+  /** Weighted paragraph similarity: unchanged count 1, changed count their Dice score, added/removed count 0. */
   similarity: number;
 }
 

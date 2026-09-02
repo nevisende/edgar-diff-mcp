@@ -93,7 +93,7 @@ describe('FilingService', () => {
     const d = await service.diff(base, target, 'item 1a');
     expect(d.status).toBe('ok');
     if (d.status === 'ok') {
-      expect(d.stats).toMatchObject({ added: 1, removed: 1, changed: 1 });
+      expect(d.stats).toMatchObject({ added: 1, removed: 1, changed: 1, similarity: 0.827 });
       expect(d.changes.every((c) => c.type !== 'unchanged')).toBe(true);
     }
   });
@@ -108,7 +108,8 @@ describe('FilingService', () => {
     expect(d).toMatchObject({ status: 'ok', base, target, onlyInBase: [], onlyInTarget: [] });
     expect(d.items.map((entry) => entry.item)).toEqual(['7', '1A', '1', '1B', '1C']);
     expect(d.items.map((entry) => entry.stats.similarity)).toEqual([...d.items.map((entry) => entry.stats.similarity)].sort((a, b) => a - b));
-    expect(d.items.find((entry) => entry.item === '1A')?.stats).toMatchObject({ added: 1, removed: 1, changed: 1 });
+    expect(d.items.find((entry) => entry.item === '7')?.stats.similarity).toBe(0.799);
+    expect(d.items.find((entry) => entry.item === '1A')?.stats).toMatchObject({ added: 1, removed: 1, changed: 1, similarity: 0.827 });
     expect(Object.keys(d.items[0] ?? {}).sort()).toEqual(['item', 'stats', 'title']);
     expect(d.items.every((entry) => !('changes' in entry))).toBe(true);
   });

@@ -66,7 +66,7 @@ export class FilingService {
     return { status: 'ok', ...(includeUnchanged ? d : onlyChanges(d)) };
   }
 
-  /** Per-Item statistics across two filings. Paragraph text stays in diff(). */
+  /** Per-Item statistics across two filings, sorted by weighted similarity. Paragraph text stays in diff(). */
   async diffAll(base: FilingRef, target: FilingRef): Promise<DiffAllResult> {
     const baseParsed = await this.parse(base);
     if (baseParsed.sections.size === 0) {

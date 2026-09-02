@@ -115,7 +115,7 @@ harness does not award partial credit for nearby text.
 Parser fixes moved the result from 892/1090 (81.8%) to 980/1090 (89.9%). AMZN, GOOGL, CVX,
 PFE, DIS, NFLX, COST, UNH, HD, PLD and CRM gained expected Items. MSFT exposed a different
 error: repeated running headers produced four-paragraph fake candidates and Item 1A similarity
-of 0.000. Removing that page furniture raised the measured similarity to 0.383.
+of 0.000. Removing that page furniture raised the measured similarity to 0.727.
 
 ## The diff
 
@@ -123,6 +123,8 @@ Paragraph-level LCS (`diff.diffArrays` over normalised text) gives unchanged / r
 runs. Inside each adjacent removed+added run, paragraphs are paired greedily by Sørensen–Dice
 similarity over word bigrams (threshold 0.5) and reported as `changed` with a word-level edit
 script. Anything unpaired stays `removed` or `added`.
+Section similarity gives unchanged paragraphs a weight of 1, changed pairs their Dice
+similarity, and added or removed paragraphs a weight of 0.
 
 Why Dice over bigrams and not embeddings: it is deterministic, dependency-free, fast enough to
 run over an MD&A in milliseconds, and its failure mode (two heavily rewritten paragraphs

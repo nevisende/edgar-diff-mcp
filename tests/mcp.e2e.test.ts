@@ -91,7 +91,7 @@ describe('MCP surface', () => {
       item: '1A',
     });
     expect(diff.status).toBe('ok');
-    expect(diff.stats).toMatchObject({ added: 1, removed: 1, changed: 1 });
+    expect(diff.stats).toMatchObject({ added: 1, removed: 1, changed: 1, similarity: 0.827 });
     expect(diff.truncated).toBe(false);
     const added = diff.changes.find((c: { type: string }) => c.type === 'added');
     expect(added.target.text).toMatch(/tariffs/);
@@ -105,7 +105,7 @@ describe('MCP surface', () => {
     });
     expect(overview.status).toBe('ok');
     expect(overview.items.map((entry: { item: string }) => entry.item)).toEqual(['7', '1A', '1', '1B', '1C']);
-    expect(overview.items[0].stats.similarity).toBeLessThanOrEqual(overview.items[1].stats.similarity);
+    expect(overview.items.slice(0, 2).map((entry: { stats: { similarity: number } }) => entry.stats.similarity)).toEqual([0.799, 0.827]);
     expect(overview.onlyInBase).toEqual([]);
     expect(overview.onlyInTarget).toEqual([]);
     expect(JSON.stringify(overview)).not.toContain('changes');

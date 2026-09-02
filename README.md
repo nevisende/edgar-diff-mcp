@@ -11,7 +11,7 @@ Output of `npm run demo` (the bundled synthetic fixtures — see `tests/fixtures
 ```
 10-K 2025-02-15 → 10-K 2026-02-15
 Item 1A — Risk Factors
-paragraphs 7 → 7 · +1 -1 ~1 · similarity 0.714
+paragraphs 7 → 7 · +1 -1 ~1 · similarity 0.827
 
 - [base ¶3] The COVID-19 pandemic and related public health measures have in the past disrupted …
 
@@ -34,7 +34,7 @@ GE, Intel and McDonald's stay `not_found` on purpose: their 10-Ks use company-sp
 
 The same engine on Apple's real Item 1A:
 
-`10-K 2024-11-01 → 10-K 2025-10-31 · Item 1A · paragraphs 115 → 106 · +9 -18 ~51 · similarity 0.4`
+`10-K 2024-11-01 → 10-K 2025-10-31 · Item 1A · paragraphs 115 → 106 · +9 -18 ~51 · similarity 0.762`
 
 ## Why this exists
 
