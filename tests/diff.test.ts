@@ -64,7 +64,41 @@ describe('diffSections on Risk Factors', () => {
   it('keeps document order and preserves unchanged paragraphs when asked', () => {
     const idx = d.changes.filter((c) => c.base).map((c) => c.base!.paragraph);
     expect([...idx].sort((a, b) => a - b)).toEqual(idx);
+    expect(d.changes.some((c) => c.type === 'unchanged')).toBe(true);
     expect(onlyChanges(d).changes.every((c) => c.type !== 'unchanged')).toBe(true);
+  });
+});
+
+describe('unchanged paragraph comparison', () => {
+  const fixtureSection = parse(2024).get('1A')!;
+
+  it('reports a parenthesised financial value changing sign as a word-level edit', () => {
+    const paragraph = fixtureSection.paragraphs[0]!;
+    const base = {
+      ...fixtureSection,
+      paragraphs: [{ ...paragraph, text: 'Net income (loss) $(1,234)' }],
+    };
+    const target = {
+      ...fixtureSection,
+      paragraphs: [{ ...paragraph, text: 'Net income (loss) $1,234' }],
+    };
+
+    const d = diffSections(base, target, ref(2024), ref(2025));
+    expect(d.stats.changed).toBe(1);
+    expect(d.stats.unchanged).toBe(0);
+    expect(d.changes[0]?.type).toBe('changed');
+    expect(d.changes[0]?.wordDiff?.some((edit) => edit.removed && /[()]/.test(edit.value))).toBe(true);
+  });
+
+  it('tolerates whitespace, case and curly-quote differences', () => {
+    const paragraph = fixtureSection.paragraphs.find((p) => p.text.includes("customers' operations"))!;
+    const targetText = paragraph.text.toUpperCase().replace("CUSTOMERS' OPERATIONS", 'CUSTOMERS’   OPERATIONS');
+    const base = { ...fixtureSection, paragraphs: [paragraph] };
+    const target = { ...fixtureSection, paragraphs: [{ ...paragraph, text: `  ${targetText}\n` }] };
+
+    const d = diffSections(base, target, ref(2024), ref(2025));
+    expect(d.stats.unchanged).toBe(1);
+    expect(d.changes[0]?.type).toBe('unchanged');
   });
 });
 

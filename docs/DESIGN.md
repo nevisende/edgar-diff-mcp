@@ -123,6 +123,8 @@ Paragraph-level LCS (`diff.diffArrays` over normalised text) gives unchanged / r
 runs. Inside each adjacent removed+added run, paragraphs are paired greedily by Sørensen–Dice
 similarity over word bigrams (threshold 0.5) and reported as `changed` with a word-level edit
 script. Anything unpaired stays `removed` or `added`.
+`unchanged` tolerates only case, whitespace, and curly quote or dash variants; punctuation such
+as signs, parentheses, percentages, currency symbols, and decimal points remains significant.
 Section similarity gives unchanged paragraphs a weight of 1, changed pairs their Dice
 similarity, and added or removed paragraphs a weight of 0.
 
