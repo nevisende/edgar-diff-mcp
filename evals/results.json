@@ -1,5 +1,5 @@
 {
-  "runDate": "2026-09-02T19:30:38.807Z",
+  "runDate": "2026-09-02T19:39:13.300Z",
   "corpus": [
     "AAPL",
     "MSFT",
@@ -87,56 +87,46 @@
       ],
       "missingItems": [],
       "itemChars": {
-        "1": 15923,
-        "2": 496,
+        "1": 15799,
+        "2": 464,
         "3": 5365,
-        "4": 47,
-        "5": 2512,
-        "6": 32,
-        "7": 17768,
-        "8": 59995,
+        "4": 23,
+        "5": 2480,
+        "6": 10,
+        "7": 17576,
+        "8": 59227,
         "9": 84,
         "10": 333,
         "11": 124,
         "12": 124,
         "13": 124,
-        "14": 156,
-        "15": 11394,
-        "16": 2024,
-        "1A": 67903,
+        "14": 124,
+        "15": 11298,
+        "16": 2013,
+        "1A": 67524,
         "1B": 25,
         "1C": 2672,
-        "7A": 2935,
-        "9A": 4451,
+        "7A": 2903,
+        "9A": 4419,
         "9B": 540,
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 10: body is only 333 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 124 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 124 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 124 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 124 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "AAPL",
@@ -192,56 +182,45 @@
       ],
       "missingItems": [],
       "itemChars": {
-        "1": 15618,
+        "1": 15494,
         "2": 464,
         "3": 4305,
-        "4": 47,
-        "5": 2453,
-        "6": 32,
-        "7": 15101,
-        "8": 58952,
+        "4": 23,
+        "5": 2421,
+        "6": 10,
+        "7": 14909,
+        "8": 58216,
         "9": 84,
         "10": 965,
         "11": 124,
         "12": 124,
         "13": 124,
-        "14": 156,
-        "15": 11959,
-        "16": 2024,
-        "1A": 68609,
+        "14": 124,
+        "15": 11863,
+        "16": 1982,
+        "1A": 68230,
         "1B": 25,
-        "1C": 2708,
-        "7A": 2931,
-        "9A": 4451,
+        "1C": 2676,
+        "7A": 2899,
+        "9A": 4419,
         "9B": 1312,
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 124 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 124 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 124 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 124 chars (\"The information required by this Item will be included in th\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "AAPL",
@@ -275,32 +254,24 @@
       ],
       "missingItems": [],
       "itemChars": {
-        "I.1": 25792,
-        "I.2": 21293,
+        "I.1": 25381,
+        "I.2": 21083,
         "I.3": 323,
-        "I.4": 1346,
-        "II.1": 5499,
-        "II.1A": 19032,
+        "I.4": 1311,
+        "II.1": 5464,
+        "II.1A": 18927,
         "II.2": 1987,
         "II.3": 31,
-        "II.4": 50,
+        "II.4": 23,
         "II.5": 1394,
-        "II.6": 1057
+        "II.6": 987
       },
-      "flags": [
-        "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
-      ],
-      "warnings": []
+      "flags": [],
+      "warnings": [
+        "Item I.3: body is only 323 chars (\"There have been no material changes to the Company’s market \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.3: body is only 31 chars (\"Defaults Upon Senior Securities\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "MSFT",
@@ -381,26 +352,25 @@
         "1A": 80761
       },
       "flags": [
-        "Duplicate heading: Item 1B heading appeared 3 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 1C heading appeared 4 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 3 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 9A heading appeared 4 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 3 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 3 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 235 chars (\"We have received no written comments regarding our periodic \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 1C heading appeared 4 times outside the table of contents; kept the longest body.",
+        "Item 3: body is only 175 chars (\"Refer to Note 14 – Contingencies of the Notes to Financial S\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 95 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9A heading appeared 4 times outside the table of contents; kept the longest body.",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 283 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 204 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 181 chars (\"The information set forth in the Proxy Statement under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 357 chars (\"Information concerning fees and services provided by our pri\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 3 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "MSFT",
@@ -481,26 +451,26 @@
         "1A": 68564
       },
       "flags": [
-        "Duplicate heading: Item 1B heading appeared 3 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 1C heading appeared 4 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 3 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 9A heading appeared 4 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 3 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 3 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 235 chars (\"We have received no written comments regarding our periodic \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 1C heading appeared 4 times outside the table of contents; kept the longest body.",
+        "Item 3: body is only 175 chars (\"Refer to Note 14 – Contingencies of the Notes to Financial S\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 95 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9A heading appeared 4 times outside the table of contents; kept the longest body.",
+        "Item 9B: body is only 330 chars (\"Insider Trading Arrangements\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 283 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 204 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 181 chars (\"The information set forth in the Proxy Statement under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 357 chars (\"Information concerning fees and services provided by our pri\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 3 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "MSFT",
@@ -542,16 +512,10 @@
         "I.2": 57232,
         "II.1A": 70470
       },
-      "flags": [
-        "Duplicate heading: Item I.3 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.4 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.2 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.5 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.6 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1A heading appeared 2 times outside the table of contents; kept the longest body."
-      ],
-      "warnings": []
+      "flags": [],
+      "warnings": [
+        "Item II.1: body is only 174 chars (\"Refer to Note 13 – Contingencies of the Notes to Financial S\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "NVDA",
@@ -633,31 +597,21 @@
       },
       "flags": [
         "Item 15 suspiciously long: 103257 chars",
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 170 chars (\"Please see Note 12 of the Notes to the Consolidated Financia\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 154 chars (\"The information required by this Item is set forth in our Co\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 339 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 327 chars (\"Information regarding our executive compensation required by\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 371 chars (\"Information regarding related transactions and director inde\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 245 chars (\"Information regarding accounting fees and services required \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "NVDA",
@@ -739,31 +693,21 @@
       },
       "flags": [
         "Item 15 suspiciously long: 105968 chars",
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 170 chars (\"Please see Note 12 of the Notes to the Consolidated Financia\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 154 chars (\"The information required by this Item is set forth in our Co\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 339 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 327 chars (\"Information regarding our executive compensation required by\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 371 chars (\"Information regarding related transactions and director inde\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 245 chars (\"Information regarding accounting fees and services required \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "NVDA",
@@ -807,14 +751,13 @@
       },
       "flags": [
         "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.5 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item II.6 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item II.1: body is only 226 chars (\"Refer to Note 10 of the Notes to Condensed Consolidated Fina\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "AMZN",
@@ -893,12 +836,20 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 130 chars (\"See Item 8 of Part II, “Financial Statements and Supplementa\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 5: body is only 343 chars (\"Market Information\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 171 chars (\"Information required by Item 11 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 171 chars (\"Information required by Item 12 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 171 chars (\"Information required by Item 13 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 171 chars (\"Information required by Item 14 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -978,12 +929,20 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 130 chars (\"See Item 8 of Part II, “Financial Statements and Supplementa\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 5: body is only 343 chars (\"Market Information\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 171 chars (\"Information required by Item 11 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 171 chars (\"Information required by Item 12 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 171 chars (\"Information required by Item 13 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 171 chars (\"Information required by Item 14 of Part III is included in o\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -1033,7 +992,13 @@
       "flags": [
         "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item II.1: body is only 106 chars (\"See Item 1 of Part I, “Financial Statements — Note 4 — Commi\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.2: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.3: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "GOOGL",
@@ -1103,7 +1068,7 @@
         "12": 254,
         "13": 314,
         "14": 205,
-        "15": 12270,
+        "15": 11749,
         "16": 2900,
         "1A": 84722,
         "1B": 15,
@@ -1114,10 +1079,21 @@
         "9C": 31
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 2: body is only 277 chars (\"Our headquarters are located in Mountain View, California. W\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 246 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 31 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 16 chars (\"27.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 31 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 254 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 314 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 205 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "GOOGL",
@@ -1187,7 +1163,7 @@
         "12": 254,
         "13": 314,
         "14": 205,
-        "15": 9195,
+        "15": 8700,
         "16": 6162,
         "1A": 82857,
         "1B": 15,
@@ -1198,10 +1174,21 @@
         "9C": 31
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 2: body is only 277 chars (\"Our headquarters are located in Mountain View, California. W\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 246 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 31 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 16 chars (\"29.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 31 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 254 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 314 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 205 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "GOOGL",
@@ -1247,7 +1234,13 @@
         "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item II.6 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item I.3: body is only 223 chars (\"For quantitative and qualitative disclosures about market ri\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.1: body is only 279 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.2: body is only 356 chars (\"Unregistered Sales of Equity Securities\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "META",
@@ -1328,31 +1321,20 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 218 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 218 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 218 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 218 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "META",
@@ -1433,30 +1415,20 @@
         "9C": 1244
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 10: body is only 54 chars (\"Directors, Executive Officers and Corporate Governance\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 218 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 218 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 218 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 218 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "META",
@@ -1500,16 +1472,14 @@
       },
       "flags": [
         "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.5 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item I.3: body is only 332 chars (\"There have been no material changes to our market risk expos\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.2: body is only 163 chars (\"a) Sales of Unregistered Securities\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "TSLA",
@@ -1590,31 +1560,21 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 200 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 139 chars (\"The information required by this Item 11 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 139 chars (\"The information required by this Item 12 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 139 chars (\"The information required by this Item 13 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 139 chars (\"The information required by this Item 14 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "TSLA",
@@ -1695,31 +1655,21 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 207 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 139 chars (\"The information required by this Item 11 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 139 chars (\"The information required by this Item 12 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 139 chars (\"The information required by this Item 13 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 139 chars (\"The information required by this Item 14 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "TSLA",
@@ -1767,19 +1717,17 @@
       },
       "flags": [
         "Item 1A suspiciously short: 305 chars",
-        "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.5 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item II.1: body is only 203 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.1A: body is only 305 chars (\"Our operations and financial results are subject to various \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.2: body is only 59 chars (\"Unregistered Sales of Equity Securities and Use of Proceeds\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.3: body is only 31 chars (\"Defaults Upon Senior Securities\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.5: body is only 302 chars (\"Rule 10b5-1 Trading Arrangements\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "BRK-B",
@@ -1858,24 +1806,21 @@
         "9C": 433
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 29 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 5: body is only 115 chars (\"Market for Registrant’s Common Equity, Related Security Hold\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 14 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 9: body is only 89 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 328 chars (\"Berkshire has not adopted a Rule 10b5-1 trading arrangement \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 10: body is only 59 chars (\"Directors, Executive Officers and Corporate Governance\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 27 chars (\"Executive Compensation\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 99 chars (\"Security Ownership of Certain Beneficial Owners and Manageme\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 77 chars (\"Certain Relationships and Related Transactions and Director \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 43 chars (\"Principal Accountant Fees and Services\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "BRK-B",
@@ -1954,24 +1899,21 @@
         "9C": 433
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 29 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 5: body is only 115 chars (\"Market for Registrant’s Common Equity, Related Security Hold\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 14 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 9: body is only 89 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 328 chars (\"Berkshire has not adopted a Rule 10b5-1 trading arrangement \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 10: body is only 59 chars (\"Directors, Executive Officers and Corporate Governance\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 27 chars (\"Executive Compensation\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 99 chars (\"Security Ownership of Certain Beneficial Owners and Manageme\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 77 chars (\"Certain Relationships and Related Transactions and Director \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 43 chars (\"Principal Accountant Fees and Services\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "BRK-B",
@@ -2020,17 +1962,17 @@
       "flags": [
         "Item 1A suspiciously short: 1960 chars",
         "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.2 heading appeared 19 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item I.4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item II.6 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item I.2 heading appeared 19 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item I.2 heading appeared 19 times outside the table of contents; kept the longest body.",
+        "Item I.3: body is only 343 chars (\"Reference is made to Berkshire’s Annual Report on Form 10-K \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.2: body is only 103 chars (\"Unregistered Sales of Equity Securities and Use of Proceeds \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.3: body is only 31 chars (\"Defaults Upon Senior Securities\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.4: body is only 201 chars (\"Information regarding the Company’s mine safety violations a\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item II.5: body is only 328 chars (\"Berkshire has not adopted a Rule 10b5-1 trading arrangement \"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "JPM",
@@ -2099,7 +2041,7 @@
         "12": 1217,
         "13": 74,
         "14": 39,
-        "15": 984098,
+        "15": 974088,
         "1A": 111327,
         "1B": 26,
         "1C": 145,
@@ -2110,31 +2052,23 @@
       },
       "flags": [
         "Item 7/MD&A suspiciously short: 300 chars",
-        "Item 15 suspiciously long: 984098 chars",
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Item 15 suspiciously long: 974088 chars"
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 26 chars (\"Unresolved Staff Comments.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 1C: body is only 145 chars (\"Refer to the Operational Risk Management section of Manageme\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 76 chars (\"Refer to Note 30 for a description of the Firm’s material le\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 24 chars (\"Mine Safety Disclosures.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 7: body is only 300 chars (\"Management’s discussion and analysis of financial condition \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 7A: body is only 196 chars (\"Refer to the Market Risk Management section of Management’s \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 314 chars (\"The Consolidated Financial Statements, together with the Not\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 85 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 68 chars (\"Disclosure regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 23 chars (\"Executive Compensation.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 74 chars (\"Certain Relationships and Related Transactions, and Director\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 39 chars (\"Principal Accounting Fees and Services.\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "CVX",
@@ -2214,10 +2148,17 @@
       },
       "flags": [
         "Item 7/MD&A suspiciously short: 147 chars",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 7: body is only 147 chars (\"The index to Management’s Discussion and Analysis of Financi\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 7A: body is only 285 chars (\"The company’s discussion of interest rate, foreign currency \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 105 chars (\"The index to Financial Statements and Supplementary Data is \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -2298,10 +2239,17 @@
       },
       "flags": [
         "Item 7/MD&A suspiciously short: 147 chars",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 7: body is only 147 chars (\"The index to Management’s Discussion and Analysis of Financi\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 7A: body is only 285 chars (\"The company’s discussion of interest rate, foreign currency \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 105 chars (\"The index to Financial Statements and Supplementary Data is \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -2383,31 +2331,20 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 223 chars (\"The information required by this Item 11 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 177 chars (\"The information required by this Item 12 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 201 chars (\"The information required by this Item 13 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 205 chars (\"The information required by this Item 14 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "WMT",
@@ -2488,31 +2425,20 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 223 chars (\"The information required by this Item 11 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 177 chars (\"The information required by this Item 12 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 201 chars (\"The information required by this Item 13 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 205 chars (\"The information required by this Item 14 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "KO",
@@ -2593,31 +2519,21 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 294 chars (\"During the fiscal quarter ended December 31, 2025, none of o\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions That Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 10: body is only 301 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 203 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 203 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 203 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 203 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "KO",
@@ -2698,31 +2614,20 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions That Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 10: body is only 326 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 189 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 189 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 189 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 189 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "PFE",
@@ -2760,7 +2665,6 @@
         "2",
         "3",
         "5",
-        "6",
         "7",
         "7A",
         "8",
@@ -2777,33 +2681,41 @@
         "1B"
       ],
       "itemChars": {
-        "1": 91381,
+        "1": 91043,
         "2": 1594,
-        "3": 4737,
+        "3": 4685,
         "5": 1946,
-        "6": 26,
-        "7": 104255,
-        "8": 259248,
-        "9": 31,
+        "7": 103761,
+        "8": 257870,
+        "9": 5,
         "10": 1543,
         "11": 365,
         "12": 230,
         "13": 498,
         "14": 826,
-        "15": 18432,
-        "16": 33881,
-        "1A": 87186,
-        "1C": 6938,
-        "7A": 216,
-        "9A": 8545,
+        "15": 18328,
+        "16": 33725,
+        "1A": 86926,
+        "1C": 6912,
+        "7A": 190,
+        "9A": 8467,
         "9B": 254
       },
       "flags": [
         "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 7A: body is only 190 chars (\"The information required by this Item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 254 chars (\"OTHER INFORMATION\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 365 chars (\"Information about Director and executive compensation is inc\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 230 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "PFE",
@@ -2841,7 +2753,6 @@
         "2",
         "3",
         "5",
-        "6",
         "7",
         "7A",
         "8",
@@ -2858,33 +2769,41 @@
         "1B"
       ],
       "itemChars": {
-        "1": 87975,
+        "1": 87663,
         "2": 1571,
-        "3": 5089,
+        "3": 5037,
         "5": 1950,
-        "6": 26,
-        "7": 103954,
-        "8": 281458,
+        "7": 103434,
+        "8": 279976,
         "9": 5,
         "10": 1543,
         "11": 365,
         "12": 230,
         "13": 498,
         "14": 826,
-        "15": 19238,
-        "16": 30633,
-        "1A": 78797,
-        "1C": 6944,
-        "7A": 216,
-        "9A": 8553,
+        "15": 19134,
+        "16": 30477,
+        "1A": 78563,
+        "1C": 6918,
+        "7A": 190,
+        "9A": 8475,
         "9B": 254
       },
       "flags": [
         "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 7A: body is only 190 chars (\"The information required by this Item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 254 chars (\"OTHER INFORMATION\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 365 chars (\"Information about Director and executive compensation is inc\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 230 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "BA",
@@ -2964,32 +2883,18 @@
         "9B": 253,
         "9C": 67
       },
-      "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
-      ],
-      "warnings": []
+      "flags": [],
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 116 chars (\"We incorporate by reference into this Item our disclosures m\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements With Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 253 chars (\"During the three months ended December 31, 2025, none of our\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 295 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 324 chars (\"Our independent registered public accounting firm is Deloitt\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "BA",
@@ -3069,32 +2974,18 @@
         "9B": 253,
         "9C": 67
       },
-      "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
-      ],
-      "warnings": []
+      "flags": [],
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 116 chars (\"We incorporate by reference into this Item our disclosures m\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements With Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 253 chars (\"During the three months ended December 31, 2024, none of our\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 295 chars (\"The information required by this item will be included under\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 324 chars (\"Our independent registered public accounting firm is Deloitt\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "DIS",
@@ -3174,12 +3065,22 @@
       },
       "flags": [
         "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 203 chars (\"The Company has received no written comments regarding its p\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 225 chars (\"As disclosed in Note 14 to the Consolidated Financial Statem\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 67 chars (\"See Index to Financial Statements and Supplemental Data on p\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 331 chars (\"Information required by this item and appearing under the ca\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 275 chars (\"Information setting forth the security ownership of certain \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 300 chars (\"Information regarding certain related transactions appearing\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 201 chars (\"Information appearing under the captions “Auditor Fees and S\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3260,12 +3161,22 @@
       },
       "flags": [
         "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 203 chars (\"The Company has received no written comments regarding its p\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 225 chars (\"As disclosed in Note 14 to the Consolidated Financial Statem\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 67 chars (\"See Index to Financial Statements and Supplemental Data on p\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 305 chars (\"Information appearing under the captions “Director Compensat\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 275 chars (\"Information setting forth the security ownership of certain \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 300 chars (\"Information regarding certain related transactions appearing\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 201 chars (\"Information appearing under the captions “Auditor Fees and S\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3345,12 +3256,22 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 361 chars (\"Information with respect to this item may be found in Note 9\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 216 chars (\"The consolidated financial statements and accompanying notes\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 275 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 279 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 247 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 325 chars (\"Information with respect to principal independent registered\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3430,12 +3351,22 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 361 chars (\"Information with respect to this item may be found in Note 8\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 216 chars (\"The consolidated financial statements and accompanying notes\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 275 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 279 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 247 chars (\"Information required by this item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 325 chars (\"Information with respect to principal independent registered\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3515,12 +3446,23 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 122 chars (\"See discussion of Legal Proceedings in Note 10 to the consol\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at Management's Discussion and Analysis of Financial Condition and Results of Operations",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 242 chars (\"During the fiscal quarter ended August 31, 2025, no director\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 184 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 194 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 198 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 257 chars (\"Our independent registered public accounting firm is KPMG LL\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3600,12 +3542,22 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 122 chars (\"See discussion of Legal Proceedings in Note 10 to the consol\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "heading and first paragraph were in one block; split at Management's Discussion and Analysis",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 244 chars (\"During the fiscal quarter ended September 1, 2024, no direct\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 225 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 194 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 257 chars (\"Our independent registered public accounting firm is KPMG LL\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3685,12 +3637,18 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 2: body is only 322 chars (\"We own and lease real properties to support our business ope\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 331 chars (\"The information required by this Item 3 is incorporated here\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 316 chars (\"The information required by Items 404 and 407(a) of Regulati\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 309 chars (\"The information required by Item 9(e) of Schedule 14A will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3770,12 +3728,18 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 2: body is only 322 chars (\"We own and lease real properties to support our business ope\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 331 chars (\"The information required by this Item 3 is incorporated here\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 316 chars (\"The information required by Items 404 and 407(a) of Regulati\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 309 chars (\"The information required by Item 9(e) of Schedule 14A will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -3857,31 +3821,20 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 4 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item 1 heading appeared 4 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1 heading appeared 4 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 300 chars (\"Certain legal proceedings in which we are involved are discu\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 93 chars (\"Information required by this Item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 93 chars (\"Information required by this Item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 210 chars (\"Our independent registered public accounting firm is Pricewa\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "CAT",
@@ -3962,31 +3915,20 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 4 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item 1 heading appeared 4 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1 heading appeared 4 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 300 chars (\"Certain legal proceedings in which we are involved are discu\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 93 chars (\"Information required by this Item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 93 chars (\"Information required by this Item is incorporated by referen\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 210 chars (\"Our independent registered public accounting firm is Pricewa\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "GE",
@@ -4038,7 +3980,7 @@
       ],
       "itemChars": {},
       "flags": [
-        "Document warnings: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
+        "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
       ],
       "warnings": [
         "No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -4094,7 +4036,7 @@
       ],
       "itemChars": {},
       "flags": [
-        "Document warnings: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
+        "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
       ],
       "warnings": [
         "No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -4166,7 +4108,7 @@
         "12": 197,
         "13": 137,
         "14": 169,
-        "15": 10441,
+        "15": 10243,
         "16": 6571,
         "1A": 74686,
         "1B": 15,
@@ -4177,12 +4119,21 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 318 chars (\"During the fiscal quarter ended February 1, 2026, no directo\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 246 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 197 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 137 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 169 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -4262,12 +4213,21 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 265 chars (\"During the fiscal quarter ended February 2, 2025, no directo\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 378 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 222 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 137 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 169 chars (\"The information required by this item is incorporated by ref\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -4320,7 +4280,7 @@
       ],
       "itemChars": {},
       "flags": [
-        "Document warnings: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
+        "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
       ],
       "warnings": [
         "No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -4376,7 +4336,7 @@
       ],
       "itemChars": {},
       "flags": [
-        "Document warnings: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
+        "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
       ],
       "warnings": [
         "No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -4459,10 +4419,19 @@
         "9C": 15
       },
       "flags": [
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 378 chars (\"From time to time, we and our co-investment ventures are par\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 327 chars (\"The information required by this item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 262 chars (\"The information required by this item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 256 chars (\"The information required by this item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 226 chars (\"The information required by this item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -4542,10 +4511,20 @@
         "9C": 15
       },
       "flags": [
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 378 chars (\"From time to time, we and our co-investment ventures are par\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not Applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 299 chars (\"During the period ended December 31, 2024, none of our direc\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 327 chars (\"The information required by this item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 262 chars (\"The information required by this item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 256 chars (\"The information required by this item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 226 chars (\"The information required by this item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -4627,31 +4606,23 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item 1 heading appeared 3 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1 heading appeared 3 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 39 chars (\"There are no unresolved staff comments.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 2: body is only 67 chars (\"Information pertaining to our properties can be found under \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 136 chars (\"Information regarding legal proceedings is included in note \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 371 chars (\"Director and Officer Trading Arrangements and Policies\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 253 chars (\"The information required by this item is set forth under the\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 293 chars (\"The information required by this item is set forth under the\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 257 chars (\"The information required by this item is set forth under the\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 393 chars (\"Our independent registered public accounting firm is KPMG LL\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "O",
@@ -4732,31 +4703,23 @@
         "9C": 67
       },
       "flags": [
-        "Duplicate heading: Item 1 heading appeared 3 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+        "Duplicate heading: Item 1 heading appeared 3 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1 heading appeared 3 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 39 chars (\"There are no unresolved staff comments.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 2: body is only 67 chars (\"Information pertaining to our properties can be found under \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 136 chars (\"Information regarding legal proceedings is included in note \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 8 chars (\"Reserved\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 371 chars (\"Director and Officer Trading Arrangements and Policies\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 253 chars (\"The information required by this item is set forth under the\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 293 chars (\"The information required by this item is set forth under the\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 257 chars (\"The information required by this item is set forth under the\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 393 chars (\"Our independent registered public accounting firm is KPMG LL\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "AMD",
@@ -4836,32 +4799,17 @@
         "9B": 558,
         "9C": 68
       },
-      "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
-      ],
-      "warnings": []
+      "flags": [],
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 178 chars (\"For a discussion of our legal proceedings, refer to Note 12 \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 68 chars (\"Disclosures Regarding Foreign Jurisdictions that Prevent Ins\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 225 chars (\"The information under the captions “Principal Stockholders,”\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 201 chars (\"The information under the captions “Corporate Governance—Ind\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "AMD",
@@ -4941,32 +4889,17 @@
         "9B": 615,
         "9C": 68
       },
-      "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
-      ],
-      "warnings": []
+      "flags": [],
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 162 chars (\"For a discussion of our legal proceedings, refer to Note 18 \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 68 chars (\"Disclosures Regarding Foreign Jurisdictions that Prevent Ins\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 225 chars (\"The information under the captions “Principal Stockholders,”\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 201 chars (\"The information under the captions “Corporate Governance—Ind\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "ORCL",
@@ -5048,31 +4981,23 @@
       },
       "flags": [
         "Item 15 suspiciously long: 145144 chars",
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 299 chars (\"The material set forth in Note 12 (pertaining to information\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 105 chars (\"The response to this item is submitted as a separate section\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 305 chars (\"Rule 10b5-1 Trading Plans\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 142 chars (\"The information required by this Item 11 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 142 chars (\"The information required by this Item 12 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 142 chars (\"The information required by this Item 13 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 142 chars (\"The information required by this Item 14 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "ORCL",
@@ -5154,31 +5079,23 @@
       },
       "flags": [
         "Item 15 suspiciously long: 143341 chars",
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
-      "warnings": []
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 299 chars (\"The material set forth in Note 12 (pertaining to information\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 8: body is only 105 chars (\"The response to this item is submitted as a separate section\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9B: body is only 305 chars (\"Rule 10b5-1 Trading Plans\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 142 chars (\"The information required by this Item 11 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 142 chars (\"The information required by this Item 12 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 142 chars (\"The information required by this Item 13 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 142 chars (\"The information required by this Item 14 is incorporated her\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
+      ]
     },
     {
       "ticker": "CRM",
@@ -5259,12 +5176,19 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 273 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 222 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 186 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -5346,12 +5270,19 @@
         "9C": 15
       },
       "flags": [
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
         "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Document warnings: Item 6: heading found but no body text followed it; not returned."
+        "Document warning: Item 6: heading found but no body text followed it; not returned."
       ],
       "warnings": [
-        "Item 6: heading found but no body text followed it; not returned."
+        "Item 6: heading found but no body text followed it; not returned.",
+        "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+        "Item 1B: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 4: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 5 chars (\"None.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 15 chars (\"Not applicable.\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 12: body is only 273 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 222 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 186 chars (\"The information required by this Item is incorporated herein\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
       ]
     },
     {
@@ -5408,56 +5339,41 @@
       ],
       "missingItems": [],
       "itemChars": {
-        "1": 70801,
+        "1": 70689,
         "2": 1770,
         "3": 257,
-        "4": 6793,
+        "4": 6761,
         "5": 3048,
-        "6": 16,
-        "7": 60117,
-        "8": 154926,
+        "6": 10,
+        "7": 59989,
+        "8": 154510,
         "9": 84,
         "10": 2029,
-        "11": 304,
+        "11": 288,
         "12": 2110,
         "13": 341,
         "14": 375,
-        "15": 17790,
-        "16": 1663,
-        "1A": 63525,
+        "15": 17758,
+        "16": 1647,
+        "1A": 63429,
         "1B": 25,
-        "1C": 7829,
+        "1C": 7813,
         "7A": 3229,
-        "9A": 9218,
+        "9A": 9202,
         "9B": 1621,
         "9C": 67
       },
-      "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
-      ],
-      "warnings": []
+      "flags": [],
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"UNRESOLVED STAFF COMMENTS\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 257 chars (\"Information pertaining to legal proceedings is provided in N\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[RESERVED]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSP\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 288 chars (\"The material to be included in the 2026 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 341 chars (\"The material to be included in the 2026 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 375 chars (\"The material to be included in the 2026 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "ABBV",
@@ -5513,56 +5429,41 @@
       ],
       "missingItems": [],
       "itemChars": {
-        "1": 70074,
+        "1": 69962,
         "2": 1715,
         "3": 257,
-        "4": 8113,
-        "5": 3080,
+        "4": 8081,
+        "5": 3064,
         "6": 10,
-        "7": 60529,
-        "8": 161843,
+        "7": 60401,
+        "8": 161411,
         "9": 84,
         "10": 2029,
-        "11": 304,
+        "11": 288,
         "12": 2127,
         "13": 341,
         "14": 375,
-        "15": 17942,
-        "16": 1751,
-        "1A": 58281,
+        "15": 17910,
+        "16": 1735,
+        "1A": 58201,
         "1B": 25,
-        "1C": 7837,
-        "7A": 3243,
-        "9A": 9182,
+        "1C": 7821,
+        "7A": 3227,
+        "9A": 9166,
         "9B": 1800,
         "9C": 67
       },
-      "flags": [
-        "Duplicate heading: Item 1 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 1C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 2 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 3 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 4 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 5 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 6 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 7A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 8 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9A heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9B heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 9C heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 10 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 11 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 12 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 13 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 14 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 15 heading appeared 2 times outside the table of contents; kept the longest body.",
-        "Duplicate heading: Item 16 heading appeared 2 times outside the table of contents; kept the longest body."
-      ],
-      "warnings": []
+      "flags": [],
+      "warnings": [
+        "Item 1B: body is only 25 chars (\"UNRESOLVED STAFF COMMENTS\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 3: body is only 257 chars (\"Information pertaining to legal proceedings is provided in N\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 6: body is only 10 chars (\"[RESERVED]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9: body is only 84 chars (\"CHANGES IN AND DISAGREEMENTS WITH ACCOUNTANTS ON ACCOUNTING \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 9C: body is only 67 chars (\"DISCLOSURE REGARDING FOREIGN JURISDICTIONS THAT PREVENT INSP\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 11: body is only 288 chars (\"The material to be included in the 2025 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 13: body is only 341 chars (\"The material to be included in the 2025 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+        "Item 14: body is only 375 chars (\"The material to be included in the 2025 AbbVie Inc. Proxy St\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+      ]
     },
     {
       "ticker": "MCD",
@@ -5614,7 +5515,7 @@
       ],
       "itemChars": {},
       "flags": [
-        "Document warnings: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
+        "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
       ],
       "warnings": [
         "No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -5670,7 +5571,7 @@
       ],
       "itemChars": {},
       "flags": [
-        "Document warnings: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
+        "Document warning: No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
       ],
       "warnings": [
         "No \"Item N\" headings were found; the document may not be a 10-K/10-Q or may be an exhibit."
@@ -5685,13 +5586,13 @@
       "baseAccession": "0000320193-24-000123",
       "targetAccession": "0000320193-25-000079",
       "stats": {
-        "baseParagraphs": 127,
-        "targetParagraphs": 118,
-        "added": 14,
-        "removed": 23,
-        "changed": 58,
+        "baseParagraphs": 115,
+        "targetParagraphs": 106,
+        "added": 9,
+        "removed": 18,
+        "changed": 51,
         "unchanged": 46,
-        "similarity": 0.362
+        "similarity": 0.4
       },
       "flags": []
     },
@@ -5872,13 +5773,13 @@
       "baseAccession": "0000078003-25-000054",
       "targetAccession": "0000078003-26-000026",
       "stats": {
-        "baseParagraphs": 115,
-        "targetParagraphs": 122,
-        "added": 17,
-        "removed": 10,
-        "changed": 49,
+        "baseParagraphs": 106,
+        "targetParagraphs": 112,
+        "added": 11,
+        "removed": 5,
+        "changed": 45,
         "unchanged": 56,
-        "similarity": 0.459
+        "similarity": 0.5
       },
       "flags": []
     },
@@ -6129,13 +6030,13 @@
       "baseAccession": "0001551152-25-000020",
       "targetAccession": "0001551152-26-000008",
       "stats": {
-        "baseParagraphs": 129,
-        "targetParagraphs": 140,
-        "added": 19,
-        "removed": 8,
+        "baseParagraphs": 124,
+        "targetParagraphs": 134,
+        "added": 13,
+        "removed": 3,
         "changed": 18,
         "unchanged": 103,
-        "similarity": 0.736
+        "similarity": 0.769
       },
       "flags": []
     },

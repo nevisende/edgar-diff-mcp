@@ -189,6 +189,7 @@ for (const ticker of corpus) {
         const section = await service.getSection(filing, item.key);
         if (section.status === 'ok') {
           for (const w of section.section.warnings) {
+            if (!result.warnings.includes(w)) result.warnings.push(w);
             if (/appeared \d+ times/.test(w)) {
               result.flags.push(`Duplicate heading: ${w}`);
             }
@@ -197,8 +198,8 @@ for (const ticker of corpus) {
       }
 
       // Document-level warnings
-      if (listed.warnings.length > 0) {
-        result.flags.push(`Document warnings: ${listed.warnings.join('; ')}`);
+      for (const w of listed.warnings) {
+        result.flags.push(`Document warning: ${w}`);
       }
 
       console.error(`[OK] ${ticker} ${filing.form} ${filing.filingDate} — found ${result.foundItems.length}/${result.expectedItems.length} items, missing: ${result.missingItems.length > 0 ? result.missingItems.join(',') : 'none'}`);
@@ -282,13 +283,30 @@ lines.push(`| **Precision** | **${precision}%** |`);
 lines.push('');
 
 // Per-filing table
+const compactFlags = (flags: string[]): string => {
+  const counts = new Map<string, number>();
+  for (const flag of flags) {
+    let label = 'other-flag';
+    if (flag.startsWith('Duplicate heading:')) label = 'dup-heading';
+    else if (flag.startsWith('Item 1A suspiciously short:')) label = 'short-item-1a';
+    else if (flag.startsWith('Item 7/MD&A suspiciously short:')) label = 'short-item-7';
+    else if (flag.startsWith('Item 15 suspiciously long:')) label = 'long-item-15';
+    else if (flag.startsWith('Document warning:')) label = 'doc-warning';
+    counts.set(label, (counts.get(label) ?? 0) + 1);
+  }
+  return [...counts].map(([label, count]) => {
+    const alwaysCount = label === 'dup-heading' || label === 'doc-warning';
+    return alwaysCount || count > 1 ? `${label}×${count}` : label;
+  }).join('; ');
+};
+
 lines.push('## Per-Filing Results');
 lines.push('');
 lines.push('| Ticker | Form | Filing Date | Accession | Missing Items | Flags |');
 lines.push('|--------|------|-------------|-----------|---------------|-------|');
 for (const f of filingResults) {
   const missing = f.missingItems.length > 0 ? f.missingItems.join(', ') : '—';
-  const flags = f.flags.length > 0 ? f.flags.map((fl) => fl.replace(/\|/g, '\\|')).join('; ') : (f.error ? `ERROR: ${f.error.slice(0, 80)}` : '—');
+  const flags = f.flags.length > 0 ? compactFlags(f.flags) : (f.error ? `ERROR: ${f.error.slice(0, 80)}` : '—');
   lines.push(`| ${f.ticker} | ${f.form} | ${f.filingDate} | ${f.accession} | ${missing} | ${flags} |`);
 }
 lines.push('');
