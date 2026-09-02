@@ -30,6 +30,8 @@ paragraphs 7 → 7 · +1 -1 ~1 · similarity 0.827
 | Before parser fixes | 892/1090 (81.8% recall) | Not measured |
 | Now | 1048/1166 (89.9% recall) | 1028/1166 (88.2%) |
 
+The denominators differ because the expected-Item list was completed after the first run (10-K Item 9 and 10-Q Items 3–5 were missing from it); the first row is kept as it was reported at the time.
+
 The plausible rate is lower because location checks only that the expected key exists, while plausibility also rejects undersized core sections and oversized Item 15 results. The latest run reports one evaluation issue: the ticker XOM now resolves to "ExxonMobil Holdings Corp" (CIK 0002115436, a 2026 holding company), which has filed no 10-K yet; the operating company's filings live under CIK 0000034088. The harness reports this as an issue rather than silently substituting.
 
 GE, Intel and McDonald's stay `not_found` on purpose: their 10-Ks use company-specific section headings in the body and put the formal Item names in a cross-reference index. See [`evals/latest.md`](evals/latest.md) for the full committed result.
