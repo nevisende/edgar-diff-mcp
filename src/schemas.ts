@@ -86,22 +86,31 @@ const CitedParagraphSchema = z.object({
   text: z.string(),
 });
 
-export const GetSectionResultSchema = z.discriminatedUnion('status', [
-  z.object({
-    status: z.literal('ok'),
-    filing: FilingRefSchema,
-    item: z.string(),
-    title: z.string(),
-    totalParagraphs: z.number().int().nonnegative(),
-    truncated: z.boolean(),
-    warnings: z.array(z.string()),
-    paragraphs: z.array(CitedParagraphSchema),
-  }),
-  SectionNotFoundSchema,
-]);
-export type GetSectionResult = z.infer<typeof GetSectionResultSchema>;
-export const GetSectionOutputSchema = z.object({ result: GetSectionResultSchema });
-export type GetSectionOutput = z.infer<typeof GetSectionOutputSchema>;
+export type GetSectionOutput =
+  | {
+      status: 'ok';
+      filing: FilingRef;
+      item: string;
+      title: string;
+      totalParagraphs: number;
+      truncated: boolean;
+      warnings: string[];
+      paragraphs: z.infer<typeof CitedParagraphSchema>[];
+    }
+  | Extract<SectionResult, { status: 'not_found' }>;
+
+export const GetSectionOutputSchema = z.object({
+  status: z.enum(['ok', 'not_found']),
+  filing: FilingRefSchema,
+  item: z.string(),
+  title: z.string().optional(),
+  totalParagraphs: z.number().int().nonnegative().optional(),
+  truncated: z.boolean().optional(),
+  warnings: z.array(z.string()).optional(),
+  paragraphs: z.array(CitedParagraphSchema).optional(),
+  reason: z.string().optional(),
+  availableItems: z.array(z.string()).optional(),
+});
 
 const WordEditSchema = z.object({
   value: z.string(),
@@ -138,64 +147,62 @@ const CitedParagraphChangeSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('unchanged'), base: CitedChangeSideSchema, target: CitedChangeSideSchema }),
 ]);
 
-const DiffSectionsNotFoundSchema = z.object({
-  status: z.literal('not_found'),
-  side: z.enum(['base', 'target']),
-  detail: SectionNotFoundSchema,
-});
+export type DiffSectionsResult =
+  | {
+      status: 'ok';
+      item: string;
+      title: string;
+      base: FilingRef;
+      target: FilingRef;
+      stats: DiffStats;
+      changes: z.infer<typeof CitedParagraphChangeSchema>[];
+      warnings: string[];
+      truncated: boolean;
+    }
+  | Extract<DiffResult, { status: 'not_found' }>;
+export type DiffSectionsOutput = DiffSectionsResult;
 
-export const DiffSectionsResultSchema = z.discriminatedUnion('status', [
-  z.object({
-    status: z.literal('ok'),
-    item: z.string(),
-    title: z.string(),
-    base: FilingRefSchema,
-    target: FilingRefSchema,
-    stats: DiffStatsSchema,
-    changes: z.array(CitedParagraphChangeSchema),
-    warnings: z.array(z.string()),
-    truncated: z.boolean(),
-  }),
-  DiffSectionsNotFoundSchema,
-]);
-export type DiffSectionsResult = z.infer<typeof DiffSectionsResultSchema>;
-export const DiffSectionsOutputSchema = z.object({ result: DiffSectionsResultSchema });
-export type DiffSectionsOutput = z.infer<typeof DiffSectionsOutputSchema>;
+export const DiffSectionsOutputSchema = z.object({
+  status: z.enum(['ok', 'not_found']),
+  item: z.string().optional(),
+  title: z.string().optional(),
+  base: FilingRefSchema.optional(),
+  target: FilingRefSchema.optional(),
+  stats: DiffStatsSchema.optional(),
+  changes: z.array(CitedParagraphChangeSchema).optional(),
+  warnings: z.array(z.string()).optional(),
+  truncated: z.boolean().optional(),
+  side: z.enum(['base', 'target']).optional(),
+  detail: SectionNotFoundSchema.optional(),
+});
 
 const ItemDiffOverviewSchema = z.object({ item: z.string(), title: z.string(), stats: DiffStatsSchema });
 const FilingItemOverviewSchema = z.object({ item: z.string(), title: z.string() });
 
-export const DiffAllResultSchema = z.discriminatedUnion('status', [
-  z.object({
-    status: z.literal('ok'),
-    base: FilingRefSchema,
-    target: FilingRefSchema,
-    items: z.array(ItemDiffOverviewSchema),
-    onlyInBase: z.array(FilingItemOverviewSchema),
-    onlyInTarget: z.array(FilingItemOverviewSchema),
-    warnings: z.array(z.string()),
-  }),
-  z.object({
-    status: z.literal('not_found'),
-    side: z.enum(['base', 'target']),
-    reason: z.string(),
-    filing: FilingRefSchema,
-  }),
-]);
-export const DiffAllItemsOutputSchema = z.object({ result: DiffAllResultSchema });
-export type DiffAllItemsOutput = z.infer<typeof DiffAllItemsOutputSchema>;
+export type DiffAllItemsOutput = DiffAllResult;
+export const DiffAllItemsOutputSchema = z.object({
+  status: z.enum(['ok', 'not_found']),
+  base: FilingRefSchema.optional(),
+  target: FilingRefSchema.optional(),
+  items: z.array(ItemDiffOverviewSchema).optional(),
+  onlyInBase: z.array(FilingItemOverviewSchema).optional(),
+  onlyInTarget: z.array(FilingItemOverviewSchema).optional(),
+  warnings: z.array(z.string()).optional(),
+  side: z.enum(['base', 'target']).optional(),
+  reason: z.string().optional(),
+  filing: FilingRefSchema.optional(),
+});
 
-export const SearchResultSchema = z.discriminatedUnion('status', [
-  z.object({
-    status: z.literal('ok'),
-    filing: FilingRefSchema,
-    matches: z.array(CitedParagraphSchema),
-    warnings: z.array(z.string()),
-  }),
-  SectionNotFoundSchema,
-]);
-export const SearchFilingOutputSchema = z.object({ result: SearchResultSchema });
-export type SearchFilingOutput = z.infer<typeof SearchFilingOutputSchema>;
+export type SearchFilingOutput = SearchResult;
+export const SearchFilingOutputSchema = z.object({
+  status: z.enum(['ok', 'not_found']),
+  filing: FilingRefSchema,
+  matches: z.array(CitedParagraphSchema).optional(),
+  warnings: z.array(z.string()).optional(),
+  item: z.string().optional(),
+  reason: z.string().optional(),
+  availableItems: z.array(z.string()).optional(),
+});
 
 type Assert<T extends true> = T;
 type Assignable<From, To> = [From] extends [To] ? true : false;
@@ -227,8 +234,9 @@ type _ItemDiffSchemaToType = Assert<Assignable<z.infer<typeof ItemDiffOverviewSc
 type _ItemDiffTypeToSchema = Assert<Assignable<ItemDiffOverview, z.infer<typeof ItemDiffOverviewSchema>>>;
 type _FilingItemSchemaToType = Assert<Assignable<z.infer<typeof FilingItemOverviewSchema>, FilingItemOverview>>;
 type _FilingItemTypeToSchema = Assert<Assignable<FilingItemOverview, z.infer<typeof FilingItemOverviewSchema>>>;
-type _DiffAllSchemaToType = Assert<Assignable<WithoutExplicitUndefined<z.infer<typeof DiffAllResultSchema>>, DiffAllResult>>;
-type _DiffAllTypeToSchema = Assert<Assignable<DiffAllResult, z.infer<typeof DiffAllResultSchema>>>;
-type _SearchSchemaToType = Assert<Assignable<WithoutExplicitUndefined<z.infer<typeof SearchResultSchema>>, SearchResult>>;
-type _SearchTypeToSchema = Assert<Assignable<SearchResult, z.infer<typeof SearchResultSchema>>>;
-type _DiffNotFoundSchemaToType = Assert<Assignable<WithoutExplicitUndefined<z.infer<typeof DiffSectionsNotFoundSchema>>, DiffResult>>;
+// Flat output schemas deliberately make variant-specific fields optional. These checks ensure
+// every stricter runtime result remains accepted by its advertised MCP output schema.
+type _GetSectionOutputTypeToSchema = Assert<Assignable<GetSectionOutput, z.infer<typeof GetSectionOutputSchema>>>;
+type _DiffSectionsOutputTypeToSchema = Assert<Assignable<DiffSectionsOutput, z.infer<typeof DiffSectionsOutputSchema>>>;
+type _DiffAllOutputTypeToSchema = Assert<Assignable<DiffAllItemsOutput, z.infer<typeof DiffAllItemsOutputSchema>>>;
+type _SearchOutputTypeToSchema = Assert<Assignable<SearchFilingOutput, z.infer<typeof SearchFilingOutputSchema>>>;

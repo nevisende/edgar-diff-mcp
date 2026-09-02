@@ -168,19 +168,17 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
       try {
         const ref = await service.resolveFiling(cik, accession);
         const r = await service.getSection(ref, item);
-        if (r.status !== 'ok') return json({ result: r } satisfies GetSectionOutput);
+        if (r.status !== 'ok') return json(r satisfies GetSectionOutput);
         const cap = maxParagraphs ?? 400;
         return json({
-          result: {
-            status: 'ok',
-            filing: ref,
-            item: r.section.item,
-            title: r.section.title,
-            totalParagraphs: r.section.paragraphs.length,
-            truncated: r.section.paragraphs.length > cap,
-            warnings: r.section.warnings,
-            paragraphs: r.section.paragraphs.slice(0, cap).map((p) => withCitation(ref, r.section, p.index, p.text)),
-          },
+          status: 'ok',
+          filing: ref,
+          item: r.section.item,
+          title: r.section.title,
+          totalParagraphs: r.section.paragraphs.length,
+          truncated: r.section.paragraphs.length > cap,
+          warnings: r.section.warnings,
+          paragraphs: r.section.paragraphs.slice(0, cap).map((p) => withCitation(ref, r.section, p.index, p.text)),
         } satisfies GetSectionOutput);
       } catch (e) {
         return fail(e);
@@ -206,7 +204,7 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
       try {
         const base = await service.resolveFiling(cik, baseAccession);
         const target = await service.resolveFiling(cik, targetAccession);
-        const output: DiffAllItemsOutput = { result: await service.diffAll(base, target) };
+        const output: DiffAllItemsOutput = await service.diffAll(base, target);
         return json(output);
       } catch (e) {
         return fail(e);
@@ -236,15 +234,13 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
         const base = await service.resolveFiling(cik, baseAccession);
         const target = await service.resolveFiling(cik, targetAccession);
         const d = await service.diff(base, target, item, includeUnchanged ?? false);
-        if (d.status !== 'ok') return json({ result: d } satisfies DiffSectionsOutput);
+        if (d.status !== 'ok') return json(d satisfies DiffSectionsOutput);
         const cap = maxChanges ?? 200;
         const section: Section = { item: d.item, title: d.title, paragraphs: [], charCount: 0, warnings: [] };
         return json({
-          result: {
-            ...d,
-            truncated: d.changes.length > cap,
-            changes: d.changes.slice(0, cap).map((c) => citeChange(c, base, target, section)),
-          },
+          ...d,
+          truncated: d.changes.length > cap,
+          changes: d.changes.slice(0, cap).map((c) => citeChange(c, base, target, section)),
         } satisfies DiffSectionsOutput);
       } catch (e) {
         return fail(e);
@@ -270,7 +266,7 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     async ({ cik, accession, pattern, item, limit }) => {
       try {
         const ref = await service.resolveFiling(cik, accession);
-        const output: SearchFilingOutput = { result: await service.search(ref, pattern, item, limit ?? 20) };
+        const output: SearchFilingOutput = await service.search(ref, pattern, item, limit ?? 20);
         return json(output);
       } catch (e) {
         return fail(e);

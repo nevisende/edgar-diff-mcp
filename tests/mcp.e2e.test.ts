@@ -44,8 +44,9 @@ const call = async (name: string, arguments_: Record<string, unknown>): Promise<
   const result = await mcp.callTool({ name, arguments: arguments_ });
   const parsed = JSON.parse(text(result)) as Record<string, any>;
   expect(result.structuredContent).toBeDefined();
-  expect(result.structuredContent).toEqual(parsed);
-  return parsed;
+  const structured = result.structuredContent as Record<string, any>;
+  expect(structured).toEqual(parsed);
+  return structured;
 };
 
 beforeAll(async () => {
@@ -66,6 +67,11 @@ describe('MCP surface', () => {
       expect(t.outputSchema).toBeDefined();
       expect(t.outputSchema?.type).toBe('object');
     }
+    for (const name of ['get_section', 'diff_all_items', 'diff_sections', 'search_filing']) {
+      const tool = tools.find((t) => t.name === name);
+      expect(tool?.outputSchema).toMatchObject({ properties: { status: { enum: ['ok', 'not_found'] } } });
+      expect(tool?.outputSchema?.properties).not.toHaveProperty('result');
+    }
     const overview = tools.find((t) => t.name === 'diff_all_items');
     expect(overview?.annotations?.idempotentHint).toBe(true);
     expect(overview?.description).toMatch(/statistics only.*diff_sections/is);
@@ -78,12 +84,13 @@ describe('MCP surface', () => {
     const { results: filings } = await call('list_filings', { cik: '1', form: '10-K' });
     expect(filings).toHaveLength(2);
 
-    const { result: diff } = await call('diff_sections', {
+    const diff = await call('diff_sections', {
       cik: '1',
       baseAccession: filings[1].accession,
       targetAccession: filings[0].accession,
       item: '1A',
     });
+    expect(diff.status).toBe('ok');
     expect(diff.stats).toMatchObject({ added: 1, removed: 1, changed: 1 });
     expect(diff.truncated).toBe(false);
     const added = diff.changes.find((c: { type: string }) => c.type === 'added');
@@ -91,7 +98,7 @@ describe('MCP surface', () => {
   });
 
   it('returns the all-Item overview through the MCP protocol', async () => {
-    const { result: overview } = await call('diff_all_items', {
+    const overview = await call('diff_all_items', {
       cik: '1',
       baseAccession: '0000000001-24-000001',
       targetAccession: '0000000001-25-000001',
@@ -105,7 +112,7 @@ describe('MCP surface', () => {
   });
 
   it('never guesses: unknown item → not_found with availableItems', async () => {
-    const { result: r } = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '9A' });
+    const r = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '9A' });
     expect(r.status).toBe('not_found');
     expect(r.availableItems).toEqual(['1', '1A', '1B', '1C', '7']);
   });
@@ -119,7 +126,7 @@ describe('MCP surface', () => {
   });
 
   it('every change in a diff carries a full citation on its side', async () => {
-    const { result: diff } = await call('diff_sections', {
+    const diff = await call('diff_sections', {
       cik: '1',
       baseAccession: '0000000001-24-000001',
       targetAccession: '0000000001-25-000001',
@@ -140,7 +147,7 @@ describe('MCP surface', () => {
   });
 
   it('returns verbatim paragraphs with per-paragraph citations', async () => {
-    const { result: r } = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '1C', maxParagraphs: 2 });
+    const r = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '1C', maxParagraphs: 2 });
     expect(r.status).toBe('ok');
     expect(r.truncated).toBe(true);
     expect(r.paragraphs[0].citation).toMatchObject({ accession: '0000000001-25-000001', item: '1C', paragraph: 0 });
@@ -151,7 +158,7 @@ describe('MCP surface', () => {
     const items = await call('list_items', { cik: '1', accession: '0000000001-25-000001' });
     expect(items.items.map((item: { key: string }) => item.key)).toEqual(['1', '1A', '1B', '1C', '7']);
 
-    const { result: search } = await call('search_filing', {
+    const search = await call('search_filing', {
       cik: '1',
       accession: '0000000001-25-000001',
       pattern: 'tariffs',
