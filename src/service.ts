@@ -5,7 +5,9 @@ import type { Citation, DiffAllResult, FilingRef, Section, SectionDiff, SectionR
 
 export const MAX_PATTERN_CHARS = 200;
 
-export type DiffResult = ({ status: 'ok' } & SectionDiff) | { status: 'not_found'; side: 'base' | 'target'; detail: SectionResult };
+export type DiffResult =
+  | ({ status: 'ok' } & SectionDiff)
+  | { status: 'not_found'; side: 'base' | 'target'; detail: Extract<SectionResult, { status: 'not_found' }> };
 export type SearchResult =
   | { status: 'ok'; filing: FilingRef; matches: { citation: Citation; text: string }[]; warnings: string[] }
   | { status: 'not_found'; filing: FilingRef; item: string; reason: string; availableItems: string[] };

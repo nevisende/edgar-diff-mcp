@@ -2,6 +2,23 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import type { EdgarClient } from './edgar/client.js';
 import { MAX_PATTERN_CHARS, cite, type FilingService } from './service.js';
+import {
+  DiffAllItemsOutputSchema,
+  DiffSectionsOutputSchema,
+  GetSectionOutputSchema,
+  ListFilingsOutputSchema,
+  ListItemsOutputSchema,
+  ResolveCompanyOutputSchema,
+  SearchFilingOutputSchema,
+  type DiffAllItemsOutput,
+  type DiffSectionsOutput,
+  type DiffSectionsResult,
+  type GetSectionOutput,
+  type ListFilingsOutput,
+  type ListItemsOutput,
+  type ResolveCompanyOutput,
+  type SearchFilingOutput,
+} from './schemas.js';
 import type { FilingRef, ParagraphChange, Section } from './types.js';
 
 /**
@@ -22,7 +39,10 @@ Typical flow: resolve_company → list_filings (form "10-K") → diff_all_items 
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true } as const;
 
-const json = (value: unknown) => ({ content: [{ type: 'text' as const, text: JSON.stringify(value, null, 2) }] });
+const json = <T extends Record<string, unknown>>(value: T) => ({
+  content: [{ type: 'text' as const, text: JSON.stringify(value, null, 2) }],
+  structuredContent: value,
+});
 const fail = (e: unknown) => ({ isError: true, content: [{ type: 'text' as const, text: e instanceof Error ? e.message : String(e) }] });
 
 const CikSchema = z.string().regex(/^\d{1,10}$/, 'CIK must be 1–10 digits').describe('Central Index Key');
@@ -36,12 +56,30 @@ const ItemSchema = z.string().min(1).describe('Item reference: "1A", "7", "Item 
 const withCitation = (ref: FilingRef, section: Section, paragraph: number, text: string) => ({ citation: cite(ref, section, paragraph), text });
 
 /** Attach full citations to diff entries so they are self-describing when copied out of context. */
-function citeChange(c: ParagraphChange, base: FilingRef, target: FilingRef, section: Section) {
-  return {
-    ...c,
-    ...(c.base ? { base: { ...c.base, citation: cite(base, section, c.base.paragraph) } } : {}),
-    ...(c.target ? { target: { ...c.target, citation: cite(target, section, c.target.paragraph) } } : {}),
-  };
+function citeChange(
+  c: ParagraphChange,
+  base: FilingRef,
+  target: FilingRef,
+  section: Section,
+): Extract<DiffSectionsResult, { status: 'ok' }>['changes'][number] {
+  const citedBase = c.base ? { ...c.base, citation: cite(base, section, c.base.paragraph) } : undefined;
+  const citedTarget = c.target ? { ...c.target, citation: cite(target, section, c.target.paragraph) } : undefined;
+  switch (c.type) {
+    case 'added':
+      if (!citedTarget) throw new Error('Internal: added change is missing its target paragraph.');
+      return { type: 'added', target: citedTarget };
+    case 'removed':
+      if (!citedBase) throw new Error('Internal: removed change is missing its base paragraph.');
+      return { type: 'removed', base: citedBase };
+    case 'changed':
+      if (!citedBase || !citedTarget || c.similarity === undefined || !c.wordDiff) {
+        throw new Error('Internal: changed paragraph is missing diff details.');
+      }
+      return { type: 'changed', base: citedBase, target: citedTarget, similarity: c.similarity, wordDiff: c.wordDiff };
+    case 'unchanged':
+      if (!citedBase || !citedTarget) throw new Error('Internal: unchanged paragraph is missing one side.');
+      return { type: 'unchanged', base: citedBase, target: citedTarget };
+  }
 }
 
 export function buildServer(client: EdgarClient, service: FilingService): McpServer {
@@ -51,13 +89,15 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     'resolve_company',
     {
       title: 'Resolve company',
-      description: 'Look up a company by ticker (exact) or name (substring) and return CIK candidates. Returns [] when nothing matches.',
+      description: 'Look up a company by ticker (exact) or name (substring) and return CIK candidates. Returns an empty results array when nothing matches.',
       inputSchema: { query: z.string().min(1).describe('Ticker such as "AAPL", a company name fragment, or a numeric CIK') },
+      outputSchema: ResolveCompanyOutputSchema,
       annotations: READ_ONLY,
     },
     async ({ query }) => {
       try {
-        return json(await client.resolveCompany(query));
+        const output: ResolveCompanyOutput = { results: await client.resolveCompany(query) };
+        return json(output);
       } catch (e) {
         return fail(e);
       }
@@ -74,13 +114,15 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
         form: z.string().optional().describe('Exact form type, e.g. "10-K"'),
         limit: z.number().int().min(1).max(100).optional().describe('Max results, default 20'),
       },
+      outputSchema: ListFilingsOutputSchema,
       annotations: READ_ONLY,
     },
     async ({ cik, form, limit }) => {
       try {
         const opts: { form?: string; limit?: number } = { limit: limit ?? 20 };
         if (form) opts.form = form;
-        return json(await client.listFilings(cik, opts));
+        const output: ListFilingsOutput = { results: await client.listFilings(cik, opts) };
+        return json(output);
       } catch (e) {
         return fail(e);
       }
@@ -93,12 +135,14 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
       title: 'List items in a filing',
       description: 'Parse a filing and list the Items that were found (e.g. 1A Risk Factors, 7 MD&A) with sizes and any parser warnings. Call this before get_section when unsure what exists.',
       inputSchema: { cik: CikSchema, accession: AccessionSchema },
+      outputSchema: ListItemsOutputSchema,
       annotations: READ_ONLY,
     },
     async ({ cik, accession }) => {
       try {
         const ref = await service.resolveFiling(cik, accession);
-        return json({ filing: ref, ...(await service.listItems(ref)) });
+        const output: ListItemsOutput = { filing: ref, ...(await service.listItems(ref)) };
+        return json(output);
       } catch (e) {
         return fail(e);
       }
@@ -117,24 +161,27 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
         item: ItemSchema,
         maxParagraphs: z.number().int().min(1).max(2000).optional().describe('Truncate output after N paragraphs (default 400). Truncation is reported.'),
       },
+      outputSchema: GetSectionOutputSchema,
       annotations: READ_ONLY,
     },
     async ({ cik, accession, item, maxParagraphs }) => {
       try {
         const ref = await service.resolveFiling(cik, accession);
         const r = await service.getSection(ref, item);
-        if (r.status !== 'ok') return json(r);
+        if (r.status !== 'ok') return json({ result: r } satisfies GetSectionOutput);
         const cap = maxParagraphs ?? 400;
         return json({
-          status: 'ok',
-          filing: ref,
-          item: r.section.item,
-          title: r.section.title,
-          totalParagraphs: r.section.paragraphs.length,
-          truncated: r.section.paragraphs.length > cap,
-          warnings: r.section.warnings,
-          paragraphs: r.section.paragraphs.slice(0, cap).map((p) => withCitation(ref, r.section, p.index, p.text)),
-        });
+          result: {
+            status: 'ok',
+            filing: ref,
+            item: r.section.item,
+            title: r.section.title,
+            totalParagraphs: r.section.paragraphs.length,
+            truncated: r.section.paragraphs.length > cap,
+            warnings: r.section.warnings,
+            paragraphs: r.section.paragraphs.slice(0, cap).map((p) => withCitation(ref, r.section, p.index, p.text)),
+          },
+        } satisfies GetSectionOutput);
       } catch (e) {
         return fail(e);
       }
@@ -152,13 +199,15 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
         baseAccession: AccessionSchema.describe('Accession number of the older filing to use as the comparison base'),
         targetAccession: AccessionSchema.describe('Accession number of the newer filing to compare against the base'),
       },
+      outputSchema: DiffAllItemsOutputSchema,
       annotations: READ_ONLY,
     },
     async ({ cik, baseAccession, targetAccession }) => {
       try {
         const base = await service.resolveFiling(cik, baseAccession);
         const target = await service.resolveFiling(cik, targetAccession);
-        return json(await service.diffAll(base, target));
+        const output: DiffAllItemsOutput = { result: await service.diffAll(base, target) };
+        return json(output);
       } catch (e) {
         return fail(e);
       }
@@ -179,6 +228,7 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
         includeUnchanged: z.boolean().optional(),
         maxChanges: z.number().int().min(1).max(1000).optional().describe('Truncate change list after N entries (default 200). Truncation is reported.'),
       },
+      outputSchema: DiffSectionsOutputSchema,
       annotations: READ_ONLY,
     },
     async ({ cik, baseAccession, targetAccession, item, includeUnchanged, maxChanges }) => {
@@ -186,14 +236,16 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
         const base = await service.resolveFiling(cik, baseAccession);
         const target = await service.resolveFiling(cik, targetAccession);
         const d = await service.diff(base, target, item, includeUnchanged ?? false);
-        if (d.status !== 'ok') return json(d);
+        if (d.status !== 'ok') return json({ result: d } satisfies DiffSectionsOutput);
         const cap = maxChanges ?? 200;
         const section: Section = { item: d.item, title: d.title, paragraphs: [], charCount: 0, warnings: [] };
         return json({
-          ...d,
-          truncated: d.changes.length > cap,
-          changes: d.changes.slice(0, cap).map((c) => citeChange(c, base, target, section)),
-        });
+          result: {
+            ...d,
+            truncated: d.changes.length > cap,
+            changes: d.changes.slice(0, cap).map((c) => citeChange(c, base, target, section)),
+          },
+        } satisfies DiffSectionsOutput);
       } catch (e) {
         return fail(e);
       }
@@ -212,12 +264,14 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
         item: ItemSchema.optional(),
         limit: z.number().int().min(1).max(200).optional(),
       },
+      outputSchema: SearchFilingOutputSchema,
       annotations: READ_ONLY,
     },
     async ({ cik, accession, pattern, item, limit }) => {
       try {
         const ref = await service.resolveFiling(cik, accession);
-        return json(await service.search(ref, pattern, item, limit ?? 20));
+        const output: SearchFilingOutput = { result: await service.search(ref, pattern, item, limit ?? 20) };
+        return json(output);
       } catch (e) {
         return fail(e);
       }
