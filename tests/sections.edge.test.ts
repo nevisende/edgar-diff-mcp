@@ -246,6 +246,17 @@ describe('repeated page furniture', () => {
   });
 });
 
+describe('form label noise', () => {
+  it('keeps a body sentence beginning with 10-K while dropping filing labels', () => {
+    const business = splitItems(htmlToLines(fx('form-label-noise-10k.htm')), '10-K').sections.get('1');
+    const paragraphs = business?.paragraphs.map((paragraph) => paragraph.text);
+
+    expect(paragraphs).toContain('10-K filings are required annually by the SEC.');
+    expect(paragraphs).not.toContain('Form 10-K');
+    expect(paragraphs).not.toContain('2025 Form 10-K');
+  });
+});
+
 describe('consecutive placeholder Items', () => {
   const placeholders = splitItems(htmlToLines(fx('placeholder-cluster-10q.htm')), '10-Q').sections;
 

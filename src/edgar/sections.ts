@@ -78,7 +78,9 @@ const ROMAN: Record<string, string> = { '1': 'I', '2': 'II', '3': 'III', '4': 'I
 function isNoise(line: string): boolean {
   if (/^\d{1,3}$/.test(line)) return true; // page numbers
   if (/^table of contents$/i.test(line)) return true;
-  if (/^(?:(?:fiscal\s+)?\d{4}\s+)?(?:form\s+)?10-[kq]\b/i.test(line) && line.length < 60) return true;
+  const formLabel = /^(?:(?:fiscal\s+)?\d{4}\s+)?form\s+10-[kq]\b/i.test(line);
+  const bareFormLabel = /^(?:(?:fiscal\s+)?\d{4}\s+)?10-[kq]\b/i.test(line) && !/[.!?]$/.test(line);
+  if ((formLabel || bareFormLabel) && line.length < 60) return true;
   const part = PART_RE.exec(line);
   if (part && line.length < 60 && !looksLikeSentence(part[2] ?? '')) return true; // "PART II. OTHER INFORMATION"
   return false;
