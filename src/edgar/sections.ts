@@ -362,7 +362,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
       best.section.warnings.push(`Item ${key}: body is only ${best.bodyChars} chars ("${preview}"); likely a placeholder such as "None." or "Not applicable."`);
     }
     const hasRealRival = list.some((candidate) =>
-      candidate !== best && candidate.bodyChars >= MIN_BODY_CHARS && !candidate.pageRef,
+      candidate !== best && !candidate.tocTail && candidate.bodyChars >= MIN_BODY_CHARS && !candidate.pageRef,
     );
     if (hasRealRival) {
       best.section.warnings.push(`Item ${key} heading appeared ${list.length} times outside the table of contents; kept the longest body.`);

@@ -46,3 +46,7 @@ pages. The footer must be removed while an ordinary numeric table row remains ve
 
 `part-item-same-line-10q.htm` is a synthetic quarterly filing whose Part II marker and Item 1A
 heading share one line. The parser must update the Part and still recognize the Item heading.
+
+`toc-tail-duplicate-10k.htm` is a synthetic annual filing whose last table-of-contents row
+absorbs a long preamble. That `tocTail` candidate must not cause a duplicate-heading warning
+when a real body heading exists later in the filing.

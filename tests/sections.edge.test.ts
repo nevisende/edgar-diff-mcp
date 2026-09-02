@@ -79,6 +79,16 @@ describe('table-of-contents defences', () => {
       expect(section.warnings).toEqual([]);
     }
   });
+
+  it('does not count a substantive TOC tail as a duplicate-heading rival', () => {
+    const result = splitItems(htmlToLines(fx('toc-tail-duplicate-10k.htm')), '10-K');
+    const summary = result.sections.get('16');
+
+    expect([...result.sections.keys()]).toEqual(['16']);
+    expect(summary?.paragraphs[0]?.text).toMatch(/^Acme elects to provide/);
+    expect(summary?.warnings).toEqual([]);
+    expect(result.warnings).toEqual([]);
+  });
 });
 
 describe('combined Part and Item headings', () => {
