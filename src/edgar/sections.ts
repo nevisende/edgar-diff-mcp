@@ -29,13 +29,19 @@ export function htmlToLines(html: string): string[] {
     .map((l) => l.replace(/[ \t\r\f\v]+/g, ' ').trim())
     .filter((l) => l.length > 0);
   const furnitureCounts = new Map<string, number>();
+  const navFurnitureCounts = new Map<string, number>();
   for (const line of lines) {
     const normalised = furnitureKey(line);
     if (normalised) furnitureCounts.set(normalised, (furnitureCounts.get(normalised) ?? 0) + 1);
+    const navKey = navFurnitureKey(line);
+    if (navKey) navFurnitureCounts.set(navKey, (navFurnitureCounts.get(navKey) ?? 0) + 1);
   }
   return lines.filter((line) => {
     const normalised = furnitureKey(line);
-    return !normalised || (furnitureCounts.get(normalised) ?? 0) < 3;
+    if (normalised && (furnitureCounts.get(normalised) ?? 0) >= 3) return false;
+    const navKey = navFurnitureKey(line);
+    if (navKey && (navFurnitureCounts.get(navKey) ?? 0) >= 2) return false;
+    return true;
   });
 }
 
@@ -44,6 +50,14 @@ function furnitureKey(line: string): string | undefined {
   if (line.length >= 80 || !/\d/.test(line)) return undefined;
   if (!/form\s+10-[kq]\b|\bpage\s+\d/i.test(line)) return undefined;
   return line.replace(/\d/g, '#');
+}
+
+const NAV_FURNITURE_RE = /^(financial\s+)?table of contents$|^index to (consolidated )?financial statements$|^back to (top|contents)$/i;
+
+/** Short repeated lines serving as in-document navigation links are page furniture. */
+function navFurnitureKey(line: string): string | undefined {
+  if (line.length >= 60) return undefined;
+  return NAV_FURNITURE_RE.test(line) ? line.toLowerCase() : undefined;
 }
 
 const PART_RE = /^part\s+(i{1,3}|iv|[1-4])\s*[,.:\-–—]?\s*(.*)$/i;

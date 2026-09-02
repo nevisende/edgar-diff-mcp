@@ -54,3 +54,8 @@ heading share one line. The parser must update the Part and still recognize the 
 `toc-tail-duplicate-10k.htm` is a synthetic annual filing whose last table-of-contents row
 absorbs a long preamble. That `tocTail` candidate must not cause a duplicate-heading warning
 when a real body heading exists later in the filing.
+
+`navigation-furniture-10k.htm` is a synthetic annual filing containing repeated navigation links
+such as "Financial Table of Contents", "Back to contents", and "Index to financial statements".
+Those repeated navigation links are page furniture and must be dropped from section bodies.
+

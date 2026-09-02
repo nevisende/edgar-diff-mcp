@@ -344,3 +344,24 @@ describe('titleFor', () => {
     expect(titleFor('8-K', '2', '')).toBe('Untitled');
   });
 });
+
+describe('repeated navigation links', () => {
+  const navLines = htmlToLines(fx('navigation-furniture-10k.htm'));
+  const parsed = splitItems(navLines, '10-K').sections;
+
+  it('drops repeated navigation links from lines and bodies', () => {
+    expect(navLines.some((line) => /financial table of contents/i.test(line))).toBe(false);
+    expect(navLines.some((line) => /back to contents/i.test(line))).toBe(false);
+    expect(navLines.some((line) => /index to financial statements/i.test(line))).toBe(false);
+
+    const risk = parsed.get('1A')!;
+    expect(risk.paragraphs.some((p) => /financial table of contents/i.test(p.text))).toBe(false);
+    expect(risk.paragraphs.some((p) => /back to contents/i.test(p.text))).toBe(false);
+    expect(risk.paragraphs).toHaveLength(4);
+
+    const mdna = parsed.get('7')!;
+    expect(mdna.paragraphs.some((p) => /index to financial statements/i.test(p.text))).toBe(false);
+    expect(mdna.paragraphs).toHaveLength(3);
+  });
+});
+
