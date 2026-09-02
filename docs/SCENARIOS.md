@@ -8,7 +8,7 @@ The scenario suite tests the server at two distinct layers:
 
 - **Layer A: Model-free MCP client (`scripts/scenarios-mcp.ts`).** A deterministic client over `@modelcontextprotocol/sdk` connects to `node dist/main.js` via stdio against live SEC EDGAR data. It runs predefined tool call pipelines (`resolve_company` → `list_filings` → `diff_sections` / `diff_all_items` / `search_filing` / `get_section`) and asserts structural ground truth: HTTP/tool status, array lengths, exact paragraph counts, accession identifiers, verbatim substrings, and SEC Archives citation URLs.
 - **Layer B: Agent harnesses with registered MCP tools (`scripts/scenarios-harness.sh`).** The same scenario prompts executed as natural-language tasks across three agent CLIs:
-  1. **Claude Code** with Claude 3.7 Sonnet (`claude -p --model sonnet`)
+  1. **Claude Code** with Claude Sonnet (the `sonnet` alias in Claude Code) (`claude -p --model sonnet`)
   2. **Codex CLI** with GPT-5.6 (`codex exec` running `gpt-5.6-sol`)
   3. **Antigravity CLI** with Gemini 3.8 Flash (`agy -p --model gemini-3.8-flash-high`)
 
@@ -103,7 +103,7 @@ Evaluated across three independent agent harnesses running against the registere
 
 | Harness | Model | Passed |
 |---|---|---:|
-| Claude Code | Claude 3.7 Sonnet | 7/7 |
+| Claude Code | Claude Sonnet (the `sonnet` alias in Claude Code) | 7/7 |
 | Codex CLI | GPT-5.6 (`gpt-5.6-sol`) | 6/7* |
 | Antigravity CLI | Gemini 3.8 Flash (`gemini-3.8-flash-high`) | 7/7 |
 
@@ -178,4 +178,4 @@ Two harness bugs were uncovered and resolved during the exercise:
 
 - **Grading is string-level:** Grader assertions check captured natural-language text using regular expressions and substring predicates. They verify accessions, CIKs, key counts, and distinctive phrases, but do not perform abstract semantic entailment or AST-level quote verification against EDGAR.
 - **Single-run measurements:** Each harness was run once per scenario. Wall-clock times and minor phrasing variations represent single-sample runs rather than statistical averages.
-- **Model mutability:** Upstream model weights, tool-calling heuristics, and provider system prompts evolve over time. These results record the behaviour of Claude 3.7 Sonnet, GPT-5.6 (`gpt-5.6-sol`), and Gemini 3.8 Flash (`gemini-3.8-flash-high`) as tested on 2026-09-02.
+- **Model mutability:** Upstream model weights, tool-calling heuristics, and provider system prompts evolve over time. These results record the behaviour of Claude Sonnet (the `sonnet` alias in Claude Code), GPT-5.6 (`gpt-5.6-sol`), and Gemini 3.8 Flash (`gemini-3.8-flash-high`) as tested on 2026-09-02.
