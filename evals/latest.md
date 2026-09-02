@@ -4,7 +4,7 @@
 
 # EDGAR Parser Evaluation Report
 
-**Run date:** 2026-09-02T20:21:13.502Z
+**Run date:** 2026-09-02T22:02:58.689Z
 **Corpus:** 30 tickers
 
 ## Headline
@@ -351,7 +351,6 @@
 | Item II.5: body is only 302 chars ("Rule 10b5-1 Trading Arrangements"); likely a placeholder such as "None." or "Not applicable." | 1 |
 | 17 repeated running headers merged | 1 |
 | Item I.3: body is only 343 chars ("Reference is made to Berkshire’s Annual Report on Form 10-K "); likely a placeholder such as "None." or "Not applicable." | 1 |
-| Item II.2: body is only 103 chars ("Unregistered Sales of Equity Securities and Use of Proceeds "); likely a placeholder such as "None." or "Not applicable." | 1 |
 | Item II.4: body is only 201 chars ("Information regarding the Company’s mine safety violations a"); likely a placeholder such as "None." or "Not applicable." | 1 |
 | Item II.5: body is only 328 chars ("Berkshire has not adopted a Rule 10b5-1 trading arrangement "); likely a placeholder such as "None." or "Not applicable." | 1 |
 | Item 9B: body is only 294 chars ("During the fiscal quarter ended December 31, 2025, none of o"); likely a placeholder such as "None." or "Not applicable." | 1 |

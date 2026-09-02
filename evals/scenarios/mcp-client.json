@@ -1,6 +1,6 @@
 {
   "kind": "deterministic model-free MCP scenario run",
-  "generatedAt": "2026-09-02T21:25:34.518Z",
+  "generatedAt": "2026-09-02T22:03:11.984Z",
   "server": "node dist/main.js over stdio",
   "userAgent": "edgar-diff-mcp/0.1 furkandenizhan@gmail.com",
   "cacheDir": "/Users/nevisende-mm/Documents/researcher/edgar-diff-mcp/.edgar-cache",
@@ -308,19 +308,25 @@
               "expected": "II.1A"
             },
             {
-              "name": "14 paragraphs were added",
+              "name": "no paragraphs were added",
               "pass": true,
-              "actual": 14,
-              "expected": 14
+              "actual": 0,
+              "expected": 0
             },
             {
-              "name": "10 paragraphs were removed",
+              "name": "no paragraphs were removed",
               "pass": true,
-              "actual": 10,
-              "expected": 10
+              "actual": 0,
+              "expected": 0
             },
             {
-              "name": "one paragraph changed",
+              "name": "no paragraphs changed",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "Item II.1A is identical",
               "pass": true,
               "actual": 1,
               "expected": 1
@@ -335,7 +341,7 @@
         }
       ],
       "notes": "All structural assertions passed.",
-      "excerpt": "April\nCitation: {\"cik\":\"0001067983\",\"accession\":\"0001193125-26-341032\",\"form\":\"10-Q\",\"filingDate\":\"2026-08-10\",\"url\":\"https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm\",\"reportDate\":\"2026-06-30\",\"item\":\"II.1A\",\"itemTitle\":\"Risk Factors\",\"paragraph\":16}"
+      "excerpt": "{\n  \"company\": {\n    \"results\": [\n      {\n        \"cik\": \"0001067983\",\n        \"ticker\": \"BRK-B\",\n        \"name\": \"BERKSHIRE HATHAWAY INC\"\n      }\n    ]\n  },\n  \"filings\": {\n    \"results\": [\n      {\n        \"cik\": \"0001067983\",\n        \"accession\": \"0001193125-26-341032\",\n        \"form\": \"10-Q\",\n        \"filingDate\": \"2026-08-10\",\n        \"url\": \"https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm\",\n        \"reportDate\": \"2026-06-30\"\n      },\n      {\n        \"cik\": \"0001067983\",\n        \"accession\": \"0001193125-26-202243\",\n        \"form\": \"10-Q\",\n        \"filingDate\": \"2026-05-04\",\n        \"url\": \"https://www.sec.gov/Archives/edgar/data/1067983/000119312526202243/brka-20260331.htm\",\n        \"reportDate\": \"2026-03-31\"\n      }\n    ]\n  },\n  \"riskDiff\": {\n    \"status\": \"ok\",\n    \"item\": \"II.1A\",\n    \"title\": \"Risk Factors\",\n    \"targetTitle\": \"Risk Factors\",\n    \"base\": {\n      \"cik\": \"0001067983\",\n      \"accession\": \"0001193125-26-202243\",\n      \"form\": \"10-Q\",\n      \"filingDate\": \"2026-05-04\",\n      \"url\": \"https://www.sec.gov/Archives/edgar/data/1067983/000119312526202243/brka-20260331.htm\",\n      \"reportDate\": \"2026-03-31\"\n    },\n    \"target\": {\n      \"cik\": \"0001067983\",\n      \"accession\": \"0001193125-26-341032\",\n      \"form\": \"10-Q\",\n      \"filingDate\": \"2026-08-10\",\n      \"url\": \"https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm\",\n      \"reportDate\": \"2026-06-30\"\n    },\n    \"stats\": {\n      \"baseParagraphs\": 1,\n      \"targetParagraphs\": 1,\n      \"added\": 0,\n      \"removed\": 0,\n      \"changed\": 0,\n      \"unchanged\": 1,\n      \"similarity\": 1\n    },\n    \"changes\": [],\n    \"warnings\": [],\n    \"offset\": 0,\n    \"returned\": 0,\n    \"total\": 0,\n    \"truncated\": false\n  }\n}"
     },
     {
       "id": "ge-honest-not-found",
@@ -608,7 +614,7 @@
             {
               "name": "diff has substantive changes",
               "pass": true,
-              "actual": 40,
+              "actual": 34,
               "expected": 0
             },
             {

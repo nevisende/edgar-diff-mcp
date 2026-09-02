@@ -1,5 +1,5 @@
 {
-  "runDate": "2026-09-02T20:21:13.502Z",
+  "runDate": "2026-09-02T22:02:58.689Z",
   "corpus": [
     "AAPL",
     "MSFT",
@@ -2463,22 +2463,21 @@
         "I.3": 343,
         "I.4": 1005,
         "II.1": 1022,
-        "II.1A": 1960,
-        "II.2": 103,
+        "II.1A": 538,
+        "II.2": 1311,
         "II.3": 31,
         "II.4": 201,
         "II.5": 328,
         "II.6": 1415
       },
       "flags": [
-        "Item 1A suspiciously short: 1960 chars",
+        "Item 1A suspiciously short: 538 chars",
         "Duplicate heading: Item I.1 heading appeared 2 times outside the table of contents; kept the longest body."
       ],
       "warnings": [
         "Item I.1 heading appeared 2 times outside the table of contents; kept the longest body.",
         "17 repeated running headers merged",
         "Item I.3: body is only 343 chars (\"Reference is made to Berkshire’s Annual Report on Form 10-K \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
-        "Item II.2: body is only 103 chars (\"Unregistered Sales of Equity Securities and Use of Proceeds \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item II.3: body is only 31 chars (\"Defaults Upon Senior Securities\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item II.4: body is only 201 chars (\"Information regarding the Company’s mine safety violations a\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
         "Item II.5: body is only 328 chars (\"Berkshire has not adopted a Rule 10b5-1 trading arrangement \"); likely a placeholder such as \"None.\" or \"Not applicable.\""
@@ -2848,7 +2847,7 @@
         "11": 952,
         "12": 499,
         "13": 442,
-        "14": 316387,
+        "14": 315199,
         "15": 1684,
         "16": 14252,
         "1A": 34421,
@@ -2972,7 +2971,7 @@
         "11": 951,
         "12": 499,
         "13": 442,
-        "14": 308035,
+        "14": 306955,
         "15": 1673,
         "16": 13948,
         "1A": 37541,

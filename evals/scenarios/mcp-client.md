@@ -1,6 +1,6 @@
 # Deterministic MCP-client scenarios
 
-Generated 2026-09-02T21:25:34.518Z. Model-free run through a real MCP client using stdio against `node dist/main.js` and real SEC EDGAR data.
+Generated 2026-09-02T22:03:11.984Z. Model-free run through a real MCP client using stdio against `node dist/main.js` and real SEC EDGAR data.
 
 **Result: 7/7 passed.**
 
@@ -79,8 +79,74 @@ Citation: {"cik":"0000320193","accession":"0000320193-25-000079","form":"10-K","
 ### brk-10q-part-ii
 
 ```text
-April
-Citation: {"cik":"0001067983","accession":"0001193125-26-341032","form":"10-Q","filingDate":"2026-08-10","url":"https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm","reportDate":"2026-06-30","item":"II.1A","itemTitle":"Risk Factors","paragraph":16}
+{
+  "company": {
+    "results": [
+      {
+        "cik": "0001067983",
+        "ticker": "BRK-B",
+        "name": "BERKSHIRE HATHAWAY INC"
+      }
+    ]
+  },
+  "filings": {
+    "results": [
+      {
+        "cik": "0001067983",
+        "accession": "0001193125-26-341032",
+        "form": "10-Q",
+        "filingDate": "2026-08-10",
+        "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+        "reportDate": "2026-06-30"
+      },
+      {
+        "cik": "0001067983",
+        "accession": "0001193125-26-202243",
+        "form": "10-Q",
+        "filingDate": "2026-05-04",
+        "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526202243/brka-20260331.htm",
+        "reportDate": "2026-03-31"
+      }
+    ]
+  },
+  "riskDiff": {
+    "status": "ok",
+    "item": "II.1A",
+    "title": "Risk Factors",
+    "targetTitle": "Risk Factors",
+    "base": {
+      "cik": "0001067983",
+      "accession": "0001193125-26-202243",
+      "form": "10-Q",
+      "filingDate": "2026-05-04",
+      "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526202243/brka-20260331.htm",
+      "reportDate": "2026-03-31"
+    },
+    "target": {
+      "cik": "0001067983",
+      "accession": "0001193125-26-341032",
+      "form": "10-Q",
+      "filingDate": "2026-08-10",
+      "url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm",
+      "reportDate": "2026-06-30"
+    },
+    "stats": {
+      "baseParagraphs": 1,
+      "targetParagraphs": 1,
+      "added": 0,
+      "removed": 0,
+      "changed": 0,
+      "unchanged": 1,
+      "similarity": 1
+    },
+    "changes": [],
+    "warnings": [],
+    "offset": 0,
+    "returned": 0,
+    "total": 0,
+    "truncated": false
+  }
+}
 ```
 
 ### ge-honest-not-found
