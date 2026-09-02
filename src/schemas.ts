@@ -75,6 +75,7 @@ export const ListItemsOutputSchema = z.object({
       title: z.string(),
       paragraphs: z.number().int().nonnegative(),
       chars: z.number().int().nonnegative(),
+      warnings: z.array(z.string()).describe('Parser warnings specific to this Item.'),
     }),
   ),
   warnings: z.array(z.string()),

@@ -177,6 +177,7 @@ describe('MCP surface', () => {
   it('returns typed item listings and cited search matches', async () => {
     const items = await call('list_items', { cik: '1', accession: '0000000001-25-000001' });
     expect(items.items.map((item: { key: string }) => item.key)).toEqual(['1', '1A', '1B', '1C', '7']);
+    expect(items.items.find((item: { key: string }) => item.key === '1B').warnings.join(' ')).toMatch(/placeholder/);
 
     const search = await call('search_filing', {
       cik: '1',
@@ -188,6 +189,14 @@ describe('MCP surface', () => {
     expect(search.matches[0].citation).toMatchObject({ item: '1A', paragraph: 4 });
     expect(search.matches[0].text).toMatch(/tariffs/);
     expect(search.truncated).toBe(false);
+
+    const warnedSearch = await call('search_filing', {
+      cik: '1',
+      accession: '0000000001-25-000001',
+      pattern: 'None',
+      item: '1B',
+    });
+    expect(warnedSearch.warnings.join(' ')).toMatch(/placeholder/);
   });
 
   it('makes word-level diffs opt-in', async () => {

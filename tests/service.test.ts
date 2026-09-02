@@ -74,6 +74,8 @@ describe('FilingService', () => {
     const ref = await service.resolveFiling('1', '0000000001-24-000001');
     const { items, warnings } = await service.listItems(ref);
     expect(items.map((i) => i.key)).toEqual(['1', '1A', '1B', '1C', '7']);
+    expect(items.find((item) => item.key === '1B')?.warnings.join(' ')).toMatch(/placeholder/);
+    expect(items.find((item) => item.key === '1A')?.warnings).toEqual([]);
     expect(warnings).toEqual([]);
   });
 
@@ -185,6 +187,16 @@ describe('FilingService', () => {
     expect(r.matches).toHaveLength(1);
     expect(r.matches[0]!.citation).toMatchObject({ item: '1A', itemTitle: 'Risk Factors', accession: '0000000001-25-000001' });
     expect(r.matches[0]!.text).toMatch(/^Changes in trade policy/);
+  });
+
+  it('returns de-duplicated warnings from the sections searched', async () => {
+    const ref = await service.resolveFiling('1', '0000000001-24-000001');
+    const r = await service.search(ref, 'None', '1B');
+    expect(r.status).toBe('ok');
+    if (r.status !== 'ok') return;
+    expect(r.warnings).toHaveLength(1);
+    expect(r.warnings[0]).toMatch(/placeholder/);
+    expect(new Set(r.warnings).size).toBe(r.warnings.length);
   });
 
   it('search on an unknown item is not_found, not an empty list', async () => {

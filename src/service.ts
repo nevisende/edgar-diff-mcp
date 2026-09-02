@@ -44,11 +44,17 @@ export class FilingService {
     return result;
   }
 
-  async listItems(ref: FilingRef): Promise<{ items: { key: string; title: string; paragraphs: number; chars: number }[]; warnings: string[] }> {
+  async listItems(ref: FilingRef): Promise<{ items: { key: string; title: string; paragraphs: number; chars: number; warnings: string[] }[]; warnings: string[] }> {
     const { sections, warnings } = await this.parse(ref);
     return {
-      items: [...sections.values()].map((s) => ({ key: s.item, title: s.title, paragraphs: s.paragraphs.length, chars: s.charCount })),
-      warnings,
+      items: [...sections.values()].map((s) => ({
+        key: s.item,
+        title: s.title,
+        paragraphs: s.paragraphs.length,
+        chars: s.charCount,
+        warnings: [...new Set(s.warnings)],
+      })),
+      warnings: [...new Set(warnings)],
     };
   }
 
@@ -144,16 +150,17 @@ export class FilingService {
       if ('error' in r) return { status: 'not_found', filing: ref, item, reason: r.error, availableItems: keys };
       pool = pool.filter((s) => s.item === r.key);
     }
+    const searchWarnings = [...new Set([...warnings, ...pool.flatMap((section) => section.warnings)])];
     const matches: { citation: Citation; text: string }[] = [];
     for (const s of pool) {
       for (const p of s.paragraphs) {
         if (re.test(p.text)) {
           matches.push({ citation: cite(ref, s, p.index), text: p.text });
-          if (matches.length >= limit) return { status: 'ok', filing: ref, matches, warnings };
+          if (matches.length >= limit) return { status: 'ok', filing: ref, matches, warnings: searchWarnings };
         }
       }
     }
-    return { status: 'ok', filing: ref, matches, warnings };
+    return { status: 'ok', filing: ref, matches, warnings: searchWarnings };
   }
 }
 
