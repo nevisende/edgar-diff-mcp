@@ -56,3 +56,37 @@ describe('EdgarClient paginated submissions', () => {
     await expect(client.listFilings('1', { form: '10-K', limit: 1 })).rejects.toThrow(/did not match the expected shape/);
   });
 });
+
+describe('EdgarClient request retries', () => {
+  it('retries network errors and succeeds on the third attempt', async () => {
+    let attempts = 0;
+    const client = new EdgarClient({
+      userAgent: 'retry tests@example.com',
+      minIntervalMs: 0,
+      fetchImpl: async () => {
+        attempts++;
+        if (attempts < 3) throw new TypeError('socket closed');
+        return new Response('recovered', { status: 200 });
+      },
+    });
+
+    await expect(client.getText('https://example.test/retry')).resolves.toBe('recovered');
+    expect(attempts).toBe(3);
+  });
+
+  it('stops after three 429 responses and includes the URL in the error', async () => {
+    let attempts = 0;
+    const client = new EdgarClient({
+      userAgent: 'retry tests@example.com',
+      minIntervalMs: 0,
+      fetchImpl: async () => {
+        attempts++;
+        return new Response('slow down', { status: 429, statusText: 'Too Many Requests' });
+      },
+    });
+    const url = 'https://example.test/always-throttled';
+
+    await expect(client.getText(url)).rejects.toThrow(new RegExp(`429.*${url}`));
+    expect(attempts).toBe(3);
+  });
+});

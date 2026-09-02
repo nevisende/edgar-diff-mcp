@@ -38,6 +38,9 @@ export interface ListFilingsOptions {
 const TICKERS_URL = 'https://www.sec.gov/files/company_tickers.json';
 const SUBMISSIONS_URL = (cik: string) => `https://data.sec.gov/submissions/CIK${cik}.json`;
 const SUBMISSIONS_PAGE_URL = (name: string) => `https://data.sec.gov/submissions/${name}`;
+const REQUEST_TIMEOUT_MS = 30_000;
+const MAX_ATTEMPTS = 3;
+const RETRY_BASE_DELAY_MS = 500;
 
 /** Filings are immutable and safe to cache forever; indexes change daily and are not. */
 export function isImmutableUrl(url: string): boolean {
@@ -94,28 +97,56 @@ export class EdgarClient {
     this.cache = opts.cache;
   }
 
-  /** Serialised, rate-limited GET returning text. */
+  /** Rate-limited GET returning text. Concurrent responses do not block later request starts. */
   async getText(url: string): Promise<string> {
     const cacheable = isImmutableUrl(url);
     const cached = cacheable ? await this.cache?.get(url) : undefined;
     if (cached !== undefined) return cached;
 
-    const run = async (): Promise<string> => {
-      const wait = this.lastRequestAt + this.minInterval - Date.now();
-      if (wait > 0) await new Promise((r) => setTimeout(r, wait));
-      this.lastRequestAt = Date.now();
-      const res = await this.fetchImpl(url, {
-        headers: { 'User-Agent': this.ua, 'Accept-Encoding': 'gzip, deflate', Accept: '*/*' },
-      });
-      if (!res.ok) throw new Error(`EDGAR ${res.status} ${res.statusText} for ${url}`);
-      const text = await res.text();
-      if (cacheable) await this.cache?.set(url, text);
-      return text;
-    };
+    let lastError: Error | undefined;
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+      await this.waitForRequestSlot();
+      let res: Response;
+      try {
+        res = await this.fetchImpl(url, {
+          headers: { 'User-Agent': this.ua, 'Accept-Encoding': 'gzip, deflate', Accept: '*/*' },
+          signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        });
+      } catch (error) {
+        lastError = new Error(`EDGAR request failed for ${url}: ${errorMessage(error)}`);
+        if (attempt < MAX_ATTEMPTS) await delay(RETRY_BASE_DELAY_MS * 2 ** (attempt - 1));
+        continue;
+      }
 
-    const result = this.queue.then(run, run);
-    this.queue = result.then(() => undefined, () => undefined);
-    return result;
+      if (!res.ok) {
+        const error = new Error(`EDGAR ${res.status} ${res.statusText} for ${url}`);
+        if (res.status !== 429 && res.status < 500) throw error;
+        lastError = error;
+        if (attempt < MAX_ATTEMPTS) await delay(RETRY_BASE_DELAY_MS * 2 ** (attempt - 1));
+        continue;
+      }
+
+      try {
+        const text = await res.text();
+        if (cacheable) await this.cache?.set(url, text);
+        return text;
+      } catch (error) {
+        lastError = new Error(`EDGAR response failed for ${url}: ${errorMessage(error)}`);
+        if (attempt < MAX_ATTEMPTS) await delay(RETRY_BASE_DELAY_MS * 2 ** (attempt - 1));
+      }
+    }
+    throw lastError ?? new Error(`EDGAR request failed for ${url}`);
+  }
+
+  private async waitForRequestSlot(): Promise<void> {
+    const takeSlot = async (): Promise<void> => {
+      const wait = this.lastRequestAt + this.minInterval - Date.now();
+      if (wait > 0) await delay(wait);
+      this.lastRequestAt = Date.now();
+    };
+    const slot = this.queue.then(takeSlot, takeSlot);
+    this.queue = slot;
+    await slot;
   }
 
   /** Fetch + validate. Schema drift at EDGAR becomes a readable error, not a TypeError deep in a loop. */
@@ -223,4 +254,12 @@ export class EdgarClient {
   async fetchDocument(ref: FilingRef): Promise<string> {
     return this.getText(ref.url);
   }
+}
+
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
 }
