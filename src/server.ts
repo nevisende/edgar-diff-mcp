@@ -35,7 +35,7 @@ import type { FilingRef, ParagraphChange, Section } from './types.js';
 const INSTRUCTIONS = `edgar-diff-mcp is read-only and returns SEC filing text verbatim.
 Quote only what a tool returns and keep its citation (accession, item, paragraph, url) next to the quote.
 If a tool returns status "not_found", say so and use availableItems — do not infer the missing section.
-Large Items are truncated honestly. Retry with higher maxParagraphs/maxChanges and maxChars (up to 400000) to retrieve a larger page.
+Large results are paged honestly. Raise maxChars or call again with offset = offset + returned to retrieve the next page.
 Typical flow: resolve_company → list_filings (form "10-K") → diff_all_items → diff_sections(item "1A") or get_section.`;
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true } as const;
@@ -92,10 +92,17 @@ function citeChange(
   }
 }
 
-function truncateList<T>(entries: T[], maxEntries: number, maxEntriesName: string, maxChars: number): { entries: T[]; truncated: boolean; truncatedReason?: string } {
-  const kept = entries.slice(0, maxEntries);
+function paginateList<T>(entries: T[], offset: number, maxEntries: number, maxEntriesName: string, maxChars: number): {
+  entries: T[];
+  offset: number;
+  returned: number;
+  total: number;
+  truncated: boolean;
+  truncatedReason?: string;
+} {
+  const kept = entries.slice(offset, offset + maxEntries);
   const reasons: string[] = [];
-  if (kept.length < entries.length) reasons.push(`${maxEntriesName}=${maxEntries}`);
+  if (offset + kept.length < entries.length) reasons.push(`${maxEntriesName}=${maxEntries}`);
   let charTruncated = false;
   while (JSON.stringify(kept).length > maxChars && kept.length > 0) {
     kept.pop();
@@ -104,12 +111,16 @@ function truncateList<T>(entries: T[], maxEntries: number, maxEntriesName: strin
   if (charTruncated) reasons.push(`maxChars=${maxChars}`);
   return {
     entries: kept,
+    offset,
+    returned: kept.length,
+    total: entries.length,
     truncated: reasons.length > 0,
     ...(reasons.length > 0 ? { truncatedReason: `Trailing entries were omitted to satisfy ${reasons.join(' and ')}.` } : {}),
   };
 }
 
 const MaxCharsSchema = z.number().int().min(2).max(400_000).optional().describe('Maximum characters in the serialized paragraph/change/match list (default 60000). Truncation is reported.');
+const OffsetSchema = z.number().int().nonnegative().optional().describe('Zero-based entry index to start from (default 0). For another page, use offset + returned from the prior response.');
 
 export function buildServer(client: EdgarClient, service: FilingService): McpServer {
   const server = new McpServer({ name: 'edgar-diff-mcp', version: '0.1.0' }, { instructions: INSTRUCTIONS });
@@ -183,25 +194,27 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     {
       title: 'Get section (verbatim)',
       description:
-        'Return the verbatim paragraphs of one Item from a filing, each with a citation. If the Item cannot be located the result is status "not_found" together with the Items that are available — never a guess. Short placeholder bodies ("None.") are returned with a warning. Large results are truncated according to maxParagraphs and maxChars.',
+        'Return a page of verbatim paragraphs from one Item, each with a citation. If the Item cannot be located the result is status "not_found" together with the Items that are available — never a guess. Short placeholder bodies ("None.") are returned with a warning. Raise maxChars or call again with offset = offset + returned for the next page.',
       inputSchema: {
         cik: CikSchema,
         accession: AccessionSchema,
         item: ItemSchema,
-        maxParagraphs: z.number().int().min(1).max(2000).optional().describe('Truncate output after N paragraphs (default 400). Truncation is reported.'),
+        offset: OffsetSchema,
+        maxParagraphs: z.number().int().min(1).max(2000).optional().describe('Maximum paragraphs in this page (default 400).'),
         maxChars: MaxCharsSchema,
       },
       outputSchema: GetSectionOutputSchema,
       annotations: READ_ONLY,
     },
-    async ({ cik, accession, item, maxParagraphs, maxChars }) => {
+    async ({ cik, accession, item, offset, maxParagraphs, maxChars }) => {
       try {
         const ref = await service.resolveFiling(cik, accession);
         const r = await service.getSection(ref, item);
         if (r.status !== 'ok') return json(r satisfies GetSectionOutput);
         const cap = maxParagraphs ?? 400;
-        const limited = truncateList(
+        const limited = paginateList(
           r.section.paragraphs.map((p) => withCitation(ref, r.section, p.index, p.text)),
+          offset ?? 0,
           cap,
           'maxParagraphs',
           maxChars ?? 60_000,
@@ -211,7 +224,9 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
           filing: ref,
           item: r.section.item,
           title: r.section.title,
-          totalParagraphs: r.section.paragraphs.length,
+          offset: limited.offset,
+          returned: limited.returned,
+          total: limited.total,
           truncated: limited.truncated,
           ...(limited.truncatedReason ? { truncatedReason: limited.truncatedReason } : {}),
           warnings: r.section.warnings,
@@ -254,35 +269,40 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     {
       title: 'Diff one Item across two filings',
       description:
-        'Compare the same Item (e.g. "1A" Risk Factors) between a base filing and a target filing. Returns added, removed and changed paragraphs — verbatim, each with a citation on its side — plus summary stats. Word-level edit scripts are omitted by default; set includeWordDiff to true to include them. Unchanged paragraphs are omitted unless includeUnchanged is true. Large results are truncated according to maxChanges and maxChars.',
+        'Compare the same Item (e.g. "1A" Risk Factors) between a base filing and a target filing. Returns a page of added, removed and changed paragraphs — verbatim, each with a citation on its side — plus summary stats. Word-level edit scripts are omitted by default; set includeWordDiff to true to include them. Unchanged paragraphs are omitted unless includeUnchanged is true. Raise maxChars or call again with offset = offset + returned for the next page.',
       inputSchema: {
         cik: CikSchema,
         baseAccession: AccessionSchema.describe('Older filing'),
         targetAccession: AccessionSchema.describe('Newer filing'),
         item: ItemSchema,
+        offset: OffsetSchema,
         includeUnchanged: z.boolean().optional(),
         includeWordDiff: z.boolean().optional().describe('Include word-level edit scripts for changed paragraphs (default false).'),
-        maxChanges: z.number().int().min(1).max(1000).optional().describe('Truncate change list after N entries (default 200). Truncation is reported.'),
+        maxChanges: z.number().int().min(1).max(1000).optional().describe('Maximum changes in this page (default 200).'),
         maxChars: MaxCharsSchema,
       },
       outputSchema: DiffSectionsOutputSchema,
       annotations: READ_ONLY,
     },
-    async ({ cik, baseAccession, targetAccession, item, includeUnchanged, includeWordDiff, maxChanges, maxChars }) => {
+    async ({ cik, baseAccession, targetAccession, item, offset, includeUnchanged, includeWordDiff, maxChanges, maxChars }) => {
       try {
         const base = await service.resolveFiling(cik, baseAccession);
         const target = await service.resolveFiling(cik, targetAccession);
         const d = await service.diff(base, target, item, includeUnchanged ?? false);
         if (d.status !== 'ok') return json(d satisfies DiffSectionsOutput);
         const cap = maxChanges ?? 200;
-        const limited = truncateList(
+        const limited = paginateList(
           d.changes.map((c) => citeChange(c, base, target, d.item, d.title, d.targetTitle, includeWordDiff ?? false)),
+          offset ?? 0,
           cap,
           'maxChanges',
           maxChars ?? 60_000,
         );
         return json({
           ...d,
+          offset: limited.offset,
+          returned: limited.returned,
+          total: limited.total,
           truncated: limited.truncated,
           ...(limited.truncatedReason ? { truncatedReason: limited.truncatedReason } : {}),
           changes: limited.entries,
@@ -297,27 +317,31 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     'search_filing',
     {
       title: 'Search a filing (verbatim matches)',
-      description: `Regex search across a filing (or one Item). Returns the full verbatim paragraph for each match with a citation. Case-insensitive; pattern ≤ ${MAX_PATTERN_CHARS} chars. Unknown item → status "not_found". Large results are truncated according to maxChars.`,
+      description: `Regex search across a filing (or one Item). Returns a page of full verbatim paragraphs with citations. Case-insensitive; pattern ≤ ${MAX_PATTERN_CHARS} chars. Unknown item → status "not_found". Raise maxChars or call again with offset = offset + returned for the next page.`,
       inputSchema: {
         cik: CikSchema,
         accession: AccessionSchema,
         pattern: z.string().min(1).max(MAX_PATTERN_CHARS).describe('JavaScript regular expression, e.g. "tariff|export control"'),
         item: ItemSchema.optional(),
-        limit: z.number().int().min(1).max(200).optional(),
+        offset: OffsetSchema,
+        limit: z.number().int().min(1).max(200).optional().describe('Maximum matches in this page (default 20).'),
         maxChars: MaxCharsSchema,
       },
       outputSchema: SearchFilingOutputSchema,
       annotations: READ_ONLY,
     },
-    async ({ cik, accession, pattern, item, limit, maxChars }) => {
+    async ({ cik, accession, pattern, item, offset, limit, maxChars }) => {
       try {
         const ref = await service.resolveFiling(cik, accession);
-        const result = await service.search(ref, pattern, item, limit ?? 20);
+        const result = await service.search(ref, pattern, item);
         if (result.status !== 'ok') return json(result satisfies SearchFilingOutput);
-        const limited = truncateList(result.matches, result.matches.length, 'limit', maxChars ?? 60_000);
+        const limited = paginateList(result.matches, offset ?? 0, limit ?? 20, 'limit', maxChars ?? 60_000);
         const output: SearchFilingOutput = {
           ...result,
           matches: limited.entries,
+          offset: limited.offset,
+          returned: limited.returned,
+          total: limited.total,
           truncated: limited.truncated,
           ...(limited.truncatedReason ? { truncatedReason: limited.truncatedReason } : {}),
         };

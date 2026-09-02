@@ -95,7 +95,7 @@ describe('MCP surface', () => {
     });
     expect(diff.status).toBe('ok');
     expect(diff.stats).toMatchObject({ added: 1, removed: 1, changed: 1, similarity: 0.827 });
-    expect(diff.truncated).toBe(false);
+    expect(diff).toMatchObject({ offset: 0, returned: 3, total: 3, truncated: false });
     expect(diff.changes.find((c: { type: string }) => c.type === 'changed')).not.toHaveProperty('wordDiff');
     const added = diff.changes.find((c: { type: string }) => c.type === 'added');
     expect(added.target.text).toMatch(/tariffs/);
@@ -140,11 +140,28 @@ describe('MCP surface', () => {
     expect(diff.truncated).toBe(true);
     expect(diff.truncatedReason).toMatch(/maxChanges=2/);
     expect(diff.changes).toHaveLength(2);
+    expect(diff).toMatchObject({ offset: 0, returned: 2, total: 3 });
     for (const c of diff.changes) {
       for (const side of ['base', 'target'] as const) {
         if (c[side]) expect(c[side].citation).toMatchObject({ cik: '0000000001', item: '1A', itemTitle: 'Risk Factors', paragraph: c[side].paragraph });
       }
     }
+  });
+
+  it('pages through a fixture diff without losing or repeating changes', async () => {
+    const args = {
+      cik: '1',
+      baseAccession: '0000000001-24-000001',
+      targetAccession: '0000000001-25-000001',
+      item: '1A',
+    };
+    const full = await call('diff_sections', args);
+    const first = await call('diff_sections', { ...args, maxChanges: 2 });
+    const second = await call('diff_sections', { ...args, maxChanges: 2, offset: first.offset + first.returned });
+
+    expect(first).toMatchObject({ offset: 0, returned: 2, total: full.total, truncated: true });
+    expect(second).toMatchObject({ offset: 2, returned: 1, total: full.total, truncated: false });
+    expect([...first.changes, ...second.changes]).toEqual(full.changes);
   });
 
   it('uses each filing\'s own Item title in diff citations', async () => {
@@ -162,16 +179,31 @@ describe('MCP surface', () => {
 
   it('announces its rules to the client via instructions', async () => {
     expect(mcp.getInstructions()).toMatch(/verbatim/i);
-    expect(mcp.getInstructions()).toMatch(/maxParagraphs.*maxChanges.*maxChars/i);
+    expect(mcp.getInstructions()).toMatch(/raise maxChars.*offset = offset \+ returned/i);
+    const { tools } = await mcp.listTools();
+    for (const name of ['get_section', 'diff_sections', 'search_filing']) {
+      expect(tools.find((tool) => tool.name === name)?.description).toMatch(/offset = offset \+ returned/i);
+    }
   });
 
   it('returns verbatim paragraphs with per-paragraph citations', async () => {
     const r = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '1C', maxParagraphs: 2 });
     expect(r.status).toBe('ok');
-    expect(r.truncated).toBe(true);
+    expect(r).toMatchObject({ offset: 0, returned: 2, truncated: true });
+    expect(r.total).toBeGreaterThan(r.returned);
     expect(r.truncatedReason).toMatch(/maxParagraphs=2/);
     expect(r.paragraphs[0].citation).toMatchObject({ accession: '0000000001-25-000001', item: '1C', paragraph: 0 });
     expect(r.paragraphs[0].text).toMatch(/^We maintain a cybersecurity risk management program/);
+
+    const next = await call('get_section', {
+      cik: '1',
+      accession: '0000000001-25-000001',
+      item: '1C',
+      offset: r.offset + r.returned,
+      maxParagraphs: 2,
+    });
+    expect(next).toMatchObject({ offset: 2, total: r.total });
+    expect(next.paragraphs[0].citation.paragraph).toBe(2);
   });
 
   it('returns typed item listings and cited search matches', async () => {
@@ -188,7 +220,7 @@ describe('MCP surface', () => {
     expect(search.status).toBe('ok');
     expect(search.matches[0].citation).toMatchObject({ item: '1A', paragraph: 4 });
     expect(search.matches[0].text).toMatch(/tariffs/);
-    expect(search.truncated).toBe(false);
+    expect(search).toMatchObject({ offset: 0, returned: 1, total: 1, truncated: false });
 
     const warnedSearch = await call('search_filing', {
       cik: '1',
@@ -197,6 +229,24 @@ describe('MCP surface', () => {
       item: '1B',
     });
     expect(warnedSearch.warnings.join(' ')).toMatch(/placeholder/);
+
+    const allMatches = await call('search_filing', {
+      cik: '1',
+      accession: '0000000001-25-000001',
+      pattern: '.',
+      item: '1A',
+      limit: 200,
+    });
+    const matchPage = await call('search_filing', {
+      cik: '1',
+      accession: '0000000001-25-000001',
+      pattern: '.',
+      item: '1A',
+      offset: 1,
+      limit: 2,
+    });
+    expect(matchPage).toMatchObject({ offset: 1, returned: 2, total: allMatches.total, truncated: true });
+    expect(matchPage.matches).toEqual(allMatches.matches.slice(1, 3));
   });
 
   it('makes word-level diffs opt-in', async () => {

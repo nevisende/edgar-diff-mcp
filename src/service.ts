@@ -133,7 +133,7 @@ export class FilingService {
   }
 
   /** Verbatim paragraphs matching a regex, with citations. Unknown item → not_found, never an empty list. */
-  async search(ref: FilingRef, pattern: string, item?: string, limit = 20): Promise<SearchResult> {
+  async search(ref: FilingRef, pattern: string, item?: string, limit?: number): Promise<SearchResult> {
     if (pattern.length > MAX_PATTERN_CHARS) throw new Error(`Pattern longer than ${MAX_PATTERN_CHARS} chars; simplify it.`);
     if (hasNestedQuantifier(pattern)) throw new Error('Unsafe pattern: nested quantifiers such as "(a+)+" are not allowed.');
     let re: RegExp;
@@ -156,7 +156,9 @@ export class FilingService {
       for (const p of s.paragraphs) {
         if (re.test(p.text)) {
           matches.push({ citation: cite(ref, s, p.index), text: p.text });
-          if (matches.length >= limit) return { status: 'ok', filing: ref, matches, warnings: searchWarnings };
+          if (limit !== undefined && matches.length >= limit) {
+            return { status: 'ok', filing: ref, matches, warnings: searchWarnings };
+          }
         }
       }
     }

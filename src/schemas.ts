@@ -93,7 +93,9 @@ export type GetSectionOutput =
       filing: FilingRef;
       item: string;
       title: string;
-      totalParagraphs: number;
+      offset: number;
+      returned: number;
+      total: number;
       truncated: boolean;
       truncatedReason?: string;
       warnings: string[];
@@ -106,7 +108,9 @@ export const GetSectionOutputSchema = z.object({
   filing: FilingRefSchema,
   item: z.string(),
   title: z.string().optional().describe('Present only when status is "ok".'),
-  totalParagraphs: z.number().int().nonnegative().optional().describe('Present only when status is "ok".'),
+  offset: z.number().int().nonnegative().optional().describe('Page start index; present only when status is "ok".'),
+  returned: z.number().int().nonnegative().optional().describe('Entries in this page; present only when status is "ok".'),
+  total: z.number().int().nonnegative().optional().describe('Total entries before paging; present only when status is "ok".'),
   truncated: z.boolean().optional().describe('Present only when status is "ok".'),
   truncatedReason: z.string().optional().describe('Present only when status is "ok" and truncated is true.'),
   warnings: z.array(z.string()).optional().describe('Present only when status is "ok".'),
@@ -161,6 +165,9 @@ export type DiffSectionsResult =
       stats: DiffStats;
       changes: z.infer<typeof CitedParagraphChangeSchema>[];
       warnings: string[];
+      offset: number;
+      returned: number;
+      total: number;
       truncated: boolean;
       truncatedReason?: string;
     }
@@ -177,6 +184,9 @@ export const DiffSectionsOutputSchema = z.object({
   stats: DiffStatsSchema.optional().describe('Present only when status is "ok".'),
   changes: z.array(CitedParagraphChangeSchema).optional().describe('Present only when status is "ok".'),
   warnings: z.array(z.string()).optional().describe('Present only when status is "ok".'),
+  offset: z.number().int().nonnegative().optional().describe('Page start index; present only when status is "ok".'),
+  returned: z.number().int().nonnegative().optional().describe('Entries in this page; present only when status is "ok".'),
+  total: z.number().int().nonnegative().optional().describe('Total entries before paging; present only when status is "ok".'),
   truncated: z.boolean().optional().describe('Present only when status is "ok".'),
   truncatedReason: z.string().optional().describe('Present only when status is "ok" and truncated is true.'),
   side: z.enum(['base', 'target']).optional().describe('Present only when status is "not_found".'),
@@ -201,13 +211,22 @@ export const DiffAllItemsOutputSchema = z.object({
 });
 
 export type SearchFilingOutput =
-  | (Extract<SearchResult, { status: 'ok' }> & { truncated: boolean; truncatedReason?: string })
+  | (Extract<SearchResult, { status: 'ok' }> & {
+      offset: number;
+      returned: number;
+      total: number;
+      truncated: boolean;
+      truncatedReason?: string;
+    })
   | Extract<SearchResult, { status: 'not_found' }>;
 export const SearchFilingOutputSchema = z.object({
   status: z.enum(['ok', 'not_found']),
   filing: FilingRefSchema,
   matches: z.array(CitedParagraphSchema).optional().describe('Present only when status is "ok".'),
   warnings: z.array(z.string()).optional().describe('Present only when status is "ok".'),
+  offset: z.number().int().nonnegative().optional().describe('Page start index; present only when status is "ok".'),
+  returned: z.number().int().nonnegative().optional().describe('Entries in this page; present only when status is "ok".'),
+  total: z.number().int().nonnegative().optional().describe('Total entries before paging; present only when status is "ok".'),
   truncated: z.boolean().optional().describe('Present only when status is "ok".'),
   truncatedReason: z.string().optional().describe('Present only when status is "ok" and truncated is true.'),
   item: z.string().optional().describe('Present only when status is "not_found".'),
