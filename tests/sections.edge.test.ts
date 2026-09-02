@@ -165,6 +165,17 @@ describe('running Item headers', () => {
   });
 });
 
+describe('repeated page furniture', () => {
+  const furnitureLines = htmlToLines(fx('repeated-page-footer-10k.htm'));
+  const furniture = splitItems(furnitureLines, '10-K').sections.get('1A')!;
+
+  it('drops repeated Form 10-K footers but preserves ordinary numeric table rows', () => {
+    expect(furnitureLines.some((line) => /Apple Inc\. \| 2024 Form 10-K/.test(line))).toBe(false);
+    expect(furniture.paragraphs.some((p) => /Apple Inc\. \| 2024 Form 10-K/.test(p.text))).toBe(false);
+    expect(furniture.paragraphs.map((p) => p.text)).toContain('Total 1,234');
+  });
+});
+
 describe('consecutive placeholder Items', () => {
   const placeholders = splitItems(htmlToLines(fx('placeholder-cluster-10q.htm')), '10-Q').sections;
 

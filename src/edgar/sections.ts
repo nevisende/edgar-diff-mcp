@@ -22,12 +22,28 @@ export function htmlToLines(html: string): string[] {
   });
   $('br').replaceWith('\n');
   const raw = $('body').length ? $('body').text() : $.root().text();
-  return raw
+  const lines = raw
     .replace(/[​﻿­]/g, '') // zero-width space / BOM / soft hyphen — everywhere in EDGAR HTML
     .replace(/ /g, ' ')
     .split('\n')
     .map((l) => l.replace(/[ \t\r\f\v]+/g, ' ').trim())
     .filter((l) => l.length > 0);
+  const furnitureCounts = new Map<string, number>();
+  for (const line of lines) {
+    const normalised = furnitureKey(line);
+    if (normalised) furnitureCounts.set(normalised, (furnitureCounts.get(normalised) ?? 0) + 1);
+  }
+  return lines.filter((line) => {
+    const normalised = furnitureKey(line);
+    return !normalised || (furnitureCounts.get(normalised) ?? 0) < 3;
+  });
+}
+
+/** Short repeated lines explicitly marked as filing/page labels are page furniture. */
+function furnitureKey(line: string): string | undefined {
+  if (line.length >= 80 || !/\d/.test(line)) return undefined;
+  if (!/form\s+10-[kq]\b|\bpage\s+\d/i.test(line)) return undefined;
+  return line.replace(/\d/g, '#');
 }
 
 const PART_RE = /^part\s+(i{1,3}|iv|[1-4])\s*[.:\-–—]?\s*(.*)$/i;

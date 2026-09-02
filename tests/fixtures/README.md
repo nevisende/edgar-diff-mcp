@@ -40,3 +40,6 @@ though their short lengths and proximity resemble a table-of-contents cluster.
 `spaced-toc-10k.htm` is a synthetic annual filing whose table-of-contents rows are separated
 by enough lines to escape cluster detection. Its short duplicate candidates must not create
 doubt warnings when the parser selects the substantive Item bodies.
+
+`repeated-page-footer-10k.htm` repeats a short annual-report footer across three synthetic
+pages. The footer must be removed while an ordinary numeric table row remains verbatim.
