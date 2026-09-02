@@ -33,6 +33,10 @@ boundaries inside a real titled Risk Factors section. The repeated running heade
 furniture and must neither split the section nor appear in its returned paragraphs. It also
 has consecutive short real sections with long canonical headings, which must not form a TOC.
 
+`titled-running-item-headers-10q.htm` is a synthetic quarterly filing that repeats one identical
+full Item 2 heading across four substantive page fragments. Those fragments must merge, while
+recurring Item 4 headings separated by a different title must remain separate candidates.
+
 `placeholder-cluster-10q.htm` is a synthetic quarterly filing with three consecutive real
 Items whose complete bodies are `None.` or `Not applicable.`. They must remain available even
 though their short lengths and proximity resemble a table-of-contents cluster.

@@ -314,11 +314,51 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
     const body = bodyBetween(h, next ? next.line : documentEnd);
     return { lines: body, chars: body.reduce((n, l) => n + l.length, 0) };
   };
-  const classified = classify(all, (i) => {
+  const classifyAll = (): Classified[] => classify(all, (i) => {
     const body = bodyOf(i);
     const placeholder = body.lines.length === 1 && /^(?:none|not applicable|n\/a)\.?$/i.test(body.lines[0] ?? '');
     return { chars: body.chars, placeholder };
   });
+  let classified = classifyAll();
+
+  // Some filings repeat a full titled Item heading at the top of every page.
+  // Merge only an exact key+title run with substantive text between every
+  // occurrence; a different intervening heading makes the run ineligible.
+  const titledGroups = new Map<string, { heading: Classified; index: number }[]>();
+  classified.forEach((heading, index) => {
+    const key = heading.keys.length === 1 ? heading.keys[0] : undefined;
+    const title = heading.rawTitle.trim();
+    if (!key || !title || heading.toc || heading.tocTail) return;
+    const identity = `${key}\0${title}`;
+    const group = titledGroups.get(identity) ?? [];
+    group.push({ heading, index });
+    titledGroups.set(identity, group);
+  });
+  const repeatedTitledLines = new Set<number>();
+  const runningHeaderMerges = new Map<number, number>();
+  for (const group of titledGroups.values()) {
+    if (group.length < 3) continue;
+    const separatedByRealBody = group.slice(1).every((entry, offset) => {
+      const previous = group[offset];
+      return previous !== undefined
+        && entry.index === previous.index + 1
+        && bodyOf(previous.index).chars >= MIN_BODY_CHARS;
+    });
+    if (!separatedByRealBody) continue;
+    const first = group[0];
+    if (!first) continue;
+    runningHeaderMerges.set(first.heading.line, group.length - 1);
+    for (const repeated of group.slice(1)) repeatedTitledLines.add(repeated.heading.line);
+  }
+  if (repeatedTitledLines.size > 0) {
+    for (const line of repeatedTitledLines) ignoredHeadingLines.add(line);
+    for (let i = all.length - 1; i >= 0; i--) {
+      const heading = all[i];
+      if (heading && repeatedTitledLines.has(heading.line)) all.splice(i, 1);
+    }
+    classified = classifyAll();
+  }
+
   const kept = classified.map((c, i) => ({ c, i })).filter(({ c }) => !c.toc);
   if (kept.length === 0) {
     warnings.push(`Found ${all.length} Item headings but all of them sit in a table-of-contents cluster; no bodies to return.`);
@@ -342,6 +382,8 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
       if (h.combinedLabel) {
         section.warnings.push(`Combined heading "${h.combinedLabel}": this body covers Items ${h.keys.join(', ')}`);
       }
+      const mergedHeaders = runningHeaderMerges.get(h.line);
+      if (mergedHeaders) section.warnings.push(`${mergedHeaders} repeated running headers merged`);
       const list = candidates.get(key) ?? [];
       list.push({ section, bodyChars: charCount, tocTail: h.tocTail, pageRef: hasPageRef(h.rawTitle) });
       candidates.set(key, list);

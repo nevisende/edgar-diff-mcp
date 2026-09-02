@@ -185,6 +185,24 @@ describe('running Item headers', () => {
     expect(running.has('2')).toBe(false);
     expect(running.has('3')).toBe(false);
   });
+
+  it('merges identical titled running headers separated by substantive body text', () => {
+    const result = splitItems(htmlToLines(fx('titled-running-item-headers-10q.htm')), '10-Q');
+    const mdna = result.sections.get('I.2');
+
+    expect(mdna?.paragraphs).toHaveLength(12);
+    expect(mdna?.paragraphs[0]?.text).toMatch(/^On the first synthetic page/);
+    expect(mdna?.paragraphs.at(-1)?.text).toMatch(/^A last substantive paragraph/);
+    expect(mdna?.paragraphs.some((p) => /^Item 2\./.test(p.text))).toBe(false);
+    expect(mdna?.warnings).toEqual(['3 repeated running headers merged']);
+  });
+
+  it('does not merge recurring headings across a different title for the same key', () => {
+    const controls = splitItems(htmlToLines(fx('titled-running-item-headers-10q.htm')), '10-Q').sections.get('I.4');
+
+    expect(controls?.paragraphs).toHaveLength(1);
+    expect(controls?.warnings.some((warning) => /repeated running headers merged/.test(warning))).toBe(false);
+  });
 });
 
 describe('repeated page furniture', () => {
