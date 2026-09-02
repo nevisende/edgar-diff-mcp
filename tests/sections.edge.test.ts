@@ -101,6 +101,16 @@ describe('combined Part and Item headings', () => {
     expect(risk?.paragraphs[0]?.text).toMatch(/^Acme faces hypothetical supply constraints/);
     expect(result.warnings).toEqual([]);
   });
+
+  it('parses a same-line Part and Item heading without intervening punctuation', () => {
+    const result = splitItems(htmlToLines(fx('part-item-no-punctuation-10q.htm')), '10-Q');
+    const statements = result.sections.get('I.1');
+
+    expect([...result.sections.keys()]).toEqual(['I.1']);
+    expect(statements?.title).toBe('Financial Statements');
+    expect(statements?.paragraphs[0]?.text).toMatch(/^Acme's condensed balance sheets/);
+    expect(result.warnings).toEqual([]);
+  });
 });
 
 describe('fused headings', () => {

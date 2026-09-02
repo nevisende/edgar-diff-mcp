@@ -46,7 +46,7 @@ function furnitureKey(line: string): string | undefined {
   return line.replace(/\d/g, '#');
 }
 
-const PART_RE = /^part\s+(i{1,3}|iv|[1-4])\s*[.:\-–—]?\s*(.*)$/i;
+const PART_RE = /^part\s+(i{1,3}|iv|[1-4])\s*[,.:\-–—]?\s*(.*)$/i;
 const ITEM_TOKEN = '\\d{1,2}[a-c]?';
 const ITEM_RANGE = `${ITEM_TOKEN}\\s*(?:through|[-–—])\\s*${ITEM_TOKEN}`;
 const ITEM_LIST = `${ITEM_TOKEN}(?:\\s*,\\s*${ITEM_TOKEN})*(?:\\s*,?\\s+and\\s+${ITEM_TOKEN})?`;
@@ -246,8 +246,8 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
     if (line.length <= MAX_HEADING_CHARS && p && p[1] && !looksLikeSentence(p[2] ?? '')) {
       const raw = p[1].toUpperCase();
       part = ROMAN[raw] ?? raw;
-      headingLine = line.replace(/^part\s+(?:i{1,3}|iv|[1-4])\s*[,.:\-–—]\s*/i, '');
-      if (headingLine === line) return;
+      headingLine = (p[2] ?? '').trim();
+      if (!headingLine) return;
     }
     if (crossReferenceIndexAt >= 0 && i > crossReferenceIndexAt) return;
     const m = ITEM_RE.exec(headingLine);
