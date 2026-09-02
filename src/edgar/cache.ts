@@ -1,5 +1,5 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { join } from 'node:path';
 import type { KeyValueCache } from './client.js';
 
@@ -20,7 +20,7 @@ export class FileCache implements KeyValueCache {
   async set(key: string, value: string): Promise<void> {
     await mkdir(this.dir, { recursive: true });
     const final = this.path(key);
-    const tmp = `${final}.${process.pid}.tmp`;
+    const tmp = `${final}.${process.pid}.${randomUUID()}.tmp`;
     await writeFile(tmp, value, 'utf8');
     await rename(tmp, final);
   }
