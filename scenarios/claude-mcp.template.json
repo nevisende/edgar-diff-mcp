@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "edgar-diff": {
+      "command": "node",
+      "args": ["$REPO/dist/main.js"],
+      "env": {
+        "EDGAR_USER_AGENT": "edgar-diff-mcp/0.1 furkandenizhan@gmail.com",
+        "EDGAR_CACHE_DIR": "$REPO/.edgar-cache"
+      }
+    }
+  }
+}
