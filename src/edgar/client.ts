@@ -48,6 +48,7 @@ export function isImmutableUrl(url: string): boolean {
 }
 
 const TickersSchema = z.record(z.string(), z.object({ cik_str: z.number(), ticker: z.string(), title: z.string() }));
+const CompanySubmissionsSchema = z.object({ name: z.string(), tickers: z.array(z.string()) });
 const FilingArraysSchema = z.object({
   accessionNumber: z.array(z.string()),
   form: z.array(z.string()),
@@ -67,6 +68,12 @@ interface SubmissionsState {
   files: string[];
   nextFile: number;
   loading?: Promise<void>;
+}
+
+class EdgarHttpError extends Error {
+  constructor(readonly status: number, statusText: string, url: string) {
+    super(`EDGAR ${status} ${statusText} for ${url}`);
+  }
 }
 
 export function padCik(cik: string | number): string {
@@ -119,7 +126,7 @@ export class EdgarClient {
       }
 
       if (!res.ok) {
-        const error = new Error(`EDGAR ${res.status} ${res.statusText} for ${url}`);
+        const error = new EdgarHttpError(res.status, res.statusText, url);
         if (res.status !== 429 && res.status < 500) throw error;
         lastError = error;
         if (attempt < MAX_ATTEMPTS) await delay(RETRY_BASE_DELAY_MS * 2 ** (attempt - 1));
@@ -160,7 +167,16 @@ export class EdgarClient {
   async resolveCompany(query: string): Promise<CompanyMatch[]> {
     const q = query.trim();
     if (!q) return [];
-    if (/^\d{1,10}$/.test(q)) return [{ cik: padCik(q), ticker: '', name: '' }];
+    if (/^\d{1,10}$/.test(q)) {
+      const cik = padCik(q);
+      try {
+        const company = await this.getJson(SUBMISSIONS_URL(cik), CompanySubmissionsSchema);
+        return [{ cik, ticker: company.tickers[0] ?? '', name: company.name }];
+      } catch (error) {
+        if (error instanceof EdgarHttpError && error.status === 404) return [];
+        throw error;
+      }
+    }
     const data = await this.getJson(TICKERS_URL, TickersSchema);
     const rows = Object.values(data);
     const byTicker = rows.filter((r) => r.ticker.toUpperCase() === q.toUpperCase());

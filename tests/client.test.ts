@@ -90,3 +90,32 @@ describe('EdgarClient request retries', () => {
     expect(attempts).toBe(3);
   });
 });
+
+describe('EdgarClient numeric CIK resolution', () => {
+  it('returns the submissions name and first ticker for a verified CIK', async () => {
+    const client = new EdgarClient({
+      userAgent: 'CIK tests@example.com',
+      minIntervalMs: 0,
+      fetchImpl: async () => new Response(JSON.stringify({ name: 'Acme Robotics, Inc.', tickers: ['ACME', 'ACM.B'] }), { status: 200 }),
+    });
+
+    await expect(client.resolveCompany('1')).resolves.toEqual([
+      { cik: '0000000001', ticker: 'ACME', name: 'Acme Robotics, Inc.' },
+    ]);
+  });
+
+  it('returns no match when the numeric CIK does not exist', async () => {
+    let calls = 0;
+    const client = new EdgarClient({
+      userAgent: 'CIK tests@example.com',
+      minIntervalMs: 0,
+      fetchImpl: async () => {
+        calls++;
+        return new Response('not found', { status: 404, statusText: 'Not Found' });
+      },
+    });
+
+    await expect(client.resolveCompany('9999999999')).resolves.toEqual([]);
+    expect(calls).toBe(1);
+  });
+});
