@@ -1,5 +1,5 @@
 /**
- * Live evaluation harness — measures the parser's real-world precision against
+ * Live evaluation harness — measures the parser's real-world recall against
  * a corpus of EDGAR filings.
  *
  *   EDGAR_USER_AGENT="edgar-diff-mcp/0.1 you@example.com" npm run eval:live > evals/latest.md
@@ -30,6 +30,8 @@ const TICKERS_WITH_10Q = DEFAULT_CORPUS.slice(0, 8);
 const EXPECTED_10K_BASE = ['1', '1A', '1B', '2', '3', '5', '7', '7A', '8', '9A', '9B', '10', '11', '12', '13', '14', '15'];
 /** Item 1C is only expected for filings dated >= 2023-12-15 (SEC cyber rule). */
 const ITEM_1C_CUTOFF = '2023-12-15';
+/** Valid 10-K Items that are not required in every filing. */
+const OPTIONAL_10K_ITEMS = new Set(['1C', '4', '6', '9C', '16']);
 
 /** Expected Items for 10-Q filings. */
 const EXPECTED_10Q = ['I.1', 'I.2', 'I.3', 'I.4', 'II.1', 'II.1A', 'II.2', 'II.6'];
@@ -48,6 +50,7 @@ interface FilingResult {
   expectedItems: string[];
   foundItems: string[];
   missingItems: string[];
+  falsePositiveItems: string[];
   itemChars: Record<string, number>;
   flags: string[];
   warnings: string[];
@@ -136,6 +139,7 @@ for (const ticker of corpus) {
       expectedItems: [],
       foundItems: [],
       missingItems: [],
+      falsePositiveItems: [],
       itemChars: {},
       flags: [],
       warnings: [],
@@ -163,6 +167,9 @@ for (const ticker of corpus) {
       }
 
       result.missingItems = result.expectedItems.filter((k) => !result.foundItems.includes(k));
+      result.falsePositiveItems = result.foundItems.filter((k) =>
+        !result.expectedItems.includes(k) && !(is10K && OPTIONAL_10K_ITEMS.has(k))
+      );
 
       // Suspicion checks
       const item1aChars = result.itemChars['1A'] ?? result.itemChars['II.1A'] ?? 0;
@@ -263,7 +270,8 @@ await writeFile('evals/results.json', JSON.stringify(results, null, 2));
 // Compute headline numbers
 const totalExpected = filingResults.reduce((n, f) => n + f.expectedItems.length, 0);
 const totalFound = filingResults.reduce((n, f) => n + f.foundItems.filter((k) => f.expectedItems.includes(k)).length, 0);
-const precision = totalExpected > 0 ? ((totalFound / totalExpected) * 100).toFixed(1) : '0.0';
+const totalFalsePositives = filingResults.reduce((n, f) => n + f.falsePositiveItems.length, 0);
+const recall = totalExpected > 0 ? ((totalFound / totalExpected) * 100).toFixed(1) : '0.0';
 
 // Markdown report to stdout
 const lines: string[] = [];
@@ -279,7 +287,8 @@ lines.push(`|--------|-------|`);
 lines.push(`| Filings evaluated | ${filingResults.filter((f) => !f.error).length} |`);
 lines.push(`| Expected Item slots | ${totalExpected} |`);
 lines.push(`| Found | ${totalFound} |`);
-lines.push(`| **Precision** | **${precision}%** |`);
+lines.push(`| **Recall (expected Items located)** | **${recall}%** |`);
+lines.push(`| False positives | ${totalFalsePositives} |`);
 lines.push('');
 
 // Per-filing table
@@ -302,12 +311,13 @@ const compactFlags = (flags: string[]): string => {
 
 lines.push('## Per-Filing Results');
 lines.push('');
-lines.push('| Ticker | Form | Filing Date | Accession | Missing Items | Flags |');
-lines.push('|--------|------|-------------|-----------|---------------|-------|');
+lines.push('| Ticker | Form | Filing Date | Accession | Missing Items | False Positives | Flags |');
+lines.push('|--------|------|-------------|-----------|---------------|-----------------|-------|');
 for (const f of filingResults) {
   const missing = f.missingItems.length > 0 ? f.missingItems.join(', ') : '—';
+  const falsePositives = f.falsePositiveItems.length > 0 ? f.falsePositiveItems.join(', ') : '—';
   const flags = f.flags.length > 0 ? compactFlags(f.flags) : (f.error ? `ERROR: ${f.error.slice(0, 80)}` : '—');
-  lines.push(`| ${f.ticker} | ${f.form} | ${f.filingDate} | ${f.accession} | ${missing} | ${flags} |`);
+  lines.push(`| ${f.ticker} | ${f.form} | ${f.filingDate} | ${f.accession} | ${missing} | ${falsePositives} | ${flags} |`);
 }
 lines.push('');
 
