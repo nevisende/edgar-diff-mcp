@@ -131,6 +131,41 @@ describe('combined headings', () => {
   });
 });
 
+describe('running Item headers', () => {
+  const running = splitItems(htmlToLines(fx('running-item-headers-10k.htm')), '10-K').sections;
+
+  it('does not split a titled section at repeated bare page headers', () => {
+    const risk = running.get('1A')!;
+    expect(risk.paragraphs).toHaveLength(7);
+    expect(risk.paragraphs[0]!.text).toMatch(/^Our operations and financial results/);
+    expect(risk.paragraphs.at(-1)!.text).toMatch(/^Acme depends on retaining qualified employees/);
+    expect(risk.paragraphs.some((p) => /^Item 1A$/i.test(p.text))).toBe(false);
+    expect(risk.paragraphs.some((p) => /Fiscal 2024 Form 10-K/.test(p.text))).toBe(false);
+    expect(risk.warnings.some((w) => /appeared/.test(w))).toBe(false);
+  });
+
+  it('keeps consecutive short sections whose long titles are exact known Item titles', () => {
+    expect([...running.keys()]).toEqual(['1', '1A', '1B', '5', '12', '13', '14']);
+    for (const key of ['5', '12', '13', '14']) {
+      expect(running.get(key)!.charCount).toBeLessThan(MIN_BODY_CHARS);
+      expect(running.get(key)!.paragraphs).toHaveLength(1);
+    }
+    expect(running.has('2')).toBe(false);
+    expect(running.has('3')).toBe(false);
+  });
+});
+
+describe('consecutive placeholder Items', () => {
+  const placeholders = splitItems(htmlToLines(fx('placeholder-cluster-10q.htm')), '10-Q').sections;
+
+  it('returns each real placeholder instead of classifying the run as a TOC', () => {
+    expect([...placeholders.keys()]).toEqual(['I.1', 'II.2', 'II.3', 'II.4', 'II.6']);
+    expect(placeholders.get('II.2')!.paragraphs.map((p) => p.text)).toEqual(['None.']);
+    expect(placeholders.get('II.3')!.paragraphs.map((p) => p.text)).toEqual(['None.']);
+    expect(placeholders.get('II.4')!.paragraphs.map((p) => p.text)).toEqual(['Not applicable.']);
+  });
+});
+
 describe('titleFor', () => {
   it('only applies canonical titles to forms it knows', () => {
     expect(titleFor('10-K', '3', 'whatever')).toBe('Legal Proceedings');

@@ -43,6 +43,8 @@ export const MIN_BODY_CHARS = 400;
 /** ≥ this many headings within TOC_MAX_GAP lines of each other = a table of contents. */
 const TOC_MIN_RUN = 3;
 const TOC_MAX_GAP = 2;
+/** TOC rows have no substantive body after page-number noise is removed. */
+const TOC_STUB_BODY_CHARS = 40;
 // hasPageRef / classify below implement the cluster rule.
 
 interface Heading {
@@ -60,7 +62,7 @@ const ROMAN: Record<string, string> = { '1': 'I', '2': 'II', '3': 'III', '4': 'I
 function isNoise(line: string): boolean {
   if (/^\d{1,3}$/.test(line)) return true; // page numbers
   if (/^table of contents$/i.test(line)) return true;
-  if (/^(form\s+)?10-[kq]\b/i.test(line) && line.length < 40) return true;
+  if (/^(?:(?:fiscal\s+)?\d{4}\s+)?(?:form\s+)?10-[kq]\b/i.test(line) && line.length < 60) return true;
   const part = PART_RE.exec(line);
   if (part && line.length < 60 && !looksLikeSentence(part[2] ?? '')) return true; // "PART II. OTHER INFORMATION"
   return false;
@@ -86,6 +88,13 @@ interface FusedHeading {
 
 function comparableTitle(value: string): string {
   return value.toLocaleLowerCase('en-US').replace(/[‘’]/g, "'");
+}
+
+function matchesKnownTitle(raw: string, form: string, keys: string[]): boolean {
+  const key = keys.length === 1 ? keys[0] : undefined;
+  if (!key) return false;
+  const candidate = raw.trim().replace(/[.:\-–—]+$/, '').trim();
+  return titleVariantsFor(form, key).some((variant) => comparableTitle(candidate) === comparableTitle(variant));
 }
 
 /** Split only at a known Item title or an unambiguous nearby sentence boundary. */
@@ -131,11 +140,15 @@ function itemKeys(spec: string): string[] | undefined {
 
 /** TOC rows almost always end in a page reference: "Item 1A. Risk Factors 9". */
 function hasPageRef(title: string): boolean {
-  return /\s\d{1,4}$/.test(title) || /^\d{1,4}$/.test(title);
+  const pageList = '(?:pages?\\s+)?\\d{1,4}(?:\\s*-\\s*\\d{1,4})?(?:\\s*,\\s*\\d{1,4}(?:\\s*-\\s*\\d{1,4})?)*';
+  return new RegExp(`(?:^|\\s)${pageList}$`, 'i').test(title)
+    || /\s(?:not applicable|none|n\/a)$/i.test(title)
+    || /\s\([a-e]\)$/i.test(title);
 }
 
 interface Classified extends Heading {
   bodyChars: number;
+  placeholderBody: boolean;
   /** Sits inside a table-of-contents cluster; never a section. */
   toc: boolean;
   /** Big body directly after a TOC cluster: either the first real heading or the last TOC row
@@ -149,15 +162,18 @@ interface Classified extends Heading {
  * title carries a page reference, or whose body is tiny, are dropped. A member
  * with a real body and no page reference ends the run and is flagged `tocTail`.
  */
-function classify(headings: Heading[], bodyChars: (i: number) => number): Classified[] {
-  const out: Classified[] = headings.map((h, i) => ({ ...h, bodyChars: bodyChars(i), toc: false, tocTail: false }));
+function classify(headings: Heading[], bodyInfo: (i: number) => { chars: number; placeholder: boolean }): Classified[] {
+  const out: Classified[] = headings.map((h, i) => {
+    const body = bodyInfo(i);
+    return { ...h, bodyChars: body.chars, placeholderBody: body.placeholder, toc: false, tocTail: false };
+  });
   let runStart = 0;
   const closeRun = (endExclusive: number): void => {
     if (endExclusive - runStart < TOC_MIN_RUN) return;
     for (let k = runStart; k < endExclusive; k++) {
       const m = out[k];
       if (!m) continue;
-      const stub = m.bodyChars < MIN_BODY_CHARS || hasPageRef(m.rawTitle);
+      const stub = (!m.placeholderBody && m.bodyChars < TOC_STUB_BODY_CHARS) || hasPageRef(m.rawTitle);
       if (stub) m.toc = true;
       else m.tocTail = true; // only ever the final member — a stub would have continued the run
     }
@@ -165,7 +181,8 @@ function classify(headings: Heading[], bodyChars: (i: number) => number): Classi
   for (let i = 1; i <= out.length; i++) {
     const prev = out[i - 1];
     const cur = out[i];
-    const prevIsStub = prev !== undefined && (prev.bodyChars < MIN_BODY_CHARS || hasPageRef(prev.rawTitle));
+    const prevIsStub = prev !== undefined
+      && ((!prev.placeholderBody && prev.bodyChars < TOC_STUB_BODY_CHARS) || hasPageRef(prev.rawTitle));
     const contiguous = cur !== undefined && prev !== undefined && cur.line - prev.line <= TOC_MAX_GAP && prevIsStub;
     if (!contiguous) {
       closeRun(i);
@@ -190,6 +207,13 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
   const all: Heading[] = [];
   let part: string | null = null;
   const isTenQ = form.startsWith('10-Q');
+  let crossReferenceIndexAt = -1;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (/^form\s+10-k\s+cross[- ]reference\s+index(?:\s+page\(s\))?$/i.test(lines[i] ?? '')) {
+      crossReferenceIndexAt = i;
+      break;
+    }
+  }
 
   lines.forEach((line, i) => {
     const p = PART_RE.exec(line);
@@ -198,6 +222,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
       part = ROMAN[raw] ?? raw;
       return;
     }
+    if (crossReferenceIndexAt >= 0 && i > crossReferenceIndexAt) return;
     const m = ITEM_RE.exec(line);
     if (!m?.[1] || !m[2]) return;
     const items = itemKeys(m[2]);
@@ -219,28 +244,63 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
       all.push(heading);
       return;
     }
-    if (looksLikeSentence(title)) return;
+    if (looksLikeSentence(title) && !matchesKnownTitle(title, form, keys)) return;
     const heading: Heading = { keys, rawTitle: title, line: i };
     if (combinedLabel) heading.combinedLabel = combinedLabel;
     all.push(heading);
   });
+
+  // Some annual-report renderers repeat a bare "Item 1A" as a running page
+  // header. When the same key also has an explicit titled heading, three or
+  // more bare occurrences are page furniture rather than section boundaries.
+  const occurrenceKinds = new Map<string, { bare: number; titled: number }>();
+  for (const heading of all) {
+    const key = heading.keys.length === 1 ? heading.keys[0] : undefined;
+    if (!key) continue;
+    const counts = occurrenceKinds.get(key) ?? { bare: 0, titled: 0 };
+    if (heading.rawTitle.trim()) counts.titled++;
+    else counts.bare++;
+    occurrenceKinds.set(key, counts);
+  }
+  const repeatedBareKeys = new Set(
+    [...occurrenceKinds].filter(([, counts]) => counts.bare >= 3 && counts.titled > 0).map(([key]) => key),
+  );
+  const ignoredHeadingLines = new Set<number>();
+  for (let i = all.length - 1; i >= 0; i--) {
+    const heading = all[i];
+    const key = heading?.keys.length === 1 ? heading.keys[0] : undefined;
+    if (heading && key && !heading.rawTitle.trim() && repeatedBareKeys.has(key)) {
+      ignoredHeadingLines.add(heading.line);
+      all.splice(i, 1);
+    }
+  }
 
   if (all.length === 0) {
     warnings.push('No "Item N" headings were found; the document may not be a 10-K/10-Q or may be an exhibit.');
     return { sections: new Map(), warnings };
   }
 
+  const documentEnd = crossReferenceIndexAt >= 0 ? crossReferenceIndexAt : lines.length;
+  const bodyBetween = (h: Heading, end: number): string[] => {
+    const body = h.fusedParagraph ? [h.fusedParagraph] : [];
+    for (let lineNumber = h.line + 1; lineNumber < end; lineNumber++) {
+      const line = lines[lineNumber];
+      if (line && !ignoredHeadingLines.has(lineNumber) && !isNoise(line)) body.push(line);
+    }
+    return body;
+  };
   const bodyOf = (i: number): { lines: string[]; chars: number } => {
     const h = all[i];
     const next = all[i + 1];
     if (!h) return { lines: [], chars: 0 };
-    const body = [
-      ...(h.fusedParagraph ? [h.fusedParagraph] : []),
-      ...lines.slice(h.line + 1, next ? next.line : lines.length),
-    ].filter((l) => !isNoise(l));
+    const body = bodyBetween(h, next ? next.line : documentEnd);
     return { lines: body, chars: body.reduce((n, l) => n + l.length, 0) };
   };
-  const classified = classify(all, (i) => bodyOf(i).chars);
+  const classified = classify(all, (i) => {
+    const body = bodyOf(i);
+    const placeholder = body.lines.length === 1 && /^(?:none|not applicable|n\/a)\.?$/i.test(body.lines[0] ?? '');
+    return { chars: body.chars, placeholder };
+  });
   const kept = classified.map((c, i) => ({ c, i })).filter(({ c }) => !c.toc);
   if (kept.length === 0) {
     warnings.push(`Found ${all.length} Item headings but all of them sit in a table-of-contents cluster; no bodies to return.`);
@@ -251,11 +311,8 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
   const candidates = new Map<string, { section: Section; bodyChars: number; tocTail: boolean }[]>();
   kept.forEach(({ c: h }, idx) => {
     const next = kept[idx + 1]?.c;
-    const end = next ? next.line : lines.length;
-    const body = [
-      ...(h.fusedParagraph ? [h.fusedParagraph] : []),
-      ...lines.slice(h.line + 1, end),
-    ].filter((l) => !isNoise(l));
+    const end = next ? next.line : documentEnd;
+    const body = bodyBetween(h, end);
     const paragraphs: Paragraph[] = body.map((text, index) => ({ index, text }));
     const charCount = body.reduce((n, l) => n + l.length, 0);
     for (const key of h.keys) {

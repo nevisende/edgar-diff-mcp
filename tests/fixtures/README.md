@@ -27,3 +27,12 @@ canonical Item-title split and the conservative sentence-boundary fallback.
 `combined-headings-10k.htm` is a synthetic filing with combined Item lists and ranges in both
 its table of contents and body. It also contains an Item-like incorporation sentence that must
 remain body text rather than becoming a heading.
+
+`running-item-headers-10k.htm` is a synthetic filing that repeats a bare `Item 1A` at page
+boundaries inside a real titled Risk Factors section. The repeated running headers are page
+furniture and must neither split the section nor appear in its returned paragraphs. It also
+has consecutive short real sections with long canonical headings, which must not form a TOC.
+
+`placeholder-cluster-10q.htm` is a synthetic quarterly filing with three consecutive real
+Items whose complete bodies are `None.` or `Not applicable.`. They must remain available even
+though their short lengths and proximity resemble a table-of-contents cluster.
