@@ -15,7 +15,7 @@ A real, unedited run of Claude Code against this server (model: Claude Sonnet, 2
 | 3 | `diff_all_items` | `{"cik": "0000320193", "baseAccession": "0000320193-24-000123", "targetAccession": "0000320193-25-000079"}` |
 | 4 | `diff_sections` | `{"cik": "0000320193", "baseAccession": "0000320193-24-000123", "targetAccession": "0000320193-25-000079", "item": "1A"}` |
 
-Wall clock 60 s, 13 turns, API cost $0.23. The `diff_sections` result for Item 1A is large (about 150 changes with word-level edits), so Claude Code spilled it to a file and filtered it locally with `jq` before answering; those local steps are omitted here.
+Wall clock 60 s, 13 turns, API cost $0.23. The `diff_sections` result for Item 1A contains 78 changes (9 added, 18 removed, 51 changed) with word-level edits, so Claude Code spilled it to a file and filtered it locally with `jq` before answering; those local steps are omitted here.
 
 ## Answer (verbatim)
 

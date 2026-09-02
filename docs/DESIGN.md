@@ -115,8 +115,9 @@ not create doubt about the selected section.
 ## Measuring instead of guessing
 
 `scripts/eval-live.ts` runs the parser over 30 issuers, requesting the two most recent 10-Ks
-for each and one 10-Q for eight issuers. It expects 18 Items in each recent 10-K and eight
-Items in each 10-Q. An Item counts as located only when its expected key appears in
+for each and one 10-Q for eight issuers. It expects 18 base Items in each recent 10-K, plus
+Item 1C for filings dated on or after 2023-12-15, and eight Items in each 10-Q. An Item counts
+as located only when its expected key appears in
 `list_items`; the harness does not award partial credit for nearby text. It separately counts
 a located Item as plausible when 10-K Items 1, 1A, 7 and 8 and 10-Q Items I.1 and I.2 contain
 at least 4,000 characters, 10-K Item 15 contains at most 300,000 characters, and any other
