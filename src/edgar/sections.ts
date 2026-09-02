@@ -70,6 +70,7 @@ interface Heading {
   combinedLabel?: string;
   fusedParagraph?: string;
   splitTitle?: string;
+  rangeWarning?: string;
 }
 
 const ROMAN: Record<string, string> = { '1': 'I', '2': 'II', '3': 'III', '4': 'IV' };
@@ -153,18 +154,32 @@ function expandItemRange(spec: string): string[] | undefined {
   if (!match?.[1] || !match[2]) return undefined;
   const start = /^(\d{1,2})([a-c]?)$/i.exec(match[1]);
   const end = /^(\d{1,2})([a-c]?)$/i.exec(match[2]);
-  if (!start?.[1] || !end?.[1] || start[2] || end[2]) return undefined;
+  if (!start?.[1] || !end?.[1]) return undefined;
+  const startLetter = (start[2] ?? '').toUpperCase();
+  const endLetter = (end[2] ?? '').toUpperCase();
+  if (startLetter || endLetter) {
+    if (!startLetter || !endLetter || start[1] !== end[1]) return undefined;
+    const firstLetter = startLetter.charCodeAt(0);
+    const lastLetter = endLetter.charCodeAt(0);
+    if (lastLetter < firstLetter) return undefined;
+    return Array.from({ length: lastLetter - firstLetter + 1 }, (_, i) => `${start[1]}${String.fromCharCode(firstLetter + i)}`);
+  }
   const first = Number(start[1]);
   const last = Number(end[1]);
   if (last < first || last - first > 20) return undefined;
   return Array.from({ length: last - first + 1 }, (_, i) => String(first + i));
 }
 
-function itemKeys(spec: string): string[] | undefined {
+function itemKeys(spec: string): { keys: string[]; rangeWarning?: string } | undefined {
   const range = expandItemRange(spec);
-  if (range) return range;
+  if (range) return { keys: range };
   const keys = spec.match(new RegExp(ITEM_TOKEN, 'gi'))?.map((key) => key.toUpperCase()) ?? [];
-  return keys.length > 0 && new Set(keys).size === keys.length ? keys : undefined;
+  if (keys.length === 0 || new Set(keys).size !== keys.length) return undefined;
+  const isRange = new RegExp(`^${ITEM_RANGE}$`, 'i').test(spec);
+  return {
+    keys,
+    ...(isRange ? { rangeWarning: `Item range "${spec}" could not be expanded; retained endpoints ${keys.join(', ')} only` } : {}),
+  };
 }
 
 /** TOC rows almost always end in a page reference: "Item 1A. Risk Factors 9". */
@@ -260,9 +275,9 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
     if (crossReferenceIndexAt >= 0 && i > crossReferenceIndexAt) return;
     const m = ITEM_RE.exec(headingLine);
     if (!m?.[1] || !m[2]) return;
-    const items = itemKeys(m[2]);
-    if (!items) return;
-    const keys = items.map((item) => (isTenQ && part ? `${part}.${item}` : item));
+    const parsedItems = itemKeys(m[2]);
+    if (!parsedItems) return;
+    const keys = parsedItems.keys.map((item) => (isTenQ && part ? `${part}.${item}` : item));
     const title = m[3] ?? '';
     const combinedLabel = keys.length > 1 ? `${m[1]} ${m[2]}` : undefined;
     const tooLong = headingLine.length > MAX_HEADING_CHARS;
@@ -276,6 +291,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
         splitTitle: fused.splitTitle,
       };
       if (combinedLabel) heading.combinedLabel = combinedLabel;
+      if (parsedItems.rangeWarning) heading.rangeWarning = parsedItems.rangeWarning;
       all.push(heading);
       return;
     }
@@ -283,6 +299,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
     if (looksLikeSentence(title) && !matchesKnownTitle(title, form, keys)) return;
     const heading: Heading = { keys, rawTitle: title, line: i };
     if (combinedLabel) heading.combinedLabel = combinedLabel;
+    if (parsedItems.rangeWarning) heading.rangeWarning = parsedItems.rangeWarning;
     all.push(heading);
   });
 
@@ -400,6 +417,7 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
       if (h.combinedLabel) {
         section.warnings.push(`Combined heading "${h.combinedLabel}": this body covers Items ${h.keys.join(', ')}`);
       }
+      if (h.rangeWarning) section.warnings.push(h.rangeWarning);
       const mergedHeaders = runningHeaderMerges.get(h.line);
       if (mergedHeaders) section.warnings.push(`${mergedHeaders} repeated running headers merged`);
       const list = candidates.get(key) ?? [];

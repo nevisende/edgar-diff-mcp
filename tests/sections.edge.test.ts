@@ -232,6 +232,24 @@ describe('combined headings', () => {
   });
 });
 
+describe('lettered Item ranges', () => {
+  const ranged = splitItems(htmlToLines(fx('lettered-ranges-10k.htm')), '10-K').sections;
+
+  it('expands lettered endpoints that share the same numeric prefix', () => {
+    expect([...ranged.keys()]).toEqual(['1A', '1B', '1C', '2A', '3C']);
+    expect(ranged.get('1A')?.paragraphs).toEqual(ranged.get('1B')?.paragraphs);
+    expect(ranged.get('1B')?.paragraphs).toEqual(ranged.get('1C')?.paragraphs);
+  });
+
+  it('warns when a lettered range cannot be expanded safely', () => {
+    const warning = 'Item range "2A through 3C" could not be expanded; retained endpoints 2A, 3C only';
+
+    expect(ranged.get('2A')?.warnings).toContain(warning);
+    expect(ranged.get('3C')?.warnings).toContain(warning);
+    expect(ranged.has('2B')).toBe(false);
+  });
+});
+
 describe('running Item headers', () => {
   const running = splitItems(htmlToLines(fx('running-item-headers-10k.htm')), '10-K').sections;
 
