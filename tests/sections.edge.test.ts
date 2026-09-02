@@ -247,6 +247,17 @@ describe('consecutive placeholder Items', () => {
   });
 });
 
+describe('consecutive short real Items', () => {
+  const shortSections = splitItems(htmlToLines(fx('short-real-sections-10k.htm')), '10-K').sections;
+
+  it('does not classify a run of short sentence bodies as a table of contents', () => {
+    expect([...shortSections.keys()]).toEqual(['1B', '2', '3']);
+    expect(shortSections.get('1B')?.paragraphs.map((paragraph) => paragraph.text)).toEqual(['There were no staff comments.']);
+    expect(shortSections.get('2')?.paragraphs.map((paragraph) => paragraph.text)).toEqual(['We lease our sole office.']);
+    expect(shortSections.get('3')?.paragraphs.map((paragraph) => paragraph.text)).toEqual(['There are no material proceedings.']);
+  });
+});
+
 describe('titleFor', () => {
   it('only applies canonical titles to forms it knows', () => {
     expect(titleFor('10-K', '3', 'whatever')).toBe('Legal Proceedings');

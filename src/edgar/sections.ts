@@ -179,9 +179,10 @@ interface Classified extends Heading {
 
 /**
  * Classify headings. A run of ≥ TOC_MIN_RUN headings within TOC_MAX_GAP lines of
- * each other is a table of contents, whatever markup produced it. Members whose
- * title carries a page reference, or whose body is tiny, are dropped. A member
- * with a real body and no page reference ends the run and is flagged `tocTail`.
+ * each other is a table of contents only when at least half of its members have
+ * a page reference or an empty body. Members whose title carries a page reference,
+ * or whose body is tiny, are dropped. A member with a real body and no page
+ * reference ends the run and is flagged `tocTail`.
  */
 function classify(headings: Heading[], bodyInfo: (i: number) => { chars: number; placeholder: boolean }): Classified[] {
   const out: Classified[] = headings.map((h, i) => {
@@ -190,7 +191,10 @@ function classify(headings: Heading[], bodyInfo: (i: number) => { chars: number;
   });
   let runStart = 0;
   const closeRun = (endExclusive: number): void => {
-    if (endExclusive - runStart < TOC_MIN_RUN) return;
+    const runLength = endExclusive - runStart;
+    if (runLength < TOC_MIN_RUN) return;
+    const tocSignals = out.slice(runStart, endExclusive).filter((member) => hasPageRef(member.rawTitle) || member.bodyChars === 0).length;
+    if (tocSignals * 2 < runLength) return;
     for (let k = runStart; k < endExclusive; k++) {
       const m = out[k];
       if (!m) continue;
