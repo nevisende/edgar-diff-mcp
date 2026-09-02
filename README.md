@@ -36,6 +36,8 @@ The plausible rate is lower because location checks only that the expected key e
 
 GE, Intel and McDonald's stay `not_found` on purpose: their 10-Ks use company-specific section headings in the body and put the formal Item names in a cross-reference index. See [`evals/latest.md`](evals/latest.md) for the full committed result.
 
+For end-to-end analyst scenarios across three agent harnesses see docs/SCENARIOS.md.
+
 The same engine on Apple's real Item 1A:
 
 `10-K 2024-11-01 → 10-K 2025-10-31 · Item 1A · paragraphs 115 → 106 · +9 -18 ~51 · similarity 0.762`
