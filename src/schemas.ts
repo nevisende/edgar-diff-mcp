@@ -154,6 +154,7 @@ export type DiffSectionsResult =
       status: 'ok';
       item: string;
       title: string;
+      targetTitle: string;
       base: FilingRef;
       target: FilingRef;
       stats: DiffStats;
@@ -168,7 +169,8 @@ export type DiffSectionsOutput = DiffSectionsResult;
 export const DiffSectionsOutputSchema = z.object({
   status: z.enum(['ok', 'not_found']),
   item: z.string().optional().describe('Present only when status is "ok".'),
-  title: z.string().optional().describe('Present only when status is "ok".'),
+  title: z.string().optional().describe('Base filing Item title; present only when status is "ok".'),
+  targetTitle: z.string().optional().describe('Target filing Item title; present only when status is "ok".'),
   base: FilingRefSchema.optional().describe('Present only when status is "ok".'),
   target: FilingRefSchema.optional().describe('Present only when status is "ok".'),
   stats: DiffStatsSchema.optional().describe('Present only when status is "ok".'),

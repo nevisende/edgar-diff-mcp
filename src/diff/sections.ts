@@ -106,6 +106,7 @@ export function diffSections(base: Section, target: Section, baseRef: FilingRef,
   return {
     item: base.item,
     title: base.title,
+    targetTitle: target.title,
     base: baseRef,
     target: targetRef,
     stats: {

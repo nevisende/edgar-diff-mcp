@@ -17,16 +17,18 @@ const routes: Record<string, string> = {
     cik: '1',
     filings: {
       recent: {
-        accessionNumber: ['0000000001-25-000001', '0000000001-24-000001'],
-        form: ['10-K', '10-K'],
-        filingDate: ['2026-02-15', '2025-02-15'],
-        reportDate: ['2025-12-31', '2024-12-31'],
-        primaryDocument: ['acme-10k-2025.htm', 'acme-10k-2024.htm'],
+        accessionNumber: ['0000000001-25-000001', '0000000001-24-000001', '0000000001-25-000020', '0000000001-24-000020'],
+        form: ['10-K', '10-K', '20-F', '20-F'],
+        filingDate: ['2026-02-15', '2025-02-15', '2025-04-01', '2024-04-01'],
+        reportDate: ['2025-12-31', '2024-12-31', '2024-12-31', '2023-12-31'],
+        primaryDocument: ['acme-10k-2025.htm', 'acme-10k-2024.htm', 'acme-20f-2025.htm', 'acme-20f-2024.htm'],
       },
     },
   }),
   'https://www.sec.gov/Archives/edgar/data/1/000000000125000001/acme-10k-2025.htm': fx('acme-10k-2025.htm'),
   'https://www.sec.gov/Archives/edgar/data/1/000000000124000001/acme-10k-2024.htm': fx('acme-10k-2024.htm'),
+  'https://www.sec.gov/Archives/edgar/data/1/000000000125000020/acme-20f-2025.htm': fx('acme-20f-2025.htm'),
+  'https://www.sec.gov/Archives/edgar/data/1/000000000124000020/acme-20f-2024.htm': fx('acme-20f-2024.htm'),
 };
 let fetchCalls = 0;
 const fakeFetch: typeof fetch = async (input) => {
@@ -143,6 +145,19 @@ describe('MCP surface', () => {
         if (c[side]) expect(c[side].citation).toMatchObject({ cik: '0000000001', item: '1A', itemTitle: 'Risk Factors', paragraph: c[side].paragraph });
       }
     }
+  });
+
+  it('uses each filing\'s own Item title in diff citations', async () => {
+    const diff = await call('diff_sections', {
+      cik: '1',
+      baseAccession: '0000000001-24-000020',
+      targetAccession: '0000000001-25-000020',
+      item: '3',
+    });
+    expect(diff).toMatchObject({ status: 'ok', title: 'Key Information', targetTitle: 'Key Information and Company Overview' });
+    const changed = diff.changes.find((change: { type: string }) => change.type === 'changed');
+    expect(changed.base.citation.itemTitle).toBe('Key Information');
+    expect(changed.target.citation.itemTitle).toBe('Key Information and Company Overview');
   });
 
   it('announces its rules to the client via instructions', async () => {

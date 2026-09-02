@@ -83,7 +83,10 @@ export interface DiffStats {
 
 export interface SectionDiff {
   item: string;
+  /** Base filing's Item title. */
   title: string;
+  /** Target filing's Item title, which can differ on non-10-K/10-Q forms. */
+  targetTitle: string;
   base: FilingRef;
   target: FilingRef;
   stats: DiffStats;
