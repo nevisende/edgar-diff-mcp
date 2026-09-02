@@ -54,23 +54,28 @@ So the parser:
 
 1. flattens HTML to lines, one per block element (`p`, `div`, `tr`, `li`, headings), with a
    space between table cells and zero-width characters stripped;
-2. drops short page labels such as running headers and footers only when the same normalised
-   label repeats at least three times, so an ordinary numbered table row remains verbatim;
+2. drops short labelled running headers and footers only when the same normalised label repeats
+   at least three times, while other short labels remain;
 3. finds every short line matching `Item <N[A-C]>` whose title is not a sentence (does not start
-   lower-case, ≤ 12 words) — this rejects "Item 7 of this report discusses…";
-4. splits a heading fused with its first paragraph only after a canonical Item title or a clear
-   sentence boundary near the start; an uncertain split is rejected rather than guessed;
-5. expands a combined heading such as "Items 10, 11, 12, 13 and 14" under every named Item and
-   adds a warning, so the shared body is explicit rather than assigned to one guessed Item;
+   lower-case, ≤ 12 words) — this rejects "Item 7 of this report discusses…"; a single-line
+   heading such as `PART II, ITEM 1A` updates the active Part and parses the Item on that same line;
+4. A candidate heading whose text continues past a canonical Item title is split at that title when the remainder starts with a capital letter and contains at least three words, regardless of the line's total length; the remainder becomes paragraph 0 and the section carries a split warning.
+   A long heading with an unambiguous sentence boundary near the start may also be split; an
+   uncertain split is rejected rather than guessed;
+5. expands a combined heading such as "Items 10, 11, 12, 13 and 14" under every named Item,
+   gives each section its canonical title, and adds a warning, so the shared body is explicit
+   rather than assigned to one guessed Item;
 6. drops repeated bare `Item N` running headers only when there are at least three and the same
    Item also has a titled heading, so isolated real headings remain candidates;
-7. groups headings into runs where consecutive headings are ≤ 2 lines apart *and the earlier
-   one is a stub* (tiny body or page reference). A run of ≥ 3 is a table of contents;
-8. drops every stub in the run. A run member with a real body and no page reference — the
+7. merges three or more identical titled running headers when substantive text separates each
+   occurrence and no different heading intervenes. When repeated running headers are merged, paragraph indices are reassigned over the merged section so every returned paragraph remains individually citable.
+8. groups headings into runs where consecutive headings are ≤ 2 lines apart *and the earlier
+   one is a stub* (tiny body or page reference). A run of three or more closely spaced Item headings is treated as a table of contents only when at least half of its members either end in a page reference or have an empty body; short sentence bodies without page references remain real sections.
+9. drops every stub in the run. A run member with a real body and no page reference — the
    last TOC row swallowing the preamble, or the first real heading — is kept but flagged
    `tocTail`, and a flagged candidate is used only when no unflagged one exists for that Item;
-9. among remaining candidates per Item, keeps the longest body;
-10. returns short real bodies ("None.", "Not applicable.") *with a warning*, rather than
+10. among remaining candidates per Item, keeps the longest body;
+11. returns short real bodies ("None.", "Not applicable.") *with a warning*, rather than
    refusing them, because they are real sections.
 
 10-Q filings reuse Item numbers across Part I and Part II, so `PART I`/`PART II` lines are
@@ -104,6 +109,8 @@ not create doubt about the selected section.
   never seen in the other, because diffs are per Item.
 - **Table rows whose numbers all change** share no word bigrams and are reported as
   remove+add rather than `changed`. This is the conservative direction; see "The diff".
+- **Standalone 1–3 digit lines are dropped as page numbers.** A one-cell numeric table row can
+  therefore disappear; retaining it would leak pervasive page furniture into returned sections.
 
 ## Measuring instead of guessing
 
@@ -115,14 +122,14 @@ a located Item as plausible when 10-K Items 1, 1A, 7 and 8 and 10-Q Items I.1 an
 at least 4,000 characters, 10-K Item 15 contains at most 300,000 characters, and any other
 expected Item is present.
 
-Parser fixes moved located recall from 892/1090 (81.8%) to 980/1090 (89.9%); 963/1090
-(88.3%) expected slots are also plausible. The rates differ because a key can be located even
-when its body is only a fragment or an oversized false section. The latest run counted 69
-unexpected keys and two corpus issues: JPM supplied one recent 10-K and XOM supplied none.
-AMZN, GOOGL, CVX, PFE, DIS, NFLX, COST, UNH, HD, PLD and CRM gained expected Items. MSFT
-exposed a different error: repeated running headers produced four-paragraph fake candidates
-and Item 1A similarity of 0.000. Removing that page furniture raised the measured similarity
-to 0.727.
+The first recorded run located 892/1090 expected slots (81.8% recall). The current run locates
+1048/1166 (89.9% recall), of which 1028/1166 (88.2%) are also plausible. The rates differ
+because a key can be located even when its body is only a fragment or an oversized false
+section. The latest run counted two unexpected keys and one corpus issue: XOM supplied no
+10-K. Earlier fix lanes recovered expected Items for AMZN, GOOGL, CVX, PFE, DIS, NFLX, COST,
+UNH, HD, PLD and CRM. MSFT exposed a different error: repeated running headers produced
+four-paragraph fake candidates and Item 1A similarity of 0.000. Removing that page furniture
+raised the measured similarity to 0.727.
 
 ## The diff
 
@@ -135,10 +142,23 @@ as signs, parentheses, percentages, currency symbols, and decimal points remains
 Section similarity gives unchanged paragraphs a weight of 1, changed pairs their Dice
 similarity, and added or removed paragraphs a weight of 0.
 
+For 10-Qs, `diff_sections` refuses an unqualified Item when the base and target resolve it to
+different Parts; the caller must choose the explicit key, such as `I.1` or `II.1`.
+
 Why Dice over bigrams and not embeddings: it is deterministic, dependency-free, fast enough to
 run over an MD&A in milliseconds, and its failure mode (two heavily rewritten paragraphs
 reported as remove+add instead of change) is *conservative* — it under-claims edits, never
 invents them.
+
+### Output size
+
+`get_section`, `diff_sections`, and `search_filing` apply an explicit `maxChars` budget in
+addition to their entry limits, report honest truncation, and expose zero-based `offset`
+paging; word-level edits in `diff_sections` are opt-in with `includeWordDiff`.
+
+The MCP output schemas stay flat, so fields used by only one result variant are optional; this
+trades some static strictness for compatibility with the MCP schema type, which does not allow
+a root `anyOf`.
 
 ## What I would do with another week
 

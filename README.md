@@ -23,14 +23,14 @@ paragraphs 7 → 7 · +1 -1 ~1 · similarity 0.827
 
 ## Measured on real filings
 
-`npm run eval:live` measures the parser against 30 issuers, requesting the two most recent 10-Ks for each issuer and one 10-Q for eight of them. Each recent 10-K has 18 expected Items.
+`npm run eval:live` measures the parser against 30 issuers, requesting the two most recent 10-Ks for each issuer and one 10-Q for eight of them. Each 10-K has 18 base expected Items, plus Item 1C for filings dated on or after 2023-12-15.
 
 | Parser | Expected Items located | Expected Items plausible |
 |---|---:|---:|
-| Before parser fixes | 892/1090 (81.8%) | Not measured |
-| Now | 980/1090 (89.9% recall) | 963/1090 (88.3%) |
+| Before parser fixes | 892/1090 (81.8% recall) | Not measured |
+| Now | 1048/1166 (89.9% recall) | 1028/1166 (88.2%) |
 
-The plausible rate is lower because location checks only that the expected key exists, while plausibility also rejects undersized core sections and oversized Item 15 results. The latest run reports two coverage issues: EDGAR returned only one recent 10-K for JPM and none for XOM.
+The plausible rate is lower because location checks only that the expected key exists, while plausibility also rejects undersized core sections and oversized Item 15 results. The latest run reports one evaluation issue: the ticker XOM now resolves to "ExxonMobil Holdings Corp" (CIK 0002115436, a 2026 holding company), which has filed no 10-K yet; the operating company's filings live under CIK 0000034088. The harness reports this as an issue rather than silently substituting.
 
 GE, Intel and McDonald's stay `not_found` on purpose: their 10-Ks use company-specific section headings in the body and put the formal Item names in a cross-reference index. See [`evals/latest.md`](evals/latest.md) for the full committed result.
 
@@ -59,10 +59,10 @@ These are the same rules a careful research desk applies to a junior analyst. Th
 | `resolve_company` | Ticker (exact) or name (substring) → CIK candidates. `[]` if nothing matches. |
 | `list_filings` | Recent filings for a CIK, filterable by form (`10-K`, `10-Q`). |
 | `list_items` | Items found *with confidence* in a filing, with sizes. Call this when unsure what exists. |
-| `get_section` | Verbatim, cited paragraphs for one Item. `maxParagraphs` and `maxChars` bound large results; `not_found` + `availableItems` otherwise. |
-| `diff_sections` | Same Item across two filings → cited changes and stats. Word-level edits are opt-in with `includeWordDiff`; `maxChanges` and `maxChars` bound large results. |
+| `get_section` | Verbatim, cited paragraphs for one Item. `maxParagraphs` and `maxChars` bound each page; continue with `offset`; `not_found` + `availableItems` otherwise. |
+| `diff_sections` | Same Item across two filings → cited changes and stats. Word-level edits are opt-in with `includeWordDiff`; `maxChanges` and `maxChars` bound each page; continue with `offset`. |
 | `diff_all_items` | Per-Item change statistics across two filings, most-changed first, plus Items found on only one side. No paragraphs. |
-| `search_filing` | Regex over a filing (or one Item) → matching paragraphs, verbatim, cited. |
+| `search_filing` | Regex over a filing (or one Item) → matching paragraphs, verbatim, cited. `limit` and `maxChars` bound each page; continue with `offset`. |
 
 All seven carry four MCP annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, and `openWorldHint: true`. Every tool declares an MCP `outputSchema` and returns `structuredContent` identical to its text JSON. Every paragraph on every tool uses the same citation shape:
 
@@ -79,7 +79,7 @@ The server also sends MCP `instructions` telling the client to quote only tool o
 git clone https://github.com/nevisende/edgar-diff-mcp
 cd edgar-diff-mcp
 npm install
-npm run check      # typecheck (src + tests) and the whole test suite, offline
+npm run check      # typecheck (src + tests) and all 90 tests, offline
 npm run demo       # diff the bundled synthetic 10-Ks, offline
 ```
 
@@ -130,7 +130,7 @@ npm run eval:live
 
 ## How the parser decides what is an "Item"
 
-Every 10-K lists all of its Items twice: once in the table of contents and once as real headings. A regex cannot tell them apart. This parser flattens the HTML to lines, finds every short `Item N` heading, and then removes **clusters** of headings that sit within a couple of lines of each other — that is what a table of contents looks like once flattened, whatever markup produced it. Rows with a trailing page reference or a tiny body are dropped; if one Item still has several occurrences, the longest body wins. Sentences that merely *mention* an Item ("Item 7 of this report discusses…") are rejected as headings. A fused heading and first paragraph are split only when the title matches a canonical Item title or ends at a clear sentence boundary. Combined headings such as "Items 10, 11, 12, 13 and 14" register the same body under every named Item, with a warning. Repeated page furniture, including running headers and footers such as "Apple Inc. | 2024 Form 10-K | 5", is dropped when it repeats. 10-Q Items are prefixed with their Part (`II.1A`), because Part I and Part II reuse the same numbers.
+Every 10-K lists all of its Items twice: once in the table of contents and once as real headings. A regex cannot tell them apart. This parser flattens the HTML to lines, finds every short `Item N` heading, and treats a nearby run as a table of contents only when at least half of its members have a page reference or an empty body. Rows with a trailing page reference or a tiny body are dropped; if one Item still has several occurrences, the longest body wins. Sentences that merely *mention* an Item ("Item 7 of this report discusses…") are rejected as headings. A fused heading and first paragraph are split at a canonical Item title regardless of total line length, or at a clear sentence boundary on a long line. Combined headings such as "Items 10, 11, 12, 13 and 14" register the same body under every named Item with canonical titles and a warning. Repeated page furniture is removed conservatively: labelled footers such as "Apple Inc. | 2024 Form 10-K | 5" and bare Item headers are dropped when they repeat, while repeated titled Item headers are merged. 10-Q Items are prefixed with their Part (`II.1A`), because Part I and Part II reuse the same numbers.
 
 See [`docs/DESIGN.md`](docs/DESIGN.md) for the full reasoning — including the residual case this heuristic can still get wrong, and how it fails when it does.
 
@@ -138,21 +138,39 @@ See [`docs/DESIGN.md`](docs/DESIGN.md) for the full reasoning — including the 
 
 ```
 src/
+  edgar/cache.ts      optional on-disk cache for immutable filing documents
   edgar/client.ts     polite EDGAR client: mandatory UA, ≤10 req/s, optional cache
+  edgar/items.ts      canonical Item titles and accepted title variants
   edgar/sections.ts   HTML → lines → Items (the TOC problem lives here)
   diff/sections.ts    paragraph LCS + greedy pairing + word-level edits
   diff/similarity.ts  Dice coefficient over word bigrams
   service.ts          orchestration; the only place that assembles answers
   schemas.ts          Zod output schemas, type-checked against src/types.ts
+  types.ts            shared filing, section and diff types
   server.ts           MCP tools (buildServer) — thin, validated, read-only
   main.ts             stdio entry point
   cli.ts / format.ts  human interface over the same service
+  index.ts            public library exports
 scripts/
   eval-live.ts        live filing corpus evaluation
 evals/                committed evaluation results
 tests/
-  fixtures/           synthetic 10-Ks with a known, documented diff and the parser traps built in
-  *.test.ts           parser + edge cases, diff + pairing, service (fake EDGAR), MCP end-to-end (in-memory transport)
+  client.test.ts      EDGAR index pagination, validation, retry and timeout coverage
+  diff.test.ts / diff.edge.test.ts
+                      paragraph diff, pairing and conservative normalisation
+  sections.test.ts / sections.edge.test.ts
+                      parser behaviour and fixture-backed edge cases
+  service.test.ts     orchestration against a fake EDGAR client
+  mcp.e2e.test.ts     MCP end-to-end over an in-memory transport
+  fixtures/
+    acme-10k-2024.htm / acme-10k-2025.htm
+    acme-20f-2024.htm / acme-20f-2025.htm
+    combined-headings-10k.htm
+    fused-headings-10k.htm / short-fused-headings-10k.htm
+    part-item-same-line-10q.htm / placeholder-cluster-10q.htm
+    repeated-page-footer-10k.htm / running-item-headers-10k.htm
+    short-real-sections-10k.htm / spaced-toc-10k.htm
+    titled-running-item-headers-10q.htm / toc-tail-duplicate-10k.htm
 .github/workflows/
   ci.yml               check, demo and build on Node 20 and 22
 ```
@@ -171,7 +189,7 @@ tests/
 
 Furkan Denizhan — [github.com/nevisende](https://github.com/nevisende) · [linkedin.com/in/furkan-denizhan](https://linkedin.com/in/furkan-denizhan)
 
-Built in a day with Claude Code, following the same discipline I use for the MCP servers I run in production: read-only by architecture, refuse rather than guess, and let the tests say what the code does.
+Built in about a day and a half with Claude Code, following the same discipline I use for the MCP servers I run in production: read-only by architecture, refuse rather than guess, and let the tests say what the code does.
 
 See docs/HOW_IT_WAS_BUILT.md for the agent workflow behind this repository.
 
