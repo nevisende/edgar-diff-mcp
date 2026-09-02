@@ -18,7 +18,7 @@ import type { FilingRef, ParagraphChange, Section } from './types.js';
 const INSTRUCTIONS = `edgar-diff-mcp is read-only and returns SEC filing text verbatim.
 Quote only what a tool returns and keep its citation (accession, item, paragraph, url) next to the quote.
 If a tool returns status "not_found", say so and use availableItems — do not infer the missing section.
-Typical flow: resolve_company → list_filings (form "10-K") → diff_sections(item "1A") or get_section.`;
+Typical flow: resolve_company → list_filings (form "10-K") → diff_all_items → diff_sections(item "1A") or get_section.`;
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true } as const;
 
@@ -135,6 +135,30 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
           warnings: r.section.warnings,
           paragraphs: r.section.paragraphs.slice(0, cap).map((p) => withCitation(ref, r.section, p.index, p.text)),
         });
+      } catch (e) {
+        return fail(e);
+      }
+    },
+  );
+
+  server.registerTool(
+    'diff_all_items',
+    {
+      title: 'Diff all Items across two filings',
+      description:
+        'Compare all Items shared by a base filing and a target filing. Returns per-Item change statistics only, sorted with the most changed first, plus Items found on only one side. Call diff_sections for the actual verbatim, cited paragraphs.',
+      inputSchema: {
+        cik: CikSchema,
+        baseAccession: AccessionSchema.describe('Accession number of the older filing to use as the comparison base'),
+        targetAccession: AccessionSchema.describe('Accession number of the newer filing to compare against the base'),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ cik, baseAccession, targetAccession }) => {
+      try {
+        const base = await service.resolveFiling(cik, baseAccession);
+        const target = await service.resolveFiling(cik, targetAccession);
+        return json(await service.diffAll(base, target));
       } catch (e) {
         return fail(e);
       }

@@ -90,3 +90,27 @@ export interface SectionDiff {
   changes: ParagraphChange[];
   warnings: string[];
 }
+
+export interface ItemDiffOverview {
+  item: string;
+  title: string;
+  stats: DiffStats;
+}
+
+export interface FilingItemOverview {
+  item: string;
+  title: string;
+}
+
+/** Filing-wide change statistics, with no paragraph text. */
+export type DiffAllResult =
+  | {
+      status: 'ok';
+      base: FilingRef;
+      target: FilingRef;
+      items: ItemDiffOverview[];
+      onlyInBase: FilingItemOverview[];
+      onlyInTarget: FilingItemOverview[];
+      warnings: string[];
+    }
+  | { status: 'not_found'; side: 'base' | 'target'; reason: string; filing: FilingRef };

@@ -7,12 +7,13 @@
  *   edgar-diff items 320193 0000320193-24-000123
  *   edgar-diff section 320193 0000320193-24-000123 1A
  *   edgar-diff diff 320193 <olderAccession> <newerAccession> 1A [--json]
+ *   edgar-diff diff-all 320193 <olderAccession> <newerAccession>
  *   edgar-diff search 320193 0000320193-24-000123 "tariff|export control" [--item 1A]
  */
 import { EdgarClient } from './edgar/client.js';
 import { FileCache } from './edgar/cache.js';
 import { FilingService } from './service.js';
-import { printDiff, RED, RESET } from './format.js';
+import { printDiff, printDiffAll, RED, RESET } from './format.js';
 
 const argv = process.argv.slice(2);
 const flags = new Map<string, string | true>();
@@ -76,13 +77,19 @@ async function main(): Promise<void> {
       if (d.status !== 'ok') return out(d);
       return flags.has('json') ? out(d) : printDiff(d);
     }
+    case 'diff-all': {
+      const [cik, baseAccession, targetAccession] = rest;
+      if (!cik || !baseAccession || !targetAccession) throw new Error('usage: diff-all <cik> <baseAccession> <targetAccession>');
+      const d = await service.diffAll(await service.resolveFiling(cik, baseAccession), await service.resolveFiling(cik, targetAccession));
+      return d.status === 'ok' ? printDiffAll(d) : out(d);
+    }
     case 'search': {
       const [cik, acc, pattern] = rest;
       if (!cik || !acc || !pattern) throw new Error('usage: search <cik> <accession> <pattern> [--item 1A] [--limit N]');
       return out(await service.search(await service.resolveFiling(cik, acc), pattern, str('item'), Number(str('limit') ?? 20)));
     }
     default:
-      console.error('commands: resolve | filings | items | section | diff | search');
+      console.error('commands: resolve | filings | items | section | diff | diff-all | search');
       process.exit(2);
   }
 }

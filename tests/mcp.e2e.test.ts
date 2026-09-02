@@ -50,13 +50,16 @@ beforeAll(async () => {
 });
 
 describe('MCP surface', () => {
-  it('exposes exactly the six read-only tools', async () => {
+  it('exposes exactly the seven read-only tools', async () => {
     const { tools } = await mcp.listTools();
-    expect(tools.map((t) => t.name).sort()).toEqual(['diff_sections', 'get_section', 'list_filings', 'list_items', 'resolve_company', 'search_filing']);
+    expect(tools.map((t) => t.name).sort()).toEqual(['diff_all_items', 'diff_sections', 'get_section', 'list_filings', 'list_items', 'resolve_company', 'search_filing']);
     for (const t of tools) {
       expect(t.annotations?.readOnlyHint).toBe(true);
       expect(t.annotations?.destructiveHint).toBe(false);
     }
+    const overview = tools.find((t) => t.name === 'diff_all_items');
+    expect(overview?.annotations?.idempotentHint).toBe(true);
+    expect(overview?.description).toMatch(/statistics only.*diff_sections/is);
   });
 
   it('walks the whole flow: resolve → list → diff', async () => {
@@ -78,6 +81,23 @@ describe('MCP surface', () => {
     expect(diff.truncated).toBe(false);
     const added = diff.changes.find((c: { type: string }) => c.type === 'added');
     expect(added.target.text).toMatch(/tariffs/);
+  });
+
+  it('returns the all-Item overview through the MCP protocol', async () => {
+    const overview = JSON.parse(
+      text(
+        await mcp.callTool({
+          name: 'diff_all_items',
+          arguments: { cik: '1', baseAccession: '0000000001-24-000001', targetAccession: '0000000001-25-000001' },
+        }),
+      ),
+    );
+    expect(overview.status).toBe('ok');
+    expect(overview.items.map((entry: { item: string }) => entry.item)).toEqual(['7', '1A', '1', '1B', '1C']);
+    expect(overview.items[0].stats.similarity).toBeLessThanOrEqual(overview.items[1].stats.similarity);
+    expect(overview.onlyInBase).toEqual([]);
+    expect(overview.onlyInTarget).toEqual([]);
+    expect(JSON.stringify(overview)).not.toContain('changes');
   });
 
   it('never guesses: unknown item → not_found with availableItems', async () => {
