@@ -55,6 +55,24 @@ describe('EdgarClient paginated submissions', () => {
 
     await expect(client.listFilings('1', { form: '10-K', limit: 1 })).rejects.toThrow(/did not match the expected shape/);
   });
+
+  it('rejects unequal filing arrays and empty accession or primary-document entries', async () => {
+    const invalidRows = [
+      { ...filings(['0000000001-25-000001'], ['10-K']), form: [] },
+      filings([''], ['10-K']),
+      { ...filings(['0000000001-25-000001'], ['10-K']), primaryDocument: [''] },
+    ];
+    const expectedErrors = [/equal lengths/, /accessionNumber entries must be non-empty/, /primaryDocument entries must be non-empty/];
+
+    for (const [index, recent] of invalidRows.entries()) {
+      const client = new EdgarClient({
+        userAgent: 'schema tests@example.com',
+        minIntervalMs: 0,
+        fetchImpl: async () => new Response(JSON.stringify({ filings: { recent } }), { status: 200 }),
+      });
+      await expect(client.listFilings('1')).rejects.toThrow(expectedErrors[index]);
+    }
+  });
 });
 
 describe('EdgarClient request retries', () => {

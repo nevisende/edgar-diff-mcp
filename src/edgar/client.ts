@@ -50,11 +50,25 @@ export function isImmutableUrl(url: string): boolean {
 const TickersSchema = z.record(z.string(), z.object({ cik_str: z.number(), ticker: z.string(), title: z.string() }));
 const CompanySubmissionsSchema = z.object({ name: z.string(), tickers: z.array(z.string()) });
 const FilingArraysSchema = z.object({
-  accessionNumber: z.array(z.string()),
+  accessionNumber: z.array(z.string().min(1, 'accessionNumber entries must be non-empty')),
   form: z.array(z.string()),
   filingDate: z.array(z.string()),
   reportDate: z.array(z.string()),
-  primaryDocument: z.array(z.string()),
+  primaryDocument: z.array(z.string().min(1, 'primaryDocument entries must be non-empty')),
+}).superRefine((filings, ctx) => {
+  const lengths = [
+    filings.accessionNumber.length,
+    filings.form.length,
+    filings.filingDate.length,
+    filings.reportDate.length,
+    filings.primaryDocument.length,
+  ];
+  if (new Set(lengths).size !== 1) {
+    ctx.addIssue({
+      code: 'custom',
+      message: `filing arrays must have equal lengths; received ${lengths.join(', ')}`,
+    });
+  }
 });
 const SubmissionsSchema = z.object({
   filings: z.object({
