@@ -39,6 +39,25 @@ export const ITEM_TITLES_10Q: Record<string, string> = {
   'II.6': 'Exhibits',
 };
 
+const ITEM_TITLE_VARIANTS_10K: Partial<Record<string, string[]>> = {
+  '5': ["Market for Registrant's Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities"],
+  '7': ["Management's Discussion and Analysis of Financial Condition and Results of Operations"],
+  '9': ['Changes in and Disagreements with Accountants on Accounting and Financial Disclosure'],
+  '10': ['Directors, Executive Officers, and Corporate Governance'],
+  '12': ['Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters'],
+  '13': ['Certain Relationships and Related Transactions, and Director Independence'],
+  '15': ['Exhibits, Financial Statement Schedules'],
+};
+
+/** Known filed variants, longest first so a shorter canonical prefix never truncates a title. */
+export function titleVariantsFor(form: string, key: string): string[] {
+  const f = form.toUpperCase();
+  const table = f.startsWith('10-Q') ? ITEM_TITLES_10Q : f.startsWith('10-K') ? ITEM_TITLES_10K : undefined;
+  const canonical = table?.[key];
+  const variants = f.startsWith('10-K') ? ITEM_TITLE_VARIANTS_10K[key] ?? [] : [];
+  return [...variants, ...(canonical ? [canonical] : [])].sort((a, b) => b.length - a.length);
+}
+
 /** Canonical titles only for the forms we actually know; anything else keeps its own heading text. */
 export function titleFor(form: string, key: string, fallback: string): string {
   const f = form.toUpperCase();

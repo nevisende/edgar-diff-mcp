@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import type { Section, Paragraph } from '../types.js';
-import { titleFor } from './items.js';
+import { titleFor, titleVariantsFor } from './items.js';
 
 /**
  * HTML → ordered lines of visible text.
@@ -46,6 +46,8 @@ interface Heading {
   key: string;
   rawTitle: string;
   line: number;
+  fusedParagraph?: string;
+  splitTitle?: string;
 }
 
 const ROMAN: Record<string, string> = { '1': 'I', '2': 'II', '3': 'III', '4': 'IV' };
@@ -70,6 +72,38 @@ function looksLikeSentence(title: string): boolean {
   if (/^[a-z]/.test(t)) return true; // "of our revenue…"
   if (t.split(/\s+/).length > MAX_TITLE_WORDS) return true;
   return false;
+}
+
+interface FusedHeading {
+  rawTitle: string;
+  paragraph: string;
+  splitTitle: string;
+}
+
+function comparableTitle(value: string): string {
+  return value.toLocaleLowerCase('en-US').replace(/[‘’]/g, "'");
+}
+
+/** Split only at a known Item title or an unambiguous nearby sentence boundary. */
+function splitFusedHeading(raw: string, form: string, key: string): FusedHeading | undefined {
+  for (const variant of titleVariantsFor(form, key)) {
+    const found = raw.slice(0, variant.length);
+    if (comparableTitle(found) !== comparableTitle(variant)) continue;
+    const rest = raw.slice(variant.length);
+    const body = /^[.:–—-]?\s+(.+)$/.exec(rest)?.[1];
+    if (body) return { rawTitle: found, paragraph: body, splitTitle: found };
+  }
+
+  for (let i = 0; i < Math.min(raw.length, 120); i++) {
+    if (!/[.!?]/.test(raw[i] ?? '')) continue;
+    const rest = raw.slice(i + 1);
+    const body = /^\s+([A-Z].*)$/.exec(rest)?.[1];
+    if (!body) continue;
+    const headingTitle = raw.slice(0, i + 1);
+    if (looksLikeSentence(headingTitle)) return undefined;
+    return { rawTitle: headingTitle, paragraph: body, splitTitle: headingTitle };
+  }
+  return undefined;
 }
 
 /** TOC rows almost always end in a page reference: "Item 1A. Risk Factors 9". */
@@ -135,19 +169,24 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
   const isTenQ = form.startsWith('10-Q');
 
   lines.forEach((line, i) => {
-    if (line.length > MAX_HEADING_CHARS) return;
     const p = PART_RE.exec(line);
-    if (p && p[1] && !looksLikeSentence(p[2] ?? '')) {
+    if (line.length <= MAX_HEADING_CHARS && p && p[1] && !looksLikeSentence(p[2] ?? '')) {
       const raw = p[1].toUpperCase();
       part = ROMAN[raw] ?? raw;
       return;
     }
     const m = ITEM_RE.exec(line);
     if (!m || !m[1]) return;
-    const title = m[2] ?? '';
-    if (looksLikeSentence(title)) return;
     const item = m[1].toUpperCase();
     const key = isTenQ && part ? `${part}.${item}` : item;
+    const title = m[2] ?? '';
+    if (line.length > MAX_HEADING_CHARS) {
+      const fused = splitFusedHeading(title, form, key);
+      if (!fused) return;
+      all.push({ key, rawTitle: fused.rawTitle, line: i, fusedParagraph: fused.paragraph, splitTitle: fused.splitTitle });
+      return;
+    }
+    if (looksLikeSentence(title)) return;
     all.push({ key, rawTitle: title, line: i });
   });
 
@@ -160,7 +199,10 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
     const h = all[i];
     const next = all[i + 1];
     if (!h) return { lines: [], chars: 0 };
-    const body = lines.slice(h.line + 1, next ? next.line : lines.length).filter((l) => !isNoise(l));
+    const body = [
+      ...(h.fusedParagraph ? [h.fusedParagraph] : []),
+      ...lines.slice(h.line + 1, next ? next.line : lines.length),
+    ].filter((l) => !isNoise(l));
     return { lines: body, chars: body.reduce((n, l) => n + l.length, 0) };
   };
   const classified = classify(all, (i) => bodyOf(i).chars);
@@ -175,10 +217,16 @@ export function splitItems(lines: string[], form: string): { sections: Map<strin
   kept.forEach(({ c: h }, idx) => {
     const next = kept[idx + 1]?.c;
     const end = next ? next.line : lines.length;
-    const body = lines.slice(h.line + 1, end).filter((l) => !isNoise(l));
+    const body = [
+      ...(h.fusedParagraph ? [h.fusedParagraph] : []),
+      ...lines.slice(h.line + 1, end),
+    ].filter((l) => !isNoise(l));
     const paragraphs: Paragraph[] = body.map((text, index) => ({ index, text }));
     const charCount = body.reduce((n, l) => n + l.length, 0);
     const section: Section = { item: h.key, title: titleFor(form, h.key, h.rawTitle), paragraphs, charCount, warnings: [] };
+    if (h.splitTitle) {
+      section.warnings.push(`heading and first paragraph were in one block; split at ${h.splitTitle}`);
+    }
     const list = candidates.get(h.key) ?? [];
     list.push({ section, bodyChars: charCount, tocTail: h.tocTail });
     candidates.set(h.key, list);

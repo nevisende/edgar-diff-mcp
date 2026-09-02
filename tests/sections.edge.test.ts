@@ -71,6 +71,28 @@ describe('table-of-contents defences', () => {
   });
 });
 
+describe('fused headings', () => {
+  const fused = splitItems(htmlToLines(fx('fused-headings-10k.htm')), '10-K').sections;
+
+  it('splits canonical Item titles from a first paragraph in the same block', () => {
+    expect([...fused.keys()]).toEqual(['1', '1A', '7']);
+    expect(fused.get('1')!.paragraphs[0]!.text).toMatch(/^Acme designs industrial robots/);
+    expect(fused.get('1A')!.paragraphs[0]!.text).toMatch(/^Investing in Acme involves substantial risks/);
+    expect(fused.get('1A')!.warnings.join(' ')).toContain('heading and first paragraph were in one block; split at Risk Factors');
+  });
+
+  it('uses a nearby sentence boundary only when it clearly precedes body text', () => {
+    const mdna = fused.get('7')!;
+    expect(mdna.paragraphs[0]!.text).toMatch(/^Revenue increased as customers/);
+    expect(mdna.warnings.join(' ')).toContain('heading and first paragraph were in one block; split at Results of Operations.');
+  });
+
+  it('keeps rejecting an overlong Item-like sentence when no split is safe', () => {
+    expect(fused.has('2')).toBe(false);
+    expect(fused.get('7')!.paragraphs.at(-1)!.text).toMatch(/^Item 2\. of this report/);
+  });
+});
+
 describe('titleFor', () => {
   it('only applies canonical titles to forms it knows', () => {
     expect(titleFor('10-K', '3', 'whatever')).toBe('Legal Proceedings');

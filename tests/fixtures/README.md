@@ -19,3 +19,7 @@ and Item 7 (MD&A) has one changed paragraph (revenue numbers) and one changed ta
 Everything else is identical. Tests assert exactly these facts.
 
 For a diff over *real* filings, run `npm run smoke:live` (needs network + `EDGAR_USER_AGENT`).
+
+`fused-headings-10k.htm` is a synthetic filing whose Item headings and first body paragraphs
+share long block elements. It includes a separate table of contents and exercises both a
+canonical Item-title split and the conservative sentence-boundary fallback.
