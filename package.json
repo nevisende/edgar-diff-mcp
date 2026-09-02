@@ -44,6 +44,7 @@
     "check": "npm run typecheck && npm run test",
     "smoke:live": "tsx scripts/smoke-live.ts",
     "eval:live": "tsx scripts/eval-live.ts",
+    "scenarios:mcp": "npm run build && tsx scripts/scenarios-mcp.ts",
     "demo": "tsx scripts/demo-fixtures.ts",
     "prepublishOnly": "npm run check && npm run build"
   },

@@ -1,0 +1,627 @@
+{
+  "kind": "deterministic model-free MCP scenario run",
+  "generatedAt": "2026-09-02T21:25:34.518Z",
+  "server": "node dist/main.js over stdio",
+  "userAgent": "edgar-diff-mcp/0.1 furkandenizhan@gmail.com",
+  "cacheDir": "/Users/nevisende-mm/Documents/researcher/edgar-diff-mcp/.edgar-cache",
+  "passed": 7,
+  "total": 7,
+  "scenarios": [
+    {
+      "id": "nvda-risk-factors",
+      "title": "NVIDIA newly added risk factors",
+      "pass": true,
+      "steps": [
+        {
+          "tool": "resolve_company",
+          "saveAs": "company",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "NVDA resolves to NVIDIA CIK",
+              "pass": true,
+              "actual": "0001045810",
+              "expected": "0001045810"
+            }
+          ]
+        },
+        {
+          "tool": "list_filings",
+          "saveAs": "filings",
+          "status": "2 results",
+          "assertions": [
+            {
+              "name": "two 10-Ks are returned",
+              "pass": true,
+              "actual": {
+                "length": 2
+              },
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "tool": "diff_all_items",
+          "saveAs": "overview",
+          "status": "ok",
+          "assertions": [
+            {
+              "name": "all-Item diff succeeds",
+              "pass": true,
+              "actual": "ok",
+              "expected": "ok"
+            },
+            {
+              "name": "shared Items are compared",
+              "pass": true,
+              "actual": {
+                "length": 23
+              },
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "tool": "diff_sections",
+          "saveAs": "riskDiff",
+          "status": "ok",
+          "assertions": [
+            {
+              "name": "Item 1A diff succeeds",
+              "pass": true,
+              "actual": "ok",
+              "expected": "ok"
+            },
+            {
+              "name": "added paragraphs exist",
+              "pass": true,
+              "actual": 36,
+              "expected": 0
+            },
+            {
+              "name": "Groq license paragraph is genuinely added",
+              "pass": true,
+              "actual": "matches \"intellectual property license arrangement with Groq\": matched",
+              "expected": "intellectual property license arrangement with Groq"
+            },
+            {
+              "name": "diff changes carry SEC Archives citations",
+              "pass": true,
+              "actual": "includes \"https://www.sec.gov/Archives/\": matched",
+              "expected": "https://www.sec.gov/Archives/"
+            }
+          ]
+        }
+      ],
+      "notes": "All structural assertions passed.",
+      "excerpt": "We have entered into an intellectual property license arrangement with Groq, Inc., or Groq, that required significant, nonrefundable payments. Successfully incorporating the licensed technology into our architectures and product roadmaps requires significant engineering effort and may not occur on expected timelines or at all. The licensed technology may not achieve the desired results as designed or achieve customer or ecosystem adoption. The economic outcomes of this arrangement depend on our ability to translate the licensed technology into commercially viable products and services over time, and we may be unable to recover the associated costs or realize an adequate return on this spend. If our efforts to use the licensed technology are delayed or unsuccessful, our business, operating results, and financial condition could be negatively impacted.\nCitation: {\"cik\":\"0001045810\",\"accession\":\"0001045810-26-000021\",\"form\":\"10-K\",\"filingDate\":\"2026-02-25\",\"url\":\"https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm\",\"reportDate\":\"2026-01-25\",\"item\":\"1A\",\"itemTitle\":\"Risk Factors\",\"paragraph\":44}"
+    },
+    {
+      "id": "aapl-mdna-tariffs",
+      "title": "Apple MD&A tariff references",
+      "pass": true,
+      "steps": [
+        {
+          "tool": "resolve_company",
+          "saveAs": "company",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "AAPL resolves to Apple CIK",
+              "pass": true,
+              "actual": "0000320193",
+              "expected": "0000320193"
+            }
+          ]
+        },
+        {
+          "tool": "list_filings",
+          "saveAs": "filings",
+          "status": "2 results",
+          "assertions": [
+            {
+              "name": "two 10-Ks are returned",
+              "pass": true,
+              "actual": {
+                "length": 2
+              },
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "tool": "search_filing",
+          "saveAs": "tariffSearch",
+          "status": "ok",
+          "assertions": [
+            {
+              "name": "Item 7 search succeeds",
+              "pass": true,
+              "actual": "ok",
+              "expected": "ok"
+            },
+            {
+              "name": "four tariff paragraphs match",
+              "pass": true,
+              "actual": 4,
+              "expected": 4
+            },
+            {
+              "name": "search includes the 2025 tariff disclosure",
+              "pass": true,
+              "actual": "matches \"Beginning in the second quarter of 2025, new U\\\\.S\\\\. Tariffs\": matched",
+              "expected": "Beginning in the second quarter of 2025, new U\\.S\\. Tariffs"
+            },
+            {
+              "name": "matches carry SEC Archives citations",
+              "pass": true,
+              "actual": "includes \"https://www.sec.gov/Archives/\": matched",
+              "expected": "https://www.sec.gov/Archives/"
+            }
+          ]
+        },
+        {
+          "tool": "diff_sections",
+          "saveAs": "mdnaDiff",
+          "status": "ok",
+          "assertions": [
+            {
+              "name": "Item 7 diff succeeds",
+              "pass": true,
+              "actual": "ok",
+              "expected": "ok"
+            },
+            {
+              "name": "tariff matches are reported as added",
+              "pass": true,
+              "actual": "matches \"\\\"type\\\":\\\"added\\\"[^}]*\\\"paragraph\\\":24[\\\\s\\\\S]*\\\"type\\\":\\\"added\\\"[^}]*\\\"paragraph\\\":25\": matched",
+              "expected": "\"type\":\"added\"[^}]*\"paragraph\":24[\\s\\S]*\"type\":\"added\"[^}]*\"paragraph\":25"
+            }
+          ]
+        }
+      ],
+      "notes": "All structural assertions passed.",
+      "excerpt": "Beginning in the second quarter of 2025, new U.S. Tariffs were announced, including additional tariffs on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the EU, among others. In response, several countries have imposed, or threatened to impose, reciprocal tariffs on imports from the U.S. and other retaliatory measures. Various modifications to the U.S. Tariffs have been announced and further changes could be made in the future, which may include additional sector-based tariffs or other measures. For example, the U.S. Department of Commerce has initiated an investigation under Section 232 of the Trade Expansion Act of 1962, as amended, into, among other things, imports of semiconductors, semiconductor manufacturing equipment, and their derivative products, including downstream products that contain semiconductors. Tariffs and other measures that are applied to the Company’s products or their components can have a material adverse impact on the Company’s business, results of operations and financial condition, including impacting the Company’s supply chain, the availability of rare earths and other raw materials and components, pricing and gross margin. The ultima…\nCitation: {\"cik\":\"0000320193\",\"accession\":\"0000320193-25-000079\",\"form\":\"10-K\",\"filingDate\":\"2025-10-31\",\"url\":\"https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm\",\"reportDate\":\"2025-09-27\",\"item\":\"7\",\"itemTitle\":\"Management's Discussion and Analysis\",\"paragraph\":25}"
+    },
+    {
+      "id": "tsla-where-it-moved",
+      "title": "Tesla Items with the most change",
+      "pass": true,
+      "steps": [
+        {
+          "tool": "resolve_company",
+          "saveAs": "company",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "TSLA resolves to Tesla CIK",
+              "pass": true,
+              "actual": "0001318605",
+              "expected": "0001318605"
+            }
+          ]
+        },
+        {
+          "tool": "list_filings",
+          "saveAs": "filings",
+          "status": "2 results",
+          "assertions": [
+            {
+              "name": "two 10-Ks are returned",
+              "pass": true,
+              "actual": {
+                "length": 2
+              },
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "tool": "diff_all_items",
+          "saveAs": "overview",
+          "status": "ok",
+          "assertions": [
+            {
+              "name": "all-Item diff succeeds",
+              "pass": true,
+              "actual": "ok",
+              "expected": "ok"
+            },
+            {
+              "name": "Item 9B has the lowest similarity",
+              "pass": true,
+              "actual": "9B",
+              "expected": "9B"
+            },
+            {
+              "name": "Item 15 ranks second",
+              "pass": true,
+              "actual": "15",
+              "expected": "15"
+            },
+            {
+              "name": "Item 7 ranks third",
+              "pass": true,
+              "actual": "7",
+              "expected": "7"
+            },
+            {
+              "name": "Item 9B similarity is 0.12",
+              "pass": true,
+              "actual": 0.12,
+              "expected": 0.12
+            }
+          ]
+        }
+      ],
+      "notes": "All structural assertions passed.",
+      "excerpt": "[\n  {\n    \"item\": \"9B\",\n    \"title\": \"Other Information\",\n    \"stats\": {\n      \"baseParagraphs\": 2,\n      \"targetParagraphs\": 8,\n      \"added\": 7,\n      \"removed\": 1,\n      \"changed\": 1,\n      \"unchanged\": 0,\n      \"similarity\": 0.12\n    }\n  },\n  {\n    \"item\": \"15\",\n    \"title\": \"Exhibits and Financial Statement Schedules\",\n    \"stats\": {\n      \"baseParagraphs\": 303,\n      \"targetParagraphs\": 121,\n      \"added\": 20,\n      \"removed\": 202,\n      \"changed\": 9,\n      \"unchanged\": 92,\n      \"similarity\": 0.328\n    }\n  },\n  {\n    \"item\": \"7\",\n    \"title\": \"Management's Discussion and Analysis\",\n    \"stats\": {\n      \"baseParagraphs\": 180,\n      \"targetParagraphs\": 177,\n      \"added\": 35,\n      \"removed\": 38,\n      \"changed\": 97,\n      \"unchanged\": 45,\n      \"similarity\": 0.615\n    }\n  }\n]"
+    },
+    {
+      "id": "brk-10q-part-ii",
+      "title": "Berkshire Part II Item 1A",
+      "pass": true,
+      "steps": [
+        {
+          "tool": "resolve_company",
+          "saveAs": "company",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "BRK-B resolves to Berkshire CIK",
+              "pass": true,
+              "actual": "0001067983",
+              "expected": "0001067983"
+            }
+          ]
+        },
+        {
+          "tool": "list_filings",
+          "saveAs": "filings",
+          "status": "2 results",
+          "assertions": [
+            {
+              "name": "two 10-Qs are returned",
+              "pass": true,
+              "actual": {
+                "length": 2
+              },
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "tool": "diff_sections",
+          "saveAs": "riskDiff",
+          "status": "ok",
+          "assertions": [
+            {
+              "name": "qualified Item II.1A diff succeeds",
+              "pass": true,
+              "actual": "ok",
+              "expected": "ok"
+            },
+            {
+              "name": "qualified Item is preserved",
+              "pass": true,
+              "actual": "II.1A",
+              "expected": "II.1A"
+            },
+            {
+              "name": "14 paragraphs were added",
+              "pass": true,
+              "actual": 14,
+              "expected": 14
+            },
+            {
+              "name": "10 paragraphs were removed",
+              "pass": true,
+              "actual": 10,
+              "expected": 10
+            },
+            {
+              "name": "one paragraph changed",
+              "pass": true,
+              "actual": 1,
+              "expected": 1
+            },
+            {
+              "name": "diff changes carry SEC Archives citations",
+              "pass": true,
+              "actual": "includes \"https://www.sec.gov/Archives/\": matched",
+              "expected": "https://www.sec.gov/Archives/"
+            }
+          ]
+        }
+      ],
+      "notes": "All structural assertions passed.",
+      "excerpt": "April\nCitation: {\"cik\":\"0001067983\",\"accession\":\"0001193125-26-341032\",\"form\":\"10-Q\",\"filingDate\":\"2026-08-10\",\"url\":\"https://www.sec.gov/Archives/edgar/data/1067983/000119312526341032/brka-20260630.htm\",\"reportDate\":\"2026-06-30\",\"item\":\"II.1A\",\"itemTitle\":\"Risk Factors\",\"paragraph\":16}"
+    },
+    {
+      "id": "ge-honest-not-found",
+      "title": "GE Aerospace honest not-found result",
+      "pass": true,
+      "steps": [
+        {
+          "tool": "resolve_company",
+          "saveAs": "company",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "GE resolves to its CIK",
+              "pass": true,
+              "actual": "0000040545",
+              "expected": "0000040545"
+            }
+          ]
+        },
+        {
+          "tool": "list_filings",
+          "saveAs": "filings",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "latest 10-K is returned",
+              "pass": true,
+              "actual": {
+                "length": 1
+              },
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "tool": "list_items",
+          "saveAs": "items",
+          "status": "0 items",
+          "assertions": [
+            {
+              "name": "cross-reference filing exposes no confident Items",
+              "pass": true,
+              "actual": {
+                "length": 0
+              },
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "tool": "get_section",
+          "saveAs": "riskSection",
+          "status": "not_found",
+          "assertions": [
+            {
+              "name": "Item 1A is honestly not found",
+              "pass": true,
+              "actual": "not_found",
+              "expected": "not_found"
+            },
+            {
+              "name": "reason identifies Item 1A",
+              "pass": true,
+              "actual": "Item \"1A\" was not found in this filing.",
+              "expected": "Item \"1A\" was not found"
+            }
+          ]
+        }
+      ],
+      "notes": "All structural assertions passed.",
+      "excerpt": "{\n  \"status\": \"not_found\",\n  \"filing\": {\n    \"cik\": \"0000040545\",\n    \"accession\": \"0000040545-26-000008\",\n    \"form\": \"10-K\",\n    \"filingDate\": \"2026-01-29\",\n    \"url\": \"https://www.sec.gov/Archives/edgar/data/40545/000004054526000008/ge-20251231.htm\",\n    \"reportDate\": \"2025-12-31\"\n  },\n  \"item\": \"1A\",\n  \"reason\": \"Item \\\"1A\\\" was not found in this filing.\",\n  \"availableItems\": []\n}"
+    },
+    {
+      "id": "jpm-legal-proceedings",
+      "title": "JPMorgan Legal Proceedings",
+      "pass": true,
+      "steps": [
+        {
+          "tool": "resolve_company",
+          "saveAs": "company",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "JPM resolves to JPMorgan CIK",
+              "pass": true,
+              "actual": "0000019617",
+              "expected": "0000019617"
+            }
+          ]
+        },
+        {
+          "tool": "list_filings",
+          "saveAs": "filings",
+          "status": "2 results",
+          "assertions": [
+            {
+              "name": "two 10-Ks are returned from paginated submissions",
+              "pass": true,
+              "actual": {
+                "length": 2
+              },
+              "expected": 2
+            },
+            {
+              "name": "new accession is correct",
+              "pass": true,
+              "actual": "0001628280-26-008131",
+              "expected": "0001628280-26-008131"
+            },
+            {
+              "name": "prior accession is correct",
+              "pass": true,
+              "actual": "0000019617-25-000270",
+              "expected": "0000019617-25-000270"
+            }
+          ]
+        },
+        {
+          "tool": "diff_sections",
+          "saveAs": "legalDiff",
+          "status": "ok",
+          "assertions": [
+            {
+              "name": "Item 3 diff succeeds",
+              "pass": true,
+              "actual": "ok",
+              "expected": "ok"
+            },
+            {
+              "name": "no paragraphs were added",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "no paragraphs were removed",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "no paragraphs changed",
+              "pass": true,
+              "actual": 0,
+              "expected": 0
+            },
+            {
+              "name": "Item 3 is identical",
+              "pass": true,
+              "actual": 1,
+              "expected": 1
+            },
+            {
+              "name": "filing metadata carries SEC Archives URLs",
+              "pass": true,
+              "actual": "includes \"https://www.sec.gov/Archives/\": matched",
+              "expected": "https://www.sec.gov/Archives/"
+            }
+          ]
+        }
+      ],
+      "notes": "All structural assertions passed.",
+      "excerpt": "Accessions: 0000019617-25-000270 → 0001628280-26-008131\nBase URL: https://www.sec.gov/Archives/edgar/data/19617/000001961725000270/jpm-20241231.htm\nTarget URL: https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm\n{\n  \"baseParagraphs\": 1,\n  \"targetParagraphs\": 1,\n  \"added\": 0,\n  \"removed\": 0,\n  \"changed\": 0,\n  \"unchanged\": 1,\n  \"similarity\": 1\n}"
+    },
+    {
+      "id": "xom-holding-company",
+      "title": "Exxon ticker reassignment and operating-company fallback",
+      "pass": true,
+      "steps": [
+        {
+          "tool": "resolve_company",
+          "saveAs": "tickerCompany",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "XOM resolves to the holding-company CIK",
+              "pass": true,
+              "actual": "0002115436",
+              "expected": "0002115436"
+            },
+            {
+              "name": "resolved entity is the holding company",
+              "pass": true,
+              "actual": "ExxonMobil Holdings Corp",
+              "expected": "Holdings Corp"
+            }
+          ]
+        },
+        {
+          "tool": "list_filings",
+          "saveAs": "holdingFilings",
+          "status": "0 results",
+          "assertions": [
+            {
+              "name": "holding-company CIK has no 10-Ks",
+              "pass": true,
+              "actual": {
+                "length": 0
+              },
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "tool": "resolve_company",
+          "saveAs": "nameLookup",
+          "status": "0 results",
+          "assertions": [
+            {
+              "name": "current ticker index has no operating-company name match",
+              "pass": true,
+              "actual": {
+                "length": 0
+              },
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "tool": "resolve_company",
+          "saveAs": "operatingCompany",
+          "status": "1 result",
+          "assertions": [
+            {
+              "name": "known operating-company CIK resolves",
+              "pass": true,
+              "actual": "0000034088",
+              "expected": "0000034088"
+            },
+            {
+              "name": "CIK belongs to Exxon Mobil Corp",
+              "pass": true,
+              "actual": "EXXON MOBIL CORP",
+              "expected": "EXXON MOBIL CORP"
+            }
+          ]
+        },
+        {
+          "tool": "list_filings",
+          "saveAs": "operatingFilings",
+          "status": "2 results",
+          "assertions": [
+            {
+              "name": "operating-company CIK has two 10-Ks",
+              "pass": true,
+              "actual": {
+                "length": 2
+              },
+              "expected": 2
+            },
+            {
+              "name": "filing URLs use operating-company CIK",
+              "pass": true,
+              "actual": "includes \"/edgar/data/34088/\": matched",
+              "expected": "/edgar/data/34088/"
+            }
+          ]
+        },
+        {
+          "tool": "diff_sections",
+          "saveAs": "riskDiff",
+          "status": "ok",
+          "assertions": [
+            {
+              "name": "operating-company Item 1A diff succeeds",
+              "pass": true,
+              "actual": "ok",
+              "expected": "ok"
+            },
+            {
+              "name": "diff has substantive changes",
+              "pass": true,
+              "actual": 40,
+              "expected": 0
+            },
+            {
+              "name": "citations use operating-company CIK",
+              "pass": true,
+              "actual": "includes \"\\\"cik\\\":\\\"0000034088\\\"\": matched",
+              "expected": "\"cik\":\"0000034088\""
+            }
+          ]
+        }
+      ],
+      "notes": "All structural assertions passed.",
+      "excerpt": "XOM resolution: {\"cik\":\"0002115436\",\"ticker\":\"XOM\",\"name\":\"ExxonMobil Holdings Corp\"}\nXOM 10-K count: 0\nOperating company: {\"cik\":\"0000034088\",\"ticker\":\"\",\"name\":\"EXXON MOBIL CORP\"}\nThe oil, gas, and petrochemical businesses are fundamentally commodity businesses. This means ExxonMobil’s operations and earnings may be significantly affected by changes in oil, gas, and petrochemical prices and by changes in margins on refined products. Oil, gas, petrochemical, and product prices and margins in turn depend on local, regional, and global events or conditions that affect supply and demand for the relevant commodity or product. Any material decline in oil or natural gas prices could have a material adverse effect on the Company’s operations, results, financial condition, and proved reserves, especially in the Upstream segment. On the other hand, a material increase in oil or natural gas prices could have a material adverse effect on the Company’s operations and results, especially in the Energy Products, Chemical Products, and Specialty Products segments. Our pursuit of lower-emission and other new business opportunities, including carbon capture and storage, hydrogen …\nCitation: {\"cik\":\"0000034088\",\"accession\":\"0000034088-26-000045\",\"form\":\"10-K\",\"filingDate\":\"2026-02-18\",\"url\":\"https://www.sec.gov/Archives/edgar/data/34088/000003408826000045/xom-20251231.htm\",\"reportDate\":\"2025-12-31\",\"item\":\"1A\",\"itemTitle\":\"Risk Factors\",\"paragraph\":2}"
+    }
+  ]
+}
