@@ -14,6 +14,11 @@ suggestions; a PR that weakens any of them is wrong even if it is green.
 - `npm run check` — typecheck + tests. Must pass before you stop.
 - `npm run demo` — offline diff of the bundled fixtures. Use it to eyeball formatting changes.
 - `npm run smoke:live -- <TICKER> [ITEM]` — real EDGAR. Needs `EDGAR_USER_AGENT` with an email. Do not run in CI.
+- `npm run eval:live` — measure the 30-issuer corpus; uses the network and requires `EDGAR_USER_AGENT` with an email.
+- `npm run scenarios:mcp` — build and run the deterministic MCP scenario layer; uses the network and benefits from `EDGAR_CACHE_DIR`.
+- `scripts/scenarios-harness.sh <claude|codex|agy> [id]` — run one or all agent scenarios; uses the network, the selected CLI/provider, and their quota.
+- `npm run scenarios:grade` — grade the captured harness answers; offline once those answer files exist.
+- `npm run examples` — regenerate real MCP and CLI output in `examples/`; refreshes live EDGAR indexes and requires `EDGAR_USER_AGENT` with an email.
 
 ## Conventions
 - TypeScript `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes` — keep them on. Use `?? ''` / explicit guards instead of `!` where the value can genuinely be missing.

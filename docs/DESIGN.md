@@ -56,32 +56,46 @@ So the parser:
    space between table cells and zero-width characters stripped;
 2. drops short labelled running headers and footers only when the same normalised label repeats
    at least three times, while other short labels remain;
-3. finds every short line matching `Item <N[A-C]>` whose title is not a sentence (does not start
+3. drops short recognised in-document navigation labels such as "Financial Table of Contents",
+   "Back to contents" and "Index to financial statements" when the same label repeats at least
+   twice; these links are page furniture, not filing prose;
+4. finds every short line matching `Item <N[A-C]>` whose title is not a sentence (does not start
    lower-case, ≤ 12 words) — this rejects "Item 7 of this report discusses…"; a single-line
    heading such as `PART II, ITEM 1A` updates the active Part and parses the Item on that same line;
-4. A candidate heading whose text continues past a canonical Item title is split at that title when the remainder starts with a capital letter and contains at least three words, regardless of the line's total length; the remainder becomes paragraph 0 and the section carries a split warning.
+5. recognises filed title variants as well as canonical titles, including the long Part II Item 2
+   forms that append issuer repurchases or issuer purchases of equity securities, with optional
+   Use of Proceeds wording and punctuation, so the preceding Item cannot absorb those tables;
+6. A candidate heading whose text continues past a canonical Item title is split at that title when the remainder starts with a capital letter and contains at least three words, regardless of the line's total length; the remainder becomes paragraph 0 and the section carries a split warning.
    A long heading with an unambiguous sentence boundary near the start may also be split; an
    uncertain split is rejected rather than guessed;
-5. expands a combined heading such as "Items 10, 11, 12, 13 and 14" under every named Item,
+7. expands a combined heading such as "Items 10, 11, 12, 13 and 14" under every named Item,
    gives each section its canonical title, and adds a warning, so the shared body is explicit
    rather than assigned to one guessed Item;
-6. drops repeated bare `Item N` running headers only when there are at least three and the same
+8. drops repeated bare `Item N` running headers only when there are at least three and the same
    Item also has a titled heading, so isolated real headings remain candidates;
-7. merges three or more identical titled running headers when substantive text separates each
+9. merges three or more identical titled running headers when substantive text separates each
    occurrence and no different heading intervenes. When repeated running headers are merged, paragraph indices are reassigned over the merged section so every returned paragraph remains individually citable.
-8. groups headings into runs where consecutive headings are ≤ 2 lines apart *and the earlier
+10. groups headings into runs where consecutive headings are ≤ 2 lines apart *and the earlier
    one is a stub* (tiny body or page reference). A run of three or more closely spaced Item headings is treated as a table of contents only when at least half of its members either end in a page reference or have an empty body; short sentence bodies without page references remain real sections.
-9. drops every stub in the run. A run member with a real body and no page reference — the
+11. drops every stub in the run. A run member with a real body and no page reference — the
    last TOC row swallowing the preamble, or the first real heading — is kept but flagged
    `tocTail`, and a flagged candidate is used only when no unflagged one exists for that Item;
-10. among remaining candidates per Item, keeps the longest body;
-11. returns short real bodies ("None.", "Not applicable.") *with a warning*, rather than
+12. among remaining candidates per Item, keeps the longest body;
+13. returns short real bodies ("None.", "Not applicable.") *with a warning*, rather than
    refusing them, because they are real sections.
 
 10-Q filings reuse Item numbers across Part I and Part II, so `PART I`/`PART II` lines are
 tracked and keys become `I.2`, `II.1A`; `PART` lines themselves are excluded from bodies.
 Callers may still pass `1A`; it resolves when unambiguous and errors when not. Cross-references
 such as "See Part II, Item 1A" do not flip the Part because they are sentence-shaped.
+
+### What the scenarios found
+
+The end-to-end suite in [`docs/SCENARIOS.md`](SCENARIOS.md) exposed two parser bugs: repeated
+"Financial Table of Contents" navigation links leaked into Exxon's diff, and Berkshire's long
+Part II Item 2 title was missed so repurchase tables were swallowed by Item II.1A. The 30-issuer
+evaluation missed both because it checks that expected Items exist and pass broad size bounds;
+reading the actual cross-filing diffs made the furniture and incorrect boundary immediately visible.
 
 ### Duplicate headings
 
