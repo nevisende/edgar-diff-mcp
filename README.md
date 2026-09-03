@@ -8,17 +8,17 @@ Ask Claude *"what changed in Apple's risk factors between the last two 10-Ks?"* 
 
 Output of `npm run demo` (the bundled synthetic fixtures; see `tests/fixtures/README.md`):
 
-```
+```text
 10-K 2025-02-15 -> 10-K 2026-02-15
 Item 1A - Risk Factors
 paragraphs 7 -> 7 | +1 -1 ~1 | similarity 0.827
 
-- [base paragraph 3] The COVID-19 pandemic and related public health measures have in the past disrupted ...
+- [base paragraph 3] The COVID-19 pandemic and related public health measures have in the past disrupted, and may in the future disrupt, our ...
 
 ~ [base paragraph 4 -> target paragraph 3] similarity 0.786
-  ... capacity from two->three cloud providers, and increases in the price of that capacity, or constraints on its availability, could materially increase ...
+  Training and operating the machine learning models that power AcmeOS requires significant computing resources. We currently purchase graph ...
 
-+ [target paragraph 4] Changes in trade policy, including the tariffs announced on imported robotic components ...
++ [target paragraph 4] Changes in trade policy, including the tariffs announced on imported robotic components and lidar sensors, have incre ...
 ```
 
 ## Measured on real filings

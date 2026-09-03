@@ -15,7 +15,7 @@ export function printDiff(d: SectionDiff): void {
     else if (c.type === 'changed') {
       console.log(`${YELLOW}~ [base paragraph ${c.base?.paragraph} -> target paragraph ${c.target?.paragraph}] similarity ${c.similarity}${RESET}`);
       const line = (c.wordDiff ?? [])
-        .map((w) => (w.added ? `${GREEN}${w.value}${RESET}` : w.removed ? `${RED}${w.value}${RESET}` : w.value))
+        .map((w) => (w.added ? `${GREEN}{+${w.value}+}${RESET}` : w.removed ? `${RED}[-${w.value}-]${RESET}` : w.value))
         .join('');
       console.log(`  ${line}\n`);
     }
