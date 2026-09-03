@@ -42,6 +42,15 @@ The same engine on Apple's real Item 1A:
 
 `10-K 2024-11-01 → 10-K 2025-10-31 · Item 1A · paragraphs 115 → 106 · +9 -18 ~51 · similarity 0.762`
 
+## Examples
+
+`npm run examples` regenerates [`examples/`](examples/) from real filings by constructing the server with `buildServer()` and calling every tool through an MCP SDK client over an in-memory transport. The generated JSON is therefore the `structuredContent` a real MCP client receives; supported CLI equivalents are captured alongside it with ANSI styling removed.
+
+- [Apple Item 1A diff with cited, word-level changes](examples/mcp/05-diff-sections-aapl-risk-factors.json)
+- [GE Item 1A honest `not_found` result](examples/mcp/08-get-section-ge-not-found.json)
+- [Berkshire Part II Item 1A unchanged without Item 2 table leakage](examples/mcp/09-diff-sections-brk-risk-factors.json)
+- [Exxon's holding-company ticker resolution path](examples/mcp/10-xom-holding-company.json)
+
 ## Why this exists
 
 Reading what *changed* between two annual reports is one of the highest-signal, lowest-glamour jobs in fundamental research. It is also exactly the kind of task people now hand to an LLM — and exactly where an LLM is most dangerous, because a fluent summary of a diff is indistinguishable from a fluent hallucination of one.
@@ -83,7 +92,7 @@ The server also sends MCP `instructions` telling the client to quote only tool o
 git clone https://github.com/nevisende/edgar-diff-mcp
 cd edgar-diff-mcp
 npm install
-npm run check      # typecheck (src + tests) and all 90 tests, offline
+npm run check      # typecheck (src + tests) and all 102 tests, offline
 npm run demo       # diff the bundled synthetic 10-Ks, offline
 ```
 
@@ -156,8 +165,19 @@ src/
   cli.ts / format.ts  human interface over the same service
   index.ts            public library exports
 scripts/
+  examples.ts         regenerate bounded real-output examples through MCP and CLI
   eval-live.ts        live filing corpus evaluation
-evals/                committed evaluation results
+  scenarios-mcp.ts    deterministic model-free scenario runner
+  scenarios-harness.sh / scenarios-grade.ts
+                      agent harness runner and answer grader
+scenarios/             shared scenario plans, prompts and harness configuration
+examples/
+  README.md            generated index and notes for every example case
+  mcp/ / cli/          bounded real MCP JSON and matching CLI text
+evals/
+  latest.md / results.json
+                       committed live-corpus evaluation results
+  scenarios/           captured answers and reports from all three harnesses
 tests/
   client.test.ts      EDGAR index pagination, validation, retry and timeout coverage
   diff.test.ts / diff.edge.test.ts
@@ -178,6 +198,16 @@ tests/
 .github/workflows/
   ci.yml               check, demo and build on Node 20 and 22
 ```
+
+## Documents and data
+
+- [`docs/DESIGN.md`](docs/DESIGN.md) — the five correctness rules, parser and diff design, evaluation method, and deliberately exposed failure modes.
+- [`docs/HOW_IT_WAS_BUILT.md`](docs/HOW_IT_WAS_BUILT.md) — the agent-assisted build loop, division of labour, cold-review findings, and budget.
+- [`docs/EXAMPLE_SESSION.md`](docs/EXAMPLE_SESSION.md) — a worked MCP session showing tool calls, verbatim output, citations, and honest failure handling.
+- [`docs/SCENARIOS.md`](docs/SCENARIOS.md) — the two-layer, seven-scenario evaluation across the deterministic client and three agent harnesses.
+- [`evals/latest.md`](evals/latest.md) and [`evals/results.json`](evals/results.json) — the readable and machine-readable results from the 30-issuer live corpus.
+- [`evals/scenarios/`](evals/scenarios/) — captured answers from Claude, Codex, and Gemini plus deterministic and graded reports.
+- [`examples/`](examples/) — reproducible, bounded real output for every MCP tool and the CLI equivalents it can express.
 
 ## Related work
 
