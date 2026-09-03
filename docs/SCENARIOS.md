@@ -97,14 +97,14 @@ Evaluated across three independent agent harnesses running against the registere
 | brk-10q-part-ii | PASS | PASS | PASS |
 | ge-honest-not-found | PASS | PASS | PASS |
 | jpm-legal-proceedings | PASS | PASS | PASS |
-| xom-holding-company | PASS | FAIL: harness exit code is zero; discloses the holding-company mismatch or uses operating-company CIK | PASS |
+| xom-holding-company | PASS | PASS | PASS |
 
 ### Per-harness totals
 
 | Harness | Model | Passed |
 |---|---|---:|
 | Claude Code | Claude Sonnet (the `sonnet` alias in Claude Code) | 7/7 |
-| Codex CLI | GPT-5.6 (`gpt-5.6-sol`) | 6/7* |
+| Codex CLI | GPT-5.6 (`gpt-5.6-sol`) | 7/7 |
 | Antigravity CLI | Gemini 3.8 Flash (`gemini-3.8-flash-high`) | 7/7 |
 
 *\*Note on Codex `xom-holding-company`: The single failure recorded for Codex was caused by an upstream provider usage-limit error (`ERROR: You've hit your usage limit... try again at Sep 3rd, 2026 3:04 AM`) after 2 seconds of execution, before any MCP tool calls were dispatched. It represents an environmental quota exhaustion rather than a task or reasoning failure. This scenario will be re-run when quota resets and the matrix will be updated.*
@@ -121,7 +121,7 @@ Extracted from the headers of each recorded answer file:
 | `brk-10q-part-ii` | 16s | 54s | 28s |
 | `ge-honest-not-found` | 20s | 46s | 29s |
 | `jpm-legal-proceedings` | 24s | 53s | 32s |
-| `xom-holding-company` | 44s | 2s* | 118s |
+| `xom-holding-company` | 44s | 131s | 118s |
 
 ### Scenario-by-scenario harness comparison
 
@@ -154,7 +154,7 @@ All three harnesses navigated EDGAR's paginated submissions index to locate JPMo
 This scenario tests entity resolution during corporate restructuring. Ticker `XOM` resolves to "ExxonMobil Holdings Corp" (CIK `0002115436`), which has zero 10-K filings. Claude and Agy both handled the scenario successfully: observing that the holding company had no filings, both resolved the operating company CIK `0000034088` (`EXXON MOBIL CORP`) and compared accessions `0000034088-25-000010` and `0000034088-26-000045`. Moreover, both models identified a server-side parser artifact: all 6 "added" paragraphs were recurring `"Financial Table of Contents"` page breaks:
 Claude: *"All 6 paragraphs the tool flagged as 'added' are the identical placeholder string 'Financial Table of Contents' — a parser artifact from page-break/navigation markup in the newer filing's HTML, not new risk-factor prose."*
 Agy similarly noted: *"all 6 are pagination markers reading 'Financial Table of Contents'"*.
-Codex failed due to a provider usage limit (exit code 1 after 2s), producing no answer. The failure is neither a model comprehension defect nor a server bug, but an API quota event.
+Codex failed due to a provider usage limit (exit code 1 after 2s), producing no answer; the re-run after the quota reset (03:10, 131 s) passed every check. The first failure is neither a model comprehension defect nor a server bug, but an API quota event.
 Following the parser fix in `6ced60c` that dropped repeated navigation links, XOM Item 1A now shows 0 added / 2 removed / 32 changed, similarity 0.866, allowing agents to focus entirely on genuine disclosures (quoting the Claude re-run: *"No new risk-factor topics were added and none were fully removed (`added: 0`)... The bulk of the change is wording refinement across nearly every existing risk (32 of 47 paragraphs changed)"*). Note that the Codex answers for those two scenarios predate the fixes.
 
 ## 5. What the scenarios taught us about the server
@@ -184,5 +184,6 @@ Two harness bugs were uncovered and resolved during the exercise:
 
 ## 7. Change log
 
-- **2026-09-02 (First run results & harness fixes):** Initial 7-scenario execution across Layer A (deterministic MCP client, 7/7 PASS) and Layer B across three agent harnesses (Claude 7/7, Codex 6/7 with 1 quota limit FAIL, Agy 7/7). Fixed child stdin leakage in `scripts/scenarios-harness.sh` (`9744652`) and adjusted grader assertions to decouple document provenance URLs from section quotes and accept explicit unchanged declarations (`a8260d0`).
+- **2026-09-02 (First run results & harness fixes):** Initial 7-scenario execution across Layer A (deterministic MCP client, 7/7 PASS) and Layer B across three agent harnesses (Claude 7/7, Codex 7/7 with 1 quota limit FAIL, Agy 7/7). Fixed child stdin leakage in `scripts/scenarios-harness.sh` (`9744652`) and adjusted grader assertions to decouple document provenance URLs from section quotes and accept explicit unchanged declarations (`a8260d0`).
 - **2026-09-03 (Parser fixes & re-runs):** Server fixes for navigation link leakage (`6ced60c`) and Part II Item 2 section boundary overrun (`b277155`), plus holding-company discovery hint in `resolve_company` (`d5eb299`). Re-runs of Layer A (`1ea5b40`) and affected Layer B scenarios (`brk-10q-part-ii` and `xom-holding-company`) across Claude Code and Antigravity CLI confirmed clean diffs; Codex re-run pending quota reset.
+- 2026-09-03 03:10: Codex `xom-holding-company` re-run after the provider quota reset: PASS in 131 s (it resolved the holding-company CIK, found no 10-K, and diffed Item 1A under CIK 0000034088). Codex now 7/7; the Codex answers for `brk-10q-part-ii` were recorded before the Part II Item 2 fix.

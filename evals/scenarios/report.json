@@ -1,6 +1,6 @@
 {
   "kind": "string-level scenario grading",
-  "generatedAt": "2026-09-02T22:07:31.978Z",
+  "generatedAt": "2026-09-03T01:10:39.222Z",
   "harnesses": [
     "claude",
     "codex",
@@ -12,7 +12,7 @@
       "total": 7
     },
     "codex": {
-      "passed": 6,
+      "passed": 7,
       "total": 7
     },
     "agy": {
@@ -619,12 +619,12 @@
     {
       "scenario": "xom-holding-company",
       "harness": "codex",
-      "pass": false,
+      "pass": true,
       "file": "codex/xom-holding-company.md",
       "checks": [
         {
           "name": "harness exit code is zero",
-          "pass": false
+          "pass": true
         },
         {
           "name": "answer section exists",
@@ -632,17 +632,14 @@
         },
         {
           "name": "discloses the holding-company mismatch or uses operating-company CIK",
-          "pass": false
+          "pass": true
         },
         {
           "name": "does not attribute a filing diff to holding-company CIK",
           "pass": true
         }
       ],
-      "failedChecks": [
-        "harness exit code is zero",
-        "discloses the holding-company mismatch or uses operating-company CIK"
-      ]
+      "failedChecks": []
     },
     {
       "scenario": "xom-holding-company",
