@@ -22,7 +22,7 @@ import {
 import type { FilingRef, ParagraphChange, Section } from './types.js';
 
 /**
- * edgar-diff-mcp — a read-only MCP server over SEC EDGAR.
+ * edgar-diff-mcp - a read-only MCP server over SEC EDGAR.
  *
  * Design rules (see docs/DESIGN.md):
  *  1. Read-only by construction. No tool has a side effect outside the cache.
@@ -34,9 +34,9 @@ import type { FilingRef, ParagraphChange, Section } from './types.js';
 
 const INSTRUCTIONS = `edgar-diff-mcp is read-only and returns SEC filing text verbatim.
 Quote only what a tool returns and keep its citation (accession, item, paragraph, url) next to the quote.
-If a tool returns status "not_found", say so and use availableItems — do not infer the missing section.
+If a tool returns status "not_found", say so and use availableItems; do not infer the missing section.
 Large results are paged honestly. Raise maxChars or call again with offset = offset + returned to retrieve the next page.
-Typical flow: resolve_company → list_filings (form "10-K") → diff_all_items → diff_sections(item "1A") or get_section.`;
+Typical flow: resolve_company -> list_filings (form "10-K") -> diff_all_items -> diff_sections(item "1A") or get_section.`;
 
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true } as const;
 
@@ -46,7 +46,7 @@ const json = <T extends Record<string, unknown>>(value: T) => ({
 });
 const fail = (e: unknown) => ({ isError: true, content: [{ type: 'text' as const, text: e instanceof Error ? e.message : String(e) }] });
 
-const CikSchema = z.string().regex(/^\d{1,10}$/, 'CIK must be 1–10 digits').describe('Central Index Key');
+const CikSchema = z.string().regex(/^\d{1,10}$/, 'CIK must be 1-10 digits').describe('Central Index Key');
 const AccessionSchema = z
   .string()
   .regex(/^\d{10}-\d{2}-\d{6}$/, 'Accession must look like 0000320193-24-000123')
@@ -209,7 +209,7 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     {
       title: 'Get section (verbatim)',
       description:
-        'Return a page of verbatim paragraphs from one Item, each with a citation. If the Item cannot be located the result is status "not_found" together with the Items that are available — never a guess. Short placeholder bodies ("None.") are returned with a warning. Raise maxChars or call again with offset = offset + returned for the next page.',
+        'Return a page of verbatim paragraphs from one Item, each with a citation. If the Item cannot be located the result is status "not_found" together with the Items that are available; never a guess. Short placeholder bodies ("None.") are returned with a warning. Raise maxChars or call again with offset = offset + returned for the next page.',
       inputSchema: {
         cik: CikSchema,
         accession: AccessionSchema,
@@ -284,7 +284,7 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     {
       title: 'Diff one Item across two filings',
       description:
-        'Compare the same Item (e.g. "1A" Risk Factors) between a base filing and a target filing. Returns a page of added, removed and changed paragraphs — verbatim, each with a citation on its side — plus summary stats. Word-level edit scripts are omitted by default; set includeWordDiff to true to include them. Unchanged paragraphs are omitted unless includeUnchanged is true. Raise maxChars or call again with offset = offset + returned for the next page.',
+        'Compare the same Item (e.g. "1A" Risk Factors) between a base filing and a target filing. Returns a page of added, removed and changed paragraphs: verbatim, each with a citation on its side, plus summary stats. Word-level edit scripts are omitted by default; set includeWordDiff to true to include them. Unchanged paragraphs are omitted unless includeUnchanged is true. Raise maxChars or call again with offset = offset + returned for the next page.',
       inputSchema: {
         cik: CikSchema,
         baseAccession: AccessionSchema.describe('Older filing'),
@@ -332,7 +332,7 @@ export function buildServer(client: EdgarClient, service: FilingService): McpSer
     'search_filing',
     {
       title: 'Search a filing (verbatim matches)',
-      description: `Regex search across a filing (or one Item). Returns a page of full verbatim paragraphs with citations. Case-insensitive; pattern ≤ ${MAX_PATTERN_CHARS} chars. Unknown item → status "not_found". Raise maxChars or call again with offset = offset + returned for the next page.`,
+      description: `Regex search across a filing (or one Item). Returns a page of full verbatim paragraphs with citations. Case-insensitive; pattern <= ${MAX_PATTERN_CHARS} chars. Unknown item -> status "not_found". Raise maxChars or call again with offset = offset + returned for the next page.`,
       inputSchema: {
         cik: CikSchema,
         accession: AccessionSchema,

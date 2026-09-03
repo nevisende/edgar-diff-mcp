@@ -15,7 +15,7 @@ describe('greedy pairing inside one removed/added run', () => {
     expect(diffSections(sec('alpha beta gamma'), sec('delta epsilon zeta'), ref(4), ref(5)).stats.similarity).toBe(0);
   });
 
-  it('pairs a 2×2 run by best similarity, not by position', () => {
+  it('pairs a 2x2 run by best similarity, not by position', () => {
     const base = sec('same', 'Our supply chain depends on two contract manufacturers in Asia.', 'We face intense competition from established automation vendors.', 'same2');
     const target = sec('same', 'We face intense competition from established automation vendors and start-ups.', 'Our supply chain depends on three contract manufacturers in Asia and Mexico.', 'same2');
     const d = onlyChanges(diffSections(base, target, ref(4), ref(5)));

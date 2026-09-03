@@ -26,7 +26,7 @@ function bigrams(text: string): Map<string, number> {
   return m;
 }
 
-/** Sørensen–Dice similarity over word bigrams. Cheap, order-aware, good enough to pair edited paragraphs. */
+/** Sorensen-Dice similarity over word bigrams. Cheap, order-aware, good enough to pair edited paragraphs. */
 export function dice(a: string, b: string): number {
   const A = bigrams(a);
   const B = bigrams(b);

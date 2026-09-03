@@ -10,7 +10,7 @@ describe('htmlToLines', () => {
     expect(lines.some((l) => l.includes('window.x'))).toBe(false);
     expect(lines.some((l) => l.includes('color:red'))).toBe(false);
     expect(lines).toContain('Item 1A. Risk Factors');
-    expect(lines.every((l) => !l.includes(' '))).toBe(true);
+    expect(lines.every((l) => !l.includes('\u00A0'))).toBe(true);
   });
 });
 

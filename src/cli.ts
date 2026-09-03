@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * edgar-diff — the same read-only operations as the MCP server, for humans.
+ * edgar-diff - the same read-only operations as the MCP server, for humans.
  *
  *   edgar-diff resolve AAPL
  *   edgar-diff filings 320193 --form 10-K --limit 3
@@ -35,7 +35,7 @@ const str = (k: string): string | undefined => {
 
 const ua = process.env['EDGAR_USER_AGENT'] ?? '';
 if (!/@/.test(ua)) {
-  console.error('Set EDGAR_USER_AGENT="edgar-diff/0.1 you@example.com" — the SEC requires a contact address.');
+  console.error('Set EDGAR_USER_AGENT="edgar-diff/0.1 you@example.com" - the SEC requires a contact address.');
   process.exit(2);
 }
 // Opt-in, same as the server. Filings are large; set EDGAR_CACHE_DIR to keep them.

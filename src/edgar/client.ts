@@ -11,10 +11,10 @@ import type { FilingRef } from '../types.js';
  */
 
 export interface EdgarClientOptions {
-  /** e.g. "edgar-diff-mcp/0.1 you@example.com" — the SEC requires a contact. */
+  /** e.g. "edgar-diff-mcp/0.1 you@example.com" - the SEC requires a contact. */
   userAgent: string;
   fetchImpl?: typeof fetch;
-  /** Minimum spacing between requests in ms. Default 110 (≈9 req/s). */
+  /** Minimum spacing between requests in ms. Default 110 (about 9 req/s). */
   minIntervalMs?: number;
   /** Request timeout in ms. Default 30000. */
   timeoutMs?: number;

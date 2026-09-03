@@ -132,7 +132,7 @@ export class FilingService {
     return { status: 'ok', base, target, items, onlyInBase, onlyInTarget, warnings: [...new Set(warnings)] };
   }
 
-  /** Verbatim paragraphs matching a regex, with citations. Unknown item → not_found, never an empty list. */
+  /** Verbatim paragraphs matching a regex, with citations. Unknown item -> not_found, never an empty list. */
   async search(ref: FilingRef, pattern: string, item?: string, limit?: number): Promise<SearchResult> {
     if (pattern.length > MAX_PATTERN_CHARS) throw new Error(`Pattern longer than ${MAX_PATTERN_CHARS} chars; simplify it.`);
     if (hasNestedQuantifier(pattern)) throw new Error('Unsafe pattern: nested quantifiers such as "(a+)+" are not allowed.');

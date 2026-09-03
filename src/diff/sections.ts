@@ -8,7 +8,7 @@ export const CHANGED_THRESHOLD = 0.5;
 /**
  * Paragraph-level diff of two sections.
  *
- * 1. LCS over normalised paragraphs → unchanged / removed / added runs.
+ * 1. LCS over normalised paragraphs -> unchanged / removed / added runs.
  * 2. Inside each adjacent removed/added run, greedily pair the most similar
  *    paragraphs and report them as `changed` with a word-level edit script.
  *
@@ -132,7 +132,7 @@ function wordEdits(a: string, b: string): WordEdit[] {
   });
 }
 
-/** Drop `unchanged` entries — what an agent usually wants to read. */
+/** Drop `unchanged` entries, which are usually not useful to an agent. */
 export function onlyChanges(d: SectionDiff): SectionDiff {
   return { ...d, changes: d.changes.filter((c) => c.type !== 'unchanged') };
 }

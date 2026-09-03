@@ -4,16 +4,16 @@ export const RED = '\x1b[31m', GREEN = '\x1b[32m', YELLOW = '\x1b[33m', DIM = '\
 
 export function printDiff(d: SectionDiff): void {
   const s = d.stats;
-  console.log(`${DIM}${d.base.form} ${d.base.filingDate} → ${d.target.form} ${d.target.filingDate}${RESET}`);
-  console.log(`Item ${d.item} — ${d.title}`);
-  console.log(`paragraphs ${s.baseParagraphs} → ${s.targetParagraphs} · ${GREEN}+${s.added}${RESET} ${RED}-${s.removed}${RESET} ${YELLOW}~${s.changed}${RESET} · similarity ${s.similarity}`);
+  console.log(`${DIM}${d.base.form} ${d.base.filingDate} -> ${d.target.form} ${d.target.filingDate}${RESET}`);
+  console.log(`Item ${d.item} - ${d.title}`);
+  console.log(`paragraphs ${s.baseParagraphs} -> ${s.targetParagraphs} | ${GREEN}+${s.added}${RESET} ${RED}-${s.removed}${RESET} ${YELLOW}~${s.changed}${RESET} | similarity ${s.similarity}`);
   for (const w of d.warnings) console.log(`${YELLOW}warning:${RESET} ${w}`);
   console.log('');
   for (const c of d.changes) {
-    if (c.type === 'added') console.log(`${GREEN}+ [target ¶${c.target?.paragraph}] ${c.target?.text}${RESET}\n`);
-    else if (c.type === 'removed') console.log(`${RED}- [base ¶${c.base?.paragraph}] ${c.base?.text}${RESET}\n`);
+    if (c.type === 'added') console.log(`${GREEN}+ [target paragraph ${c.target?.paragraph}] ${c.target?.text}${RESET}\n`);
+    else if (c.type === 'removed') console.log(`${RED}- [base paragraph ${c.base?.paragraph}] ${c.base?.text}${RESET}\n`);
     else if (c.type === 'changed') {
-      console.log(`${YELLOW}~ [base ¶${c.base?.paragraph} → target ¶${c.target?.paragraph}] similarity ${c.similarity}${RESET}`);
+      console.log(`${YELLOW}~ [base paragraph ${c.base?.paragraph} -> target paragraph ${c.target?.paragraph}] similarity ${c.similarity}${RESET}`);
       const line = (c.wordDiff ?? [])
         .map((w) => (w.added ? `${GREEN}${w.value}${RESET}` : w.removed ? `${RED}${w.value}${RESET}` : w.value))
         .join('');
@@ -24,12 +24,12 @@ export function printDiff(d: SectionDiff): void {
 }
 
 export function printDiffAll(d: Extract<DiffAllResult, { status: 'ok' }>): void {
-  console.log(`${DIM}${d.base.form} ${d.base.filingDate} → ${d.target.form} ${d.target.filingDate}${RESET}`);
-  const headers = ['item', 'title', '¶ base→target', '+/-/~', 'similarity'];
+  console.log(`${DIM}${d.base.form} ${d.base.filingDate} -> ${d.target.form} ${d.target.filingDate}${RESET}`);
+  const headers = ['item', 'title', 'paragraphs base->target', '+/-/~', 'similarity'];
   const rows = d.items.map(({ item, title, stats }) => [
     item,
     title,
-    `${stats.baseParagraphs}→${stats.targetParagraphs}`,
+    `${stats.baseParagraphs}->${stats.targetParagraphs}`,
     `+${stats.added}/-${stats.removed}/~${stats.changed}`,
     stats.similarity.toFixed(3),
   ]);
@@ -38,8 +38,8 @@ export function printDiffAll(d: Extract<DiffAllResult, { status: 'ok' }>): void 
   console.log(line(headers));
   console.log(widths.map((width) => '-'.repeat(width)).join('-|-'));
   for (const row of rows) console.log(line(row));
-  if (d.onlyInBase.length) console.log(`only in base: ${d.onlyInBase.map((entry) => `Item ${entry.item} — ${entry.title}`).join(', ')}`);
-  if (d.onlyInTarget.length) console.log(`only in target: ${d.onlyInTarget.map((entry) => `Item ${entry.item} — ${entry.title}`).join(', ')}`);
+  if (d.onlyInBase.length) console.log(`only in base: ${d.onlyInBase.map((entry) => `Item ${entry.item} - ${entry.title}`).join(', ')}`);
+  if (d.onlyInTarget.length) console.log(`only in target: ${d.onlyInTarget.map((entry) => `Item ${entry.item} - ${entry.title}`).join(', ')}`);
   for (const warning of d.warnings) console.log(`${YELLOW}warning:${RESET} ${warning}`);
   console.log(`${DIM}base:   ${d.base.url}\ntarget: ${d.target.url}${RESET}`);
 }

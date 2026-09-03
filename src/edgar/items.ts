@@ -105,6 +105,6 @@ export function titleVariantsFor(form: string, key: string): string[] {
 export function titleFor(form: string, key: string, fallback: string): string {
   const f = form.toUpperCase();
   const table = f.startsWith('10-Q') ? ITEM_TITLES_10Q : f.startsWith('10-K') ? ITEM_TITLES_10K : undefined;
-  const raw = fallback.trim().replace(/[.:\-–—]+$/, '').trim();
+  const raw = fallback.trim().replace(/[.:\-\u2013\u2014]+$/, '').trim();
   return table?.[key] ?? (raw || 'Untitled');
 }

@@ -87,7 +87,7 @@ describe('MCP surface', () => {
     expect(overview?.description).toMatch(/statistics only.*diff_sections/is);
   });
 
-  it('walks the whole flow: resolve → list → diff', async () => {
+  it('walks the whole flow: resolve -> list -> diff', async () => {
     const { results: companies } = await call('resolve_company', { query: 'ACME' });
     expect(companies[0].cik).toBe('0000000001');
 
@@ -122,7 +122,7 @@ describe('MCP surface', () => {
     expect(JSON.stringify(overview)).not.toContain('changes');
   });
 
-  it('never guesses: unknown item → not_found with availableItems', async () => {
+  it('never guesses: unknown item -> not_found with availableItems', async () => {
     const r = await call('get_section', { cik: '1', accession: '0000000001-25-000001', item: '9A' });
     expect(r.status).toBe('not_found');
     expect(r.availableItems).toEqual(['1', '1A', '1B', '1C', '7']);

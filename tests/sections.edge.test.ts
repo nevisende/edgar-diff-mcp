@@ -17,7 +17,7 @@ describe('table-of-contents defences', () => {
     expect(warnings).toEqual([]);
   });
 
-  it('treats "Item 7 of this report discusses…" as body text, not a heading', () => {
+  it('treats "Item 7 of this report discusses..." as body text, not a heading', () => {
     const business = sections.get('1')!;
     expect(business.paragraphs.some((p) => p.text.startsWith('Item 7 of this report'))).toBe(true);
     expect(sections.get('7')!.warnings.some((w) => /appeared/.test(w))).toBe(false);
@@ -65,7 +65,7 @@ describe('table-of-contents defences', () => {
     ];
     const r = splitItems(tenQ, '10-Q');
     expect([...r.sections.keys()]).toEqual(['I.1', 'I.2', 'II.1A', 'II.6']);
-    // The cross-reference "See Part II, Item 1A…" inside I.2 must not flip the Part.
+    // The cross-reference "See Part II, Item 1A..." inside I.2 must not flip the Part.
     expect(r.sections.get('I.2')!.paragraphs).toHaveLength(8);
     expect(r.sections.get('II.6')!.warnings.join(' ')).toMatch(/placeholder/);
   });
@@ -382,5 +382,4 @@ describe('Part II Item 2 long title variant', () => {
     expect(repurchases?.paragraphs.some((p) => /April.*100,000/.test(p.text))).toBe(true);
   });
 });
-
 

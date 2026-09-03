@@ -92,7 +92,7 @@ describe('unchanged paragraph comparison', () => {
 
   it('tolerates whitespace, case and curly-quote differences', () => {
     const paragraph = fixtureSection.paragraphs.find((p) => p.text.includes("customers' operations"))!;
-    const targetText = paragraph.text.toUpperCase().replace("CUSTOMERS' OPERATIONS", 'CUSTOMERS’   OPERATIONS');
+    const targetText = paragraph.text.toUpperCase().replace("CUSTOMERS' OPERATIONS", 'CUSTOMERS\u2019   OPERATIONS');
     const base = { ...fixtureSection, paragraphs: [paragraph] };
     const target = { ...fixtureSection, paragraphs: [{ ...paragraph, text: `  ${targetText}\n` }] };
 
