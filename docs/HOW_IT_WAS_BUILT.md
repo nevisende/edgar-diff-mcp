@@ -28,7 +28,7 @@ Each lane ran in its own git worktree on its own branch with a written brief. Br
 ## What the agents were bad at
 
 - **Stopping.** The evaluation lane spent its last twenty minutes writing investigation subagents about one Pfizer Item instead of reporting. The brief now says what the final answer must contain and how long it may be.
-- **Wrappers.** The first typed-output pass wrapped every union result in `{ result: … }` to satisfy the MCP rule that an output schema is an object. Correct, and ugly for the agent on the other end. It was redone flat.
+- **Wrappers.** The first typed-output pass wrapped every union result in `{ result: ... }` to satisfy the MCP rule that an output schema is an object. Correct, and ugly for the agent on the other end. It was redone flat.
 - **Warnings as noise.** After the first parser pass, every Apple Item carried "heading appeared 2 times". True, harmless, and exactly the kind of message that trains a reader to ignore warnings. It was tightened so losing TOC stubs and heading-only labels no longer trigger it; the latest evaluation still shows `dup-heading` flags where substantive rival bodies remain.
 - **Quota.** One CLI hit its daily limit at 21:40. The lanes were independent enough that the work moved to another model without re-briefing.
 
@@ -38,7 +38,7 @@ Write the rule, write the test, write the brief, read the diff. The agent writes
 
 ## Budget
 
-Total agent spend for the project, all harnesses: the five Codex build lanes before the cold review plus six Codex post-review lanes — eleven in total, all Codex — metered at roughly 1.5 million tokens, plus the Antigravity and orchestrator sessions which are not metered the same way, over about a day and a half of wall-clock time. The orchestrator's job was to stay small.
+Total agent spend for the project, all harnesses: the five Codex build lanes before the cold review plus six Codex post-review lanes, eleven in total and all Codex, metered at roughly 1.5 million tokens, plus the Antigravity and orchestrator sessions which are not metered the same way, over about a day and a half of wall-clock time. The orchestrator's job was to stay small.
 
 ## Cold review findings
 

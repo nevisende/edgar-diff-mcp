@@ -2,23 +2,23 @@
 
 [![CI](https://github.com/nevisende/edgar-diff-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/nevisende/edgar-diff-mcp/actions/workflows/ci.yml)
 
-**A read-only [MCP](https://modelcontextprotocol.io) server that lets a coding agent diff SEC filings section-by-section — and answers only with verbatim, cited text.**
+**A read-only [MCP](https://modelcontextprotocol.io) server that lets a coding agent diff SEC filings section-by-section and answers only with verbatim, cited text.**
 
 Ask Claude *"what changed in Apple's risk factors between the last two 10-Ks?"* and get back the exact paragraphs that were added, removed or edited, each one tagged with the accession number, Item, paragraph index and source URL. No summary, no paraphrase, no guess.
 
-Output of `npm run demo` (the bundled synthetic fixtures — see `tests/fixtures/README.md`):
+Output of `npm run demo` (the bundled synthetic fixtures; see `tests/fixtures/README.md`):
 
 ```
-10-K 2025-02-15 → 10-K 2026-02-15
-Item 1A — Risk Factors
-paragraphs 7 → 7 · +1 -1 ~1 · similarity 0.827
+10-K 2025-02-15 -> 10-K 2026-02-15
+Item 1A - Risk Factors
+paragraphs 7 -> 7 | +1 -1 ~1 | similarity 0.827
 
-- [base ¶3] The COVID-19 pandemic and related public health measures have in the past disrupted …
+- [base paragraph 3] The COVID-19 pandemic and related public health measures have in the past disrupted ...
 
-~ [base ¶4 → target ¶3] similarity 0.786
-  … capacity from two→three cloud providers, and increases in the price of that capacity, or constraints on its availability, could materially increase …
+~ [base paragraph 4 -> target paragraph 3] similarity 0.786
+  ... capacity from two->three cloud providers, and increases in the price of that capacity, or constraints on its availability, could materially increase ...
 
-+ [target ¶4] Changes in trade policy, including the tariffs announced on imported robotic components …
++ [target paragraph 4] Changes in trade policy, including the tariffs announced on imported robotic components ...
 ```
 
 ## Measured on real filings
@@ -30,7 +30,7 @@ paragraphs 7 → 7 · +1 -1 ~1 · similarity 0.827
 | Before parser fixes | 892/1090 (81.8% recall) | Not measured |
 | Now | 1048/1166 (89.9% recall) | 1028/1166 (88.2%) |
 
-The denominators differ because the expected-Item list was completed after the first run (10-K Item 9 and 10-Q Items 3–5 were missing from it); the first row is kept as it was reported at the time.
+The denominators differ because the expected-Item list was completed after the first run (10-K Item 9 and 10-Q Items 3-5 were missing from it); the first row is kept as it was reported at the time.
 
 The plausible rate is lower because location checks only that the expected key exists, while plausibility also rejects undersized core sections and oversized Item 15 results. The latest run reports one evaluation issue: the ticker XOM now resolves to "ExxonMobil Holdings Corp" (CIK 0002115436, a 2026 holding company), which has filed no 10-K yet; the operating company's filings live under CIK 0000034088. The harness reports this as an issue rather than silently substituting.
 
@@ -40,7 +40,11 @@ For end-to-end analyst scenarios across three agent harnesses see docs/SCENARIOS
 
 The same engine on Apple's real Item 1A:
 
-`10-K 2024-11-01 → 10-K 2025-10-31 · Item 1A · paragraphs 115 → 106 · +9 -18 ~51 · similarity 0.762`
+```
+10-K 2024-11-01 -> 10-K 2025-10-31
+Item 1A - Risk Factors
+paragraphs 115 -> 106 | +9 -18 ~51 | similarity 0.762
+```
 
 ## Examples
 
@@ -53,7 +57,7 @@ The same engine on Apple's real Item 1A:
 
 ## Why this exists
 
-Reading what *changed* between two annual reports is one of the highest-signal, lowest-glamour jobs in fundamental research. It is also exactly the kind of task people now hand to an LLM — and exactly where an LLM is most dangerous, because a fluent summary of a diff is indistinguishable from a fluent hallucination of one.
+Reading what *changed* between two annual reports is one of the highest-signal, lowest-glamour jobs in fundamental research. It is also exactly the kind of task people now hand to an LLM. That is exactly where an LLM is most dangerous, because a fluent summary of a diff is indistinguishable from a fluent hallucination of one.
 
 This server takes a position on that:
 
@@ -61,7 +65,7 @@ This server takes a position on that:
 2. **Verbatim or nothing.** Tools return filing text as filed. The model can reason on top; the server never does the reasoning for it.
 3. **Every paragraph is cited.** CIK, accession, Item, paragraph index, URL. A reader can open the filing and check.
 4. **No data = no answer.** If an Item can't be located, you get `status: "not_found"` *and the list of Items that were found*. `search_filing` on an unknown Item is `not_found` too, never an empty list. You never get a best guess dressed up as a result.
-5. **Honest degradation.** Anything the parser is unsure about is returned in `warnings[]` — a genuinely short Item ("None.") comes back *with* a warning rather than being silently dropped; truncated output says `truncated: true`.
+5. **Honest degradation.** Anything the parser is unsure about is returned in `warnings[]`. A genuinely short Item ("None.") comes back *with* a warning rather than being silently dropped; truncated output says `truncated: true`.
 
 These are the same rules a careful research desk applies to a junior analyst. They happen to be the rules that make LLM output trustworthy too.
 
@@ -69,19 +73,19 @@ These are the same rules a careful research desk applies to a junior analyst. Th
 
 | Tool | What it does |
 |---|---|
-| `resolve_company` | Ticker (exact) or name (substring) → CIK candidates. `[]` if nothing matches. |
+| `resolve_company` | Ticker (exact) or name (substring) -> CIK candidates. `[]` if nothing matches. |
 | `list_filings` | Recent filings for a CIK, filterable by form (`10-K`, `10-Q`). |
 | `list_items` | Items found *with confidence* in a filing, with sizes. Call this when unsure what exists. |
 | `get_section` | Verbatim, cited paragraphs for one Item. `maxParagraphs` and `maxChars` bound each page; continue with `offset`; `not_found` + `availableItems` otherwise. |
-| `diff_sections` | Same Item across two filings → cited changes and stats. Word-level edits are opt-in with `includeWordDiff`; `maxChanges` and `maxChars` bound each page; continue with `offset`. |
+| `diff_sections` | Same Item across two filings -> cited changes and stats. Word-level edits are opt-in with `includeWordDiff`; `maxChanges` and `maxChars` bound each page; continue with `offset`. |
 | `diff_all_items` | Per-Item change statistics across two filings, most-changed first, plus Items found on only one side. No paragraphs. |
-| `search_filing` | Regex over a filing (or one Item) → matching paragraphs, verbatim, cited. `limit` and `maxChars` bound each page; continue with `offset`. |
+| `search_filing` | Regex over a filing (or one Item) -> matching paragraphs, verbatim, cited. `limit` and `maxChars` bound each page; continue with `offset`. |
 
 All seven carry four MCP annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`, and `openWorldHint: true`. Every tool declares an MCP `outputSchema` and returns `structuredContent` identical to its text JSON. Every paragraph on every tool uses the same citation shape:
 
 ```json
 { "cik": "0000320193", "accession": "0000320193-24-000123", "form": "10-K", "filingDate": "2024-11-01",
-  "item": "1A", "itemTitle": "Risk Factors", "paragraph": 17, "url": "https://www.sec.gov/Archives/edgar/data/320193/…" }
+  "item": "1A", "itemTitle": "Risk Factors", "paragraph": 17, "url": "https://www.sec.gov/Archives/edgar/data/320193/..." }
 ```
 
 The server also sends MCP `instructions` telling the client to quote only tool output and to keep citations next to quotes.
@@ -139,28 +143,28 @@ npm run cli -- search  320193 0000320193-24-000123 "tariff|export control" --ite
 npm run eval:live
 ```
 
-`npm run smoke:live -- MSFT 7` diffs a real Item 7 (MD&A) from EDGAR and exits non-zero on any `not_found` — a parser gap is a bug, not a soft failure.
+`npm run smoke:live -- MSFT 7` diffs a real Item 7 (MD&A) from EDGAR and exits non-zero on any `not_found`. A parser gap is a bug, not a soft failure.
 
 ## How the parser decides what is an "Item"
 
-Every 10-K lists all of its Items twice: once in the table of contents and once as real headings. A regex cannot tell them apart. This parser flattens the HTML to lines, finds every short `Item N` heading, and treats a nearby run as a table of contents only when at least half of its members have a page reference or an empty body. Rows with a trailing page reference or a tiny body are dropped; if one Item still has several occurrences, the longest body wins. Sentences that merely *mention* an Item ("Item 7 of this report discusses…") are rejected as headings. A fused heading and first paragraph are split at a canonical Item title regardless of total line length, or at a clear sentence boundary on a long line. Combined headings such as "Items 10, 11, 12, 13 and 14" register the same body under every named Item with canonical titles and a warning. Repeated page furniture is removed conservatively: labelled footers such as "Apple Inc. | 2024 Form 10-K | 5" and bare Item headers are dropped when they repeat, while repeated titled Item headers are merged. 10-Q Items are prefixed with their Part (`II.1A`), because Part I and Part II reuse the same numbers.
+Every 10-K lists all of its Items twice: once in the table of contents and once as real headings. A regex cannot tell them apart. This parser flattens the HTML to lines, finds every short `Item N` heading, and treats a nearby run as a table of contents only when at least half of its members have a page reference or an empty body. Rows with a trailing page reference or a tiny body are dropped; if one Item still has several occurrences, the longest body wins. Sentences that merely *mention* an Item ("Item 7 of this report discusses...") are rejected as headings. A fused heading and first paragraph are split at a canonical Item title regardless of total line length, or at a clear sentence boundary on a long line. Combined headings such as "Items 10, 11, 12, 13 and 14" register the same body under every named Item with canonical titles and a warning. Repeated page furniture is removed conservatively: labelled footers such as "Apple Inc. | 2024 Form 10-K | 5" and bare Item headers are dropped when they repeat, while repeated titled Item headers are merged. 10-Q Items are prefixed with their Part (`II.1A`), because Part I and Part II reuse the same numbers.
 
-See [`docs/DESIGN.md`](docs/DESIGN.md) for the full reasoning — including the residual case this heuristic can still get wrong, and how it fails when it does.
+See [`docs/DESIGN.md`](docs/DESIGN.md) for the full reasoning, including the residual case this heuristic can still get wrong and how it fails when it does.
 
 ## Layout
 
 ```
 src/
   edgar/cache.ts      optional on-disk cache for immutable filing documents
-  edgar/client.ts     polite EDGAR client: mandatory UA, ≤10 req/s, optional cache
+  edgar/client.ts     polite EDGAR client: mandatory UA, <=10 req/s, optional cache
   edgar/items.ts      canonical Item titles and accepted title variants
-  edgar/sections.ts   HTML → lines → Items (the TOC problem lives here)
+  edgar/sections.ts   HTML -> lines -> Items (the TOC problem lives here)
   diff/sections.ts    paragraph LCS + greedy pairing + word-level edits
   diff/similarity.ts  Dice coefficient over word bigrams
   service.ts          orchestration; the only place that assembles answers
   schemas.ts          Zod output schemas, type-checked against src/types.ts
   types.ts            shared filing, section and diff types
-  server.ts           MCP tools (buildServer) — thin, validated, read-only
+  server.ts           MCP tools (buildServer): thin, validated, read-only
   main.ts             stdio entry point
   cli.ts / format.ts  human interface over the same service
   index.ts            public library exports
@@ -201,17 +205,17 @@ tests/
 
 ## Documents and data
 
-- [`docs/DESIGN.md`](docs/DESIGN.md) — the five correctness rules, parser and diff design, evaluation method, and deliberately exposed failure modes.
-- [`docs/HOW_IT_WAS_BUILT.md`](docs/HOW_IT_WAS_BUILT.md) — the agent-assisted build loop, division of labour, cold-review findings, and budget.
-- [`docs/EXAMPLE_SESSION.md`](docs/EXAMPLE_SESSION.md) — a worked MCP session showing tool calls, verbatim output, citations, and honest failure handling.
-- [`docs/SCENARIOS.md`](docs/SCENARIOS.md) — the two-layer, seven-scenario evaluation across the deterministic client and three agent harnesses.
-- [`evals/latest.md`](evals/latest.md) and [`evals/results.json`](evals/results.json) — the readable and machine-readable results from the 30-issuer live corpus.
-- [`evals/scenarios/`](evals/scenarios/) — captured answers from Claude, Codex, and Gemini plus deterministic and graded reports.
-- [`examples/`](examples/) — reproducible, bounded real output for every MCP tool and the CLI equivalents it can express.
+- [`docs/DESIGN.md`](docs/DESIGN.md): the five correctness rules, parser and diff design, evaluation method, and deliberately exposed failure modes.
+- [`docs/HOW_IT_WAS_BUILT.md`](docs/HOW_IT_WAS_BUILT.md): the agent-assisted build loop, division of labour, cold-review findings, and budget.
+- [`docs/EXAMPLE_SESSION.md`](docs/EXAMPLE_SESSION.md): a worked MCP session showing tool calls, verbatim output, citations, and honest failure handling.
+- [`docs/SCENARIOS.md`](docs/SCENARIOS.md): the two-layer, seven-scenario evaluation across the deterministic client and three agent harnesses.
+- [`evals/latest.md`](evals/latest.md) and [`evals/results.json`](evals/results.json): the readable and machine-readable results from the 30-issuer live corpus.
+- [`evals/scenarios/`](evals/scenarios/): captured answers from Claude, Codex, and Gemini plus deterministic and graded reports.
+- [`examples/`](examples/): reproducible, bounded real output for every MCP tool and the CLI equivalents it can express.
 
 ## Related work
 
-[`InPractise/diffing-tool`](https://github.com/InPractise/diffing-tool) (TypeScript, 2024) matches sections between filings by title and content in three similarity passes using Levenshtein distance. This project instead locates Items by heading structure, refuses when unsure, and diffs at paragraph level with citations — a narrower problem solved conservatively.
+[`InPractise/diffing-tool`](https://github.com/InPractise/diffing-tool) (TypeScript, 2024) matches sections between filings by title and content in three similarity passes using Levenshtein distance. This project instead locates Items by heading structure, refuses when unsure, and diffs at paragraph level with citations: a narrower problem solved conservatively.
 
 ## Non-goals (for now)
 
@@ -221,7 +225,7 @@ tests/
 
 ## Author
 
-Furkan Denizhan — [github.com/nevisende](https://github.com/nevisende) · [linkedin.com/in/furkan-denizhan](https://linkedin.com/in/furkan-denizhan)
+Furkan Denizhan | [github.com/nevisende](https://github.com/nevisende) | [linkedin.com/in/furkan-denizhan](https://linkedin.com/in/furkan-denizhan)
 
 Built in about a day and a half with Claude Code, following the same discipline I use for the MCP servers I run in production: read-only by architecture, refuse rather than guess, and let the tests say what the code does.
 

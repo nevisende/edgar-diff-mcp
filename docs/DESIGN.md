@@ -4,7 +4,7 @@
 
 An investor reading a 10-K does not want a summary of the risk factors. They want to know
 which sentence the general counsel added this year, and which one quietly disappeared.
-That is a diff problem, not a summarisation problem — and it only has value if every line of
+That is a diff problem, not a summarisation problem, and it only has value if every line of
 the output can be traced back to the filing.
 
 ## Five rules, and why each one is a *rule* and not a setting
@@ -17,12 +17,12 @@ I run over production BI systems.
 
 **2. Verbatim or nothing.**
 The server returns text as filed. It never summarises, never rewrites, never "cleans up"
-wording. If the model wants to summarise, it can — on top of cited inputs, where the summary
+wording. If the model wants to summarise, it can do so on top of cited inputs, where the summary
 can be checked. Putting the LLM *inside* the tool would make its output unverifiable.
 
 **3. Every paragraph is cited.**
 `{ cik, accession, form, filingDate, item, itemTitle, paragraph, url }` on every paragraph of
-every tool — `get_section`, `search_filing`, and both sides of every `diff_sections` change.
+every tool: `get_section`, `search_filing`, and both sides of every `diff_sections` change.
 Paragraph index rather than character offsets, because paragraph boundaries survive
 re-rendering and offsets do not.
 
@@ -42,12 +42,12 @@ an upstream schema change is a readable error, not a `TypeError` three calls lat
 ## The table-of-contents problem
 
 Every 10-K contains each Item heading at least twice: in the TOC and in the body. Vendors
-render the TOC as a table, as a list, as bare paragraphs, or as links — there is no reliable
+render the TOC as a table, as a list, as bare paragraphs, or as links. There is no reliable
 markup signal. What *is* reliable, once the HTML is flattened to one line per block:
 
 - TOC rows sit next to each other (a gap of one or two lines, allowing for `PART I` rows);
 - TOC rows usually end in a page reference ("Item 1A. Risk Factors 9");
-- TOC rows are followed by almost no text — except the **last** one, which is followed by the
+- TOC rows are followed by almost no text, except the **last** one, which is followed by the
   cover-page tail, the forward-looking-statements boilerplate and `PART I`.
 
 So the parser:
@@ -60,7 +60,7 @@ So the parser:
    "Back to contents" and "Index to financial statements" when the same label repeats at least
    twice; these links are page furniture, not filing prose;
 4. finds every short line matching `Item <N[A-C]>` whose title is not a sentence (does not start
-   lower-case, ≤ 12 words) — this rejects "Item 7 of this report discusses…"; a single-line
+   lower-case, <= 12 words). This rejects "Item 7 of this report discusses..."; a single-line
    heading such as `PART II, ITEM 1A` updates the active Part and parses the Item on that same line;
 5. recognises filed title variants as well as canonical titles, including the long Part II Item 2
    forms that append issuer repurchases or issuer purchases of equity securities, with optional
@@ -75,10 +75,10 @@ So the parser:
    Item also has a titled heading, so isolated real headings remain candidates;
 9. merges three or more identical titled running headers when substantive text separates each
    occurrence and no different heading intervenes. When repeated running headers are merged, paragraph indices are reassigned over the merged section so every returned paragraph remains individually citable.
-10. groups headings into runs where consecutive headings are ≤ 2 lines apart *and the earlier
+10. groups headings into runs where consecutive headings are <= 2 lines apart *and the earlier
    one is a stub* (tiny body or page reference). A run of three or more closely spaced Item headings is treated as a table of contents only when at least half of its members either end in a page reference or have an empty body; short sentence bodies without page references remain real sections.
-11. drops every stub in the run. A run member with a real body and no page reference — the
-   last TOC row swallowing the preamble, or the first real heading — is kept but flagged
+11. drops every stub in the run. A run member with a real body and no page reference, either the
+   last TOC row swallowing the preamble or the first real heading, is kept but flagged
    `tocTail`, and a flagged candidate is used only when no unflagged one exists for that Item;
 12. among remaining candidates per Item, keeps the longest body;
 13. returns short real bodies ("None.", "Not applicable.") *with a warning*, rather than
@@ -123,7 +123,7 @@ not create doubt about the selected section.
   never seen in the other, because diffs are per Item.
 - **Table rows whose numbers all change** share no word bigrams and are reported as
   remove+add rather than `changed`. This is the conservative direction; see "The diff".
-- **Standalone 1–3 digit lines are dropped as page numbers.** A one-cell numeric table row can
+- **Standalone 1-3 digit lines are dropped as page numbers.** A one-cell numeric table row can
   therefore disappear; retaining it would leak pervasive page furniture into returned sections.
 
 ## Measuring instead of guessing
@@ -149,7 +149,7 @@ raised the measured similarity to 0.727.
 ## The diff
 
 Paragraph-level LCS (`diff.diffArrays` over normalised text) gives unchanged / removed / added
-runs. Inside each adjacent removed+added run, paragraphs are paired greedily by Sørensen–Dice
+runs. Inside each adjacent removed+added run, paragraphs are paired greedily by Sorensen-Dice
 similarity over word bigrams (threshold 0.5) and reported as `changed` with a word-level edit
 script. Anything unpaired stays `removed` or `added`.
 `unchanged` tolerates only case, whitespace, and curly quote or dash variants; punctuation such
@@ -162,7 +162,7 @@ different Parts; the caller must choose the explicit key, such as `I.1` or `II.1
 
 Why Dice over bigrams and not embeddings: it is deterministic, dependency-free, fast enough to
 run over an MD&A in milliseconds, and its failure mode (two heavily rewritten paragraphs
-reported as remove+add instead of change) is *conservative* — it under-claims edits, never
+reported as remove+add instead of change) is *conservative*: it under-claims edits and never
 invents them.
 
 ### Output size
