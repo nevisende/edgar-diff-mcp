@@ -1,0 +1,517 @@
+{
+  "tool": "diff_sections",
+  "input": {
+    "cik": "0000320193",
+    "baseAccession": "0000320193-24-000123",
+    "targetAccession": "0000320193-25-000079",
+    "item": "1A",
+    "maxChanges": 6,
+    "maxChars": 32000,
+    "includeWordDiff": true
+  },
+  "structuredContent": {
+    "status": "ok",
+    "item": "1A",
+    "title": "Risk Factors",
+    "targetTitle": "Risk Factors",
+    "base": {
+      "cik": "0000320193",
+      "accession": "0000320193-24-000123",
+      "form": "10-K",
+      "filingDate": "2024-11-01",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+      "reportDate": "2024-09-28"
+    },
+    "target": {
+      "cik": "0000320193",
+      "accession": "0000320193-25-000079",
+      "form": "10-K",
+      "filingDate": "2025-10-31",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+      "reportDate": "2025-09-27"
+    },
+    "stats": {
+      "baseParagraphs": 115,
+      "targetParagraphs": 106,
+      "added": 9,
+      "removed": 18,
+      "changed": 51,
+      "unchanged": 46,
+      "similarity": 0.762
+    },
+    "changes": [
+      {
+        "type": "removed",
+        "base": {
+          "paragraph": 0,
+          "text": "The Company’s business, reputation, results of operations, financial condition and stock price can be affected by a number of factors, whether currently known or unknown, including those described below. When any one or more of these risks materialize from time to time, the Company’s business, reputation, results of operations, financial condition and stock price can be materially and adversely affected.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-24-000123",
+            "form": "10-K",
+            "filingDate": "2024-11-01",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+            "reportDate": "2024-09-28",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 0
+          }
+        }
+      },
+      {
+        "type": "removed",
+        "base": {
+          "paragraph": 1,
+          "text": "Because of the following factors, as well as other factors affecting the Company’s results of operations and financial condition, past financial performance should not be considered to be a reliable indicator of future performance, and investors should not use historical trends to anticipate results or trends in future periods. This discussion of risk factors contains forward-looking statements.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-24-000123",
+            "form": "10-K",
+            "filingDate": "2024-11-01",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+            "reportDate": "2024-09-28",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 1
+          }
+        }
+      },
+      {
+        "type": "added",
+        "target": {
+          "paragraph": 0,
+          "text": "The following summarizes factors that could have a material adverse effect on the Company’s business, reputation, results of operations, financial condition and stock price. The Company may not be able to accurately predict, control or mitigate these risks. Statements in this section are based on the Company’s beliefs and opinions regarding matters that could materially adversely affect the Company in the future and are not representations as to whether such matters have or have not occurred previously. The risks and uncertainties described below are not exhaustive and should not be considered a complete statement of all potential risks or uncertainties that the Company faces or may face in the future.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-25-000079",
+            "form": "10-K",
+            "filingDate": "2025-10-31",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+            "reportDate": "2025-09-27",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 0
+          }
+        }
+      },
+      {
+        "type": "changed",
+        "base": {
+          "paragraph": 4,
+          "text": "The Company’s operations and performance depend significantly on global and regional economic conditions and adverse economic conditions can materially adversely affect the Company’s business, results of operations and financial condition.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-24-000123",
+            "form": "10-K",
+            "filingDate": "2024-11-01",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+            "reportDate": "2024-09-28",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 4
+          }
+        },
+        "target": {
+          "paragraph": 3,
+          "text": "The Company’s operations and performance depend significantly on global and regional economic conditions and adverse economic conditions can materially adversely affect the Company’s business, results of operations, financial condition and stock price.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-25-000079",
+            "form": "10-K",
+            "filingDate": "2025-10-31",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+            "reportDate": "2025-09-27",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 3
+          }
+        },
+        "similarity": 0.906,
+        "wordDiff": [
+          {
+            "value": "The Company’s operations and performance depend significantly on global and regional economic conditions and adverse economic conditions can materially adversely affect the Company’s business, results of operations"
+          },
+          {
+            "value": " and",
+            "removed": true
+          },
+          {
+            "value": ",",
+            "added": true
+          },
+          {
+            "value": " financial condition "
+          },
+          {
+            "value": "and stock price",
+            "added": true
+          },
+          {
+            "value": "."
+          }
+        ]
+      },
+      {
+        "type": "changed",
+        "base": {
+          "paragraph": 7,
+          "text": "In addition to an adverse impact on demand for the Company’s products and services, uncertainty about, or a decline in, global or regional economic conditions can have a significant impact on the Company’s suppliers, contract manufacturers, logistics providers, distributors, cellular network carriers and other channel partners, and developers. Potential outcomes include financial instability; inability to obtain credit to finance business operations; and insolvency.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-24-000123",
+            "form": "10-K",
+            "filingDate": "2024-11-01",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+            "reportDate": "2024-09-28",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 7
+          }
+        },
+        "target": {
+          "paragraph": 6,
+          "text": "Uncertainty about, or a decline in, global or regional economic conditions can also have a significant impact on the Company’s suppliers, contract manufacturers, logistics providers, distributors, cellular network carriers and other channel partners, and developers. Potential outcomes include financial instability; inability to obtain credit to finance business operations; and insolvency.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-25-000079",
+            "form": "10-K",
+            "filingDate": "2025-10-31",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+            "reportDate": "2025-09-27",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 6
+          }
+        },
+        "similarity": 0.842,
+        "wordDiff": [
+          {
+            "value": "In addition to an adverse impact on demand for the Company’s products and services, uncertainty",
+            "removed": true
+          },
+          {
+            "value": "Uncertainty",
+            "added": true
+          },
+          {
+            "value": " about, or a decline in, global or regional economic conditions can "
+          },
+          {
+            "value": "also ",
+            "added": true
+          },
+          {
+            "value": "have a significant impact on the Company’s suppliers, contract manufacturers, logistics providers, distributors, cellular network carriers and other channel partners, and developers. Potential outcomes include financial instability; inability to obtain credit to finance business operations; and insolvency."
+          }
+        ]
+      },
+      {
+        "type": "changed",
+        "base": {
+          "paragraph": 11,
+          "text": "The Company has a large, global business with sales outside the U.S. representing a majority of the Company’s total net sales, and the Company believes that it generally benefits from growth in international trade. Substantially all of the Company’s manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam. Restrictions on international trade, such as tariffs and other controls on imports or exports of goods, technology or data, can materially adversely affect the Company’s business and supply chain. The impact can be particularly significant if these restrictive measures apply to countries and regions where the Company derives a significant portion of its revenues and/or has significant supply chain operations. Restrictive measures can increase the cost of the Company’s products and the components and raw materials that go into them, and can require the Company to take various actions, including changing suppliers, restructuring business relationships and operations, and ceasing to offer and distribute affected products, services and third-party applications to its customers. Changing the Company’s business and supply chain in accordance with new or changed restrictions on international trade can be expensive, time-consuming and disruptive to the Company’s operations. Such restrictions can be announced with little or no advance notice, which can create uncertainty, and the Company may not be able to effectively mitigate all adverse impacts from such measures. For example, tensions between governments, including the U.S. and China, have in the past led to tariffs and other restrictions affecting the Company’s business. If disputes and conflicts further escalate in the future, actions by governments in response could be significantly more severe and restrictive and could materially adversely affect the Company’s business.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-24-000123",
+            "form": "10-K",
+            "filingDate": "2024-11-01",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+            "reportDate": "2024-09-28",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 11
+          }
+        },
+        "target": {
+          "paragraph": 10,
+          "text": "The Company has a large, global business with sales outside the U.S. representing a majority of the Company’s total net sales, and the Company believes that it generally benefits from growth in international trade. A significant majority of the Company’s manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam, in addition to sourcing from partners and facilities located in the U.S. Restrictions on international trade, such as tariffs and other controls on imports or exports of goods, technology or data, can materially adversely affect the Company’s business and supply chain. The impact can be particularly significant if these restrictive measures apply to countries and regions where the Company derives a significant portion of its revenues and/or has significant supply chain operations. Restrictive measures can increase the cost or limit the availability of the Company’s products and the components and rare earths and other raw materials that go into them. Restrictive measures can also require the Company to change suppliers, restructure business relationships and operations, refrain from offering and distributing or cease to offer and distribute affected products, services and third-party applications to its customers, and increase the prices of its products and services. Changing the Company’s business and supply chain in accordance with new or changed restrictions on international trade can be expensive, time-consuming and disruptive to the Company’s business and results of operations. Trade and other international disputes can also have an adverse impact on the overall macroeconomic environment and result in shifts and reductions in consumer spending and negative consumer sentiment for the Company’s products and services, all of which can further adversely affect the Company’s business and results of operations. Such restrictions can be announced with little or no advance notice, which can create uncertainty, and the Company may not be able to effectively mitigate any or all adverse impacts from such measures. Global supply chains can be highly concentrated, and an escalation of geopolitical tensions or conflict could result in significant disruptions. Beginning in the second quarter of 2025, new tariffs were announced on imports to the U.S. (“U.S. Tariffs”), including additional tariffs on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the European Union (“EU”), among others. In response, several countries have imposed, or threatened to impose, reciprocal tariffs on imports from the U.S. and other retaliatory measures. Various modifications to the U.S. Tariffs have been announced and further changes could be made in the future, which may include additional sector-based tariffs or other measures. For example, the U.S. Department of Commerce has initiated an investigation under Section 232 of the Trade Expansion Act of 1962, as amended, into, among other things, imports of semiconductors, semiconductor manufacturing equipment, and their derivative products, including downstream products that contain semiconductors. The ultimate impact remains uncertain and will depend on several factors, including whether additional or incremental U.S. Tariffs or other measures are announced or imposed, to what extent other countries implement tariffs or other retaliatory measures in response, and the overall magnitude and duration of these measures. If disputes and conflicts further escalate, actions by governments in response could be significantly more severe and restrictive.",
+          "citation": {
+            "cik": "0000320193",
+            "accession": "0000320193-25-000079",
+            "form": "10-K",
+            "filingDate": "2025-10-31",
+            "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+            "reportDate": "2025-09-27",
+            "item": "1A",
+            "itemTitle": "Risk Factors",
+            "paragraph": 10
+          }
+        },
+        "similarity": 0.593,
+        "wordDiff": [
+          {
+            "value": "The Company has a large, global business with sales outside the U.S. representing a majority of the Company’s total net sales, and the Company believes that it generally benefits from growth in international trade. "
+          },
+          {
+            "value": "Substantially all",
+            "removed": true
+          },
+          {
+            "value": "A significant majority",
+            "added": true
+          },
+          {
+            "value": " of the Company’s manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam"
+          },
+          {
+            "value": ", in addition to sourcing from partners and facilities located in the U",
+            "added": true
+          },
+          {
+            "value": "."
+          },
+          {
+            "value": "S. ",
+            "added": true
+          },
+          {
+            "value": "Restrictions on international trade, such as tariffs and other controls on imports or exports of goods, technology or data, can materially adversely affect the Company’s business and supply chain. The impact can be particularly significant if these restrictive measures apply to countries and regions where the Company derives a significant portion of its revenues and/or has significant supply chain operations. Restrictive measures can increase the cost "
+          },
+          {
+            "value": "or limit the availability ",
+            "added": true
+          },
+          {
+            "value": "of the Company’s products and the components and "
+          },
+          {
+            "value": "rare earths and other ",
+            "added": true
+          },
+          {
+            "value": "raw materials that go into them"
+          },
+          {
+            "value": ", and",
+            "removed": true
+          },
+          {
+            "value": ". Restrictive measures",
+            "added": true
+          },
+          {
+            "value": " can "
+          },
+          {
+            "value": "also ",
+            "added": true
+          },
+          {
+            "value": "require the Company to "
+          },
+          {
+            "value": "take various actions, including changing",
+            "removed": true
+          },
+          {
+            "value": "change",
+            "added": true
+          },
+          {
+            "value": " suppliers, "
+          },
+          {
+            "value": "restructuring",
+            "removed": true
+          },
+          {
+            "value": "restructure",
+            "added": true
+          },
+          {
+            "value": " business relationships and operations, "
+          },
+          {
+            "value": "refrain from offering ",
+            "added": true
+          },
+          {
+            "value": "and "
+          },
+          {
+            "value": "ceasing",
+            "removed": true
+          },
+          {
+            "value": "distributing or cease",
+            "added": true
+          },
+          {
+            "value": " to offer and distribute affected products, services and third-party applications to its customers"
+          },
+          {
+            "value": ", and increase the prices of its products and services",
+            "added": true
+          },
+          {
+            "value": ". Changing the Company’s business and supply chain in accordance with new or changed restrictions on international trade can be expensive, time-consuming and disruptive to the Company’s "
+          },
+          {
+            "value": "business and results of ",
+            "added": true
+          },
+          {
+            "value": "operations. "
+          },
+          {
+            "value": "Trade and other international disputes can also have an adverse impact on the overall macroeconomic environment and result in shifts and reductions in consumer spending and negative consumer sentiment for the Company’s products and services, all of which can further adversely affect the Company’s business and results of operations. ",
+            "added": true
+          },
+          {
+            "value": "Such restrictions can be announced with little or no advance notice, which can create uncertainty, and the Company may not be able to effectively mitigate "
+          },
+          {
+            "value": "any or ",
+            "added": true
+          },
+          {
+            "value": "all adverse impacts from such measures. "
+          },
+          {
+            "value": "For example",
+            "removed": true
+          },
+          {
+            "value": "Global supply chains can be highly concentrated",
+            "added": true
+          },
+          {
+            "value": ", "
+          },
+          {
+            "value": "and an escalation of geopolitical ",
+            "added": true
+          },
+          {
+            "value": "tensions "
+          },
+          {
+            "value": "between governments",
+            "removed": true
+          },
+          {
+            "value": "or conflict could result in significant disruptions. Beginning in the second quarter of 2025",
+            "added": true
+          },
+          {
+            "value": ", "
+          },
+          {
+            "value": "including",
+            "removed": true
+          },
+          {
+            "value": "new tariffs were announced on imports to",
+            "added": true
+          },
+          {
+            "value": " the U.S. "
+          },
+          {
+            "value": "and",
+            "removed": true
+          },
+          {
+            "value": "(“U.S. Tariffs”), including additional tariffs on imports from",
+            "added": true
+          },
+          {
+            "value": " China, "
+          },
+          {
+            "value": "India, Japan, South Korea, Taiwan, Vietnam and the European Union (“EU”), among others. In response, several countries ",
+            "added": true
+          },
+          {
+            "value": "have "
+          },
+          {
+            "value": "in",
+            "removed": true
+          },
+          {
+            "value": "imposed, or threatened to impose, reciprocal tariffs on imports from",
+            "added": true
+          },
+          {
+            "value": " the "
+          },
+          {
+            "value": "past led",
+            "removed": true
+          },
+          {
+            "value": "U.S. and other retaliatory measures. Various modifications",
+            "added": true
+          },
+          {
+            "value": " to "
+          },
+          {
+            "value": "the U.S. Tariffs have been announced and further changes could be made in the future, which may include additional sector-based ",
+            "added": true
+          },
+          {
+            "value": "tariffs "
+          },
+          {
+            "value": "or other measures. For example, the U.S. Department of Commerce has initiated an investigation under Section 232 of the Trade Expansion Act of 1962, as amended, into, among other things, imports of semiconductors, semiconductor manufacturing equipment, ",
+            "added": true
+          },
+          {
+            "value": "and "
+          },
+          {
+            "value": "their derivative products, including downstream products that contain semiconductors. The ultimate impact remains uncertain and will depend on several factors, including whether additional or incremental U.S. Tariffs or ",
+            "added": true
+          },
+          {
+            "value": "other "
+          },
+          {
+            "value": "restrictions affecting",
+            "removed": true
+          },
+          {
+            "value": "measures are announced or imposed, to what extent other countries implement tariffs or other retaliatory measures in response, and",
+            "added": true
+          },
+          {
+            "value": " the "
+          },
+          {
+            "value": "Company’s business",
+            "removed": true
+          },
+          {
+            "value": "overall magnitude and duration of these measures",
+            "added": true
+          },
+          {
+            "value": ". If disputes and conflicts further escalate"
+          },
+          {
+            "value": " in the future",
+            "removed": true
+          },
+          {
+            "value": ", actions by governments in response could be significantly more severe and restrictive"
+          },
+          {
+            "value": " and could materially adversely affect the Company’s business",
+            "removed": true
+          },
+          {
+            "value": "."
+          }
+        ]
+      }
+    ],
+    "warnings": [],
+    "offset": 0,
+    "returned": 6,
+    "total": 78,
+    "truncated": true,
+    "truncatedReason": "Trailing entries were omitted to satisfy maxChanges=6."
+  }
+}

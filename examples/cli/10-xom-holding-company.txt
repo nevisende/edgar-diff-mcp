@@ -1,0 +1,17 @@
+$ npm run cli -- resolve XOM
+
+[
+  {
+    "cik": "0002115436",
+    "ticker": "XOM",
+    "name": "ExxonMobil Holdings Corp"
+  }
+]
+
+$ npm run cli -- filings 0002115436 --form 10-K
+
+[]
+
+$ npm run cli -- resolve "Exxon Mobil Corp"
+
+[]

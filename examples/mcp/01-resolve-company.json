@@ -1,0 +1,15 @@
+{
+  "tool": "resolve_company",
+  "input": {
+    "query": "AAPL"
+  },
+  "structuredContent": {
+    "results": [
+      {
+        "cik": "0000320193",
+        "ticker": "AAPL",
+        "name": "Apple Inc."
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "tool": "get_section",
+  "input": {
+    "cik": "0000320193",
+    "accession": "0000320193-25-000079",
+    "item": "1A",
+    "offset": 3,
+    "maxParagraphs": 3,
+    "maxChars": 32000
+  },
+  "structuredContent": {
+    "status": "ok",
+    "filing": {
+      "cik": "0000320193",
+      "accession": "0000320193-25-000079",
+      "form": "10-K",
+      "filingDate": "2025-10-31",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+      "reportDate": "2025-09-27"
+    },
+    "item": "1A",
+    "title": "Risk Factors",
+    "offset": 3,
+    "returned": 3,
+    "total": 106,
+    "truncated": true,
+    "truncatedReason": "Trailing entries were omitted to satisfy maxParagraphs=3.",
+    "warnings": [],
+    "paragraphs": [
+      {
+        "citation": {
+          "cik": "0000320193",
+          "accession": "0000320193-25-000079",
+          "form": "10-K",
+          "filingDate": "2025-10-31",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+          "reportDate": "2025-09-27",
+          "item": "1A",
+          "itemTitle": "Risk Factors",
+          "paragraph": 3
+        },
+        "text": "The Company’s operations and performance depend significantly on global and regional economic conditions and adverse economic conditions can materially adversely affect the Company’s business, results of operations, financial condition and stock price."
+      },
+      {
+        "citation": {
+          "cik": "0000320193",
+          "accession": "0000320193-25-000079",
+          "form": "10-K",
+          "filingDate": "2025-10-31",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+          "reportDate": "2025-09-27",
+          "item": "1A",
+          "itemTitle": "Risk Factors",
+          "paragraph": 4
+        },
+        "text": "The Company has international operations with sales outside the U.S. representing a majority of the Company’s total net sales. In addition, the Company’s global supply chain is large and complex and a majority of the Company’s supplier facilities, including manufacturing and assembly sites, are located outside the U.S. As a result, the Company’s operations and performance depend significantly on global and regional economic conditions."
+      },
+      {
+        "citation": {
+          "cik": "0000320193",
+          "accession": "0000320193-25-000079",
+          "form": "10-K",
+          "filingDate": "2025-10-31",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+          "reportDate": "2025-09-27",
+          "item": "1A",
+          "itemTitle": "Risk Factors",
+          "paragraph": 5
+        },
+        "text": "Adverse macroeconomic conditions, including slow growth or recession, high unemployment, inflation, tighter credit, higher interest rates, and currency fluctuations, can adversely impact consumer confidence and spending and materially adversely affect demand for the Company’s products and services. In addition, consumer confidence and spending can be materially adversely affected in response to changes in fiscal and monetary policy, financial market volatility, declines in income or asset values, and other economic factors."
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "steps": [
+    {
+      "tool": "resolve_company",
+      "input": {
+        "query": "XOM"
+      },
+      "structuredContent": {
+        "results": [
+          {
+            "cik": "0002115436",
+            "ticker": "XOM",
+            "name": "ExxonMobil Holdings Corp"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "list_filings",
+      "input": {
+        "cik": "0002115436",
+        "form": "10-K"
+      },
+      "structuredContent": {
+        "results": []
+      }
+    },
+    {
+      "tool": "resolve_company",
+      "input": {
+        "query": "Exxon Mobil Corp"
+      },
+      "structuredContent": {
+        "results": []
+      }
+    }
+  ]
+}

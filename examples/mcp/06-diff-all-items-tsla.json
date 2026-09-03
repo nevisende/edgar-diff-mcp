@@ -1,0 +1,347 @@
+{
+  "tool": "diff_all_items",
+  "input": {
+    "cik": "0001318605",
+    "baseAccession": "0001628280-25-003063",
+    "targetAccession": "0001628280-26-003952"
+  },
+  "structuredContent": {
+    "status": "ok",
+    "base": {
+      "cik": "0001318605",
+      "accession": "0001628280-25-003063",
+      "form": "10-K",
+      "filingDate": "2025-01-30",
+      "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm",
+      "reportDate": "2024-12-31"
+    },
+    "target": {
+      "cik": "0001318605",
+      "accession": "0001628280-26-003952",
+      "form": "10-K",
+      "filingDate": "2026-01-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "reportDate": "2025-12-31"
+    },
+    "items": [
+      {
+        "item": "9B",
+        "title": "Other Information",
+        "stats": {
+          "baseParagraphs": 2,
+          "targetParagraphs": 8,
+          "added": 7,
+          "removed": 1,
+          "changed": 1,
+          "unchanged": 0,
+          "similarity": 0.12
+        }
+      },
+      {
+        "item": "15",
+        "title": "Exhibits and Financial Statement Schedules",
+        "stats": {
+          "baseParagraphs": 303,
+          "targetParagraphs": 121,
+          "added": 20,
+          "removed": 202,
+          "changed": 9,
+          "unchanged": 92,
+          "similarity": 0.328
+        }
+      },
+      {
+        "item": "7",
+        "title": "Management's Discussion and Analysis",
+        "stats": {
+          "baseParagraphs": 180,
+          "targetParagraphs": 177,
+          "added": 35,
+          "removed": 38,
+          "changed": 97,
+          "unchanged": 45,
+          "similarity": 0.615
+        }
+      },
+      {
+        "item": "8",
+        "title": "Financial Statements and Supplementary Data",
+        "stats": {
+          "baseParagraphs": 1024,
+          "targetParagraphs": 1097,
+          "added": 276,
+          "removed": 203,
+          "changed": 429,
+          "unchanged": 392,
+          "similarity": 0.634
+        }
+      },
+      {
+        "item": "1",
+        "title": "Business",
+        "stats": {
+          "baseParagraphs": 161,
+          "targetParagraphs": 135,
+          "added": 21,
+          "removed": 47,
+          "changed": 40,
+          "unchanged": 74,
+          "similarity": 0.655
+        }
+      },
+      {
+        "item": "10",
+        "title": "Directors, Executive Officers and Corporate Governance",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 1,
+          "unchanged": 0,
+          "similarity": 0.776
+        }
+      },
+      {
+        "item": "1A",
+        "title": "Risk Factors",
+        "stats": {
+          "baseParagraphs": 129,
+          "targetParagraphs": 131,
+          "added": 14,
+          "removed": 12,
+          "changed": 48,
+          "unchanged": 69,
+          "similarity": 0.847
+        }
+      },
+      {
+        "item": "3",
+        "title": "Legal Proceedings",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 1,
+          "unchanged": 0,
+          "similarity": 0.881
+        }
+      },
+      {
+        "item": "5",
+        "title": "Market for Registrant's Common Equity",
+        "stats": {
+          "baseParagraphs": 13,
+          "targetParagraphs": 13,
+          "added": 1,
+          "removed": 1,
+          "changed": 2,
+          "unchanged": 10,
+          "similarity": 0.91
+        }
+      },
+      {
+        "item": "11",
+        "title": "Executive Compensation",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 1,
+          "unchanged": 0,
+          "similarity": 0.917
+        }
+      },
+      {
+        "item": "14",
+        "title": "Principal Accountant Fees and Services",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 1,
+          "unchanged": 0,
+          "similarity": 0.917
+        }
+      },
+      {
+        "item": "12",
+        "title": "Security Ownership",
+        "stats": {
+          "baseParagraphs": 2,
+          "targetParagraphs": 2,
+          "added": 0,
+          "removed": 0,
+          "changed": 1,
+          "unchanged": 1,
+          "similarity": 0.958
+        }
+      },
+      {
+        "item": "13",
+        "title": "Certain Relationships and Related Transactions",
+        "stats": {
+          "baseParagraphs": 2,
+          "targetParagraphs": 2,
+          "added": 0,
+          "removed": 0,
+          "changed": 1,
+          "unchanged": 1,
+          "similarity": 0.958
+        }
+      },
+      {
+        "item": "9A",
+        "title": "Controls and Procedures",
+        "stats": {
+          "baseParagraphs": 11,
+          "targetParagraphs": 11,
+          "added": 0,
+          "removed": 0,
+          "changed": 5,
+          "unchanged": 6,
+          "similarity": 0.983
+        }
+      },
+      {
+        "item": "7A",
+        "title": "Quantitative and Qualitative Disclosures About Market Risk",
+        "stats": {
+          "baseParagraphs": 4,
+          "targetParagraphs": 4,
+          "added": 0,
+          "removed": 0,
+          "changed": 1,
+          "unchanged": 3,
+          "similarity": 0.988
+        }
+      },
+      {
+        "item": "1C",
+        "title": "Cybersecurity",
+        "stats": {
+          "baseParagraphs": 12,
+          "targetParagraphs": 12,
+          "added": 0,
+          "removed": 0,
+          "changed": 2,
+          "unchanged": 10,
+          "similarity": 0.995
+        }
+      },
+      {
+        "item": "16",
+        "title": "Form 10-K Summary",
+        "stats": {
+          "baseParagraphs": 3,
+          "targetParagraphs": 3,
+          "added": 0,
+          "removed": 0,
+          "changed": 1,
+          "unchanged": 2,
+          "similarity": 0.998
+        }
+      },
+      {
+        "item": "1B",
+        "title": "Unresolved Staff Comments",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 0,
+          "unchanged": 1,
+          "similarity": 1
+        }
+      },
+      {
+        "item": "2",
+        "title": "Properties",
+        "stats": {
+          "baseParagraphs": 11,
+          "targetParagraphs": 11,
+          "added": 0,
+          "removed": 0,
+          "changed": 0,
+          "unchanged": 11,
+          "similarity": 1
+        }
+      },
+      {
+        "item": "4",
+        "title": "Mine Safety Disclosures",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 0,
+          "unchanged": 1,
+          "similarity": 1
+        }
+      },
+      {
+        "item": "6",
+        "title": "[Reserved]",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 0,
+          "unchanged": 1,
+          "similarity": 1
+        }
+      },
+      {
+        "item": "9",
+        "title": "Changes in and Disagreements with Accountants",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 0,
+          "unchanged": 1,
+          "similarity": 1
+        }
+      },
+      {
+        "item": "9C",
+        "title": "Disclosure Regarding Foreign Jurisdictions that Prevent Inspections",
+        "stats": {
+          "baseParagraphs": 1,
+          "targetParagraphs": 1,
+          "added": 0,
+          "removed": 0,
+          "changed": 0,
+          "unchanged": 1,
+          "similarity": 1
+        }
+      }
+    ],
+    "onlyInBase": [],
+    "onlyInTarget": [],
+    "warnings": [
+      "Item 1B: body is only 25 chars (\"Unresolved Staff Comments\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "Item 3: body is only 207 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "Item 6: body is only 10 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS",
+      "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "Item 11: body is only 139 chars (\"The information required by this Item 11 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+      "Item 12: body is only 214 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "heading and first paragraph were in one block; split at CERTAIN RELATIONSHIPS AND RELATED TRANSACTIONS",
+      "Item 13: body is only 164 chars (\"AND DIRECTOR INDEPENDENCE\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "Item 14: body is only 139 chars (\"The information required by this Item 14 of Form 10-K will b\"); likely a placeholder such as \"None.\" or \"Not applicable.\"",
+      "Item 16 heading appeared 2 times outside the table of contents; kept the longest body.",
+      "Item 3: body is only 200 chars (\"For a description of our material pending legal proceedings,\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+    ]
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "tool": "list_items",
+  "input": {
+    "cik": "0000789019",
+    "accession": "0001193125-26-323660"
+  },
+  "structuredContent": {
+    "filing": {
+      "cik": "0000789019",
+      "accession": "0001193125-26-323660",
+      "form": "10-K",
+      "filingDate": "2026-07-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "reportDate": "2026-06-30"
+    },
+    "items": [
+      {
+        "key": "1B",
+        "title": "Unresolved Staff Comments",
+        "paragraphs": 1,
+        "chars": 235,
+        "warnings": [
+          "Item 1B: body is only 235 chars (\"We have received no written comments regarding our periodic \"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "1C",
+        "title": "Cybersecurity",
+        "paragraphs": 7,
+        "chars": 4128,
+        "warnings": [
+          "Item 1C heading appeared 4 times outside the table of contents; kept the longest body."
+        ]
+      },
+      {
+        "key": "2",
+        "title": "Properties",
+        "paragraphs": 11,
+        "chars": 1158,
+        "warnings": []
+      },
+      {
+        "key": "3",
+        "title": "Legal Proceedings",
+        "paragraphs": 1,
+        "chars": 175,
+        "warnings": [
+          "Item 3: body is only 175 chars (\"Refer to Note 14 – Contingencies of the Notes to Financial S\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "4",
+        "title": "Mine Safety Disclosures",
+        "paragraphs": 1,
+        "chars": 23,
+        "warnings": [
+          "Item 4: body is only 23 chars (\"Mine Safety Disclosures\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "5",
+        "title": "Market for Registrant's Common Equity",
+        "paragraphs": 57,
+        "chars": 1554,
+        "warnings": []
+      },
+      {
+        "key": "6",
+        "title": "[Reserved]",
+        "paragraphs": 2,
+        "chars": 95,
+        "warnings": [
+          "Item 6: body is only 95 chars (\"[Reserved]\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "7A",
+        "title": "Quantitative and Qualitative Disclosures About Market Risk",
+        "paragraphs": 44,
+        "chars": 1808,
+        "warnings": []
+      },
+      {
+        "key": "9",
+        "title": "Changes in and Disagreements with Accountants",
+        "paragraphs": 1,
+        "chars": 84,
+        "warnings": [
+          "Item 9: body is only 84 chars (\"Changes in and Disagreements with Accountants on Accounting \"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "9A",
+        "title": "Controls and Procedures",
+        "paragraphs": 14,
+        "chars": 4011,
+        "warnings": [
+          "Item 9A heading appeared 4 times outside the table of contents; kept the longest body."
+        ]
+      },
+      {
+        "key": "9B",
+        "title": "Other Information",
+        "paragraphs": 4,
+        "chars": 1462,
+        "warnings": []
+      },
+      {
+        "key": "9C",
+        "title": "Disclosure Regarding Foreign Jurisdictions that Prevent Inspections",
+        "paragraphs": 1,
+        "chars": 67,
+        "warnings": [
+          "Item 9C: body is only 67 chars (\"Disclosure Regarding Foreign Jurisdictions that Prevent Insp\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "10",
+        "title": "Directors, Executive Officers and Corporate Governance",
+        "paragraphs": 3,
+        "chars": 1540,
+        "warnings": []
+      },
+      {
+        "key": "11",
+        "title": "Executive Compensation",
+        "paragraphs": 1,
+        "chars": 283,
+        "warnings": [
+          "Item 11: body is only 283 chars (\"The information in the Proxy Statement set forth under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "12",
+        "title": "Security Ownership",
+        "paragraphs": 2,
+        "chars": 279,
+        "warnings": [
+          "heading and first paragraph were in one block; split at SECURITY OWNERSHIP",
+          "Item 12: body is only 279 chars (\"OF CERTAIN BENEFICIAL OWNERS AND MANAGEMENT AND RELATED STOC\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "13",
+        "title": "Certain Relationships and Related Transactions",
+        "paragraphs": 1,
+        "chars": 181,
+        "warnings": [
+          "Item 13: body is only 181 chars (\"The information set forth in the Proxy Statement under the c\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "14",
+        "title": "Principal Accountant Fees and Services",
+        "paragraphs": 1,
+        "chars": 357,
+        "warnings": [
+          "Item 14: body is only 357 chars (\"Information concerning fees and services provided by our pri\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+        ]
+      },
+      {
+        "key": "16",
+        "title": "Form 10-K Summary",
+        "paragraphs": 3,
+        "chars": 1781,
+        "warnings": [
+          "Item 16 heading appeared 3 times outside the table of contents; kept the longest body."
+        ]
+      },
+      {
+        "key": "1",
+        "title": "Business",
+        "paragraphs": 160,
+        "chars": 40768,
+        "warnings": []
+      },
+      {
+        "key": "1A",
+        "title": "Risk Factors",
+        "paragraphs": 115,
+        "chars": 80761,
+        "warnings": []
+      },
+      {
+        "key": "7",
+        "title": "Management's Discussion and Analysis",
+        "paragraphs": 545,
+        "chars": 50358,
+        "warnings": [
+          "heading and first paragraph were in one block; split at MANAGEMENT’S DISCUSSION AND ANALYSIS"
+        ]
+      },
+      {
+        "key": "8",
+        "title": "Financial Statements and Supplementary Data",
+        "paragraphs": 3114,
+        "chars": 97619,
+        "warnings": []
+      },
+      {
+        "key": "15",
+        "title": "Exhibits and Financial Statement Schedules",
+        "paragraphs": 343,
+        "chars": 12110,
+        "warnings": []
+      }
+    ],
+    "warnings": []
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "tool": "diff_sections",
+  "input": {
+    "cik": "0000019617",
+    "baseAccession": "0000019617-25-000270",
+    "targetAccession": "0001628280-26-008131",
+    "item": "3",
+    "maxChanges": 6
+  },
+  "structuredContent": {
+    "status": "ok",
+    "item": "3",
+    "title": "Legal Proceedings",
+    "targetTitle": "Legal Proceedings",
+    "base": {
+      "cik": "0000019617",
+      "accession": "0000019617-25-000270",
+      "form": "10-K",
+      "filingDate": "2025-02-14",
+      "url": "https://www.sec.gov/Archives/edgar/data/19617/000001961725000270/jpm-20241231.htm",
+      "reportDate": "2024-12-31"
+    },
+    "target": {
+      "cik": "0000019617",
+      "accession": "0001628280-26-008131",
+      "form": "10-K",
+      "filingDate": "2026-02-13",
+      "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm",
+      "reportDate": "2025-12-31"
+    },
+    "stats": {
+      "baseParagraphs": 1,
+      "targetParagraphs": 1,
+      "added": 0,
+      "removed": 0,
+      "changed": 0,
+      "unchanged": 1,
+      "similarity": 1
+    },
+    "changes": [],
+    "warnings": [
+      "Item 3: body is only 76 chars (\"Refer to Note 30 for a description of the Firm’s material le\"); likely a placeholder such as \"None.\" or \"Not applicable.\""
+    ],
+    "offset": 0,
+    "returned": 0,
+    "total": 0,
+    "truncated": false
+  }
+}

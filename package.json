@@ -47,6 +47,7 @@
     "scenarios:mcp": "npm run build && tsx scripts/scenarios-mcp.ts",
     "scenarios:harness": "bash scripts/scenarios-harness.sh",
     "scenarios:grade": "tsx scripts/scenarios-grade.ts",
+    "examples": "tsx scripts/examples.ts",
     "demo": "tsx scripts/demo-fixtures.ts",
     "prepublishOnly": "npm run check && npm run build"
   },
