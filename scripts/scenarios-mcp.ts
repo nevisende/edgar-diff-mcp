@@ -49,7 +49,7 @@ function display(value: unknown): string {
 function compactActual(actual: unknown, assertion: PlanAssertion): unknown {
   if (assertion.path === '$') return `${assertion.operator} ${JSON.stringify(assertion.expected)}: matched`;
   if (Array.isArray(actual)) return { length: actual.length };
-  if (typeof actual === 'string' && actual.length > 240) return `${actual.slice(0, 240)}…`;
+  if (typeof actual === 'string' && actual.length > 240) return `${actual.slice(0, 240)}...`;
   if (typeof actual === 'object' && actual !== null) return { serializedChars: display(actual).length };
   return actual;
 }
@@ -143,7 +143,7 @@ function scenarioExcerpt(id: string, outputs: Record<string, unknown>): string {
   }
   if (id === 'ge-honest-not-found') return JSON.stringify(outputs['riskSection'], null, 2);
   if (id === 'jpm-legal-proceedings') {
-    return `Accessions: ${String(valueAtPath(outputs, 'filings.results.1.accession'))} → ${String(valueAtPath(outputs, 'filings.results.0.accession'))}\nBase URL: ${String(valueAtPath(outputs, 'legalDiff.base.url'))}\nTarget URL: ${String(valueAtPath(outputs, 'legalDiff.target.url'))}\n${JSON.stringify(valueAtPath(outputs, 'legalDiff.stats'), null, 2)}`;
+    return `Accessions: ${String(valueAtPath(outputs, 'filings.results.1.accession'))} -> ${String(valueAtPath(outputs, 'filings.results.0.accession'))}\nBase URL: ${String(valueAtPath(outputs, 'legalDiff.base.url'))}\nTarget URL: ${String(valueAtPath(outputs, 'legalDiff.target.url'))}\n${JSON.stringify(valueAtPath(outputs, 'legalDiff.stats'), null, 2)}`;
   }
   if (id === 'xom-holding-company') {
     const changes = valueAtPath(outputs, 'riskDiff.changes');
@@ -162,7 +162,7 @@ function scenarioExcerpt(id: string, outputs: Record<string, unknown>): string {
 }
 
 function truncate(text: string, limit = 1800): string {
-  return text.length > limit ? `${text.slice(0, limit)}…` : text;
+  return text.length > limit ? `${text.slice(0, limit)}...` : text;
 }
 
 const childEnv = Object.fromEntries(
@@ -230,10 +230,19 @@ await mkdir(OUTPUT_DIR, { recursive: true });
 await writeFile(`${OUTPUT_DIR}/mcp-client.json`, `${JSON.stringify(report, null, 2)}\n`);
 
 const rows = results.map((result) => {
-  const steps = result.steps.map((step) => `${step.tool} (${step.status})`).join(' → ');
+  const steps = result.steps.map((step) => `${step.tool} (${step.status})`).join(' -> ');
   return `| ${result.id} | ${steps} | ${result.pass ? 'PASS' : 'FAIL'} | ${result.notes.replaceAll('|', '\\|')} |`;
 });
-const excerpts = results.map((result) => `### ${result.id}\n\n\`\`\`text\n${result.excerpt}\n\`\`\``).join('\n\n');
+const htmlText = (value: string): string => [...value]
+  .map((character) => {
+    if (character === '&') return '&amp;';
+    if (character === '<') return '&lt;';
+    if (character === '>') return '&gt;';
+    const codePoint = character.codePointAt(0) ?? 0;
+    return codePoint > 0x7f ? `&#${codePoint};` : character;
+  })
+  .join('');
+const excerpts = results.map((result) => `### ${result.id}\n\n<pre>${htmlText(result.excerpt)}</pre>`).join('\n\n');
 const markdown = `# Deterministic MCP-client scenarios\n\nGenerated ${report.generatedAt}. Model-free run through a real MCP client using stdio against \`node dist/main.js\` and real SEC EDGAR data.\n\n**Result: ${report.passed}/${report.total} passed.**\n\n| Scenario | Steps | Result | Notes |\n|---|---|---:|---|\n${rows.join('\n')}\n\n## Key output excerpts\n\n${excerpts}\n`;
 await writeFile(`${OUTPUT_DIR}/mcp-client.md`, markdown);
 

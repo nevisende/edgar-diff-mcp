@@ -190,7 +190,7 @@ try {
       maxChars: MAX_CHARS,
       includeWordDiff: true,
     })),
-    inputSummary: 'AAPL Item 1A, FY2024 → FY2025, 6 changes with word diffs',
+    inputSummary: 'AAPL Item 1A, FY2024 -> FY2025, 6 changes with word diffs',
     notice: 'Changed paragraphs retain citations for both sides and opt-in word-level edit runs.',
   });
 
@@ -203,7 +203,7 @@ try {
     id: '06',
     name: 'diff-all-items-tsla',
     ...(await callTool('diff_all_items', { cik: '0001318605', baseAccession: tslaBase, targetAccession: tslaTarget })),
-    inputSummary: `TSLA two latest 10-Ks (${tslaBase} → ${tslaTarget})`,
+    inputSummary: `TSLA two latest 10-Ks (${tslaBase} -> ${tslaTarget})`,
     notice: 'The statistics-only overview ranks Items by change without pulling bulky paragraph text.',
     cliCalls: [cli(`npm run cli -- diff-all 0001318605 ${tslaBase} ${tslaTarget}`, 'diff-all', '0001318605', tslaBase, tslaTarget)],
   });
@@ -251,7 +251,7 @@ try {
   examples.push({
     id: '10',
     name: 'xom-holding-company',
-    tool: 'resolve_company → list_filings → resolve_company',
+    tool: 'resolve_company -> list_filings -> resolve_company',
     inputSummary: 'XOM ticker, its 10-Ks, then company-name fallback',
     notice: 'The ticker points at a holding company with no 10-K, and the name fallback is empty rather than silently substituting another CIK.',
     steps: [xomTicker, xomFilings, xomName],

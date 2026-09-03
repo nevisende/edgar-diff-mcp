@@ -1,8 +1,8 @@
 $ npm run cli -- diff 0000019617 0000019617-25-000270 0001628280-26-008131 3
 
-10-K 2025-02-14 → 10-K 2026-02-13
-Item 3 — Legal Proceedings
-paragraphs 1 → 1 · +0 -0 ~0 · similarity 1
+10-K 2025-02-14 -> 10-K 2026-02-13
+Item 3 - Legal Proceedings
+paragraphs 1 -> 1 | +0 -0 ~0 | similarity 1
 warning: Item 3: body is only 76 chars ("Refer to Note 30 for a description of the Firm’s material le"); likely a placeholder such as "None." or "Not applicable."
 
 base:   https://www.sec.gov/Archives/edgar/data/19617/000001961725000270/jpm-20241231.htm

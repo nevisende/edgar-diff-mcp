@@ -1,11 +1,11 @@
 /**
- * Live evaluation harness — measures the parser's real-world recall against
+ * Live evaluation harness: measures the parser's real-world recall against
  * a corpus of EDGAR filings.
  *
  *   EDGAR_USER_AGENT="edgar-diff-mcp/0.1 you@example.com" npm run eval:live > evals/latest.md
  *
  * Reads from and writes to `EDGAR_CACHE_DIR` (or `.edgar-cache`) so re-runs are free after the first.
- * Exit code is always 0 — this is a report, not a gate.
+ * Exit code is always 0; this is a report, not a gate.
  */
 import { writeFile, mkdir } from 'node:fs/promises';
 import { EdgarClient } from '../src/edgar/client.js';
@@ -251,7 +251,7 @@ for (const ticker of corpus) {
         result.flags.push(`Document warning: ${w}`);
       }
 
-      console.error(`[OK] ${ticker} ${filing.form} ${filing.filingDate} — found ${result.foundItems.length}/${result.expectedItems.length} items, missing: ${result.missingItems.length > 0 ? result.missingItems.join(',') : 'none'}`);
+      console.error(`[OK] ${ticker} ${filing.form} ${filing.filingDate} - found ${result.foundItems.length}/${result.expectedItems.length} items, missing: ${result.missingItems.length > 0 ? result.missingItems.join(',') : 'none'}`);
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       result.error = msg;
@@ -279,12 +279,12 @@ for (const ticker of corpus) {
         if (d.status === 'ok') {
           dr.stats = d.stats;
           if (d.stats.similarity < 0.15) {
-            dr.flags.push(`Suspiciously low similarity ${d.stats.similarity} — possible parsing or alignment issue`);
+            dr.flags.push(`Suspiciously low similarity ${d.stats.similarity} - possible parsing or alignment issue`);
           }
         } else {
           dr.error = `Diff not_found on ${d.side}: ${JSON.stringify(d.detail.status === 'not_found' ? { reason: d.detail.reason, available: d.detail.availableItems } : {})}`;
         }
-        console.error(`[DIFF] ${ticker} ${older.filingDate} → ${newer.filingDate}: similarity=${dr.stats.similarity}`);
+        console.error(`[DIFF] ${ticker} ${older.filingDate} -> ${newer.filingDate}: similarity=${dr.stats.similarity}`);
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         dr.error = msg;
@@ -364,7 +364,7 @@ const compactFlags = (flags: string[]): string => {
   }
   return [...counts].map(([label, count]) => {
     const alwaysCount = label === 'dup-heading' || label === 'doc-warning';
-    return alwaysCount || count > 1 ? `${label}×${count}` : label;
+    return alwaysCount || count > 1 ? `${label}x${count}` : label;
   }).join('; ');
 };
 
@@ -373,9 +373,9 @@ lines.push('');
 lines.push('| Ticker | Form | Filing Date | Accession | Missing Items | False Positives | Flags |');
 lines.push('|--------|------|-------------|-----------|---------------|-----------------|-------|');
 for (const f of filingResults) {
-  const missing = f.missingItems.length > 0 ? f.missingItems.join(', ') : '—';
-  const falsePositives = f.falsePositiveItems.length > 0 ? f.falsePositiveItems.join(', ') : '—';
-  const flags = f.flags.length > 0 ? compactFlags(f.flags) : (f.error ? `ERROR: ${f.error.slice(0, 80)}` : '—');
+  const missing = f.missingItems.length > 0 ? f.missingItems.join(', ') : '-';
+  const falsePositives = f.falsePositiveItems.length > 0 ? f.falsePositiveItems.join(', ') : '-';
+  const flags = f.flags.length > 0 ? compactFlags(f.flags) : (f.error ? `ERROR: ${f.error.slice(0, 80)}` : '-');
   lines.push(`| ${f.ticker} | ${f.form} | ${f.filingDate} | ${f.accession} | ${missing} | ${falsePositives} | ${flags} |`);
 }
 lines.push('');
@@ -399,13 +399,13 @@ lines.push('');
 // Diff table
 lines.push('## Item 1A Diff Results');
 lines.push('');
-lines.push('| Ticker | Base → Target | +/−/~ | Similarity | Flags |');
+lines.push('| Ticker | Base -> Target | +/-/~ | Similarity | Flags |');
 lines.push('|--------|---------------|-------|------------|-------|');
 for (const d of diffResults) {
-  const changes = d.error ? 'ERROR' : `+${d.stats.added} −${d.stats.removed} ~${d.stats.changed}`;
-  const sim = d.error ? '—' : d.stats.similarity.toFixed(3);
-  const flags = d.flags.length > 0 ? d.flags.join('; ') : (d.error ? d.error.slice(0, 100) : '—');
-  lines.push(`| ${d.ticker} | ${d.baseDateStr} → ${d.targetDateStr} | ${changes} | ${sim} | ${flags} |`);
+  const changes = d.error ? 'ERROR' : `+${d.stats.added} -${d.stats.removed} ~${d.stats.changed}`;
+  const sim = d.error ? '-' : d.stats.similarity.toFixed(3);
+  const flags = d.flags.length > 0 ? d.flags.join('; ') : (d.error ? d.error.slice(0, 100) : '-');
+  lines.push(`| ${d.ticker} | ${d.baseDateStr} -> ${d.targetDateStr} | ${changes} | ${sim} | ${flags} |`);
 }
 lines.push('');
 
@@ -429,5 +429,10 @@ if (warningCounts.size === 0) {
 }
 lines.push('');
 
-console.log(lines.join('\n'));
+const asciiMarkdown = (value: string): string => [...value].map((character) => {
+  const codePoint = character.codePointAt(0) ?? 0;
+  return codePoint > 0x7f ? `&#${codePoint};` : character;
+}).join('');
+
+console.log(lines.map(asciiMarkdown).join('\n'));
 process.exit(0);
